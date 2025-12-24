@@ -24,15 +24,15 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 
-# 📝 Publications 
-## Robust Multimodal Learning
+# 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
+## 🛡️ Robust Multimodal Learning
 
 
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https)
+[Nip Rumors in the Bud: Retrieval-Guided Topic-Level Adaptation for Test-Time Fake News Video Detection](https)
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
@@ -120,7 +120,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 </div>
 </div> -->
 
-## Video Analysis & Detection
+## 🎥 Video Analysis & Detection
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
@@ -154,7 +154,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
-**ICCV 2025** \| **CCF A** \| [**Github**](https://github.com)
+**ICCV 2025** \| **CCF A** \| [**Github**](https://github.com/ronpay/CRAVE)
 
 - CRAVE, a novel **cross-domain retrieval augmentation** framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection.
 </div>
@@ -183,7 +183,7 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
-**WWW 2025** \| **CCF A** \| [**Github**](https://github.com) 
+**WWW 2025** \| **CCF A** \| [**Github**](https://github.com/ronpay/ExMRD) 
 
 - ExMRD, the first **explainable fake news video detection** framework powered by the Chain-of-Thought Reasoning.
 </div>
@@ -218,7 +218,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 
 
-## Large Multimodal Model
+## 🌌 Large Multimodal Model
 
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
@@ -240,37 +240,27 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
-**KDD 2026** \| **CCF A** \| [**Github**](https://github.com) 
+**KDD 2026** \| **CCF A** \| [**Github**](https://github.com/ronpay/TAME) 
 
 - TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
 </div>
 </div>
 
 
+
+
 # 🎖 Honors and Awards
-- *2021.10* Tencent Scholarship (Top 1%)
-- *2021.10* National Scholarship (Top 1%)
-- *2020.12* [Baidu Scholarship](https://baike.baidu.com/item/%E7%99%BE%E5%BA%A6%E5%A5%96%E5%AD%A6%E9%87%91/9929412) (10 students in the world each year)
-- *2020.12* [AI Chinese new stars](https://mp.weixin.qq.com/s?__biz=MzA4NzQ5MTA2NA==&mid=2653639431&idx=1&sn=25b6368c1954419b9090840347d9a27d&chksm=8be75b90bc90d286a5af3ef8e610e822d705dc3cf4382b45e3f14489f3e7ec4fd8c95ed0eceb&mpshare=1&scene=2&srcid=0511LMlj9Qv9DeIZAjMjYAU9&sharer_sharetime=1620731348139&sharer_shareid=631c113940cb81f34895aa25ab14422a#rd) (100 worldwide each year)
-- *2020.12* [AI Chinese New Star Outstanding Scholar](https://mp.weixin.qq.com/s?__biz=MzA4NzQ5MTA2NA==&mid=2653639431&idx=1&sn=25b6368c1954419b9090840347d9a27d&chksm=8be75b90bc90d286a5af3ef8e610e822d705dc3cf4382b45e3f14489f3e7ec4fd8c95ed0eceb&mpshare=1&scene=2&srcid=0511LMlj9Qv9DeIZAjMjYAU9&sharer_sharetime=1620731348139&sharer_shareid=631c113940cb81f34895aa25ab14422a#rd) (10 candidates worldwide each year)
-- *2020.12* ByteDance Scholars Program (10 students in China each year)
-- *2020.10* Tianzhou Chen Scholarship (Top 1%)
-- *2020.10* National Scholarship (Top 1%)
-- *2015.10* National Scholarship (Undergraduate) (Top 1%)
+- *2025.10* National Scholarship (Top 1%)
+- *2025.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
+- *2024.10* National Scholarship (Top 1%)
+- *2024.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
+- *2023.12* Artificial Intelligence Algorithm Challenge Runner-up (2nd), hosted by People's Daily Online
+
 
 # 📖 Educations
-- *2019.06 - 2022.04 (now)*, Master, Zhejiang Univeristy, Hangzhou.
-- *2015.09 - 2019.06*, Undergraduate, Chu Kochen Honors College, Zhejiang Univeristy, Hangzhou.
-- *2012.09 - 2015.06*, Luqiao Middle School, Taizhou.
+- *2023.09 -*, Master, University of Electronic Science and Technology of China
+- *2019.09 - 2023.06*, Undergraduate, Fuzhou University
 
-# 💬 Invited Talks
-- *2021.06*, Audio & Speech Synthesis, Huawei internal talk
-- *2021.03*, Non-autoregressive Speech Synthesis, PaperWeekly & biendata \| [\[video\]](https://www.bilibili.com/video/BV1uf4y1t7Hr/)
-- *2020.12*, Non-autoregressive Speech Synthesis, Huawei Noah's Ark Lab internal talk
 
 # 💻 Internships
-- *2019.05 - 2020.02*, [EnjoyMusic](https://enjoymusic.ai/), Hangzhou.
-- *2019.02 - 2019.05*, [YiWise](https://www.yiwise.com/), Hangzhou.
-- *2018.08 - 2019.02*, [MSRA, machine learning Group](https://www.microsoft.com/en-us/research/group/machine-learning-research-group/), Beijing.
-- *2018.01 - 2018.06*, [NetEase, AI department](https://hr.163.com/zc/12-ai/index.html), Hangzhou.
-- *2017.08 - 2018.12*, DashBase (acquired by [Cisco](https://blogs.cisco.com/news/349511)), Hangzhou.
+- *2022.03 - 2022.06*, [Ruijie Networks](https://www.ruijie.com.cn/), Software Development Intern.
