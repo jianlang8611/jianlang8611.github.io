@@ -12,14 +12,14 @@ redirect_from:
 
 I am Jian Lang, currently a master candidate in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
   
-My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially in the situations like <strong>missing modalities, distribution (domain) shifts, weak supervision (label scarcity)</strong>. And I am also interested in video analysis, detection, and large multimodal models for some applications.
+My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially in the situations like <strong>missing modalities, distribution (domain) shifts, weak supervision (label scarcity)</strong>. And I am also interested in <strong>video analysis, detection</strong>, and <strong>large multimodal models</strong> for some applications.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
 
 # 🔥 News
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
-- *2025.11*: 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
+- *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
 - *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship Again.
 
 
@@ -41,7 +41,7 @@ Feel free to contact me if you have any questions about my research or potential
 **KDD 2026** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR, the first work to achieves the **test-time adaptation** of the Fake News Video Detection, 
-- Enabling fast adaptation to evolving news videos with **shifting topic distributions** in the dynamic world.
+- Enabling fast adaptation to evolving news videos with **shifting topic-level distributions** in the dynamic world.
 </div>
 </div>
 
@@ -53,9 +53,9 @@ Feel free to contact me if you have any questions about my research or potential
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
-<!-- **CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM)  -->
+<!-- **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM)  -->
 
-**KDD 2026** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
+**KDD 2026** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM, the first label-free harmful meme detection framework powered by LMM self-improvement
 - Enabling **prompt and robust adaptation** to evolving harmful content in web memes.
@@ -70,7 +70,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
-**AAAI 2026** \| **CCF A** \| [**Project**](https://github.com/) 
+**AAAI 2026** \| **CCF A** \| [**Github**](https://github.com/) 
 
 - SCANNER, the first **test-time adaptation** framework tailored for distribution shifting hate video detection.
 </div>
@@ -84,10 +84,10 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
 
-**KDD 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/REDEEM) 
+**KDD 2025** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/REDEEM) 
 
 - REDEEM, the extension work of our RAGPT.
-- Proposing a **retrieval-guided conditional generation** paradigm for enhancing the **missing robustness** of pre-trained Multimodal Transformer.
+- Proposing a **retrieval-guided conditional generation** paradigm for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
 </div>
 </div>
 
@@ -99,9 +99,9 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
 
-**AAAI 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/RAGPT) 
+**AAAI 2025** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/RAGPT) 
 
-- RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **missing robustness** of pre-trained Multimodal Transformer.
+- RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
 </div>
 </div>
 
@@ -112,7 +112,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [FastSpeech: Fast, Robust and Controllable Text to Speech](https://papers.nips.cc/paper/8580-fastspeech-fast-robust-and-controllable-text-to-speech.pdf), **Yi Ren**, Yangjun Ruan, Xu Tan, Tao Qin, Sheng Zhao, Zhou Zhao, Tie-Yan Liu
 
-**NeurIPS 2019** \| [**Project**](https://speechresearch.github.io/fastspeech/) <strong><span class='show_paper_citations' data='4FA6C0AAAAAJ:qjMakFHDy7sC'></span></strong>
+**NeurIPS 2019** \| [**Github**](https://speechresearch.github.io/fastspeech/) <strong><span class='show_paper_citations' data='4FA6C0AAAAAJ:qjMakFHDy7sC'></span></strong>
 
 - FastSpeech is the first fully parallel end-to-end speech synthesis model.
 - **Academic Impact**: This work is included by many famous speech synthesis open-source projects, such as [ESPNet ![](https://img.shields.io/github/stars/espnet/espnet?style=social)](https://github.com/espnet/espnet). Our work are promoted by more than 20 media and forums, such as [机器之心](https://mp.weixin.qq.com/s/UkFadiUBy-Ymn-zhJ95JcQ)、[InfoQ](https://www.infoq.cn/article/tvy7hnin8bjvlm6g0myu).
@@ -127,7 +127,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
-**KDD 2026** \| [**Project**](https://github.com/Jian-Lang/RADAR) 
+**KDD 2026** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR is the first work to achieves the test-time adaptation of the Fake News Video Detection, enabling fast adaptation of obselete models to evolving news videos with shifting topic distributions in the dynamic world.
 </div>
@@ -141,7 +141,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https), Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
-**AAAI 2026** \| [**Project**](https://github.com/Jolieresearch/SCANNER) 
+**AAAI 2026** \| [**Github**](https://github.com/Jolieresearch/SCANNER) 
 
 - SCANNER is the first test-time adaptation framework tailored for distribution shifting hate video detection.
 </div>
@@ -154,7 +154,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
-**ICCV 2025** \| **CCF A** \| [**Project**](https://github.com)
+**ICCV 2025** \| **CCF A** \| [**Github**](https://github.com)
 
 - CRAVE, a novel **cross-domain retrieval augmentation** framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection.
 </div>
@@ -169,7 +169,7 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 **Jian Lang**, Rongpei Hong, Jin Xu, Xovee Xu, Yili Li, Fan Zhou†
 
 
-**WWW 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/MoRE) 
+**WWW 2025** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/MoRE) 
 
 - MoRE, a novel **mixture of retrieval-augmented multimodal experts** framework to enhance hate video detection.
 </div>
@@ -183,7 +183,7 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
-**WWW 2025** \| **CCF A** \| [**Project**](https://github.com) 
+**WWW 2025** \| **CCF A** \| [**Github**](https://github.com) 
 
 - ExMRD, the first **explainable fake news video detection** framework powered by the Chain-of-Thought Reasoning.
 </div>
@@ -196,7 +196,7 @@ Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
 Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
 
-**ICME 2025** \| **CCF B** \| [**Project**](https://github.com/Jian-Lang/REAL) 
+**ICME 2025** \| **CCF B** \| [**Github**](https://github.com/Jian-Lang/REAL) 
 
 - REAL, a novel model-agnostic framework that generates **manipulation-aware representations** to enhance existing methods in detecting fake news videos with only subtle modifications to the original authentic ones.
 </div>
@@ -206,9 +206,11 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">SIGIR 2024</div><img src='images/mmra.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Predicting Micro-video Popularity via Multi-modal Retrieval Augmentation](https), Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
+[Predicting Micro-video Popularity via Multi-modal Retrieval Augmentation](https)
 
-**SIGIR 2024** \| **CCF A** \| [**Project**](https://github.com/UESTC-ICDM/MMRA) 
+Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
+
+**SIGIR 2024** \| **CCF A** \| [**Github**](https://github.com/UESTC-ICDM/MMRA) 
 
 - MMRA, a **multi-modal retrieval-augmented popularity prediction** model that enhances prediction accuracy using relevant retrieved information.
 </div>
@@ -224,7 +226,7 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 
 [From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
-**KDD 2026** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
+**KDD 2026** \| [**Github**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM is the first label-free harmful meme detection framework powered by Large Multimodal Model self-improvement, which mitigates label scarcity and enables prompt and robust adaptation to evolving harmful content in web memes.
 </div>
@@ -234,9 +236,11 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https), Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
+[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https)
 
-**KDD 2026** \| **CCF A** \| [**Project**](https://github.com) 
+Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
+
+**KDD 2026** \| **CCF A** \| [**Github**](https://github.com) 
 
 - TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
 </div>
