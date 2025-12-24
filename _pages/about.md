@@ -99,7 +99,9 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
 
-**AAAI 2025** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/RAGPT) 
+**AAAI 2025** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/RAGPT) \|
+[![](https://img.shields.io/github/stars/Jian-Lang/RAGPT?style=social&label=RAGPT%20Stars)](https://github.com/Jian-Lang/RAGPT) \| [**Python Package**](https://imml.readthedocs.io/stable/main/modules/classify.html)
+
 
 - RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
 </div>
@@ -210,7 +212,9 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 
 Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
 
-**SIGIR 2024** \| **CCF A** \| [**Github**](https://github.com/UESTC-ICDM/MMRA) 
+**SIGIR 2024** \| **CCF A** \| [**Github**](https://github.com/ICDM-UESTC/MMRA) \|
+[![](https://img.shields.io/github/stars/ICDM-UESTC/MMRA?style=social&label=MMRA%20Stars)](https://github.com/ICDM-UESTC/MMRA)
+
 
 - MMRA, a **multi-modal retrieval-augmented popularity prediction** model that enhances prediction accuracy using relevant retrieved information.
 </div>
