@@ -27,10 +27,14 @@ Feel free to contact me if you have any questions about my research or potential
 # 📝 Publications 
 ## Robust Multimodal Learning
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/radar.jpg' alt="sym" width="100%"></div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
+[Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https)
+
+**Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
 **KDD 2026** \| [**Project**](https://github.com/Jian-Lang/RADAR) 
 
@@ -39,7 +43,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
@@ -51,7 +55,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/scanner.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2026</div><img src='images/scanner.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https), Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
@@ -63,7 +67,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/redeem.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https), **Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
@@ -75,7 +79,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/ragpt.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2025</div><img src='images/ragpt.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Retrieval-Augmented Dynamic Prompt Tuning for Incomplete Multimodal Learning](https), **Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
@@ -128,19 +132,19 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/crave.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1"> -->
-
+ -->
+<div class='paper-box'><div class='paper-box-image'> <div class="badge">ICCV 2025</div><img src='images/crave.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
 [Borrowing Eyes for the Blind Spot: Overcoming Data Scarcity in Malicious Video Detection via Cross-Domain Retrieval Augmentation](https), Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
-**ICCV 2025** \| [**Project**](https://github.com) 
+**ICCV 2025** \| [**Project**](https://github.com)
 
 - CRAVE is a novel cross-domain retrieval augmentation framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection.
 </div>
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/more.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'> <div class="badge">WWW 2025</div><img src='images/more.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Biting Off More Than You Can Detect: Retrieval-Augmented Multimodal Experts for Short Video Hate Detection](https), **Jian Lang**, Rongpei Hong, Jin Xu, Xovee Xu, Yili Li, Fan Zhou†
@@ -153,7 +157,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/exmrd.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">WWW 2025</div><img src='images/exmrd.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Following Clues, Approaching the Truth: Explainable Micro-Video Rumor Detection via Chain-of-Thought Reasoning](https), Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
@@ -164,7 +168,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/real.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">ICME 2025</div><img src='images/real.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [REAL: Retrieval-Augmented Prototype Alignment for Improved Fake News Video Detection](https), Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
@@ -176,7 +180,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/mmra.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">SIGIR 2024</div><img src='images/mmra.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Predicting Micro-video Popularity via Multi-modal Retrieval Augmentation](https), Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
@@ -204,7 +208,7 @@ Feel free to contact me if you have any questions about my research or potential
 </div> -->
 
 
-<div class='paper-box'><div class='paper-box-image'><img src='images/tame.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https), Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
