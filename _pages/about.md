@@ -29,7 +29,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><div class="badge">CCF A</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https)
@@ -38,7 +38,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 <!-- **CCF A** \|  -->
 
-[**Github**](https://github.com/Jian-Lang/RADAR) 
+**KDD 2026** \| **CCF A** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR is the first work to achieves the test-time adaptation of the Fake News Video Detection, enabling fast adaptation of obselete models to evolving news videos with shifting topic distributions in the dynamic world.
 </div>
@@ -54,7 +54,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 <!-- **CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM)  -->
 
-[**Project**](https://github.com/Jian-Lang/ALARM) 
+**KDD 2026** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM is the first label-free harmful meme detection framework powered by Large Multimodal Model self-improvement, which mitigates label scarcity and enables prompt and robust adaptation to evolving harmful content in web memes.
 </div>
@@ -68,7 +68,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
-**CCF A** \| [**Project**](https://github.com/) 
+**AAAI 2026** \| **CCF A** \| [**Project**](https://github.com/) 
 
 - SCANNER is the first test-time adaptation framework tailored for distribution shifting hate video detection.
 </div>
@@ -82,7 +82,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
 
-**CCF A** \| [**Project**](https://github.com/Jian-Lang/REDEEM) 
+**KDD 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/REDEEM) 
 
 - REDEEM, the extension work of our RAGPT accetped to AAAI 2025, is a novel framework that pioneers a retrieval-guided conditional generation paradigm for enhancing the missing robustness of pre-trained Multimodal Transformer.
 </div>
@@ -94,7 +94,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [Retrieval-Augmented Dynamic Prompt Tuning for Incomplete Multimodal Learning](https), **Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
 
-**AAAI 2025** \| [**Project**](https://github.com/Jian-Lang/RAGPT) 
+**AAAI 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/RAGPT) 
 
 - RAGPT is a novel retrieval-augmented dynamic prompt-tuning framework for enhancing the robustness of pre-trained Multimodal Transformer under modality missing conditions
 </div>
@@ -147,7 +147,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 <div class='paper-box-text' markdown="1">
 [Borrowing Eyes for the Blind Spot: Overcoming Data Scarcity in Malicious Video Detection via Cross-Domain Retrieval Augmentation](https), Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
-**ICCV 2025** \| [**Project**](https://github.com)
+**ICCV 2025** \| **CCF A** \| [**Project**](https://github.com)
 
 - CRAVE is a novel cross-domain retrieval augmentation framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection.
 </div>
@@ -160,7 +160,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 [Biting Off More Than You Can Detect: Retrieval-Augmented Multimodal Experts for Short Video Hate Detection](https), **Jian Lang**, Rongpei Hong, Jin Xu, Xovee Xu, Yili Li, Fan Zhou†
 
 
-**WWW 2025** \| [**Project**](https://github.com/Jian-Lang/MoRE) 
+**WWW 2025** \| **CCF A** \| [**Project**](https://github.com/Jian-Lang/MoRE) 
 
 - MoRE is a novel mixture of retrieval-augmented multimodal experts framework to enhance hate video detection.
 </div>
@@ -172,7 +172,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [Following Clues, Approaching the Truth: Explainable Micro-Video Rumor Detection via Chain-of-Thought Reasoning](https), Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
-**WWW 2025** \| [**Project**](https://github.com) 
+**WWW 2025** \| **CCF A** \| [**Project**](https://github.com) 
 
 - ExMRD is the first explainable fake news video detection framework powered by the Chain-of-Thought Reasoning.
 </div>
@@ -183,7 +183,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [REAL: Retrieval-Augmented Prototype Alignment for Improved Fake News Video Detection](https), Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
 
-**ICME 2025** \| [**Project**](https://github.com/Jian-Lang/REAL) 
+**ICME 2025** \| **CCF B** \| [**Project**](https://github.com/Jian-Lang/REAL) 
 
 - REAL is a novel model-agnostic framework that generates manipulation-aware representations to enhance existing methods in detecting fake news videos with only subtle modifications to the original authentic ones.
 </div>
@@ -195,7 +195,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [Predicting Micro-video Popularity via Multi-modal Retrieval Augmentation](https), Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
 
-**SIGIR 2024** \| [**Project**](https://github.com/UESTC-ICDM/MMRA) 
+**SIGIR 2024** \| **CCF A** \| [**Project**](https://github.com/UESTC-ICDM/MMRA) 
 
 - MMRA is a multi-modal retrieval-augmented popularity prediction model that enhances prediction accuracy using relevant retrieved information.
 </div>
@@ -223,7 +223,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 [TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https), Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
-**KDD 2026** \| [**Project**](https://github.com) 
+**KDD 2026** \| **CCF A** \| [**Project**](https://github.com) 
 
 - TAME is the first training-free and state-aware personalized Multimodal Large Multimodal Model assistant powered by double memories.
 </div>
