@@ -36,7 +36,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
-**KDD 2026** \| [**Project**](https://github.com/Jian-Lang/RADAR) 
+**CCF A** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR is the first work to achieves the test-time adaptation of the Fake News Video Detection, enabling fast adaptation of obselete models to evolving news videos with shifting topic distributions in the dynamic world.
 </div>
@@ -46,9 +46,11 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
+[From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https) 
 
-**KDD 2026** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
+**Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
+
+**CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM is the first label-free harmful meme detection framework powered by Large Multimodal Model self-improvement, which mitigates label scarcity and enables prompt and robust adaptation to evolving harmful content in web memes.
 </div>
@@ -58,9 +60,11 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2026</div><img src='images/scanner.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https), Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
+[Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https)
 
-**AAAI 2026** \| [**Project**](https://github.com/) 
+Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
+
+**CCF A** \| [**Project**](https://github.com/) 
 
 - SCANNER is the first test-time adaptation framework tailored for distribution shifting hate video detection.
 </div>
@@ -70,9 +74,11 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https), **Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
+[REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https)
 
-**KDD 2025** \| [**Project**](https://github.com/Jian-Lang/REDEEM) 
+**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
+
+**CCF A** \| [**Project**](https://github.com/Jian-Lang/REDEEM) 
 
 - REDEEM, the extension work of our RAGPT accetped to AAAI 2025, is a novel framework that pioneers a retrieval-guided conditional generation paradigm for enhancing the missing robustness of pre-trained Multimodal Transformer.
 </div>
