@@ -29,28 +29,32 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><div class="badge">CCF A</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https)
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
-**CCF A** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
+<!-- **CCF A** \|  -->
+
+[**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR is the first work to achieves the test-time adaptation of the Fake News Video Detection, enabling fast adaptation of obselete models to evolving news videos with shifting topic distributions in the dynamic world.
 </div>
 </div>
 
 
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><div class="badge">CCF A</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https) 
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
-**CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM) 
+<!-- **CCF A** \| [**Project**](https://github.com/Jian-Lang/ALARM)  -->
+
+[**Project**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM is the first label-free harmful meme detection framework powered by Large Multimodal Model self-improvement, which mitigates label scarcity and enables prompt and robust adaptation to evolving harmful content in web memes.
 </div>
