@@ -20,12 +20,13 @@ Feel free to contact me if you have any questions about my research or potential
 # 🔥 News
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
 - *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
-- *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship Again.
+- *2025.10*: &nbsp;💦💦 1 Paper is submitted to WWW 2026. Hope a wonderful result.
+- *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship again.
 
 
 
 # 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
-## 🛡️ Robust Multimodal Learning
+## 🛡 Robust Multimodal Learning
 
 
 
@@ -58,7 +59,7 @@ Feel free to contact me if you have any questions about my research or potential
 **KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM, the first label-free harmful meme detection framework powered by LMM self-improvement
-- Enabling **prompt and robust adaptation** to evolving harmful content in web memes.
+- Enabling **prompt and robust adaptation** to **evolving topics and themes** of harmful web memes.
 </div>
 </div>
 
