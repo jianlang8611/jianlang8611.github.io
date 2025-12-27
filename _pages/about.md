@@ -82,6 +82,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 </div>
 </div>
 
+<div style="margin-top: 32px;"></div>
 
 ### 🧩 Robust Against Missing Modalities
 
@@ -131,6 +132,8 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 - **Industry Impact**: FastSpeech has been deployed in [Microsoft Azure TTS service](https://techcommunity.microsoft.com/t5/azure-ai/neural-text-to-speech-extends-support-to-15-more-languages-with/ba-p/1505911) and supports 49 more languages with state-of-the-art AI quality. It was also shown as a text-to-speech system acceleration example in [NVIDIA GTC2020](https://resources.nvidia.com/events/GTC2020s21420).
 </div>
 </div> -->
+
+<div style="margin-top: 32px;"></div>
 
 ## 🎥 Video Analysis & Detection
 
@@ -231,6 +234,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 </div>
 
 
+<div style="margin-top: 32px;"></div>
 
 ## 🧑‍🦱 Large Multimodal Model Personalization
 
