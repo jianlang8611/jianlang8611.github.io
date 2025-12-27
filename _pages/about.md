@@ -224,7 +224,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 
 
-## 🌠 Large Multimodal Model
+## 🌠 Large Multimodal Model Personalization
 
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
