@@ -26,10 +26,11 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
+
 ## 🛡 Robust Multimodal Learning
 
 
-### Robust Against Domain (Distribution) Shift
+### 🦎 Robust Against Domain (Distribution) Shift
 
 <!-- ### Robust of MLLM Against Visual Hallucination / Corruption -->
 
@@ -81,7 +82,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 </div>
 
 
-### Robust Against Missing Modalities
+### 🧩 Robust Against Missing Modalities
 
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
@@ -230,7 +231,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 
 
-## 🌠 Large Multimodal Model Personalization
+## 🧑‍🦱 Large Multimodal Model Personalization
 
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
