@@ -29,8 +29,9 @@ Feel free to contact me if you have any questions about my research or potential
 
 ## 🛡 Robust Multimodal Learning
 
+<div style="margin-top: 32px;"></div>
 
-### 🦎 Robust Against Domain (Distribution) Shift
+### ⚓ Robust Against Domain (Distribution) Shift
 
 <!-- ### Robust of MLLM Against Visual Hallucination / Corruption -->
 
