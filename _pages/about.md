@@ -29,6 +29,9 @@ Feel free to contact me if you have any questions about my research or potential
 ## 🛡 Robust Multimodal Learning
 
 
+### Robust Against Domain (Distribution) Shift
+
+<!-- ### Robust of MLLM Against Visual Hallucination / Corruption -->
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
@@ -76,6 +79,9 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 - SCANNER, the first **test-time adaptation** framework tailored for distribution shifting hate video detection.
 </div>
 </div>
+
+
+### Robust Against Missing Modalities
 
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
