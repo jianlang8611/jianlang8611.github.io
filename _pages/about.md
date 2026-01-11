@@ -12,7 +12,7 @@ redirect_from:
 
 I am Jian Lang, currently a master candidate in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
   
-My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially in the situations like <strong>missing modalities, distribution (domain) shifts, weak supervision (label scarcity)</strong>. And I am also interested in <strong>video analysis, detection</strong>, and <strong>large multimodal models</strong> for some applications.
+My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially when facing <strong>missing modalities</strong>, <strong>distribution (domain) shifts</strong>, and <strong>data or label scarcity</strong>. And I am also interested in <strong>video analysis, detection</strong>, and <strong>large multimodal models</strong> for some applications.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
@@ -48,23 +48,6 @@ Feel free to contact me if you have any questions about my research or potential
 
 - RADAR, the first work to achieves the **test-time adaptation** of the Fake News Video Detection, 
 - Enabling fast adaptation to evolving news videos with **shifting topic-level distributions** in the dynamic world.
-</div>
-</div>
-
-
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https) 
-
-**Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
-
-<!-- **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM)  -->
-
-**KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
-
-- ALARM, the first label-free harmful meme detection framework powered by LMM self-improvement
-- Enabling **prompt and robust adaptation** to **evolving topics and themes** of harmful web memes.
 </div>
 </div>
 
@@ -118,7 +101,38 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 </div>
 </div>
 
+<div style="margin-top: 32px;"></div>
 
+
+### 🪙 Robust Against Data / Label Scarcity
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/alarm.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https://www.arxiv.org/abs/2512.21598) 
+
+**Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
+
+<!-- **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM)  -->
+
+**KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
+
+- ALARM, the first **label-free** harmful meme detection framework powered by LMM self-improvement
+- Enabling **prompt and robust adaptation** to **evolving topics and themes** of harmful web memes.
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'> <div class="badge">ICCV 2025</div><img src='images/crave.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+[Borrowing Eyes for the Blind Spot: Overcoming Data Scarcity in Malicious Video Detection via Cross-Domain Retrieval Augmentation](https://openaccess.thecvf.com/content/ICCV2025/html/Hong_Borrowing_Eyes_for_the_Blind_Spot_Overcoming_Data_Scarcity_in_ICCV_2025_paper.html)
+
+Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
+
+**ICCV 2025** \| **CCF A** \| [**PDF**](/papers/CRAVE.pdf) \| [**Github**](https://github.com/ronpay/CRAVE)
+
+- CRAVE, a novel **cross-domain retrieval augmentation** framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection with scarce training data.
+</div>
+</div>
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/fs.png' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
@@ -163,17 +177,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 </div>
 
  -->
-<div class='paper-box'><div class='paper-box-image'> <div class="badge">ICCV 2025</div><img src='images/crave.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-[Borrowing Eyes for the Blind Spot: Overcoming Data Scarcity in Malicious Video Detection via Cross-Domain Retrieval Augmentation](https://openaccess.thecvf.com/content/ICCV2025/html/Hong_Borrowing_Eyes_for_the_Blind_Spot_Overcoming_Data_Scarcity_in_ICCV_2025_paper.html)
 
-Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
-
-**ICCV 2025** \| **CCF A** \| [**PDF**](/papers/CRAVE.pdf) \| [**Github**](https://github.com/ronpay/CRAVE)
-
-- CRAVE, a novel **cross-domain retrieval augmentation** framework that transfers knowledge from resource-rich image-text domain to enhance malicious video detection.
-</div>
-</div>
 
 
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">WWW 2025</div><img src='images/more.jpg' alt="sym" width="100%"></div>
@@ -254,7 +258,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https)
+[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https://www.arxiv.org/abs/2512.21616)
 
 Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
