@@ -20,7 +20,7 @@ Feel free to contact me if you have any questions about my research or potential
 # 🔥 News
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
 - *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
-- *2025.10*: &nbsp;💦💦 1 Paper is submitted to WWW 2026. Hope a wonderful result.
+<!-- - *2025.10*: &nbsp;💦💦 1 Paper is submitted to WWW 2026. Hope a wonderful result. -->
 - *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship again.
 
 
@@ -115,7 +115,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 <!-- **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM)  -->
 
-**KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
+**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2512.21598) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
 
 - ALARM, the first **label-free** harmful meme detection framework powered by LMM self-improvement
 - Enabling **prompt and robust adaptation** to **evolving topics and themes** of harmful web memes.
@@ -262,7 +262,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
-**KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/ronpay/TAME) 
+**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/pdf/2512.21616) \| [**Github**](https://github.com/ronpay/TAME) 
 
 - TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
 </div>
@@ -282,6 +282,15 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 # 📖 Educations
 - *2023.09 -*, Master, University of Electronic Science and Technology of China
 - *2019.09 - 2023.06*, Undergraduate, Fuzhou University
+
+
+# 📝 Peer Review
+
+## Conference Review
+- AAAI 2026 Reviewer
+
+## Journal Review
+- KBS, ESWA, IJCV, TPAMI Reviewer
 
 
 # 💻 Internships
