@@ -240,7 +240,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 <div style="margin-top: 32px;"></div>
 
-## 🧑‍🦱 Large Multimodal Model Personalization
+## 🧑‍🦱 Multimodal Large Language Model Personalization
 
 
 <!-- <div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
@@ -286,11 +286,11 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
 # 📝 Peer Review
 
-## Conference Review
-- AAAI 2026 Reviewer
+<!-- ## Conference Review -->
+- **Conference Review**: AAAI 2026 Reviewer
 
-## Journal Review
-- KBS, ESWA, IJCV, TPAMI Reviewer
+<!-- ## Journal Review -->
+- **Journal Review**: IJCV, TPAMI, KBS, ESWA Reviewer
 
 
 # 💻 Internships
