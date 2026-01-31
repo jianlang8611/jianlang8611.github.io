@@ -39,13 +39,13 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Nip Rumors in the Bud: Retrieval-Guided Topic-Level Adaptation for Test-Time Fake News Video Detection](https)
+[Nip Rumors in the Bud: Retrieval-Guided Topic-Level Adaptation for Test-Time Fake News Video Detection](https://arxiv.org/abs/2601.11981)
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
 
 <!-- **CCF A** \|  -->
 
-**KDD 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/Jian-Lang/RADAR) 
+**KDD 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2601.11981) \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
 - RADAR, the first work to achieves the **test-time adaptation** of the Fake News Video Detection, 
 - Enabling fast adaptation to evolving news videos with **shifting topic-level distributions** in the dynamic world.
@@ -288,7 +288,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 # 📝 Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: AAAI 2026 Reviewer
+- **Conference Review**: ICML 2026 Reviewer, AAAI 2026 Reviewer
 
 <!-- ## Journal Review -->
 - **Journal Review**: IJCV, TPAMI, KBS, ESWA Reviewer
