@@ -216,7 +216,7 @@ Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
 Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
 
-**ICME 2025** \| **CCF B** \| [**PDF**](/papers/REAL.pdf) \| [**Github**](https://github.com/Jian-Lang/REAL) 
+**ICME 2025** \| **CCF B** \| [**PDF**](/papers/REAL.pdf) \| [**Github**](https://github.com/Jian-Lang/REAL) \| [![](https://img.shields.io/github/stars/Jian-Lang/REAL?style=social&label=REAL%20Stars)](https://github.com/Jian-Lang/REAL)
 
 - REAL, a novel model-agnostic framework that generates **manipulation-aware representations** to enhance existing methods in detecting fake news videos with only subtle modifications to the original authentic ones.
 </div>
