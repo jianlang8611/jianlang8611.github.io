@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.02*: &nbsp;💦💦 1 Paper is submitted to KDD 2026 Round 2. Hope a wonderful result.
 - *2026.01*: &nbsp;💦💦 2 Papers are submitted to ICML 2026! Hope a wonderful result.
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
 - *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
@@ -288,7 +289,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 # 📝 Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: ICML 2026 Reviewer, AAAI 2026 Reviewer
+- **Conference Review**: KDD 2026 (Round 2) Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
 
 <!-- ## Journal Review -->
 - **Journal Review**: IJCV, TPAMI, KBS, ESWA Reviewer
