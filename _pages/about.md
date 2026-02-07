@@ -20,6 +20,8 @@ Feel free to contact me if you have any questions about my research or potential
 # 🔥 News
 - *2026.02*: &nbsp;💦💦 1 Paper is submitted to KDD 2026 Round 2. Hope a wonderful result.
 - *2026.01*: &nbsp;💦💦 2 Papers are submitted to ICML 2026! Hope a wonderful result.
+- *2026.01*: &nbsp;💦💦 1 Paper is submitted to TCSVT 2026! Hope a wonderful result.
+- *2026.01*: &nbsp;💦💦 1 Paper is submitted to ACL (ARR) 2026! Hope a wonderful result.
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
 - *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result.
 <!-- - *2025.10*: &nbsp;💦💦 1 Paper is submitted to WWW 2026. Hope a wonderful result. -->
@@ -57,11 +59,11 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2026</div><img src='images/scanner.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https)
+[Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https://www.arxiv.org/abs/2602.00132)
 
 Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
-**AAAI 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**](https://github.com/) 
+**AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) 
 
 - SCANNER, the first **test-time adaptation** framework tailored for distribution shifting hate video detection.
 </div>
@@ -289,10 +291,10 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 # 📝 Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: KDD 2026 (Round 2) Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
+- **Conference Review**: KDD 2026 Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
 
 <!-- ## Journal Review -->
-- **Journal Review**: IJCV, TPAMI, KBS, ESWA Reviewer
+- **Journal Review**: IJCV Reviewer, TPAMI Reviewer, TCSVT Reviewer, KBS Reviewer, ESWA Reviewer
 
 
 # 💻 Internships
