@@ -10,7 +10,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am Jian Lang, currently a master candidate in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
+I am currently a master candidate in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
   
 My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially when facing <strong>missing modalities</strong>, <strong>distribution (domain) shifts</strong>, and <strong>data or label scarcity</strong>. And I am also interested in <strong>video analysis, detection</strong>, and <strong>large multimodal models</strong> for some applications.
   
