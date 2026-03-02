@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by CVPR 2026 Finding. 
 - *2026.02*: &nbsp;💦💦 1 Paper is submitted to KDD 2026 Round 2. Hope a wonderful result.
 - *2026.01*: &nbsp;💦💦 2 Papers are submitted to ICML 2026! Hope a wonderful result.
