@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.03*: &nbsp;💦💦 2 Papers are submitted to ECCV 2026! The Ship of Theseus now sails again.
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by CVPR 2026 Finding. 
 - *2026.02*: &nbsp;💦💦 1 Paper is submitted to KDD 2026 Round 2. Hope a wonderful result.
@@ -184,6 +185,19 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
  -->
 
+<div class='paper-box'><div class='paper-box-image'> <div class="badge">TCSVT 2026</div><img src='images/match.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[MATCH: Multi-Agentic Evidence Grounding for Explainable Hate Video Detection](https://ieeexplore.ieee.org/document/11424606)
+
+Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
+
+
+**TCSVT** \| **CAS Q1 Top** \| [**PDF**](/papers/MATCH.pdf) 
+
+- MATCH, a novel multiple LMM agent collaboration framework for interpretable hate video detection.
+</div>
+</div>
 
 
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">WWW 2025</div><img src='images/more.jpg' alt="sym" width="100%"></div>
