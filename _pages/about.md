@@ -193,7 +193,7 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 
 
-**TCSVT** \| **CAS Q1 Top** \| [**PDF**](/papers/MATCH.pdf) 
+**TCSVT 2026** \| **CAS Q1 Top** \| [**PDF**](/papers/MATCH.pdf) 
 
 - MATCH, a novel multiple LMM agent collaboration framework for interpretable hate video detection.
 </div>
