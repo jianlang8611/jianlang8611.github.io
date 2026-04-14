@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.04*: &nbsp;💦💦 We release the first comprehensive collection of resources on modality-missing learning: https://github.com/Jian-Lang/awesome-modality-missing-learning.
 - *2026.04*: &nbsp;🎉🎉 1 Paper is accepted by ACL 2026 Findings!
 - *2026.03*: &nbsp;💦💦 2 Papers are submitted to ECCV 2026! The Ship of Theseus now sails again.
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
@@ -287,9 +288,6 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 - TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
 </div>
 </div>
-
-
-
 
 # 🎖 Honors and Awards
 - *2025.10* National Scholarship (Top 1%)
