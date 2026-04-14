@@ -18,7 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
-- *2026.04*: &nbsp;💦💦 We release the first comprehensive collection of resources on modality-missing learning: https://github.com/Jian-Lang/awesome-modality-missing-learning.
+- *2026.04*: &nbsp;💦💦 We release the first comprehensive collection of resources on modality-missing learning at [awesome-mml](https://github.com/Jian-Lang/awesome-modality-missing-learning).
 - *2026.04*: &nbsp;🎉🎉 1 Paper is accepted by ACL 2026 Findings!
 - *2026.03*: &nbsp;💦💦 2 Papers are submitted to ECCV 2026! The Ship of Theseus now sails again.
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
@@ -27,8 +27,6 @@ Feel free to contact me if you have any questions about my research or potential
 - *2026.01*: &nbsp;💦💦 2 Papers are submitted to ICML 2026! Hope a wonderful result.
 - *2026.01*: &nbsp;💦💦 1 Paper is submitted to TCSVT 2026! Hope a wonderful result.
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
-<!-- - *2025.11*: &nbsp;💦💦 3 Papers are submitted to CVPR 2026. Hope a wonderful result. -->
-<!-- - *2025.10*: &nbsp;💦💦 1 Paper is submitted to WWW 2026. Hope a wonderful result. -->
 - *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship again.
 
 
