@@ -18,7 +18,8 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
-- *2026.04*: &nbsp;💦💦 We release the <strong>first comprehensive collection</strong> of resources on <strong>modality-missing learning</strong> at [awesome-mml](https://github.com/Jian-Lang/awesome-modality-missing-learning).
+- *2026.04*: &nbsp;💦💦 We release the <strong>first comprehensive repository</strong> of resources on <strong>modality-missing learning</strong> at [awesome-modality-missing-learning
+](https://github.com/Jian-Lang/awesome-modality-missing-learning).
 - *2026.04*: &nbsp;🎉🎉 1 Paper is accepted by ACL 2026 Findings!
 - *2026.03*: &nbsp;💦💦 2 Papers are submitted to ECCV 2026! The Ship of Theseus now sails again.
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
