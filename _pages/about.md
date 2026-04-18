@@ -188,13 +188,13 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">ACL 2026</div><img src='images/leaf.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[LEAF: Towards Lightweight Explainable Hateful Video Detection via Self-Grounding CoT Guided Stage-Wise Distillation]
+[LEAF: Towards Lightweight Explainable Hateful Video Detection via Self-Grounding CoT Guided Stage-Wise Distillation]()
 
 **Jian Lang**, Rongpei Hong, Meihui Zhong, Kaiju Li, Ting Zhong, Qiang Gao, Fan Zhou 
 
 **ACL 2026 Findings** \| [**PDF**](/papers/LEAF.pdf) \| [**Github**](https://github.com/Jian-Lang/LEAF) 
 
-- LEAF, the first lightweight and explainable hateful video detection framework powered by SG-CoT guided distillation.
+- LEAF, the first lightweight while explainable hateful video detection framework powered by SG-CoT guided distillation.
 </div>
 </div>
 
