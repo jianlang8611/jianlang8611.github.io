@@ -40,16 +40,12 @@ Feel free to contact me if you have any questions about my research or potential
 
 ### ⚓ Robust Against Domain (Distribution) Shift
 
-<!-- ### Robust of MLLM Against Visual Hallucination / Corruption -->
-
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/radar.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [Nip Rumors in the Bud: Retrieval-Guided Topic-Level Adaptation for Test-Time Fake News Video Detection](https://arxiv.org/abs/2601.11981)
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
-
-<!-- **CCF A** \|  -->
 
 **KDD 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2601.11981) \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
@@ -101,7 +97,6 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **AAAI 2025** \| **CCF A** \| [**PDF**](/papers/RAGPT.pdf) \| [**Github**](https://github.com/Jian-Lang/RAGPT) \|
 [![](https://img.shields.io/github/stars/Jian-Lang/RAGPT?style=social&label=RAGPT%20Stars)](https://github.com/Jian-Lang/RAGPT) 
-<!-- \| [**Python Package**](https://imml.readthedocs.io/stable/main/modules/classify.html) -->
 
 
 - RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
@@ -120,7 +115,6 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
-<!-- **CCF A** \| [**Github**](https://github.com/Jian-Lang/ALARM)  -->
 
 **KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2512.21598) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
 
@@ -141,60 +135,20 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 </div>
 </div>
 
-<!-- <div class='paper-box'><div class='paper-box-image'><img src='images/fs.png' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[FastSpeech: Fast, Robust and Controllable Text to Speech](https://papers.nips.cc/paper/8580-fastspeech-fast-robust-and-controllable-text-to-speech.pdf), **Yi Ren**, Yangjun Ruan, Xu Tan, Tao Qin, Sheng Zhao, Zhou Zhao, Tie-Yan Liu
-
-**NeurIPS 2019** \| [**Github**](https://speechresearch.github.io/fastspeech/) <strong><span class='show_paper_citations' data='4FA6C0AAAAAJ:qjMakFHDy7sC'></span></strong>
-
-- FastSpeech is the first fully parallel end-to-end speech synthesis model.
-- **Academic Impact**: This work is included by many famous speech synthesis open-source projects, such as [ESPNet ![](https://img.shields.io/github/stars/espnet/espnet?style=social)](https://github.com/espnet/espnet). Our work are promoted by more than 20 media and forums, such as [机器之心](https://mp.weixin.qq.com/s/UkFadiUBy-Ymn-zhJ95JcQ)、[InfoQ](https://www.infoq.cn/article/tvy7hnin8bjvlm6g0myu).
-- **Industry Impact**: FastSpeech has been deployed in [Microsoft Azure TTS service](https://techcommunity.microsoft.com/t5/azure-ai/neural-text-to-speech-extends-support-to-15-more-languages-with/ba-p/1505911) and supports 49 more languages with state-of-the-art AI quality. It was also shown as a text-to-speech system acceleration example in [NVIDIA GTC2020](https://resources.nvidia.com/events/GTC2020s21420).
-</div>
-</div> -->
-
 <div style="margin-top: 32px;"></div>
 
 ## 🎥 Video Analysis & Detection
-
-<!-- <div class='paper-box'><div class='paper-box-image'><img src='images/radar.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[Nipping Rumors in the Bud: Retrieval-Guided Topic Adaptation for Test-Time Detection of Fake News Videos](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
-
-**KDD 2026** \| [**Github**](https://github.com/Jian-Lang/RADAR) 
-
-- RADAR is the first work to achieves the test-time adaptation of the Fake News Video Detection, enabling fast adaptation of obselete models to evolving news videos with shifting topic distributions in the dynamic world.
-</div>
-</div> -->
-
-
-
-
-<!-- <div class='paper-box'><div class='paper-box-image'><img src='images/scanner.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https), Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
-
-**AAAI 2026** \| [**Github**](https://github.com/Jolieresearch/SCANNER) 
-
-- SCANNER is the first test-time adaptation framework tailored for distribution shifting hate video detection.
-</div>
-</div>
-
- -->
 
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">ACL 2026</div><img src='images/leaf.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
 [LEAF: Towards Lightweight Explainable Hateful Video Detection via Self-Grounding CoT Guided Stage-Wise Distillation]()
 
-**Jian Lang**, Rongpei Hong, Meihui Zhong, Kaiju Li, Ting Zhong, Qiang Gao, Fan Zhou 
+**Jian Lang**, Rongpei Hong, Meihui Zhong, Kaiju Li, Ting Zhong, Qiang Gao, Fan Zhou† 
 
 **ACL 2026 Findings** \| [**PDF**](/papers/LEAF.pdf) \| [**Github**](https://github.com/Jian-Lang/LEAF) 
 
-- LEAF, the first lightweight while explainable hateful video detection framework powered by SG-CoT guided distillation.
+- LEAF, the first lightweight while explainable hateful video detection framework powered by SG-CoT guided MLLM distillation.
 </div>
 </div>
 
@@ -275,19 +229,6 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 <div style="margin-top: 32px;"></div>
 
 ## 🧑‍🦱 Multimodal Large Language Model Personalization
-
-
-<!-- <div class='paper-box'><div class='paper-box-image'><img src='images/alarm.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https), **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
-
-**KDD 2026** \| [**Github**](https://github.com/Jian-Lang/ALARM) 
-
-- ALARM is the first label-free harmful meme detection framework powered by Large Multimodal Model self-improvement, which mitigates label scarcity and enables prompt and robust adaptation to evolving harmful content in web memes.
-</div>
-</div> -->
-
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
