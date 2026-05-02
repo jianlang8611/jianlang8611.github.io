@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
 - *2026.04*: &nbsp;💦💦 We release the <strong>first comprehensive repository</strong> of resources on <strong>modality-missing learning</strong> at [awesome-modality-missing-learning
 ](https://github.com/Jian-Lang/awesome-modality-missing-learning).
 - *2026.04*: &nbsp;🎉🎉 1 Paper is accepted by ACL 2026 Findings!
@@ -35,6 +36,56 @@ Feel free to contact me if you have any questions about my research or potential
 # 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
 
 ## 🛡 Robust Multimodal Learning
+
+<div style="margin-top: 32px;"></div>
+
+### 🧩 Robust Against Missing Modalities
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">ICML 2026</div><img src='images/aoept.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality Missing Prompt Tuning]()
+
+**Jian Lang**, Rongpei Hong, Ting Zhong, Fan Zhou†
+
+**ICML 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**]() 
+
+- The **Implicit Modality-Reduction (IMR) bottleneck** in existing prompting for modality-missing methods: restricting multimodal transformers to a modality-reduced subspace, and cutting off latent information from the space of missing modalities.
+- AOEPT, a novel **modal-contextualized prompting** method, breaks this bottleneck in a minimalist yet effective way.
+- A new metric, Normalized Missing-modality Mutual Information (NM2I) that can quantifies the severity of the IMR bottleneck.
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https://dl.acm.org/doi/10.1145/3711896.3737101)
+
+**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
+
+**KDD 2025** \| **CCF A** \| [**PDF**](/papers/REDEEM.pdf) \| [**Github**](https://github.com/Jian-Lang/REDEEM) 
+
+- REDEEM, the extension work of our RAGPT.
+- Proposing a **retrieval-guided conditional generation** paradigm for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2025</div><img src='images/ragpt.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[Retrieval-Augmented Dynamic Prompt Tuning for Incomplete Multimodal Learning](https://doi.org/10.1609/aaai.v39i17.33984)
+
+**Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
+
+**AAAI 2025** \| **CCF A** \| [**PDF**](/papers/RAGPT.pdf) \| [**Github**](https://github.com/Jian-Lang/RAGPT) \|
+[![](https://img.shields.io/github/stars/Jian-Lang/RAGPT?style=social&label=RAGPT%20Stars)](https://github.com/Jian-Lang/RAGPT) 
+
+
+- RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
+</div>
+</div>
 
 <div style="margin-top: 32px;"></div>
 
@@ -65,41 +116,6 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 **AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) 
 
 - SCANNER, the first **test-time adaptation** framework tailored for distribution shifting hate video detection.
-</div>
-</div>
-
-<div style="margin-top: 32px;"></div>
-
-### 🧩 Robust Against Missing Modalities
-
-
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2025</div><img src='images/redeem.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https://dl.acm.org/doi/10.1145/3711896.3737101)
-
-**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
-
-**KDD 2025** \| **CCF A** \| [**PDF**](/papers/REDEEM.pdf) \| [**Github**](https://github.com/Jian-Lang/REDEEM) 
-
-- REDEEM, the extension work of our RAGPT.
-- Proposing a **retrieval-guided conditional generation** paradigm for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
-</div>
-</div>
-
-
-<div class='paper-box'><div class='paper-box-image'><div class="badge">AAAI 2025</div><img src='images/ragpt.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[Retrieval-Augmented Dynamic Prompt Tuning for Incomplete Multimodal Learning](https://doi.org/10.1609/aaai.v39i17.33984)
-
-**Jian Lang**\*, Zhangtao Cheng\*, Ting Zhong, Fan Zhou†
-
-**AAAI 2025** \| **CCF A** \| [**PDF**](/papers/RAGPT.pdf) \| [**Github**](https://github.com/Jian-Lang/RAGPT) \|
-[![](https://img.shields.io/github/stars/Jian-Lang/RAGPT?style=social&label=RAGPT%20Stars)](https://github.com/Jian-Lang/RAGPT) 
-
-
-- RAGPT, a novel **retrieval-augmented dynamic prompt-tuning** framework for enhancing the **modality-missing robustness** of pre-trained Multimodal Transformer.
 </div>
 </div>
 
