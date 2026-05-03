@@ -50,9 +50,8 @@ Feel free to contact me if you have any questions about my research or potential
 
 **ICML 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**]() 
 
-- The **Implicit Modality-Reduction (IMR) bottleneck** in existing prompting for modality-missing methods.
-- AOEPT, a novel **Modal-Contextualized Prompting** method, breaks this bottleneck in a minimalist yet effective way.
-- A new metric, **Normalized Missing-modality Mutual Information** (NM2I) that can quantifies the severity of the IMR bottleneck.
+- The **Implicit Modality-Reduction (IMR) bottleneck** in existing prompting for modality-missing methods, and a new metric, **Normalized Missing-modality Mutual Information** (NM2I) that quantifies the severity of the IMR.
+- AOEPT, a novel **Modal-Contextualized Prompting** method, breaks IMR in a minimalist way.
 </div>
 </div>
 
