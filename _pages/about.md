@@ -50,9 +50,9 @@ Feel free to contact me if you have any questions about my research or potential
 
 **ICML 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**]() 
 
-- **Implicit Modality-Reduction (IMR) bottleneck** in modality missing prompt tuning.
+- **Implicit Modality-Reduction (IMR) bottleneck** in missing prompt tuning.
 - A minimalist **Modal-Contextualized Prompting** method (AOEPT) breaks IMR.
-- A new metric **Normalized Missing-modality Mutual Information** quantifies IMR.
+- A metric **Normalized Missing-modality Mutual Information** quantifies IMR.
 </div>
 </div>
 
