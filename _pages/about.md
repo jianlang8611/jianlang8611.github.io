@@ -153,7 +153,9 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 ## 🧑‍🦱 Personalized Multimodal Learning
 
-### 🧏 Multimodal Large Language Model Personalized Understanding
+<div style="margin-top: 32px;"></div>
+
+### 🧏 MLLM Personalized Understanding
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
