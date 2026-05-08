@@ -10,9 +10,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am currently a first-year PhD student in a combined master's–PhD program in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
+I am a first-year PhD student in a combined master's–PhD program in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Previously, I received Bachelor of Engineering degree from Fuzhou University. 
 
-My research mainly focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> in real-world, non-ideal, and dynamic conditions. Specifically, I am enthusiastic about building multimodal systems that can perform effectively under <strong>(1) imperfect inputs and environments</strong> (e.g., modality missing, distribution shifts, weak supervision) and <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization). Moreover, I am also interested in <strong>multimodal video understanding and detection</strong>, where I apply robustness techniques to improve the generalization, reliability, and robustness of detection models in real-world scenarios.
+My research mainly focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> in <strong>real-world</strong>, <strong>non-ideal</strong>, and <strong>dynamic</strong> conditions. Specifically, I am enthusiastic about designing multimodal systems that can perform effectively under <strong>(1) imperfect inputs and environments</strong> (e.g., modality missing, distribution shifts, weak supervision) and <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization). Moreover, I am also interested in <strong>multimodal video understanding and detection</strong>, where I apply robustness techniques to improve the generalization, reliability, and robustness of detection models in real-world scenarios.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
