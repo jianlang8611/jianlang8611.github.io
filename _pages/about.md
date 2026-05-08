@@ -10,9 +10,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am currently a master candidate in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
-  
-My research mainly focuses on <strong>robust, reliable, and stable multimodal systems</strong> that can perform effectively under <strong>imperfect multimodal data</strong>, especially when facing <strong>missing modalities</strong>, <strong>distribution (domain) shifts</strong>, and <strong>data or label scarcity</strong>. And I am also interested in <strong>video analysis, detection</strong>, and <strong>large multimodal models</strong> for some applications.
+I am currently a first-year PhD student in a combined master's–PhD program in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Before that, I received my Bachelor of Engineering degree from Fuzhou University. 
+
+My research mainly focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> in real-world, non-ideal, and dynamic conditions. Specifically, I am enthusiastic about building multimodal systems that can perform effectively under <strong>(1) imperfect inputs and environments</strong> (e.g., modality missing, distribution shifts, weak supervision) and <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization). Moreover, I am also interested in <strong>multimodal video understanding and detection</strong>, where I apply robustness techniques to improve the generalization, reliability, and robustness of detection models in real-world scenarios.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
@@ -26,8 +26,6 @@ Feel free to contact me if you have any questions about my research or potential
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by TCSVT 2026. 
 - *2026.02*: &nbsp;🎉🎉 1 Paper is accepted by CVPR 2026 Findings. 
 - *2026.02*: &nbsp;💦💦 1 Paper is submitted to KDD 2026 Round 2. Hope a wonderful result.
-- *2026.01*: &nbsp;💦💦 2 Papers are submitted to ICML 2026! Hope a wonderful result.
-- *2026.01*: &nbsp;💦💦 1 Paper is submitted to TCSVT 2026! Hope a wonderful result.
 - *2025.11*: &nbsp;🎉🎉 3 Papers are accepted by KDD 2026! See you in Jeju!
 - *2025.10*: &nbsp;🎉🎉 Get Postgraduate National Scholarship again.
 
@@ -152,6 +150,26 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 <div style="margin-top: 32px;"></div>
 
+
+## 🧑‍🦱 Personalized Multimodal Learning
+
+### 🧏 Multimodal Large Language Model Personalized Understanding
+
+<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https://www.arxiv.org/abs/2512.21616)
+
+Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
+
+**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/pdf/2512.21616) \| [**Github**](https://github.com/ronpay/TAME) 
+
+- TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
+</div>
+</div>
+
+<div style="margin-top: 32px;"></div>
+
 ## 🎥 Video Analysis & Detection
 
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">ACL 2026</div><img src='images/leaf.jpg' alt="sym" width="100%"></div>
@@ -241,23 +259,6 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 </div>
 
 
-<div style="margin-top: 32px;"></div>
-
-## 🧑‍🦱 Multimodal Large Language Model Personalization
-
-<div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
-<div class='paper-box-text' markdown="1">
-
-[TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https://www.arxiv.org/abs/2512.21616)
-
-Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
-
-**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/pdf/2512.21616) \| [**Github**](https://github.com/ronpay/TAME) 
-
-- TAME, the first training-free and **state-aware** personalized Multimodal Large Multimodal Model assistant powered by double memories.
-</div>
-</div>
-
 # 🎖 Honors and Awards
 - *2025.10* National Scholarship (Top 1%)
 - *2025.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
@@ -267,14 +268,14 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
 
 # 📖 Educations
-- *2023.09 -*, Master, University of Electronic Science and Technology of China
+- *2023.09 -*, PhD Student, University of Electronic Science and Technology of China
 - *2019.09 - 2023.06*, Undergraduate, Fuzhou University
 
 
 # 📝 Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: KDD 2026 Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
+- **Conference Review**: NeurIPS 2026 Reviewer, KDD 2026 Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
 
 <!-- ## Journal Review -->
 - **Journal Review**: IJCV Reviewer, TPAMI Reviewer, TCSVT Reviewer, KBS Reviewer, ESWA Reviewer
