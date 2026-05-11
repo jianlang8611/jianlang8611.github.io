@@ -18,6 +18,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.05*: &nbsp;💦💦 3 Paper are submitted to NeurIPS 2026. Hope a wonderful result.
 - *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
 - *2026.04*: &nbsp;💦💦 We release the <strong>first comprehensive repository</strong> of resources on <strong>modality-missing learning</strong> at [awesome-modality-missing-learning
 ](https://github.com/Jian-Lang/awesome-modality-missing-learning).
