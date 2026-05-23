@@ -252,7 +252,7 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 
 Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
 
-**SIGIR 2024** \| **CCF A** \| [**PDF**](/papers/MMRA.pdf) \|  [**Github**](https://github.com/ICDM-UESTC/MMRA) \|
+**SIGIR 2024 Short** \| [**PDF**](/papers/MMRA.pdf) \|  [**Github**](https://github.com/ICDM-UESTC/MMRA) \|
 [![](https://img.shields.io/github/stars/ICDM-UESTC/MMRA?style=social&label=MMRA%20Stars)](https://github.com/ICDM-UESTC/MMRA)
 
 
