@@ -42,11 +42,11 @@ Feel free to contact me if you have any questions about my research or potential
 <div class='paper-box'><div class='paper-box-image'><div class="badge">ICML 2026</div><img src='images/aoept.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality Missing Prompt Tuning]()
+[AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality Missing Prompt Tuning](https://arxiv.org/abs/2605.24816)
 
 **Jian Lang**, Rongpei Hong, Ting Zhong, Fan Zhou†
 
-**ICML 2026** \| **CCF A** \| [**PDF**](/) \| [**Github**]() 
+**ICML 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2605.24816) \| [**Github**](https://github.com/Jian-Lang/AOEPT) 
 
 - The **Implicit Modality-Reduction (IMR) bottleneck** in existing modality-missing prompt-tuning methods, and a new metric **Normalized Missing-modality Mutual Information (NM2I)** quantifies IMR.
 - A minimalist **Modal-Contextualized Prompting** method (**AOEPT**) breaks IMR.
