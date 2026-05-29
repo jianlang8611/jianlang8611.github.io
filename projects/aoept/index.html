@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AOEPT | ICML 2026</title>
+  <meta name="description" content="AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality-Missing Prompt Tuning.">
+  <meta property="og:title" content="AOEPT | ICML 2026">
+  <meta property="og:description" content="Project page for AOEPT, including highlight, method, NM2I analysis, and benchmark results.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/intro.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]] },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="container narrow">
+        <h1>AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality-Missing Prompt Tuning</h1>
+        <div class="authors">
+          <span>Jian Lang</span>
+          <span>Rongpei Hong</span>
+          <span>Ting Zhong</span>
+          <span>Fan Zhou</span>
+        </div>
+        <p class="affiliation">University of Electronic Science and Technology of China</p>
+        <p class="venue">ICML 2026</p>
+        <div class="buttons">
+          <a href="https://arxiv.org/pdf/2605.24816">Paper</a>
+          <a href="https://arxiv.org/abs/2605.24816">arXiv</a>
+          <a href="https://github.com/Jian-Lang/AOEPT">Code</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <h2>IMR Bottleneck</h2>
+        <p class="lead">
+          Existing modality-missing prompt-tuning methods adapt Multimodal Transformers to degraded inputs, but their prompts are still conditioned only on observed modalities. This confines the model to a modality-reduced reasoning space. AOEPT identifies this <strong>Implicit Modality-Reduction (IMR) bottleneck</strong> and breaks it by injecting modal-contextualized prompts that serve as lightweight repositories of missing-modality information.
+        </p>
+      </div>
+      <figure class="paper-figure intro-figure">
+        <img src="assets/images/intro.png" alt="Paradigm comparison between prior prompting methods and AOEPT.">
+        <figcaption>
+          Prior prompting methods fall into a reduced unimodal reasoning space. AOEPT explicitly supplements missing-modality information through modal-contextualized prompts.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section alt">
+      <div class="container narrow">
+        <h2>Method: AOEPT</h2>
+        <p class="compact-copy">
+          AOEPT builds modality-level prompt repositories from training data, activates them with the observed modality of each incomplete sample, and inserts the resulting prompts into the transformer to supplement missing-modality evidence.
+        </p>
+      </div>
+      <figure class="paper-figure method-figure">
+        <img src="assets/images/method.png" alt="AOEPT method overview.">
+        <figcaption>
+          AOEPT constructs modality-level prompt repositories from training data, activates them per sample, and uses them to augment incomplete inputs inside the transformer.
+        </figcaption>
+      </figure>
+      <div class="container">
+        <div class="method-formulas">
+          <div class="formula-block">
+            <p class="formula-title">Modality collection</p>
+            <div class="formula">
+              $$C_t^l=\{t_1^l,t_2^l,\ldots,t_{N_t}^l\},\quad
+              t_i^l,\emptyset=\operatorname{Pool}(F_\theta^l(x_i))$$
+            </div>
+          </div>
+          <div class="formula-block">
+            <p class="formula-title">MCP construction</p>
+            <div class="formula">
+              $$P_{\mathrm{TCP}}^l =
+              \operatorname{Attn}(P^l,\hat C_t^{l-1},\hat C_t^{l-1}) + P^l$$
+            </div>
+          </div>
+          <div class="formula-block">
+            <p class="formula-title">Instance-aware prompt instantiation</p>
+            <div class="formula">
+              $$P_{\mathrm{TCP},i}^{l} =
+              P_{\mathrm{TCP}}^{l}\odot
+              \sigma(\operatorname{MLP}(\bar V_i^{l-1}))$$
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <h2>NM<sup>2</sup>I Analysis</h2>
+        <p>
+          We introduce <strong>Normalized Missing-modality Mutual Information (NM<sup>2</sup>I)</strong> to <strong>diagnose the severity of the IMR bottleneck</strong> by measuring whether prompts actually contain information about the missing modality. This complements accuracy: a method can improve prediction while still failing to restore missing-modality evidence.
+        </p>
+      </div>
+
+      <div class="container">
+        <div class="formula-row">
+          <div class="formula-block">
+            <p class="formula-title">Empirical joint distribution</p>
+            <div class="formula">
+              $$\tilde e_l(p_l^k,m_l^j)=
+              \frac{\phi(\langle p_l^k,m_l^j\rangle)}
+              {\sum_{j,k}\phi(\langle p_l^k,m_l^j\rangle)}$$
+            </div>
+          </div>
+          <div class="formula-block">
+            <p class="formula-title">Mutual information</p>
+            <div class="formula">
+              $$\operatorname{MI}(P_l;M_l)=
+              \sum_{k,j}\tilde e_l(p_l^k,m_l^j)
+              \log\frac{\tilde e_l(p_l^k,m_l^j)}
+              {\tilde e_l(p_l^k)\tilde e_l(m_l^j)}$$
+            </div>
+          </div>
+          <div class="formula-block">
+            <p class="formula-title">NM<sup>2</sup>I</p>
+            <div class="formula">
+              $$\operatorname{NM^2I}_{(l)} =
+              \frac{\operatorname{MI}(P_l;M_l)}
+              {\frac{1}{2}\left(H(P_l)+H(M_l)\right)}$$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="nm2i-results">
+          <figure>
+            <img src="assets/images/nm2i_text.png" alt="NM2I comparison under text missing on MM-IMDb.">
+            <figcaption>Text missing.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/nm2i_image.png" alt="NM2I comparison under image missing on MM-IMDb.">
+            <figcaption>Image missing.</figcaption>
+          </figure>
+        </div>
+        <p class="compact-caption">
+          Prior prompting baselines remain near zero in NM<sup>2</sup>I, while AOEPT shows stronger missing-modality information in the prompt tokens.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Main Results</h2>
+        <p class="section-intro">
+          AOEPT consistently improves over strong prompt-tuning baselines across datasets, missing types, and missing rates. The table reports average performance over text-missing, image-missing, and both-missing scenarios.
+        </p>
+        <div class="table-scroll">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Missing Rate</th>
+                <th>Method</th>
+                <th>MM-IMDb F1-M</th>
+                <th>HateMemes AUC</th>
+                <th>Food101 ACC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>70%</td>
+                <td>LB</td>
+                <td>49.36</td>
+                <td>62.54</td>
+                <td>79.26</td>
+              </tr>
+              <tr>
+                <td>70%</td>
+                <td>MAPs</td>
+                <td>50.36</td>
+                <td>63.13</td>
+                <td>80.43</td>
+              </tr>
+              <tr>
+                <td>70%</td>
+                <td>DCP</td>
+                <td>51.15</td>
+                <td>64.34</td>
+                <td>82.69</td>
+              </tr>
+              <tr>
+                <td>70%</td>
+                <td>RAGPT</td>
+                <td>50.17</td>
+                <td>66.24</td>
+                <td>82.58</td>
+              </tr>
+              <tr>
+                <td>70%</td>
+                <td>MemPrompt</td>
+                <td>50.93</td>
+                <td>64.73</td>
+                <td>83.06</td>
+              </tr>
+              <tr>
+                <td>70%</td>
+                <td>SyP</td>
+                <td>51.88</td>
+                <td>68.11</td>
+                <td>83.56</td>
+              </tr>
+              <tr class="ours">
+                <td>70%</td>
+                <td>AOEPT</td>
+                <td>53.22</td>
+                <td>69.63</td>
+                <td>84.29</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>LB</td>
+                <td>46.99</td>
+                <td>66.29</td>
+                <td>73.82</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>MAPs</td>
+                <td>48.56</td>
+                <td>60.69</td>
+                <td>77.29</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>DCP</td>
+                <td>49.47</td>
+                <td>64.24</td>
+                <td>80.30</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>RAGPT</td>
+                <td>49.47</td>
+                <td>66.02</td>
+                <td>80.82</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>MemPrompt</td>
+                <td>49.42</td>
+                <td>63.78</td>
+                <td>79.06</td>
+              </tr>
+              <tr>
+                <td>90%</td>
+                <td>SyP</td>
+                <td>49.58</td>
+                <td>67.72</td>
+                <td>81.26</td>
+              </tr>
+              <tr class="ours">
+                <td>90%</td>
+                <td>AOEPT</td>
+                <td>51.45</td>
+                <td>68.57</td>
+                <td>82.06</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <h2>Further Analysis</h2>
+      </div>
+      <div class="container narrow analysis-first">
+        <h3 class="analysis-title">Modality Information Scaling</h3>
+        <p class="compact-copy">
+          AOEPT benefits from richer training-time access to the modality that is missing at test time, while prior methods tend to plateau or degrade.
+        </p>
+      </div>
+      <figure class="paper-figure scaling-figure">
+        <img src="assets/images/scaling_text.png" alt="Scaling analysis under decreasing training missing rate.">
+        <figcaption>
+          Scaling analysis under fixed severe test-time text missing. AOEPT benefits from richer training-time missing-modality information.
+        </figcaption>
+      </figure>
+      <div class="container narrow analysis-subsection">
+        <h3 class="analysis-title">Prompt Construction</h3>
+        <p class="compact-copy">
+          The attention-based construction balances performance, runtime, and parameter cost among the tested MCP variants.
+        </p>
+      </div>
+      <figure class="paper-figure construction-figure">
+        <img src="assets/images/construction.png" alt="Prompt construction comparison.">
+        <figcaption>
+          Prompt construction comparison. Attention-based MCP construction provides a strong efficiency-performance tradeoff.
+        </figcaption>
+      </figure>
+      <div class="container narrow analysis-subsection">
+        <h3 class="analysis-title">Efficiency</h3>
+        <p class="compact-copy">
+          AOEPT keeps the prompt design lightweight while improving robustness under missing modalities.
+        </p>
+      </div>
+      <figure class="paper-figure efficiency-figure">
+        <img src="assets/images/efficiency.png" alt="Model efficiency comparison.">
+        <figcaption>
+          Efficiency comparison of AOEPT and prompting baselines.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section alt">
+      <div class="container narrow">
+        <h2>BibTeX</h2>
+        <button class="copy-button" type="button" data-copy-target="#bibtex">Copy</button>
+        <pre id="bibtex"><code>@inproceedings{lang2026aoept,
+  author    = {Lang, Jian and Hong, Rongpei and Zhong, Ting and Zhou, Fan},
+  title     = {AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality-Missing Prompt Tuning},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container narrow">
+      <p>
+        This page was built by adapting the
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
