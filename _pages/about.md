@@ -110,7 +110,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 
-**AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) 
+**AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) \| <span style="color:red;"><strong>Oral</strong></span>
 
 - SCANNER, the first **test-time adaptation** framework tailored for distribution shifting hate video detection.
 </div>
@@ -129,7 +129,7 @@ Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
 **Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
 
-**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2512.21598) \| [**Github**](https://github.com/Jian-Lang/ALARM) 
+**KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2512.21598) \| [**Github**](https://github.com/Jian-Lang/ALARM) \| <span style="color:red;"><strong>Oral</strong></span>
 
 - ALARM, the first **label-free** harmful meme detection framework powered by LMM self-improvement
 - Enabling **prompt and robust adaptation** to **evolving topics and themes** of harmful web memes.
