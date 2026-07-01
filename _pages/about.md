@@ -12,7 +12,9 @@ redirect_from:
 
 I am a first-year PhD student in a combined master's–PhD program in Software Engineering at the University of Electronic Science and Technology of China (UESTC), under the supervision of Prof [Fan Zhou](https://scholar.google.com/citations?user=Ihj2Rw8AAAAJ). Previously, I received Bachelor of Engineering degree from Fuzhou University. 
 
-My research focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> for <strong>non-ideal</strong> and <strong>dynamic</strong> real-world environments. I am enthusiastic about designing multimodal systems that can perform effectively under <strong>(1) imperfect inputs and environments</strong> (e.g., modality missing, distribution shifts) and <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization). I am also interested in <strong>multimodal video understanding and detection</strong>, where I am dedicated to improving the generalization and robustness of detection models in real-world scenarios.
+My research mainly focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> for <strong>non-ideal</strong> and <strong>dynamic</strong> real-world environments. I am enthusiastic about designing multimodal systems that remain robust under <strong>(1) non-ideal inputs and environments</strong> (e.g., missing modalities, distribution shifts) and adaptive to <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization).
+
+I am also interested in understanding, detecting, and moderating <strong>user-generated multimodal content and videos</strong> on online platforms, with a focus on improving the <strong>generalization, robustness, and interpretability</strong> of detection models in dynamic real-world scenarios, while leveraging MLLMs and intelligent agents.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
