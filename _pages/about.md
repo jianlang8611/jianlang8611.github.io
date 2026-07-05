@@ -32,6 +32,8 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 
+<span class='anchor' id='-publications'></span>
+
 # 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
 
 ## 🛡 Robust Multimodal Learning
