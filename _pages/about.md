@@ -262,6 +262,8 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhouâ
 </div>
 
 
+<span class='anchor' id='projects-resources'></span>
+
 # ðŸ§° Projects & Resources
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">Resource</div><img src='images/awesome-mml.png' alt="Awesome Modality Missing Learning" width="100%"></div>
@@ -269,7 +271,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhouâ
 
 [Awesome Modality Missing Learning](https://github.com/Jian-Lang/awesome-modality-missing-learning) \| **Resource** \| [**Github**](https://github.com/Jian-Lang/awesome-modality-missing-learning) \| [![](https://img.shields.io/github/stars/Jian-Lang/awesome-modality-missing-learning?style=social&label=Stars)](https://github.com/Jian-Lang/awesome-modality-missing-learning)
 
-- The **First comprehensive repository** for **modality-missing learning** resources, including papers, benchmarks, codebases, and related topics.
+- The **first comprehensive repository** for **modality-missing learning** resources, including papers, benchmarks, codebases, and related topics.
 - Designed as an entry point for researchers and practitioners working on **robust multimodal learning under incomplete modalities**.
 </div>
 </div>
