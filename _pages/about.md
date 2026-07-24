@@ -278,6 +278,10 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhouâ
 </div>
 </div>
 
+### Fashion Attribute Value Domain Review
+
+- [**Open the bilingual review page**](/html/fashion-value-domain-review.html) for the current Fashion benchmark attribute schema, value domains, coverage, and scale assessment.
+
 
 # ðŸŽ– Honors and Awards
 - *2026.06* KDD 2026 Student Travel Award
