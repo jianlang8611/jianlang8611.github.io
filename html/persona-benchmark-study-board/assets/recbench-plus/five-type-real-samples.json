@@ -1,0 +1,147 @@
+{
+  "source": "official RecBench+ repository, movie domain",
+  "examples": {
+    "explicit": {
+      "source_user": "4647",
+      "condition_num": 1,
+      "movieCount": 3,
+      "movieSubset": [
+        "Do the Right Thing (1989)",
+        "Bamboozled (2000)",
+        "Clockers (1995)"
+      ],
+      "movieSubsetId": [
+        3424,
+        3943,
+        159
+      ],
+      "sharedRelationships": [
+        [
+          "Directed_by",
+          "Spike Lee"
+        ]
+      ],
+      "direct_description_query": "Can you suggest some movies directed by Spike Lee?",
+      "situational_description_query": "I'm looking for a film that showcases the distinctive storytelling style of Spike Lee. I appreciate his unique approach to filmmaking and would love to watch something that reflects his vision.",
+      "data_idx": 10
+    },
+    "implicit": {
+      "source_user": "4169",
+      "condition_num": 1,
+      "movieCount": 8,
+      "movieSubset": [
+        "Modern Times (1936)",
+        "Limelight (1952)",
+        "The_Great Dictator (1940)",
+        "The_Gold Rush (1925)",
+        "Monsieur Verdoux (1947)",
+        "The_Circus (1928)",
+        "City Lights (1931)",
+        "The_Kid (1921)"
+      ],
+      "movieSubsetId": [
+        3462,
+        3559,
+        1281,
+        3629,
+        3632,
+        3306,
+        3307,
+        3310
+      ],
+      "sharedRelationships": [
+        [
+          "Starring",
+          "Charlie Chaplin"
+        ]
+      ],
+      "multihop_info": [
+        {
+          "movie": "King in New York, A (1957)",
+          "relation": "Starring",
+          "person": "Charlie Chaplin"
+        },
+        {
+          "movie": "The_Immigrant (1917)",
+          "relation": "Starring",
+          "person": "Charlie Chaplin"
+        }
+      ],
+      "direct_description_query": "Please recommend some movies that feature the same actor as in A King in New York (1957) and The Immigrant (1917).",
+      "situational_description_query": "I recently watched A King in New York (1957) and The Immigrant (1917) and was really impressed by the performances in both films. I'm interested in exploring more movies that feature the same actor, as I think he brings a unique charm to his roles.",
+      "data_idx": 0
+    },
+    "misinformed": {
+      "source_user": "1354",
+      "condition_num": 1,
+      "movieCount": 2,
+      "movieSubset": [
+        "Anywhere But Here (1999)",
+        "Hope Floats (1998)"
+      ],
+      "movieSubsetId": [
+        3051,
+        1888
+      ],
+      "sharedRelationships": [
+        [
+          "Directed_by",
+          "Don Was"
+        ]
+      ],
+      "multihop_info": [
+        {
+          "movie": "Electric Dreams (1984)",
+          "relation": "Directed_by",
+          "person": "Don Was"
+        }
+      ],
+      "misinformed": [
+        {
+          "movie": "Electric Dreams (1984)",
+          "relation": "Directed_by",
+          "original person": "Don Was",
+          "person": "Alison Ball-Gabriel"
+        }
+      ],
+      "query": "I just watched Electric Dreams and was fascinated by the direction of Alison Ball-Gabriel. I'm eager to find other movies directed by her to see her unique style again.",
+      "data_idx": 0
+    },
+    "interest": {
+      "Shared consecutive movies": [
+        "My Fair Lady (1964)"
+      ],
+      "movie_seq_length": 1,
+      "predecessor_length": 5,
+      "count": 611,
+      "predecessor_movie_count": {
+        "Casablanca (1942)": 395,
+        "Maltese Falcon, The (1941)": 234,
+        "Some Like It Hot (1959)": 217,
+        "Say Anything... (1989)": 139,
+        "Charade (1963)": 138
+      },
+      "query & ground true": {
+        "reason": "Users who watched classic romantic and comedy films like 'Charade', 'Some Like It Hot', and 'Casablanca' might be interested in another classic film with elements of romance and wit.",
+        "query": "I enjoy watching classic films that blend romance with a touch of comedy, like 'Charade' and 'Some Like It Hot'. Can you recommend another classic with a similar vibe?",
+        "movie subset": [
+          "My Fair Lady (1964)"
+        ]
+      }
+    },
+    "demographic": {
+      "group_type": "age",
+      "group": "25-34",
+      "summary": "User Group: [('Age', '25-34')]\nTotal users in this group: 2096\n\nTop 10 Movies for this group:\nStand by Me (1986) - TF-IDF: 0.4607, Viewed by 772 users (36.83%)\nUsual Suspects, The (1995) - TF-IDF: 0.4544, Viewed by 767 users (36.59%)\nClerks (1994) - TF-IDF: 0.4537, Viewed by 616 users (29.39%)\nBreakfast Club, The (1985) - TF-IDF: 0.4525, Viewed by 659 users (31.44%)\nPrincess Bride, The (1987) - TF-IDF: 0.4507, Viewed by 958 users (45.71%)\nPulp Fiction (1994) - TF-IDF: 0.4503, Viewed by 866 users (41.32%)\nTerminator, The (1984) - TF-IDF: 0.4494, Viewed by 860 users (41.03%)\nAliens (1986) - TF-IDF: 0.4445, Viewed by 742 users (35.40%)\nReservoir Dogs (1992) - TF-IDF: 0.4440, Viewed by 569 users (27.15%)\nDie Hard (1988) - TF-IDF: 0.4436, Viewed by 698 users (33.30%)",
+      "query & ground true": {
+        "reason": "The user group of 25-34 year-olds likely has a strong sense of nostalgia for movies from the 80s and 90s that they may have encountered in their youth.",
+        "query": "I'm feeling nostalgic and looking for classic 80s and 90s movies. Can you recommend some?",
+        "movie subset": [
+          "Stand by Me (1986)",
+          "The Breakfast Club (1985)",
+          "The Princess Bride (1987)"
+        ]
+      }
+    }
+  }
+}
