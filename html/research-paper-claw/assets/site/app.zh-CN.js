@@ -3,9 +3,9 @@ const papers = [
     conference: "CVPR",
     status: "Highlight",
     priority: "must",
-    priorityLabel: "Must read",
+    priorityLabel: "必读",
     title: "A Frame is Worth One Token: Efficient Generative World Modeling with Delta Tokens",
-    summary: "DeltaWorld compresses the VFM feature difference between adjacent frames into one continuous delta token, reducing a 512×512 video by 1,024×. With 35× fewer parameters and 2,000× fewer FLOPs, one forward pass can produce diverse futures.",
+    summary: "DeltaWorld 把相邻帧的 VFM 特征差压成单个连续 delta token，将 512×512 视频缩短 1,024 倍；用 35 倍更少参数和 2,000 倍更少 FLOPs，一次前向就能给出多种未来。",
     match: "world model · efficient rollout · delta token",
     authors: "Tommie Kerssies, Gabriele Berton, Ju He, Qihang Yu, Wufei Ma, et al.",
     url: "https://cvpr.thecvf.com/virtual/2026/poster/38021"
@@ -14,9 +14,9 @@ const papers = [
     conference: "ICML",
     status: "Spotlight",
     priority: "must",
-    priorityLabel: "Must read",
+    priorityLabel: "必读",
     title: "DreamDojo: A Real-Time Robot World Model from Large-Scale Human Videos",
-    summary: "The model learns continuous latent actions from 44,000 hours of first-person human video, then post-trains on a small amount of robot data. After distillation it reaches 10.93 FPS, supporting real-time teleoperation, policy evaluation, and model-based planning.",
+    summary: "从 4.4 万小时第一视角人类视频学习连续 latent action，再用少量机器人数据后训练；蒸馏后达到 10.93 FPS，可直接服务实时遥操作、策略评估和 model-based planning。",
     match: "robot world model · latent action · real-time simulation",
     authors: "Shenyuan Gao, William Liang, Kaiyuan Zheng, Ayaan Malik, Seonghyeon Ye, et al.",
     url: "https://icml.cc/virtual/2026/poster/65193"
@@ -25,9 +25,9 @@ const papers = [
     conference: "ACL",
     status: "Poster",
     priority: "must",
-    priorityLabel: "Must read",
+    priorityLabel: "必读",
     title: "From Word to World: Can Large Language Models be Implicit Text-based World Models?",
-    summary: "This work recasts language modeling as next-state prediction in interaction and evaluates LLM world models through fidelity, scaling, and agent utility. Action verification improves GPT-4o by 5.5% on WebShop.",
+    summary: "把语言建模改写成交互中的 next-state prediction，并从 fidelity、scaling 和 agent utility 三层验证 LLM world model；action verification 让 GPT-4o 在 WebShop 提升 5.5%。",
     match: "text world model · agent utility · next-state prediction",
     authors: "Yixia Li, Hongru Wang, Jiahao Qiu, Zhenfei Yin, Dongdong Zhang, et al.",
     url: "https://aclanthology.org/2026.acl-long.366/"
@@ -36,9 +36,9 @@ const papers = [
     conference: "CVPR",
     status: "Highlight",
     priority: "worth",
-    priorityLabel: "Worth reading",
+    priorityLabel: "值得看",
     title: "Physical Object Understanding with a Physically Controllable World Model",
-    summary: "A probabilistic world model observes multiple possible futures from partial video. Motion correlations across those futures reveal objects and articulated parts, enabling both physical-structure discovery and direct 3D manipulation.",
+    summary: "用概率式 world model 从局部视频观察多个可能未来，再从跨未来的运动相关性涌现出对象和可动子部件；不仅识别物理结构，还能在 3D 中直接操控对象。",
     match: "physical control · object dynamics · probabilistic futures",
     authors: "Rahul Venkatesh, Klemen Kotar, Lilian Naing Chen, Wanhee Lee, Gia Ancone, et al.",
     url: "https://cvpr.thecvf.com/virtual/2026/poster/37466"
@@ -47,9 +47,9 @@ const papers = [
     conference: "ICML",
     status: "Poster",
     priority: "worth",
-    priorityLabel: "Worth reading",
+    priorityLabel: "值得看",
     title: "Causal-JEPA: Learning World Models through Object-Level Latent Interventions",
-    summary: "Causal-JEPA lifts masked prediction from patches to objects and uses latent interventions to force interaction understanding instead of shortcuts. Counterfactual reasoning improves by roughly 20% absolute, while planning uses about 1% of a patch world model's latent features.",
+    summary: "把 JEPA 的遮挡预测从 patch 提升到对象层，通过 latent intervention 迫使模型理解交互而不是走捷径；反事实推理绝对提升约 20%，规划只需 patch world model 约 1% 的 latent 特征。",
     match: "causal world model · object interaction · JEPA",
     authors: "Heejeong Nam, Quentin Le Lidec, Lucas Maes, Yann LeCun, Randall Balestriero",
     url: "https://icml.cc/virtual/2026/poster/63623"
@@ -58,9 +58,9 @@ const papers = [
     conference: "ACL",
     status: "Poster",
     priority: "worth",
-    priorityLabel: "Worth reading",
+    priorityLabel: "值得看",
     title: "Current Agents Fail to Leverage World Model as Tool for Foresight",
-    summary: "This paper tests whether agents can use a generative world model as an external simulator. Some agents call it less than 1% of the time, about 15% misuse rollouts, and forced simulation can reduce performance by 5%. The bottleneck is knowing when to simulate and how to interpret the future.",
+    summary: "直接检验 agent 会不会把生成式 world model 当外部模拟器：部分 agent 调用率低于 1%，约 15% 会误用 rollout，强制模拟甚至让性能下降 5%，瓶颈在何时模拟和如何解释未来。",
     match: "agent foresight · simulation tool use · calibration",
     authors: "Cheng Qian, Emre Can Acikgoz, Bingxuan Li, Xiusi Chen, Yuji Zhang, et al.",
     url: "https://aclanthology.org/2026.acl-long.623/"
@@ -70,24 +70,24 @@ const papers = [
 const runConfigs = {
   daily: {
     mode: "DAILY PAPER DELIVERY",
-    promptTitle: "Tell Claw what you want to explore today.",
-    runningTitle: "Building your research briefing for today.",
-    command: "Recommend today's World Model papers from CVPR, ICML, and ACL 2026",
+    promptTitle: "告诉 Claw，今天想研究什么。",
+    runningTitle: "正在形成你的今日研究简报。",
+    command: "推送今天来自 CVPR、ICML 与 ACL 2026 的 World Model 相关论文",
     steps: [
-      ["Read three 2026 acceptance lists", "3 sources"],
-      ["Score the World Model topic and keywords", "6 matches"],
-      ["Create the review, triage, and summary notes", "ready"]
+      ["读取三份 2026 接收列表", "3 sources"],
+      ["按 World Model topic 与关键词打分", "6 matches"],
+      ["生成锐评、分流与摘要式笔记", "ready"]
     ]
   },
   gallery: {
     mode: "DOMAIN RESEARCH GALLERY",
-    promptTitle: "Tell Claw which research field you want to browse.",
-    runningTitle: "Connecting every work across the field.",
-    command: "Build a browsable Domain Research Gallery for MLLM Personalization",
+    promptTitle: "告诉 Claw，想浏览哪个研究领域。",
+    runningTitle: "正在连接领域里的每一项工作。",
+    command: "为 MLLM Personalization 构建可浏览的 Domain Research Gallery",
     steps: [
-      ["Read detailed paper notes and categories", "23 notes"],
-      ["Restore years, figures, and paper relationships", "2024—2026"],
-      ["Export share-ready Gallery HTML", "ready"]
+      ["读取详细论文笔记与 category", "23 notes"],
+      ["恢复年份、首图与工作关系", "2024—2026"],
+      ["导出可分享的 Gallery HTML", "ready"]
     ]
   }
 };
@@ -137,8 +137,8 @@ function paperMarkup(paper, index) {
       </div>
       <div class="paper-match">
         <span class="priority-badge ${paper.priority}">${paper.priorityLabel}</span>
-        <p><strong>Why it matched</strong>${paper.match}</p>
-        <a class="paper-link" href="${paper.url}" target="_blank" rel="noopener">View paper <span aria-hidden="true">↗</span></a>
+        <p><strong>命中原因</strong>${paper.match}</p>
+        <a class="paper-link" href="${paper.url}" target="_blank" rel="noopener">查看论文 <span aria-hidden="true">↗</span></a>
       </div>
     </article>`;
 }
@@ -148,7 +148,7 @@ function renderPapers(conference = "all") {
     ? papers
     : papers.filter((paper) => paper.conference === conference);
   feed.innerHTML = selected.map(paperMarkup).join("");
-  filterSummary.textContent = `Showing ${selected.length} World Model match${selected.length === 1 ? "" : "es"}`;
+  filterSummary.textContent = `显示 ${selected.length} 篇 World Model 匹配论文`;
 }
 
 function delay(milliseconds) {
