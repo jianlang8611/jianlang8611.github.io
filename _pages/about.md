@@ -196,7 +196,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 <div class='paper-box'><div class='paper-box-image'> <div class="badge">TCSVT 2026</div><img src='images/match.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[MATCH: Multi-Agentic Evidence Grounding for Explainable Hate Video Detection](https://jianlang.org/papers/MATCH.pdf)
+[MATCH: Multi-Agentic Evidence Grounding for Explainable Hate Video Detection](/papers/MATCH.html)
 
 Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 

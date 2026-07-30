@@ -2,6 +2,18 @@
 
 {% include seo.html %}
 
+{% if page.citation %}
+<meta name="citation_title" content="{{ page.citation.title | escape_once }}">
+{% for citation_author in page.citation.authors %}
+<meta name="citation_author" content="{{ citation_author | escape_once }}">
+{% endfor %}
+<meta name="citation_publication_date" content="{{ page.citation.publication_date | escape_once }}">
+<meta name="citation_journal_title" content="{{ page.citation.journal_title | escape_once }}">
+<meta name="citation_doi" content="{{ page.citation.doi | escape_once }}">
+<meta name="citation_pdf_url" content="{{ page.citation.pdf_url | escape_once }}">
+<meta name="citation_language" content="en">
+{% endif %}
+
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +23,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 <meta http-equiv="cleartype" content="on">
-<head>
-  <base target="_blank">
-</head>
+<base target="_blank">
