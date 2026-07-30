@@ -268,6 +268,16 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhouâ
 
 # ðŸ§° Projects & Resources
 
+<div class='paper-box'><div class='paper-box-image'><div class="badge">Open Source</div><img src='html/research-paper-claw/assets/site/cover-logo.png' alt="Personalized Research Paper Claw" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+[Personalized Research Paper Claw](https://github.com/Jian-Lang/personalized-research-paper-claw) \| **Research Tool** \| [**Demo**](/html/research-paper-claw/) \| [**Github**](https://github.com/Jian-Lang/personalized-research-paper-claw) \| [![](https://img.shields.io/github/stars/Jian-Lang/personalized-research-paper-claw?style=social&label=Stars)](https://github.com/Jian-Lang/personalized-research-paper-claw)
+
+- An open-source research companion for **personalized top-conference recommendations**, **human-guided paper notes**, and **shareable Research Galleries**.
+- Builds a long-term Markdown knowledge base and exports domain-level understanding as standalone HTML for group meetings and collaboration.
+</div>
+</div>
+
 <div class='paper-box'><div class='paper-box-image'><div class="badge">Resource</div><img src='images/awesome-mml.png' alt="Awesome Modality Missing Learning" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
