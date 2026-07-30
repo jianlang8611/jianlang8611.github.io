@@ -14,6 +14,8 @@ I am a first-year PhD student in a combined master's–PhD program in Software E
 
 My research mainly focuses on <strong>Robust & Personalized Multimodal Intelligence</strong> for <strong>non-ideal</strong> and <strong>dynamic</strong> real-world environments. I am enthusiastic about designing multimodal systems that remain robust under <strong>(1) non-ideal, imperfect inputs and environments</strong> (e.g., missing modalities, distribution shifts) and adaptive to <strong>(2) user-specific dynamics</strong> (e.g., MLLM personalization).
 I am also interested in understanding, detecting, and moderating <strong>user-generated multimodal content and videos</strong> on online platforms, with a focus on improving the <strong>generalization, robustness, and interpretability</strong> of detection models in dynamic real-world scenarios, while leveraging MLLMs and intelligent agents.
+
+Recently, I have been particularly interested in analyzing the capabilities of personalized MLLM assistants in long-horizon interactions and enhancing these capabilities through post-training.
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
