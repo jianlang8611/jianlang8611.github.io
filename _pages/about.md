@@ -290,15 +290,6 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhouâ
 </div>
 </div>
 
-### Persona Benchmark Study Board
-
-- [**Open the benchmark study board**](/html/persona-benchmark-study-board/) for structured notes on personalization, multimodal conversation, recommendation, and long-term memory benchmarks, including construction pipelines, real data samples, evaluation protocols, and reliability risks.
-
-### Fashion Attribute Value Domain Review
-
-- [**Open the bilingual review page**](/html/fashion-value-domain-review.html) for the current Fashion benchmark attribute schema, value domains, coverage, and scale assessment.
-
-
 # ðŸŽ– Honors and Awards
 - *2026.06* KDD 2026 Student Travel Award
 - *2025.10* National Scholarship (Top 1%)
