@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="重要文生图 benchmark 的动机、统计量、能力分类与评测方式对比。">
+  <title>T2I Benchmark Atlas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark">T2I</span>
+      <span>Benchmark Atlas</span>
+    </a>
+    <div class="topbar-meta">
+      <span>7 papers</span>
+      <span>更新于 2026.07.30</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="overview-band" aria-labelledby="page-title">
+      <div class="overview-copy">
+        <p class="eyebrow">TEXT-TO-IMAGE EVALUATION / RESEARCH MAP</p>
+        <h1 id="page-title"><span class="title-cn">文生图</span> <span class="title-en">Benchmark</span><br>正在评估什么？</h1>
+        <p class="lede">七项代表性工作勾勒出一条清晰的演进路径：从“有没有画对对象”，走向“能否调用知识、遵循复杂指令”，再走向“能否完成专业创作”。</p>
+      </div>
+      <dl class="overview-stats" aria-label="页面统计">
+        <div><dt>07</dt><dd>论文 / benchmark 家族</dd></div>
+        <div><dt>06</dt><dd>核心评测方向</dd></div>
+        <div><dt>56</dt><dd>最细能力 facets</dd></div>
+        <div><dt>07</dt><dd>本地 arXiv 源码 ZIP</dd></div>
+      </dl>
+    </section>
+
+    <nav class="control-bar" aria-label="Benchmark 筛选">
+      <label class="search-wrap" for="benchmark-search">
+        <span>检索</span>
+        <input id="benchmark-search" type="search" placeholder="名称、能力、指标" autocomplete="off">
+      </label>
+      <div class="segments" role="group" aria-label="按评测方向筛选">
+        <button class="segment is-active" type="button" data-filter="all">全部</button>
+        <button class="segment" type="button" data-filter="alignment">组合对齐</button>
+        <button class="segment" type="button" data-filter="aesthetic">美学质量</button>
+        <button class="segment" type="button" data-filter="knowledge">世界知识</button>
+        <button class="segment" type="button" data-filter="instruction">指令遵循</button>
+        <button class="segment" type="button" data-filter="creative">专业创作</button>
+      </div>
+    </nav>
+
+    <section class="section-block evolution" aria-labelledby="evolution-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / LANDSCAPE</p>
+          <h2 id="evolution-title">评测范式的变化</h2>
+        </div>
+        <p>难点不只是 prompt 变难了，judge 也必须随生成模型一起升级。</p>
+      </div>
+      <ol class="evolution-track">
+        <li>
+          <time>2023</time>
+          <strong>可检测的原子事实</strong>
+          <span>对象、数量、颜色、位置</span>
+          <a href="#geneval">GenEval</a>
+        </li>
+        <li>
+          <time>2024</time>
+          <strong>真实复杂提示 + 人评</strong>
+          <span>高级组合推理、VQA 评分</span>
+          <a href="#genai-bench">GenAI-Bench</a>
+        </li>
+        <li>
+          <time>2024</time>
+          <strong>高美学参考分布</strong>
+          <span>类别 FID、人类审美偏好</span>
+          <a href="#mjhq">MJHQ-30K</a>
+        </li>
+        <li>
+          <time>2025</time>
+          <strong>原子化、知识与漂移审计</strong>
+          <span>可组合性、世界知识、judge 时效性</span>
+          <p class="evolution-links"><a href="#geneval2">GenEval 2</a> · <a href="#wise">WISE</a></p>
+        </li>
+        <li>
+          <time>2026</time>
+          <strong>指令鲁棒性与专业创作</strong>
+          <span>长短提示、文字、设计工作流</span>
+          <p class="evolution-links"><a href="#tiif-bench">TIIF</a> · <a href="#qwen-image-bench">Qwen</a></p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section-block matrix-section" aria-labelledby="matrix-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">02 / QUICK COMPARE</p>
+          <h2 id="matrix-title">七项工作横向对比</h2>
+        </div>
+        <p>先按研究问题选 benchmark，再看指标是否与目标能力匹配。</p>
+      </div>
+      <div class="table-scroll" tabindex="0">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>核心对象</th>
+              <th>规模</th>
+              <th>主要能力轴</th>
+              <th>核心评分</th>
+              <th>最适合回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row-tags="alignment composition object">
+              <th><a href="#geneval">GenEval</a><small>2023</small></th>
+              <td>基础组合正确性</td>
+              <td>553 prompts<br>6 tasks</td>
+              <td>对象 / 数量 / 颜色 / 位置 / 绑定</td>
+              <td>Detector + CLIP<br>二值全对</td>
+              <td>模型到底在哪个原子条件上失败？</td>
+            </tr>
+            <tr data-row-tags="alignment composition drift">
+              <th><a href="#geneval2">GenEval 2</a><small>2025</small></th>
+              <td>高组合度基础能力</td>
+              <td>800 prompts<br>3–10 atoms</td>
+              <td>对象 / 属性 / 数量 / 3D 关系 / 动词</td>
+              <td>Soft-TIFA<br>AM + GM</td>
+              <td>当前模型与 judge 是否已经使旧榜单失真？</td>
+            </tr>
+            <tr data-row-tags="alignment instruction reasoning video">
+              <th><a href="#genai-bench">GenAI-Bench</a><small>2024</small></th>
+              <td>真实复杂组合提示</td>
+              <td>1,600 prompts<br>38,400 ratings</td>
+              <td>基础组合 + 比较 / 否定 / 区分 / 全称</td>
+              <td>Human Likert<br>VQAScore</td>
+              <td>评分器能否理解真实用户的复杂表达？</td>
+            </tr>
+            <tr data-row-tags="knowledge reasoning alignment science culture time space">
+              <th><a href="#wise">WISE</a><small>2025 / ICML 2026</small></th>
+              <td>隐含世界知识生成</td>
+              <td>1,000 prompts<br>25 subdomains</td>
+              <td>文化常识 / 时空推理 / 生物 / 物理 / 化学</td>
+              <td>VLM rubric<br>WiScore</td>
+              <td>模型能否从间接线索推断并画出正确事实？</td>
+            </tr>
+            <tr data-row-tags="aesthetic quality human">
+              <th><a href="#mjhq">MJHQ-30K</a><small>2024</small></th>
+              <td>审美质量分布</td>
+              <td>30K images<br>10 categories</td>
+              <td>美学 / 人像 / 类别 / 多宽高比</td>
+              <td>Overall & per-class FID</td>
+              <td>训练中的审美质量是否在稳定提升？</td>
+            </tr>
+            <tr data-row-tags="instruction alignment text style reasoning">
+              <th><a href="#tiif-bench">TIIF-Bench</a><small>2026 v3</small></th>
+              <td>细粒度指令遵循</td>
+              <td>5,000 prompts<br>12,074 questions</td>
+              <td>属性 / 关系 / 推理 / 文字 / 风格 / 实际任务</td>
+              <td>TIIF Evaluator<br>GNED + style similarity</td>
+              <td>语义不变时，模型是否受 prompt 长度影响？</td>
+            </tr>
+            <tr data-row-tags="creative instruction aesthetic quality expert">
+              <th><a href="#qwen-image-bench">Qwen-Image-Bench</a><small>2026</small></th>
+              <td>专业创作能力</td>
+              <td>1,000 bilingual prompts<br>56 facets</td>
+              <td>质量 / 美学 / 对齐 / 真实世界 / 创意生成</td>
+              <td>Q-Judger<br>分层 rubric 评分</td>
+              <td>模型能否交付专业创作者真正需要的结果？</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block benchmark-section" aria-labelledby="deep-dive-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">03 / DEEP DIVE</p>
+          <h2 id="deep-dive-title">逐项拆解</h2>
+        </div>
+        <p id="result-count" aria-live="polite">显示 7 / 7</p>
+      </div>
+
+      <div class="benchmark-list">
+        <article class="benchmark" id="geneval" data-tags="alignment composition object color count position attribute binding detector" data-title="GenEval">
+          <header class="benchmark-header">
+            <div class="benchmark-number">01</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot alignment-dot"></span>基础组合对齐 · 2023</div>
+              <h3>GenEval</h3>
+              <p class="paper-title">An Object-Focused Framework for Evaluating Text-to-Image Alignment</p>
+              <p class="one-line">把 prompt 拆成可检测条件，用“所有条件是否同时满足”替代一个难解释的整体相似度。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2310.11513">PDF</a>
+              <a href="https://arxiv.org/e-print/2310.11513">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2310.11513" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual wide" href="assets/benchmarks/geneval.png" target="_blank" aria-label="查看 GenEval 评测流程图">
+            <img src="assets/benchmarks/geneval.png" alt="GenEval 使用对象检测、分割和颜色分类验证生成图像">
+            <span>论文 Figure 1 · object-focused evaluation pipeline</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>553</dt><dd>模板 prompts</dd></div>
+            <div><dt>6</dt><dd>组合任务</dd></div>
+            <div><dt>6,000</dt><dd>人类标注</dd></div>
+            <div><dt>83%</dt><dd>与人判断一致</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>人评昂贵且难以扩展；FID 只看图像分布质量、不看 prompt，CLIPScore 又把整张图与整段文本压成单一相似度。它们既难发现组合错误，也不能解释是对象缺失、数量错误、空间关系错误，还是属性绑定失败。</p>
+              <h5>为什么需要新的评估方式</h5>
+              <p>基础组合条件本身是离散且可验证的。GenEval 选择现成视觉模块逐项验收，让评分具备实例级诊断能力，并能随检测器或分类器升级而替换组件。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>六类 prompt 数量依次为 80 / 99 / 80 / 94 / 100 / 100。对象来自 80 个 MS COCO 类别；使用 11 个基础颜色词；计数为 2–4；位置关系为上、下、左、右。</p>
+              <div class="capability-list" aria-label="GenEval 能力分类">
+                <span>单对象</span><span>双对象共现</span><span>计数</span><span>颜色</span><span>2D 位置</span><span>颜色属性绑定</span>
+              </div>
+              <p>它主要评估模型对短而明确的组合描述是否具备可控、精确、可复现的基础生成能力。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、验证与重要信息</h4>
+              <p><strong>评分链：</strong>Mask2Former 检测与分割对象；计数任务提高检测阈值；bounding box 中心判断相对位置；掩去背景后用 CLIP ViT-L/14 做零样本颜色分类。单图只有在全部条件满足时记为 1，再按任务均值与六任务宏平均得到总分。</p>
+              <p><strong>可信度：</strong>1,200 张图像获得 6,000 次标注，GenEval 与人类判断一致率 83%，人际一致率 88%；在人类全票一致的样本上达到 91%。论文当时最强模型在位置关系与属性绑定上也仅约 15% 和 35%，说明整体图像“看起来不错”会掩盖严重组合错误。</p>
+              <aside class="finding"><strong>使用提醒</strong> 检测器训练分布来自 COCO，模型越强、图像分布越偏离 COCO，judge 越可能成为瓶颈；这正是 GenEval 2 后来要处理的问题。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="geneval2" data-tags="alignment composition drift atom soft-tifa relation count attribute rewrite" data-title="GenEval 2">
+          <header class="benchmark-header">
+            <div class="benchmark-number">02</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot alignment-dot"></span>组合对齐 / Benchmark Drift · 2025</div>
+              <h3>GenEval 2</h3>
+              <p class="paper-title">Addressing Benchmark Drift in Text-to-Image Evaluation</p>
+              <p class="one-line">不仅更新题目，还把“评测器会过时”正式变成 benchmark 设计必须处理的问题。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2512.16853">PDF</a>
+              <a href="https://arxiv.org/e-print/2512.16853">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2512.16853" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual square" href="assets/benchmarks/geneval2.png" target="_blank" aria-label="查看 GenEval 2 样例">
+            <img src="assets/benchmarks/geneval2.png" alt="GenEval 2 不同 atomicity 的提示与生成结果">
+            <span>论文 Figure 3 · atomicity 3–10 的组合提示</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>800</dt><dd>prompts</dd></div>
+            <div><dt>3–10</dt><dd>atoms / prompt</dd></div>
+            <div><dt>23,226</dt><dd>旧 GenEval 重审标注</dd></div>
+            <div><dt>17.7%</dt><dd>最大 judge 偏差</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>GenEval 发布时与人评一致，但其 COCO 检测器没有跟上新模型输出分布。作者重审 8 个跨三年模型后发现：自动分数对当前模型平均低估 11.0 个百分点，最大低估 17.7 个百分点；人评又显示旧题已被饱和。</p>
+              <h5>为什么需要 Soft-TIFA</h5>
+              <p>把整个 prompt 一次性交给 VQA judge，仍会随图像分布变化而漂移；TIFA 用 LLM 临时生成问题，又可能漏掉复杂 prompt 中的原子条件。Soft-TIFA 用模板保证逐 atom 全覆盖，同时保留答案概率中的不确定性。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>800 条模板 prompt，atomicity 从 3 到 10，每档恰好 100 条；每条含 1–3 个不同对象。词表含 40 对象（20 COCO + 20 非 COCO）、18 属性、9 关系、6 个计数值（2–7），另提供 GPT-4o 扩写版本。</p>
+              <div class="capability-list" aria-label="GenEval 2 能力分类">
+                <span>对象</span><span>颜色 / 材质 / 图案</span><span>计数</span><span>前后空间</span><span>传递动词</span><span>组合度</span><span>prompt rewriting</span>
+              </div>
+              <p>评估重点从“单项会不会”转为“多个基础能力能否在一张图里同时成立”。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、验证与重要信息</h4>
+              <p><strong>Soft-TIFA：</strong>按生成模板为每个 atom 建一个问题，以开源 Qwen3-VL-8B 输出正确答案概率。算术平均 Soft-TIFA<sub>AM</sub> 表示 atom-level 正确度；几何平均 Soft-TIFA<sub>GM</sub> 会强烈惩罚任一低分 atom，更接近“整条 prompt 全对”的严格标准。</p>
+              <p><strong>效果：</strong>Soft-TIFA<sub>GM</sub> 与人类 prompt-level 判断的 AUROC 为 94.5%，高于 VQAScore 的 92.4% 与 TIFA 的 91.6%。人评中最强模型 atom-level 已达 85.3%，但 prompt-level 仅 35.8%；组合性仍远未解决。</p>
+              <aside class="finding"><strong>核心结论</strong> 换成 VQA 并不会自动消除 benchmark drift。题目、judge 和人类一致性都需要持续审计，旧分数跨年份直接比较要非常谨慎。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="genai-bench" data-tags="alignment instruction reasoning video vqa human comparison negation ranking" data-title="GenAI-Bench">
+          <header class="benchmark-header">
+            <div class="benchmark-number">03</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot instruction-dot"></span>真实复杂组合 / 自动评分 · 2024</div>
+              <h3>GenAI-Bench</h3>
+              <p class="paper-title">Evaluating and Improving Compositional Text-to-Visual Generation</p>
+              <p class="one-line">用专业设计师的真实复杂 prompt 同时测生成模型和自动评分器，并把评分器用于候选重排。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2406.13743">PDF</a>
+              <a href="https://arxiv.org/e-print/2406.13743">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2406.13743" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual wide" href="assets/benchmarks/genai-bench.jpg" target="_blank" aria-label="查看 GenAI-Bench 复杂提示样例">
+            <img src="assets/benchmarks/genai-bench.jpg" alt="GenAI-Bench 中基础与高级组合提示示例">
+            <span>论文 teaser · real-world compositional prompts</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>1,600</dt><dd>设计师 prompts</dd></div>
+            <div><dt>38,400</dt><dd>人类 alignment ratings</dd></div>
+            <div><dt>10</dt><dd>图像 / 视频模型</dd></div>
+            <div><dt>5,000+</dt><dd>人审能力 tags</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>真实创作 prompt 往往同时包含场景、属性、关系与高阶逻辑。已有 benchmark 多由简单 caption 或模板构成，不能代表专业用户；部分众包提示还含主观、违规或版权相关内容。与此同时，CLIP 的“词袋式”相似度无法可靠判断复杂组合。</p>
+              <h5>为什么引入 VQAScore</h5>
+              <p>与拆问再逐题回答相比，VQAScore 直接询问 VQA 模型“图像是否呈现整段文本”，用回答 Yes 的概率作为连续分数，利用现代多模态模型的组合推理能力，并避免为每条 prompt 调用 LLM 拆题。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>1,600 条 prompt 来自专业设计师，约一半只含基础组合，另一半加入高级推理；每条都标注所有相关技能。六个文生图模型与四个文生视频模型各由 3 人按 1–5 Likert 评分，累计 38,400 个评分。</p>
+              <div class="capability-list" aria-label="GenAI-Bench 能力分类">
+                <span>场景</span><span>属性</span><span>空间 / 动作 / 部件关系</span><span>计数</span><span>比较</span><span>区分</span><span>否定</span><span>全称逻辑</span>
+              </div>
+              <p>它既衡量生成模型的复杂 text-visual alignment，也用于 meta-evaluate 自动指标本身。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、扩展集与重要信息</h4>
+              <p><strong>VQAScore：</strong>使用在 665K 公开 VQA 数据上训练的 CLIP-FlanT5，计算 P(“Yes” | visual, question)。评价指标与人评的一致性时同时报告 Pairwise Accuracy、Pearson 与 Kendall；VQAScore 在图像 / 视频上的 pairwise accuracy 为 64.1 / 63.2，明显高于其他自动指标。</p>
+              <p><strong>GenAI-Rank：</strong>从 800 个 prompt 为 DALL·E 3 与 SDXL 各生成 9 个候选，共 14,400 张图、43,200 个人评。按 VQAScore 选图可让高级 prompt 的人评分分别提升约 0.30 和 0.27，说明评测器也能作为黑盒推理时搜索信号。</p>
+              <aside class="finding"><strong>边界</strong> 该 benchmark 主攻 alignment，不评估美学、毒性、偏见或视频运动质量；VQAScore 也会漏掉小细节、大数量计数和语言歧义。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="wise" data-tags="knowledge alignment reasoning culture science biology physics chemistry spatial temporal vlm" data-title="WISE">
+          <header class="benchmark-header">
+            <div class="benchmark-number">04</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot knowledge-dot"></span>世界知识 / 隐含语义 · 2025 · ICML 2026</div>
+              <h3>WISE</h3>
+              <p class="paper-title">World Knowledge-Informed Semantic Evaluation for Text-to-Image Generation</p>
+              <p class="one-line">不直接说出该画什么，而是给出文化、时空或科学线索，检查模型能否先推断事实，再把知识落实成正确图像。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2503.07265">PDF</a>
+              <a href="https://arxiv.org/e-print/2503.07265">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2503.07265" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual square" href="assets/benchmarks/wise.png" target="_blank" aria-label="查看 WISE 三大知识域和二十五个子域样例">
+            <img src="assets/benchmarks/wise.png" alt="WISE 文化常识、时空推理和自然科学提示样例">
+            <span>论文 Figure 3 · 3 domains / 25 knowledge subdomains</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>1,000</dt><dd>知识型 prompts</dd></div>
+            <div><dt>25</dt><dd>知识子域</dd></div>
+            <div><dt>400 / 300 / 300</dt><dd>文化 / 时空 / 科学</dd></div>
+            <div><dt>20</dt><dd>被评测生成模型</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>画出 prompt 明说的两个对象，只证明了词与像素能对齐；真实场景还要求模型知道“爱因斯坦最喜欢的乐器是什么”“负十度的池塘是什么状态”。旧 benchmark 很少验证隐含事实，也无法判断统一多模态模型的理解能力是否真的转化为生成优势。</p>
+              <h5>为什么需要 WiScore</h5>
+              <p>FID 不看 prompt；CLIPScore 对关系与复杂语义不敏感；VQAScore 虽更强，仍可能只验证表层文本匹配。知识型图像还会同时涉及事实正确、物理合理与视觉质量，因此 WISE 引入带明确 rubric 的三维评分，而不是单一 embedding 相似度。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>1,000 条 prompt 均配有预期视觉线索和知识解释，目标实体尽可能不被直接点名。数据来自教材、百科、常识题与 LLM 候选，再由人工筛除不可视觉回答、过度冷门或事实不稳定的样本。</p>
+              <div class="pillar-list" aria-label="WISE 三大知识域">
+                <div><b>文化常识 · 400</b><span>节日 · 体育 · 宗教 · 工艺 · 建筑 · 动植物 · 艺术 · 名人 · 日常生活</span></div>
+                <div><b>时空推理 · 300</b><span>横向时间 · 纵向时间 · 地理位置 · 相对位置 · 不同视角</span></div>
+                <div><b>自然科学 · 300</b><span>状态 / 行为 · 力学 / 热学 / 光学 · 物性 / 燃烧 / 腐蚀 / 溶液反应 / 化学性质</span></div>
+              </div>
+              <p>它评估的不是知识问答本身，而是知识检索、隐含语义理解、推理和视觉实现四步能否连通。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、验证与重要信息</h4>
+              <p><strong>WiScore：</strong>VLM judge 分别对 Consistency、Realism、Aesthetic Quality 给 0 Rejected / 1 Conditional / 2 Exemplary；按 0.7 / 0.2 / 0.1 加权并除以 2，归一到 [0,1]。高权重放在 consistency，是为了让事实和知识约束成为主导信号。论文主实验使用固定版本 GPT-4o，并用 Gemini 与 Qwen judge 验证排名稳定性。</p>
+              <p><strong>人类验证：</strong>在 Qwen-Image 与 UniWorld 上各采 180 张图，每张由 5 人独立评三维指标，可使用搜索引擎核实事实。Consistency / Realism / Aesthetics 的 Krippendorff’s α 为 0.82 / 0.78 / 0.67，WiScore 在论文对比中与人评最接近。</p>
+              <p><strong>关键发现：</strong>多数模型总体 WiScore 低于 0.6，化学最难；原始 20 模型中 BAGEL + CoT 达 0.70，明显高于不带 CoT 的 0.52。把隐含 prompt 改写为直接答案后几乎所有模型显著提升，说明瓶颈既包括知识不足，也包括知识调用与理解-生成接口不畅。</p>
+              <aside class="finding"><strong>使用提醒</strong> 世界知识会变化且存在文化覆盖偏差。论文已做全球 / 西方 / 非西方分布审计，仓库还发布了更新的 WISE_Verified；正式报告时应固定题集版本与 VLM judge 版本。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="mjhq" data-tags="aesthetic quality human fid portrait aspect ratio category preference" data-title="MJHQ-30K">
+          <header class="benchmark-header">
+            <div class="benchmark-number">05</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot aesthetic-dot"></span>美学质量 / 人类偏好 · 2024</div>
+              <h3>MJHQ-30K</h3>
+              <p class="paper-title">Introduced in Playground v2.5: Three Insights towards Enhancing Aesthetic Quality</p>
+              <p class="one-line">不是发明新分数，而是为 FID 换成高美学、分门类的参考分布，并用产品内真实用户偏好校验。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2402.17245">PDF</a>
+              <a href="https://arxiv.org/e-print/2402.17245">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2402.17245" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual chart" href="assets/benchmarks/mjhq30k.png" target="_blank" aria-label="查看 MJHQ-30K 分类 FID 图">
+            <img src="assets/benchmarks/mjhq30k.png" alt="MJHQ-30K 的十类别 FID 对比">
+            <span>论文 Figure 13 · per-category FID</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>30K</dt><dd>高质量参考图</dd></div>
+            <div><dt>10</dt><dd>常见类别</dd></div>
+            <div><dt>3K</dt><dd>每类样本</dd></div>
+            <div><dt>1024²</dt><dd>FID 分辨率</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>人类美学偏好是最终目标，却不适合在预训练与对齐过程中频繁运行。团队需要一个快速、稳定、可按类别观察趋势的自动代理指标，判断每次训练迭代是否让生成分布更接近高质量图像。</p>
+              <h5>为什么是新的 benchmark 而非新 metric</h5>
+              <p>它沿用 FID，但把参考集变成经美学分数与 CLIPScore 筛选的 Midjourney 5.2 高质量生成图，并报告每类 FID。创新主要在参考分布与评测切片，而非 FID 公式。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>30,000 张参考图，10 类各 3,000 张：animals、art、fashion、food、indoor、landscape、logo、people、plants、vehicles；图像与 prompt 在类内也强调多样性。</p>
+              <div class="capability-list" aria-label="MJHQ-30K 能力分类">
+                <span>整体美学</span><span>类别质量</span><span>人像细节</span><span>色彩 / 对比度</span><span>多宽高比</span><span>真实用户偏好</span>
+              </div>
+              <p>核心是 aesthetic quality，而不是逐 prompt 的语义忠实度；分类 FID 还能暴露 people、fashion、logo 等垂直领域差异。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>配套人评与重要信息</h4>
+              <p><strong>自动部分：</strong>在 1024×1024 上计算 overall 与 per-category FID，越低越好。论文报告 SDXL 1.0 + refiner / Playground v2 / Playground v2.5 的 overall FID 分别为 9.55 / 7.07 / 4.48。</p>
+              <p><strong>人评部分：</strong>Internal-1K 来自产品真实用户 prompt；People-200 专测人像；另覆盖从 9:16 到 16:9 的 7 种比例。每对图至少由 7 名不同用户盲选，至少 2 票优势才判胜，单项研究涉及数千用户。</p>
+              <aside class="finding"><strong>使用提醒</strong> MJHQ-30K 的“好看”被 Midjourney 5.2 参考分布定义，存在审美风格偏置；FID 又是分布级指标，不能判断某一张图是否严格遵循了 prompt。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="tiif-bench" data-tags="instruction alignment text gned style reasoning length robustness vlm designer" data-title="TIIF-Bench">
+          <header class="benchmark-header">
+            <div class="benchmark-number">06</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot instruction-dot"></span>细粒度指令遵循 · 2026 v3</div>
+              <h3>TIIF-Bench</h3>
+              <p class="paper-title">How Does Your T2I Model Follow Your Instructions?</p>
+              <p class="one-line">把长短 prompt 鲁棒性、文字渲染、风格控制与真实设计任务放进同一个可复现的细粒度评测框架。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2506.02161">PDF</a>
+              <a href="https://arxiv.org/e-print/2506.02161">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2506.02161" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual square" href="assets/benchmarks/tiif-bench.png" target="_blank" aria-label="查看 TIIF-Bench 构建与评测流程">
+            <img src="assets/benchmarks/tiif-bench.png" alt="TIIF-Bench prompt 构建和细粒度评估流程">
+            <span>论文 Figure 5 · prompt construction & evaluation</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>5,000</dt><dd>长短 prompts</dd></div>
+            <div><dt>12,074</dt><dd>二值问题</dd></div>
+            <div><dt>554</dt><dd>TestMini prompts</dd></div>
+            <div><dt>36</dt><dd>属性池组合</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>旧 benchmark 常见四类问题：prompt 长度单一，无法测语义不变时的长度敏感性；模板语义重复；CLIP/BLIP/检测器对复杂场景过粗；把完整 caption 塞给 VLM 做整体打分会诱导 judge 根据文本先验“脑补”图中不存在的条件。</p>
+              <h5>为什么需要多种专用指标</h5>
+              <p>指令遵循不是一个同质任务：一般语义适合逐属性 yes/no，文字渲染需要 OCR 序列匹配，风格控制需要参考图特征相似度。用单一 holistic reward 会丢失可解释性，也可能奖励错误维度。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>5,000 条 prompt 均有核心语义相同的 short / long 版本，对应 12,074 个二值问题；TestMini 为 554 prompts / 1,446 questions。数据由 10 个 concept pools 与 36 种组合策略构建，另含 100 条设计师级真实任务。</p>
+              <div class="capability-list" aria-label="TIIF-Bench 能力分类">
+                <span>Basic: 属性 / 关系 / 推理</span><span>Advanced: 跨组组合</span><span>文字渲染</span><span>风格控制</span><span>Designer-level</span><span>长短 prompt 鲁棒性</span>
+              </div>
+              <p>style reference 覆盖 16:9、5:4、1:1、4:5、9:16 五种比例，避免把宽高比变化误判为风格能力下降。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、训练与重要信息</h4>
+              <p><strong>TIIF Evaluator：</strong>每个核心概念变成一个独立二值问题，图像得分为回答正确率。评测器从 Qwen3VL-8B 微调而来；训练语料覆盖 30 个 T2I 模型、两次 rollout、约 300K 图与 724K 问题，平衡后使用 109K 正例 + 109K 负例，并输出可解释推理。</p>
+              <p><strong>GNED：</strong>对目标文字与 OCR 结果做 Hungarian 全局最优匹配，再按完整目标 / 预测集合归一化，同时惩罚漏字和多字。100 个文字样例上与人类偏好一致率 99%，高于 PNED 的 94% 与 OCR Recall 的 83%。风格则使用参考图的 CSD 与 DINOv3 相似度。</p>
+              <aside class="finding"><strong>额外价值</strong> 它把 prompt 长度作为受控变量：强模型通常在 short / long 间稳定，弱模型差异显著。因此可以区分“会画某概念”与“能从冗长自然语言里稳定抓住概念”。</aside>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="qwen-image-bench" data-tags="creative instruction aesthetic quality expert bilingual taxonomy judge real-world design knowledge" data-title="Qwen-Image-Bench">
+          <header class="benchmark-header">
+            <div class="benchmark-number">07</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot creative-dot"></span>Creator-centric 综合评测 · 2026</div>
+              <h3>Qwen-Image-Bench</h3>
+              <p class="paper-title">From Generation to Creation in Text-to-Image Evaluation</p>
+              <p class="one-line">当基础质量和对齐趋于饱和，真正拉开模型差距的是现实知识、文字、叙事与专业设计执行力。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2605.28091">PDF</a>
+              <a href="https://arxiv.org/e-print/2605.28091">Source ZIP</a>
+              <a href="https://arxiv.org/abs/2605.28091" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual square" href="assets/benchmarks/qwen-image-bench.png" target="_blank" aria-label="查看 Qwen-Image-Bench 能力层级图">
+            <img src="assets/benchmarks/qwen-image-bench.png" alt="Qwen-Image-Bench 五大支柱和五十六个细粒度能力示例">
+            <span>论文 Figure 1 · creator-centric capability taxonomy</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>1,000</dt><dd>中英双语 prompts</dd></div>
+            <div><dt>5 / 23 / 56</dt><dd>L1 / L2 / L3 层级</dd></div>
+            <div><dt>80</dt><dd>专业艺术标注者</dd></div>
+            <div><dt>130K+</dt><dd>专家标注训练 pairs</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>前沿模型已在基础画质和粗粒度对齐上挤进相近分数区间，旧 benchmark 难以区分生产级系统。它们也很少评价物理、文化与事实正确性，或创作者真正关心的原创性、文字排版、镜头语言和设计落地能力。</p>
+              <h5>为什么需要新的 judge</h5>
+              <p>单一 MLLM 的无监督整体评分会把自身偏见当成标准，且强势信号会淹没细微缺陷。Q-Judger 用专业人员逐 facet、逐 rubric 的标签训练，把每个分数追溯到具体创作能力，而不是复刻一个通用模型的审美。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>1,000 个 prompt 在 17 个应用域中构建，500 short + 500 long，每条都有中英文版本，平均同时激活 3–5 个一级支柱。18 个代表模型分别在中英文全集上评测。</p>
+              <div class="pillar-list" aria-label="Qwen-Image-Bench 五级能力分类">
+                <div><b>Quality</b><span>Realism · Detail · Resolution</span></div>
+                <div><b>Aesthetics</b><span>Composition · Color · Lighting · Anatomy · Emotion · Style</span></div>
+                <div><b>Alignment</b><span>Attributes · Actions · Layout · Relations · Scene</span></div>
+                <div><b>Real-world Fidelity</b><span>Fairness · Safety · World Knowledge</span></div>
+                <div><b>Creative Generation</b><span>Imagination · Fusion · Logic · Text · Design · Storytelling</span></div>
+              </div>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>指标、监督与重要信息</h4>
+              <p><strong>Q-Judger：</strong>基于 Qwen3.6-27B 微调，对 56 个 L3 facets 分别给 0 Fail / 1 Pass / 2 Excel / N/A；再映射为 0 / 60 / 100，自底向上聚合到 L2、L1 与总分。N/A 不参与均值，因此单项缺陷不会被无关维度稀释。</p>
+              <p><strong>专家监督：</strong>80 名具备摄影、导演或美术背景的艺术院校标注者盲标，每个 pair 至少三人独立交叉复核；训练集超过 130,000 个双语 prompt-image pairs。Q-Judger 与专家对 18 个模型的排序，在五大支柱上的 Spearman ρ 约为 0.89–0.92。</p>
+              <aside class="finding"><strong>关键观察</strong> Creative Generation 的模型间方差超过 Quality 的 11 倍；最能拉开差距的 facets 包括 Text Accuracy、Information Visualization 与 Cross-lingual Generation。基础画质已经接近“入场券”，专业执行力才是新前沿。</aside>
+            </section>
+          </div>
+        </article>
+      </div>
+
+      <div class="empty-state" hidden>
+        <strong>没有匹配项</strong>
+        <span>换一个关键词或评测方向。</span>
+      </div>
+    </section>
+
+    <section class="section-block takeaway" aria-labelledby="takeaway-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">04 / TAKEAWAY</p>
+          <h2 id="takeaway-title">如何组合使用</h2>
+        </div>
+      </div>
+      <div class="takeaway-grid">
+        <div><span>基础回归</span><strong>GenEval 2</strong><p>检查对象、属性、关系和高组合度下的硬错误。</p></div>
+        <div><span>复杂语义与知识</span><strong>GenAI-Bench + WISE + TIIF</strong><p>覆盖真实 prompt、世界知识、高阶推理、长短鲁棒性和文字 / 风格控制。</p></div>
+        <div><span>审美与交付</span><strong>MJHQ-30K + Qwen-Image-Bench</strong><p>一个看高质量分布，一个看专业创作任务中的细粒度执行力。</p></div>
+        <div><span>持续可信</span><strong>定期做人评审计</strong><p>任何自动 judge 都可能漂移；报告模型版本、judge 版本和人类一致性。</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>统计口径以各论文当前下载的 arXiv 版本为准。PDF 与 Source 按钮直连 arXiv；整理使用的完整论文材料保存在本地研究项目。</p>
+    <a href="#top">返回顶部</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
