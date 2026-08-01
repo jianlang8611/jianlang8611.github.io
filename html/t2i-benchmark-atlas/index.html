@@ -14,8 +14,8 @@
       <span>Benchmark Atlas</span>
     </a>
     <div class="topbar-meta">
-      <span>8 papers</span>
-      <span>更新于 2026.07.31</span>
+      <span>10 papers</span>
+      <span>更新于 2026.08.01</span>
     </div>
   </header>
 
@@ -24,10 +24,10 @@
       <div class="overview-copy">
         <p class="eyebrow">TEXT-TO-IMAGE EVALUATION / RESEARCH MAP</p>
         <h1 id="page-title"><span class="title-cn">文生图</span> <span class="title-en">Benchmark</span><br>正在评估什么？</h1>
-        <p class="lede">八项代表性工作勾勒出一条清晰的演进路径：从“有没有画对对象”，走向“能否调用知识、遵循复杂指令”，再走向“能否完成专业创作”。</p>
+        <p class="lede">十项代表性工作勾勒出一条清晰的演进路径：从“有没有画对对象”，走向“能否理解密集语义、调用知识并遵循复杂指令”，再走向“能否完成专业创作”。</p>
       </div>
       <dl class="overview-stats" aria-label="页面统计">
-        <div><dt>08</dt><dd>论文 / benchmark 家族</dd></div>
+        <div><dt>10</dt><dd>论文 / benchmark 家族</dd></div>
         <div><dt>06</dt><dd>核心评测方向</dd></div>
         <div><dt>56</dt><dd>最细能力 facets</dd></div>
         <div><dt>2,440</dt><dd>OneIG 中英 prompts</dd></div>
@@ -68,7 +68,7 @@
           <time>2024</time>
           <strong>真实复杂提示 + 人评</strong>
           <span>高级组合推理、VQA 评分</span>
-          <a href="#genai-bench">GenAI-Bench</a>
+          <p class="evolution-links"><a href="#genai-bench">GenAI-Bench</a> · <a href="#dpg-bench">DPG-Bench</a></p>
         </li>
         <li>
           <time>2024</time>
@@ -80,7 +80,7 @@
           <time>2025</time>
           <strong>原子化、知识与漂移审计</strong>
           <span>可组合性、世界知识、judge 时效性</span>
-          <p class="evolution-links"><a href="#geneval2">GenEval 2</a> · <a href="#wise">WISE</a> · <a href="#oneig-bench">OneIG</a></p>
+          <p class="evolution-links"><a href="#geneval2">GenEval 2</a> · <a href="#wise">WISE</a> · <a href="#oneig-bench">OneIG</a> · <a href="#unigenbench-plus">UniGen++</a></p>
         </li>
         <li>
           <time>2026</time>
@@ -95,7 +95,7 @@
       <div class="section-heading">
         <div>
           <p class="section-index">02 / QUICK COMPARE</p>
-          <h2 id="matrix-title">八项工作横向对比</h2>
+          <h2 id="matrix-title">十项工作横向对比</h2>
         </div>
         <p>先按研究问题选 benchmark，再看指标是否与目标能力匹配。</p>
       </div>
@@ -136,6 +136,14 @@
               <td>Human Likert<br>VQAScore</td>
               <td>评分器能否理解真实用户的复杂表达？</td>
             </tr>
+            <tr data-row-tags="alignment instruction dense long prompt graph entity attribute relation">
+              <th><a href="#dpg-bench">DPG-Bench</a><small>ELLA · ECCV 2024</small></th>
+              <td>长密集 prompt 对齐</td>
+              <td>1,065 prompts<br>83.91 avg tokens</td>
+              <td>全局 / 实体 / 属性 / 关系 / 其他</td>
+              <td>DSG graph score<br>mPLUG-large VQA</td>
+              <td>模型能否同时保留长描述中的大量语义约束？</td>
+            </tr>
             <tr data-row-tags="knowledge reasoning alignment science culture time space">
               <th><a href="#wise">WISE</a><small>2025 / ICML 2026</small></th>
               <td>隐含世界知识生成</td>
@@ -152,12 +160,20 @@
               <td>DSG + Text Score<br>Style encoders + DreamSim</td>
               <td>同一协议下，模型各项能力的强弱分别是什么？</td>
             </tr>
+            <tr data-row-tags="alignment instruction semantic bilingual long short testpoint grammar action text offline judge">
+              <th><a href="#unigenbench-plus">UniGenBench++</a><small>2025</small></th>
+              <td>统一细粒度语义评测</td>
+              <td>600 semantic prompts<br>4 language-length tracks</td>
+              <td>10 primary / 27 sub-dimensions</td>
+              <td>Gemini testpoint pass rate<br>dedicated offline judge</td>
+              <td>模型在语言、长度与细粒度语义变化下是否稳健？</td>
+            </tr>
             <tr data-row-tags="aesthetic quality human">
               <th><a href="#mjhq">MJHQ-30K</a><small>2024</small></th>
               <td>审美质量分布</td>
               <td>30K images<br>10 categories</td>
               <td>美学 / 人像 / 类别 / 多宽高比</td>
-              <td>Overall & per-class FID</td>
+              <td>Overall &amp; per-class FID</td>
               <td>训练中的审美质量是否在稳定提升？</td>
             </tr>
             <tr data-row-tags="instruction alignment text style reasoning">
@@ -187,7 +203,7 @@
           <p class="section-index">03 / DEEP DIVE</p>
           <h2 id="deep-dive-title">逐项拆解</h2>
         </div>
-        <p id="result-count" aria-live="polite">显示 8 / 8</p>
+        <p id="result-count" aria-live="polite">显示 10 / 10</p>
       </div>
 
       <div class="benchmark-list">
@@ -239,6 +255,13 @@
               <p><strong>评分链：</strong>Mask2Former 检测与分割对象；计数任务提高检测阈值；bounding box 中心判断相对位置；掩去背景后用 CLIP ViT-L/14 做零样本颜色分类。单图只有在全部条件满足时记为 1，再按任务均值与六任务宏平均得到总分。</p>
               <p><strong>可信度：</strong>1,200 张图像获得 6,000 次标注，GenEval 与人类判断一致率 83%，人际一致率 88%；在人类全票一致的样本上达到 91%。论文当时最强模型在位置关系与属性绑定上也仅约 15% 和 35%，说明整体图像“看起来不错”会掩盖严重组合错误。</p>
               <aside class="finding"><strong>使用提醒</strong> 检测器训练分布来自 COCO，模型越强、图像分布越偏离 COCO，judge 越可能成为瓶颈；这正是 GenEval 2 后来要处理的问题。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>单图为严格二值分：对象、数量、颜色、位置和属性绑定等该 prompt 要求必须全部通过。分别报告 6 个任务的成功率，并对任务做宏平均得到 Overall GenEval Score；越高越好。</p></div>
+                <div><h5>评估协议</h5><p>对 553 条固定模板 prompt 每条生成 4 张图，按 Mask2Former → 几何关系 / 计数 → masked CLIP 颜色分类的固定流水线逐图判定。报告总体分与六类分，并同时固定生成分辨率、采样配置、检测阈值和 evaluator 版本。</p></div>
+              </div>
             </section>
           </div>
         </article>
@@ -292,6 +315,13 @@
               <p><strong>效果：</strong>Soft-TIFA<sub>GM</sub> 与人类 prompt-level 判断的 AUROC 为 94.5%，高于 VQAScore 的 92.4% 与 TIFA 的 91.6%。人评中最强模型 atom-level 已达 85.3%，但 prompt-level 仅 35.8%；组合性仍远未解决。</p>
               <aside class="finding"><strong>核心结论</strong> 换成 VQA 并不会自动消除 benchmark drift。题目、judge 和人类一致性都需要持续审计，旧分数跨年份直接比较要非常谨慎。</aside>
             </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>Soft-TIFA<sub>AM</sub> 是所有原子条件正确概率的算术平均，反映 atom-level accuracy；Soft-TIFA<sub>GM</sub> 是几何平均，对任一低分条件更敏感，近似严格的 prompt-level 完成度。两者均越高越好。</p></div>
+                <div><h5>评估协议</h5><p>在 800 条 prompt 的 atomicity 3–10 八个切片上，用同一 Qwen3-VL-8B judge 逐 atom 问答；原始模板与 GPT-4o rewrite 版本分开报告，并同时给出 AM、GM、按 atomicity 分层曲线和 judge 版本。跨年比较前需重新做人评 drift 审计。</p></div>
+              </div>
+            </section>
           </div>
         </article>
 
@@ -343,6 +373,13 @@
               <p><strong>VQAScore：</strong>使用在 665K 公开 VQA 数据上训练的 CLIP-FlanT5，计算 P(“Yes” | visual, question)。评价指标与人评的一致性时同时报告 Pairwise Accuracy、Pearson 与 Kendall；VQAScore 在图像 / 视频上的 pairwise accuracy 为 64.1 / 63.2，明显高于其他自动指标。</p>
               <p><strong>GenAI-Rank：</strong>从 800 个 prompt 为 DALL·E 3 与 SDXL 各生成 9 个候选，共 14,400 张图、43,200 个人评。按 VQAScore 选图可让高级 prompt 的人评分分别提升约 0.30 和 0.27，说明评测器也能作为黑盒推理时搜索信号。</p>
               <aside class="finding"><strong>边界</strong> 该 benchmark 主攻 alignment，不评估美学、毒性、偏见或视频运动质量；VQAScore 也会漏掉小细节、大数量计数和语言歧义。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>生成模型用 1–5 Likert 人类 alignment 分；自动 judge 用 VQAScore = P(Yes | visual, prompt-question)。评价 judge 时报告 Pairwise Accuracy、Pearson 相关与 Kendall 排序相关；候选重排则比较选图前后的人评分差值。</p></div>
+                <div><h5>评估协议</h5><p>在 1,600 条设计师 prompt 上覆盖基础与高级组合技能；图像 / 视频输出由 3 名评审独立评分。自动评估保持统一的 CLIP-FlanT5 checkpoint 与问句模板，并按基础 / 高级技能及图像 / 视频分别报告，不能把该分数解释为美学或安全性。</p></div>
+              </div>
             </section>
           </div>
         </article>
@@ -399,6 +436,13 @@
               <p><strong>关键发现：</strong>多数模型总体 WiScore 低于 0.6，化学最难；原始 20 模型中 BAGEL + CoT 达 0.70，明显高于不带 CoT 的 0.52。把隐含 prompt 改写为直接答案后几乎所有模型显著提升，说明瓶颈既包括知识不足，也包括知识调用与理解-生成接口不畅。</p>
               <aside class="finding"><strong>使用提醒</strong> 世界知识会变化且存在文化覆盖偏差。论文已做全球 / 西方 / 非西方分布审计，仓库还发布了更新的 WISE_Verified；正式报告时应固定题集版本与 VLM judge 版本。</aside>
             </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>Consistency、Realism、Aesthetic Quality 各取 0 / 1 / 2，WiScore = (0.7C + 0.2R + 0.1A) / 2，范围 [0,1]。主榜以 WiScore 为核心，同时保留三项原始分和 25 个知识子域分。</p></div>
+                <div><h5>评估协议</h5><p>对固定版本的 1,000 条隐含知识 prompt 生成图像，用同一 VLM、rubric、temperature 与版本评分；按文化 / 时空 / 科学及 25 子域汇报。发布结果时注明使用 WISE 或 WISE_Verified，并用抽样人评或第二 judge 检查排名稳定性。</p></div>
+              </div>
+            </section>
           </div>
         </article>
 
@@ -451,6 +495,13 @@
               <p><strong>人评部分：</strong>Internal-1K 来自产品真实用户 prompt；People-200 专测人像；另覆盖从 9:16 到 16:9 的 7 种比例。每对图至少由 7 名不同用户盲选，至少 2 票优势才判胜，单项研究涉及数千用户。</p>
               <aside class="finding"><strong>使用提醒</strong> MJHQ-30K 的“好看”被 Midjourney 5.2 参考分布定义，存在审美风格偏置；FID 又是分布级指标，不能判断某一张图是否严格遵循了 prompt。</aside>
             </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>核心指标是 1024×1024 特征空间中的 Overall FID 与 10 个 per-category FID，均越低越好。配套人评以 pairwise win / lose / tie 统计真实用户偏好，不把 FID 当作单图质量分。</p></div>
+                <div><h5>评估协议</h5><p>用 MJHQ-30K 的 30,000 个 prompt 为待测模型逐条生成，并与对应 30,000 张高美学参考图计算总体及类内 FID；必须统一分辨率、预处理、样本数与 FID 实现。人评单独在 Internal-1K、People-200 和 7 种宽高比设置中盲测。</p></div>
+              </div>
+            </section>
           </div>
         </article>
 
@@ -472,7 +523,7 @@
 
           <a class="benchmark-visual square" href="assets/benchmarks/tiif-bench.png" target="_blank" aria-label="查看 TIIF-Bench 构建与评测流程">
             <img src="assets/benchmarks/tiif-bench.png" alt="TIIF-Bench prompt 构建和细粒度评估流程">
-            <span>论文 Figure 5 · prompt construction & evaluation</span>
+            <span>论文 Figure 5 · prompt construction &amp; evaluation</span>
           </a>
 
           <dl class="stat-strip">
@@ -502,6 +553,13 @@
               <p><strong>TIIF Evaluator：</strong>每个核心概念变成一个独立二值问题，图像得分为回答正确率。评测器从 Qwen3VL-8B 微调而来；训练语料覆盖 30 个 T2I 模型、两次 rollout、约 300K 图与 724K 问题，平衡后使用 109K 正例 + 109K 负例，并输出可解释推理。</p>
               <p><strong>GNED：</strong>对目标文字与 OCR 结果做 Hungarian 全局最优匹配，再按完整目标 / 预测集合归一化，同时惩罚漏字和多字。100 个文字样例上与人类偏好一致率 99%，高于 PNED 的 94% 与 OCR Recall 的 83%。风格则使用参考图的 CSD 与 DINOv3 相似度。</p>
               <aside class="finding"><strong>额外价值</strong> 它把 prompt 长度作为受控变量：强模型通常在 short / long 间稳定，弱模型差异显著。因此可以区分“会画某概念”与“能从冗长自然语言里稳定抓住概念”。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>一般语义用 TIIF Evaluator 的二值问题正确率；文字用 GNED（Hungarian 匹配后的归一化编辑距离，越低越好）；风格分别报告 CSD 与 DINOv3 reference similarity。Short / Long Gap 衡量语义不变时的长度鲁棒性。</p></div>
+                <div><h5>评估协议</h5><p>完整集为 5,000 条 paired short / long prompts，快速迭代可用 554 条 TestMini。每个概念独立问答，文字与风格子集切换专用 evaluator；按 Basic、Advanced、Text、Style、Designer-level 和 short / long 分开报告，固定 OCR、参考图及 judge checkpoint。</p></div>
+              </div>
             </section>
           </div>
         </article>
@@ -557,6 +615,13 @@
               <p><strong>Q-Judger：</strong>基于 Qwen3.6-27B 微调，对 56 个 L3 facets 分别给 0 Fail / 1 Pass / 2 Excel / N/A；再映射为 0 / 60 / 100，自底向上聚合到 L2、L1 与总分。N/A 不参与均值，因此单项缺陷不会被无关维度稀释。</p>
               <p><strong>专家监督：</strong>80 名具备摄影、导演或美术背景的艺术院校标注者盲标，每个 pair 至少三人独立交叉复核；训练集超过 130,000 个双语 prompt-image pairs。Q-Judger 与专家对 18 个模型的排序，在五大支柱上的 Spearman ρ 约为 0.89–0.92。</p>
               <aside class="finding"><strong>关键观察</strong> Creative Generation 的模型间方差超过 Quality 的 11 倍；最能拉开差距的 facets 包括 Text Accuracy、Information Visualization 与 Cross-lingual Generation。基础画质已经接近“入场券”，专业执行力才是新前沿。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>Q-Judger 对每个适用 L3 facet 输出 Fail / Pass / Excel / N/A，映射为 0 / 60 / 100；排除 N/A 后自底向上平均到 56 个 L3、23 个 L2、5 个 L1 与 Overall。需同时报告五大支柱，避免总分掩盖专业短板。</p></div>
+                <div><h5>评估协议</h5><p>在 1,000 个中英双语 prompt 上使用一致的模型输出设置，Q-Judger 按 prompt 激活的 rubric 独立打分。中英文、short / long、17 个应用域和五大支柱分别汇报；固定 Q-Judger checkpoint，并用专家抽样复核新模型或分布外结果。</p></div>
+              </div>
             </section>
           </div>
         </article>
@@ -614,6 +679,131 @@
               <p><strong>构建：</strong>prompt 来自公开网络、真实用户输入与既有数据集；经过聚类平衡、embedding 去重、LLM 重写和人工敏感 / 冲突检查。短于 30 词、30–60 词、长于 60 词约按 1:2:1 分布，同时覆盖自然语言、tag 和 phrase 输入。</p>
               <aside class="finding"><strong>使用提醒</strong> 这是“分项诊断工具”而不只是总榜：各维度可以独立跑。论文也明确指出，知识推理 judge 仍有改进空间；审美模型存在偏差，人体质量模型的区分力与泛化不足，因此这两项没有被强行塞进当前自动指标。</aside>
             </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>Alignment 为 DSG 依赖问答正确率；Text Score 合成 ED、CR、WAC；Reasoning 为答案图像 LLM2CLIP 相似度；Style 为 CSD 与 OneIG encoder 均值；Diversity 为 1 − DreamSim 同 prompt 两两相似度。五项均越高越好。</p></div>
+                <div><h5>评估协议</h5><p>按 General Object、Portrait、Anime / Stylization、Text、Knowledge / Reasoning、Multilingualism 选择所需子集运行；多样性必须对每条 prompt 生成多张图，风格使用每类 3 张参考图。英文与中文分榜，五指标分开汇报并固定全部 VLM / encoder 版本。</p></div>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="dpg-bench" data-tags="alignment instruction dense long prompt graph entity attribute relation vqa ella" data-title="DPG-Bench ELLA">
+          <header class="benchmark-header">
+            <div class="benchmark-number">09</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot instruction-dot"></span>长密集语义对齐 · ELLA · ECCV 2024</div>
+              <h3>DPG-Bench <small>（ELLA）</small></h3>
+              <p class="paper-title">ELLA: Equip Diffusion Models with LLM for Enhanced Semantic Alignment</p>
+              <p class="one-line">把平均十几 token 的组合题扩展为平均 83.91 token 的密集描述，检查模型能否在多对象、多属性和多关系同时出现时不丢条件。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2403.05135">PDF</a>
+              <a href="https://arxiv.org/e-print/2403.05135">Source</a>
+              <a href="https://arxiv.org/abs/2403.05135" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual chart" href="assets/benchmarks/dpg-bench.png" target="_blank" aria-label="查看 DPG-Bench 与旧 benchmark 的 prompt token 分布对比">
+            <img src="assets/benchmarks/dpg-bench.png" alt="DPG-Bench 与 T2I-CompBench、PartiPrompts、DSG-1k 的 token 数量分布对比">
+            <span>论文 Figure 3 · dense prompt token distribution</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>1,065</dt><dd>长密集 prompts</dd></div>
+            <div><dt>83.91</dt><dd>平均 CLIP tokens</dd></div>
+            <div><dt>4,286</dt><dd>distinct nouns</dd></div>
+            <div><dt>5 / 13</dt><dd>L1 / L2 类别</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>T2I-CompBench 与 PartiPrompts 的平均长度约 12 tokens，DSG-1k 也只有 22.56；它们适合检查单个组合关系，却不能模拟真实用户用一段话同时描述多个对象、细节属性、空间关系与场景背景的情况。CLIP 文本编码器也恰好最容易在这类长输入中截断或混淆信息。</p>
+              <h5>为什么需要图结构评估</h5>
+              <p>长 prompt 的整体 CLIP 相似度无法定位遗漏，也可能让主物体掩盖小条件。DPG-Bench 沿用 DSG，把描述拆成有依赖关系的可回答问题：只有父级实体成立，其属性 / 关系子问题才有资格得分，从而减少无主体属性的虚假得分。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量与能力轴</h4>
+              <p>1,065 条 prompt 来自 COCO、PartiPrompts、DSG-1k 与 Object365。平均 67.12 words、20.90 nouns、11.59 adjectives / adverbs、9.07 prepositions，词汇覆盖 4,286 个不同名词，信息密度显著高于此前组合 benchmark。</p>
+              <div class="capability-list" aria-label="DPG-Bench 能力分类">
+                <span>Global</span><span>Entity</span><span>Attribute</span><span>Relation</span><span>Other</span><span>多对象组合</span><span>长文本保持</span>
+              </div>
+              <p>五个一级类别再细分为 13 个二级类别，重点测模型是否能同时保留场景全局信息、实体存在、细粒度属性及对象间关系。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>构建、验证与重要信息</h4>
+              <p><strong>构建：</strong>GPT-4 将短源 prompt 扩写为带场景、对象属性和关系的密集描述；Object365 样本先随机抽取 1–4 个对象再生成 prompt。所有 prompt 经人工核验，随后由 GPT-4 生成 tuple categories、问题与依赖图。</p>
+              <p><strong>人类验证：</strong>对 SDXL、PixArt-α 与 ELLA-SDXL 的 DPG-Bench 输出，20 名用户按语义对齐和美学质量排序；人类 alignment 偏好与自动榜单趋势一致。论文结果中 ELLA-SDXL 得 80.23，低于 DALL·E 3 的 83.50，但高于原始 SDXL 的 74.65。</p>
+              <aside class="finding"><strong>边界</strong> DPG-Bench 测的是英文长密集语义对齐，不覆盖双语、文字渲染或专业设计；judge 使用 2024 年的 mPLUG-large，当前强模型上应额外审计 evaluator drift。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>Average DPG Score 是遵循 DSG 依赖规则后的 graph score；Global、Entity、Attribute、Relation、Other 则是各类别全部问题的平均正确率。分数按百分制报告，均越高越好。</p></div>
+                <div><h5>评估协议</h5><p>每个模型对 1,065 条 prompt 各生成 4 张图；mPLUG-large 按预生成问题逐图 VQA，先应用父子依赖，再对问题求 prompt score，最后对全部 prompt 求均值。报告 Overall、5 个一级类别分，并固定分辨率、采样参数、随机种子策略与 VQA checkpoint。</p></div>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <article class="benchmark" id="unigenbench-plus" data-tags="alignment instruction semantic bilingual long short testpoint grammar action text offline judge comprehensive" data-title="UniGenBench++">
+          <header class="benchmark-header">
+            <div class="benchmark-number">10</div>
+            <div class="benchmark-title-wrap">
+              <div class="benchmark-kicker"><span class="type-dot alignment-dot"></span>统一细粒度语义评测 · 2025</div>
+              <h3>UniGenBench++</h3>
+              <p class="paper-title">A Unified Semantic Evaluation Benchmark for Text-to-Image Generation</p>
+              <p class="one-line">用同一批语义母题构造中英、长短四条赛道，再把每条 prompt 拆成 1–10 个可解释 testpoints，统一测真实场景中的语义稳健性。</p>
+            </div>
+            <div class="paper-actions">
+              <a href="https://arxiv.org/pdf/2510.18701">PDF</a>
+              <a href="https://arxiv.org/e-print/2510.18701">Source</a>
+              <a href="https://arxiv.org/abs/2510.18701" target="_blank" rel="noreferrer">arXiv</a>
+            </div>
+          </header>
+
+          <a class="benchmark-visual square" href="assets/benchmarks/unigenbench-plus.png" target="_blank" aria-label="查看 UniGenBench++ 主题、testpoint 与评测流程总览">
+            <img src="assets/benchmarks/unigenbench-plus.png" alt="UniGenBench++ prompt 主题、细粒度 testpoints、Gemini 逐点评测和四条排行榜总览">
+            <span>官方 overview · themes, testpoints and streamlined evaluation</span>
+          </a>
+
+          <dl class="stat-strip">
+            <div><dt>600</dt><dd>语义母题</dd></div>
+            <div><dt>5 / 20</dt><dd>主题 / 子主题</dd></div>
+            <div><dt>10 / 27</dt><dd>主维度 / 子维度</dd></div>
+            <div><dt>4</dt><dd>EN / ZH × short / long</dd></div>
+          </dl>
+
+          <div class="answer-grid">
+            <section class="answer">
+              <h4><span>01</span>为什么要做</h4>
+              <p>现有语义 benchmark 往往 prompt 场景单一、只支持英文，并用少数粗粒度维度概括能力；模型在 Overall 上看似接近，动作接触、代词指代、否定、因果或文字生成等细分问题却可能完全不同。真实产品还必须面对中文和不同长度表达。</p>
+              <h5>为什么引入逐点协议与离线 judge</h5>
+              <p>多轮 VLM 对话评一张图成本高、格式复杂，整体标量又不可诊断。UniGenBench++ 为每条 prompt 配置带上下文解释的 testpoints，让 Gemini-2.5-Pro 一次返回逐点二值判断和理由；同时蒸馏专用离线 evaluator，降低闭源 API 依赖。</p>
+            </section>
+            <section class="answer">
+              <h4><span>02</span>统计量、场景与能力轴</h4>
+              <p>600 个语义样本均有英文 / 中文与 short / long 版本，每条覆盖 1–10 个 testpoints。五大场景为 Creative Divergence、Art、Illustration、Film &amp; Story、Design，细分 20 个真实应用子主题，并覆盖人物、动物、物体、场景、拟人角色等主体。</p>
+              <div class="capability-list" aria-label="UniGenBench++ 十个主评测维度">
+                <span>Style</span><span>World Knowledge</span><span>Attribute</span><span>Compound</span><span>Action</span><span>Entity Layout</span><span>Relationship</span><span>Logical Reasoning</span><span>Grammar</span><span>Text Generation</span>
+              </div>
+              <p>十个主维度展开为 27 个子维度，例如数量 / 表情 / 材质、接触 / 手部 / 全身动作、2D / 3D 布局、比较 / 包含、代词 / 一致性 / 否定。</p>
+            </section>
+            <section class="answer answer-wide">
+              <h4><span>03</span>构建、离线模型与重要信息</h4>
+              <p><strong>构建：</strong>先均匀采样主题、主体和 1–5 个 testpoints，由 MLLM 同时生成中英 short prompt 与每个 testpoint 的上下文描述；再扩写 long prompt，并重新删除失效 testpoint、补充新出现条件，最多增加 5 个，保证长短版本的评分目标仍与文本一致。</p>
+              <p><strong>专用 evaluator：</strong>以 UnifiedReward-2.0-Qwen-72B 为底座，从 Gemini-2.5-Pro 收集约 375K 个带二值结论和解释的监督样本，其中 300K 训练、75K 测试。论文报告它在中英长短全部设置上都优于通用 Qwen2.5-VL-72B。</p>
+              <aside class="finding"><strong>关键观察</strong> 主流模型在 Style 与 World Knowledge 上普遍较强，Logical Reasoning 仍是共同短板；开源模型在 Grammar 与 Action 上波动更大。注意 benchmark 构建和主评测都依赖 Gemini-2.5-Pro，其偏好会被离线模型继承。</aside>
+            </section>
+            <section class="answer answer-wide protocol-section">
+              <h4><span>04</span>评估指标与协议</h4>
+              <div class="protocol-grid">
+                <div><h5>评估指标</h5><p>每个 testpoint 输出 Pass / Fail 与文字理由；子维度分数是该 testpoint 类别所有出现次数中的通过率，主维度分数是其子维度宏平均，Overall 再汇总十个主维度。所有分数转成百分制，越高越好。</p></div>
+                <div><h5>评估协议</h5><p>完整评测对 600 个语义样本运行 EN-short、EN-long、ZH-short、ZH-long 四套输出；Gemini-2.5-Pro 或官方离线模型一次性逐点判定。四条赛道必须分开报告，再给 10 / 27 维切片；固定 judge、prompt template 与解析版本，不混用在线和离线分数。</p></div>
+              </div>
+            </section>
           </div>
         </article>
       </div>
@@ -633,7 +823,7 @@
       </div>
       <div class="takeaway-grid">
         <div><span>基础回归</span><strong>GenEval 2</strong><p>检查对象、属性、关系和高组合度下的硬错误。</p></div>
-        <div><span>复杂语义与知识</span><strong>OneIG-Bench + WISE + TIIF</strong><p>用综合能力画像覆盖世界知识、高阶推理、长短鲁棒性和文字 / 风格控制。</p></div>
+        <div><span>复杂语义与知识</span><strong>DPG-Bench + UniGenBench++ + WISE</strong><p>覆盖密集长文本、中英长短稳健性、世界知识与细粒度逻辑错误。</p></div>
         <div><span>审美与交付</span><strong>MJHQ-30K + Qwen-Image-Bench</strong><p>一个看高质量分布，一个看专业创作任务中的细粒度执行力。</p></div>
         <div><span>持续可信</span><strong>定期做人评审计</strong><p>任何自动 judge 都可能漂移；报告模型版本、judge 版本和人类一致性。</p></div>
       </div>
