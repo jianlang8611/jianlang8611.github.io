@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaMIR Scenario 审查台</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f5f2;
+      --panel: #ffffff;
+      --panel-soft: #f7f8f6;
+      --text: #18201f;
+      --muted: #66706d;
+      --line: #d8ddda;
+      --line-strong: #b9c2be;
+      --accent: #0d665c;
+      --accent-hover: #094e47;
+      --accent-soft: #e3f1ed;
+      --blue: #285e85;
+      --blue-soft: #e7f0f6;
+      --amber: #8d5c08;
+      --amber-soft: #fff2d8;
+      --red: #a33b32;
+      --red-soft: #fae8e5;
+      --green: #166447;
+      --green-soft: #e3f2e9;
+      --shadow: 0 1px 2px rgba(20, 32, 29, 0.05), 0 8px 22px rgba(20, 32, 29, 0.04);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      min-width: 0;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .dataset-status {
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .reviewer-name {
+      width: 148px;
+      min-height: 36px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      padding: 7px 10px;
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .reviewer-name:focus {
+      outline: 2px solid #9ecac0;
+      outline-offset: 1px;
+      border-color: var(--accent);
+    }
+
+    .save-status {
+      min-width: 64px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .save-status.saving { color: var(--amber); }
+    .save-status.saved { color: var(--green); }
+    .save-status.error { color: var(--red); }
+
+    .button {
+      min-height: 36px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      padding: 0 12px;
+      background: var(--panel);
+      color: #34413e;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .button:hover { border-color: #7e8d87; }
+
+    .button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button.primary:hover { background: var(--accent-hover); }
+
+    .app {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 286px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      background: #fafbf9;
+      padding: 16px 14px 28px;
+    }
+
+    .sidebar-label,
+    .section-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .category-nav {
+      display: grid;
+      gap: 5px;
+      margin: 9px 0 18px;
+    }
+
+    .category-button,
+    .attribute-button {
+      width: 100%;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 7px 9px;
+      background: transparent;
+      color: #34413e;
+      text-align: left;
+    }
+
+    .category-button:hover,
+    .attribute-button:hover { background: #eef1ee; }
+
+    .category-button.active,
+    .attribute-button.active {
+      border-color: #a9c8c0;
+      background: var(--accent-soft);
+      color: #094e47;
+      font-weight: 800;
+    }
+
+    .category-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .category-code {
+      width: 25px;
+      height: 25px;
+      flex: 0 0 25px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      margin: 0 -14px 15px;
+      background: var(--line);
+    }
+
+    .attribute-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-search,
+    .field {
+      width: 100%;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 7px 10px;
+    }
+
+    .sidebar-search:focus,
+    .field:focus,
+    .review-note:focus {
+      outline: 2px solid #9ecac0;
+      outline-offset: 1px;
+      border-color: var(--accent);
+    }
+
+    .attribute-list {
+      display: grid;
+      gap: 3px;
+      margin-top: 8px;
+    }
+
+    .attribute-button { min-height: 34px; }
+
+    .attribute-info {
+      min-width: 0;
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .attribute-info span:last-child,
+    .category-name span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .attribute-button .count { flex: 0 0 auto; }
+
+    .review-dot {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      border-radius: 50%;
+      background: #c9cfcc;
+    }
+
+    .review-dot.partial { background: #d79a2b; }
+    .review-dot.complete { background: #2c8b63; }
+    .review-dot.revise { background: #c85448; }
+
+    .main {
+      min-width: 0;
+      padding: 20px 24px 48px;
+    }
+
+    .overview {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .overview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .overview h2 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .pager {
+      display: flex;
+      gap: 7px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .metric {
+      min-width: 0;
+      background: var(--panel);
+      padding: 11px 12px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 20px;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .coverage-line {
+      display: grid;
+      grid-template-columns: 96px minmax(150px, 1fr) 2fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .demonstration-band {
+      display: grid;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .demonstration-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .demonstration-head h3 {
+      margin: 0;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .demonstration-head p,
+    .demonstration-pair-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .demonstration-groups {
+      display: grid;
+      gap: 8px;
+    }
+
+    .demonstration-group {
+      border-top: 1px solid var(--line);
+      padding-top: 9px;
+    }
+
+    .demonstration-group > summary {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .demonstration-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .demonstration-item {
+      min-width: 0;
+      border-left: 3px solid #9dbab3;
+      padding: 8px 10px;
+      background: #f8faf8;
+    }
+
+    .demonstration-item p {
+      margin: 6px 0 0;
+      color: #34413e;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .demonstration-abstracts {
+      display: grid;
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .demonstration-abstract-row {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .demonstration-abstract-row p { margin: 0; }
+    .demonstration-abstract-row p[lang="en"] { color: var(--muted); }
+
+    .demo-review-note {
+      color: var(--muted) !important;
+      font-size: 11px !important;
+    }
+
+    .coverage-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #dfe4e1;
+    }
+
+    .coverage-fill {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .value-chips,
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: var(--panel-soft);
+      color: #59635f;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .chip.mode { border-color: #bfd0dc; background: var(--blue-soft); color: var(--blue); }
+    .chip.binding { border-color: #c8d0cc; background: #f1f3f2; color: #4e5b57; }
+    .chip.covered { border-color: #bdd9ca; background: var(--green-soft); color: var(--green); }
+    .chip.weak { border-color: #ead39d; background: var(--amber-soft); color: var(--amber); }
+    .chip.uncovered { border-color: #ecc3bd; background: var(--red-soft); color: var(--red); }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(130px, 0.55fr));
+      gap: 9px;
+      padding: 14px 0;
+    }
+
+    .scenario-list {
+      display: grid;
+      gap: 24px;
+    }
+
+    .quota-section {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quota-section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 2px 2px 9px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .quota-section-head h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .quota-section-head p {
+      max-width: 680px;
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .quota-section-count {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .quota-scenario-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .scenario-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scenario-card.review-pass { border-left: 4px solid #2c8b63; }
+    .scenario-card.review-revise { border-left: 4px solid #c85448; }
+
+    .scenario-head {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      padding: 15px 16px 12px;
+    }
+
+    .scenario-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .scenario-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .scenario-id {
+      margin-right: 2px;
+      color: #293633;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .bilingual-abstract {
+      display: grid;
+      gap: 7px;
+    }
+
+    .abstract-row {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 9px;
+      align-items: baseline;
+    }
+
+    .language-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .abstract {
+      margin: 0;
+      color: #1e2826;
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .abstract.en {
+      color: #5b6865;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .review-control {
+      display: flex;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .review-control button {
+      min-width: 52px;
+      min-height: 32px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      padding: 0 9px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .review-control button:last-child { border-right: 0; }
+    .review-control button.selected.pass { background: var(--green-soft); color: var(--green); }
+    .review-control button.selected.revise { background: var(--red-soft); color: var(--red); }
+
+    .scenario-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      gap: 20px;
+      padding: 0 16px 15px 82px;
+    }
+
+    .examples {
+      margin: 6px 0 0;
+      padding-left: 20px;
+      color: #45504d;
+      font-size: 13px;
+    }
+
+    .examples li + li { margin-top: 5px; }
+
+    .scenario-side {
+      display: grid;
+      align-content: start;
+      gap: 9px;
+    }
+
+    .scenario-presentation {
+      display: grid;
+      gap: 10px;
+      margin: 0 16px 15px 82px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .evidence-row {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .evidence-copy {
+      display: grid;
+      gap: 5px;
+    }
+
+    .evidence-copy p {
+      margin: 0;
+      color: #34413e;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .evidence-copy p[lang="en"] { color: var(--muted); }
+
+    .cover-targets {
+      display: grid;
+      gap: 7px;
+    }
+
+    .cover-target {
+      display: grid;
+      grid-template-columns: minmax(130px, 190px) minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+    }
+
+    .cover-target-name {
+      padding-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .review-note {
+      width: 100%;
+      min-height: 68px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfcfa;
+      color: var(--text);
+      padding: 8px 9px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      background: #fbfcfa;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 10px 16px 10px 82px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      list-style-position: inside;
+    }
+
+    .source-detail {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      padding: 0 16px 15px 82px;
+    }
+
+    .source-field {
+      min-width: 0;
+      padding: 9px 12px 9px 0;
+      border-top: 1px solid #e7eae8;
+    }
+
+    .source-field.wide { grid-column: 1 / -1; }
+    .source-field.half { grid-column: span 2; }
+
+    .source-field dt {
+      margin: 0 0 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .source-field dd {
+      margin: 0;
+      color: #3b4643;
+      font-size: 12px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .empty,
+    .loading {
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      padding: 36px;
+      background: rgba(255, 255, 255, 0.65);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .metrics { grid-template-columns: repeat(3, 1fr); }
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      .scenario-body { grid-template-columns: 1fr; }
+      .demonstration-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        position: static;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: flex-start;
+        padding: 12px 14px;
+      }
+      .brand { display: grid; gap: 2px; }
+      .dataset-status { white-space: normal; }
+      .top-actions {
+        width: 100%;
+        min-width: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+      }
+      .reviewer-name { width: 100%; grid-column: 1 / -1; }
+      .save-status { grid-column: 1 / -1; text-align: left; }
+      .top-actions .button { width: 100%; padding: 0 8px; }
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .category-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-button { min-width: 0; justify-content: flex-start; }
+      .category-button .count { display: none; }
+      .attribute-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .main { padding: 16px 12px 36px; }
+      .overview-head { display: grid; }
+      .pager { width: 100%; }
+      .pager .button { flex: 1; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .coverage-line { grid-template-columns: 82px 1fr; }
+      .coverage-line .value-chips { grid-column: 1 / -1; }
+      .toolbar { grid-template-columns: 1fr; }
+      .scenario-head { grid-template-columns: 42px minmax(0, 1fr); padding: 13px 12px 10px; }
+      .scenario-number { width: 36px; height: 36px; }
+      .review-control { grid-column: 1 / -1; margin-left: 50px; }
+      .review-control button { flex: 1; }
+      .scenario-body { padding: 0 12px 13px 62px; }
+      .scenario-presentation { margin: 0 12px 13px 62px; }
+      .evidence-row { grid-template-columns: 1fr; gap: 5px; }
+      .cover-target { grid-template-columns: 1fr; gap: 3px; }
+      summary { padding-left: 62px; }
+      .source-detail { grid-template-columns: 1fr; padding-left: 62px; }
+      .source-field.half { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>PersonaMIR Scenario 审查台</h1>
+      <span id="datasetStatus" class="dataset-status">加载 Fashion v4 正式双池...</span>
+    </div>
+    <div class="top-actions">
+      <input id="reviewerName" class="reviewer-name" type="text" maxlength="80" autocomplete="name" placeholder="审核者姓名" aria-label="审核者姓名">
+      <span id="saveStatus" class="save-status">正在加载</span>
+      <button id="resetBtn" class="button" type="button">清空审查记录</button>
+      <button id="exportBtn" class="button primary" type="button">导出审查结果</button>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-label">场景池</div>
+      <nav id="poolNav" class="category-nav" aria-label="Scenario pool">
+        <button type="button" class="category-button" data-pool="category_bound">
+          <span class="category-name"><span class="category-code">B</span><span>类别绑定</span></span>
+        </button>
+        <button type="button" class="category-button" data-pool="category_unbound">
+          <span class="category-name"><span class="category-code">N</span><span>不绑定商品</span></span>
+        </button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div id="categoryLabel" class="sidebar-label">类目</div>
+      <nav id="categoryNav" class="category-nav" aria-label="Category"></nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="attribute-head">
+        <span class="sidebar-label">属性</span>
+        <span id="attributeCount" class="count"></span>
+      </div>
+      <input id="attributeSearch" class="sidebar-search" type="search" placeholder="筛选属性">
+      <nav id="attributeList" class="attribute-list" aria-label="Attribute"></nav>
+    </aside>
+
+    <main class="main">
+      <section id="overview" class="overview">
+        <div class="loading">正在加载 scenario 与审计资产...</div>
+      </section>
+
+      <section class="toolbar" aria-label="Scenario filters">
+        <input id="scenarioSearch" class="field" type="search" placeholder="搜索 scenario、example、来源机制">
+        <select id="modeFilter" class="field" aria-label="Post-hoc mode filter">
+          <option value="all">全部后置 mode</option>
+        </select>
+        <select id="bindingFilter" class="field" aria-label="Binding filter">
+          <option value="all">全部参与层级</option>
+        </select>
+        <select id="reviewFilter" class="field" aria-label="Review filter">
+          <option value="all">全部人工状态</option>
+          <option value="unreviewed">未审</option>
+          <option value="pass">通过</option>
+          <option value="revise">待改</option>
+        </select>
+      </section>
+
+      <section id="scenarioList" class="scenario-list">
+        <div class="loading">正在加载...</div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const CATEGORY_CONFIG = [
+      { id: 'tops', label: '上装', code: 'TP' },
+      { id: 'bottom', label: '下装', code: 'BT' },
+      { id: 'shoes', label: '鞋履', code: 'SH' },
+      { id: 'bags', label: '包袋', code: 'BG' },
+      { id: 'jewelry', label: '首饰', code: 'JW' },
+      { id: 'glasses', label: '眼镜', code: 'GL' }
+    ];
+
+    const FILES = {
+      sourceMap: 'audit/final_scenario_source_map.json',
+      manifest: 'two_pool_manifest.json',
+      releaseAudit: 'versions/fashion_v4_quality_20260801/release_audit.json',
+      presentations: 'audit/scenario_presentations.json',
+      demonstrations: CATEGORY_CONFIG.map((category) => `prompts/demonstrations/fashion/${category.id}.json`)
+    };
+
+    const STORAGE_KEY = 'personamir.scenario.review.v4';
+    const REVIEWER_STORAGE_KEY = 'personamir.scenario.reviewer.v1';
+    const REVIEW_API = 'api/reviews';
+    const noteSaveTimers = new Map();
+    const state = {
+      scenarios: [],
+      sourceById: new Map(),
+      presentationById: new Map(),
+      demonstrationByTarget: new Map(),
+      sharedPoolByConcept: new Map(),
+      manifest: null,
+      releaseAudit: null,
+      reviews: {},
+      storageMode: 'browser',
+      pool: 'category_bound',
+      category: 'shoes',
+      attribute: 'pattern',
+      attributeSearch: '',
+      search: '',
+      mode: 'all',
+      grounding: 'all',
+      review: 'all'
+    };
+
+    const elements = {
+      datasetStatus: document.getElementById('datasetStatus'),
+      poolNav: document.getElementById('poolNav'),
+      categoryLabel: document.getElementById('categoryLabel'),
+      categoryNav: document.getElementById('categoryNav'),
+      attributeList: document.getElementById('attributeList'),
+      attributeCount: document.getElementById('attributeCount'),
+      attributeSearch: document.getElementById('attributeSearch'),
+      overview: document.getElementById('overview'),
+      scenarioSearch: document.getElementById('scenarioSearch'),
+      modeFilter: document.getElementById('modeFilter'),
+      bindingFilter: document.getElementById('bindingFilter'),
+      reviewFilter: document.getElementById('reviewFilter'),
+      scenarioList: document.getElementById('scenarioList'),
+      exportBtn: document.getElementById('exportBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      reviewerName: document.getElementById('reviewerName'),
+      saveStatus: document.getElementById('saveStatus')
+    };
+
+    initialize().catch((error) => {
+      elements.datasetStatus.textContent = '数据加载失败';
+      elements.overview.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+      elements.scenarioList.innerHTML = '';
+      console.error(error);
+    });
+
+    async function initialize() {
+      const query = new URLSearchParams(location.search);
+      const requestedPool = query.get('pool');
+      const requestedCategory = query.get('category');
+      const requestedAttribute = query.get('attribute');
+      if (['category_bound', 'category_unbound'].includes(requestedPool)) {
+        state.pool = requestedPool;
+      }
+      if (CATEGORY_CONFIG.some((item) => item.id === requestedCategory)) {
+        state.category = requestedCategory;
+      }
+      if (requestedAttribute) state.attribute = requestedAttribute;
+
+      const manifest = await fetchJson(FILES.manifest);
+      const boundRequests = Object.values(manifest.category_bound.categories)
+        .flatMap((category) => Object.values(category.attributes))
+        .map(async (attribute) => {
+          const pool = await fetchJson(attribute.file);
+          return [...(pool.scenarios || []), ...(pool.professional_scenarios || [])];
+        });
+      const sharedRequests = Object.entries(manifest.category_unbound.attribute_concepts)
+        .map(async ([concept, metadata]) => {
+          const pool = await fetchJson(metadata.file);
+          return [concept, pool];
+        });
+
+      const [boundGroups, sharedGroups, sourceMap, releaseAudit, presentations, demonstrations, reviewPayload] = await Promise.all([
+        Promise.all(boundRequests),
+        Promise.all(sharedRequests),
+        fetchJson(FILES.sourceMap),
+        fetchJson(FILES.releaseAudit),
+        fetchJson(FILES.presentations),
+        Promise.all(FILES.demonstrations.map(fetchJson)),
+        loadReviewPayload()
+      ]);
+
+      state.sharedPoolByConcept = new Map(sharedGroups);
+      state.scenarios = [
+        ...boundGroups.flat(),
+        ...sharedGroups.flatMap(([, pool]) => [
+          ...(pool.scenarios || []),
+          ...(pool.professional_scenarios || [])
+        ])
+      ];
+      state.sourceById = new Map(sourceMap.map((item) => [item.scenario_id, item]));
+      state.presentationById = new Map(presentations.records.map((item) => [item.scenario_id, item]));
+      demonstrations.forEach((payload) => {
+        payload.attributes
+          .filter((attribute) => attribute.attribute !== 'item_type')
+          .forEach((attribute) => {
+            state.demonstrationByTarget.set(`${payload.category}.${attribute.attribute}`, attribute);
+          });
+      });
+      state.manifest = manifest;
+      state.releaseAudit = releaseAudit;
+      state.reviews = reviewPayload.reviews || {};
+      state.storageMode = reviewPayload.storageMode;
+      elements.reviewerName.value = loadReviewerName();
+      const browserReviews = loadReviews();
+      if (state.storageMode === 'server' && !Object.keys(state.reviews).length && Object.keys(browserReviews).length) {
+        const migrated = await writeReviews({ action: 'replace', reviews: browserReviews });
+        state.reviews = migrated.reviews || {};
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.reviews));
+      setSavedStatus();
+
+      const availableAttributes = attributesForCurrentSelection();
+      if (!availableAttributes.includes(state.attribute)) {
+        state.attribute = availableAttributes[0];
+      }
+
+      setupFilters();
+      bindEvents();
+      render();
+    }
+
+    async function fetchJson(path) {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`${path}: ${response.status} ${response.statusText}`);
+      return response.json();
+    }
+
+    async function loadReviewPayload() {
+      try {
+        const response = await fetch(REVIEW_API, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+        const payload = await response.json();
+        return { ...payload, storageMode: 'server' };
+      } catch (error) {
+        console.info(`Review API unavailable; using browser storage: ${error.message}`);
+        return { reviews: loadReviews(), storageMode: 'browser' };
+      }
+    }
+
+    function setupFilters() {
+      const current = scenariosForCurrentAttribute();
+      const modes = unique(state.scenarios.map((item) => item.posthoc_mode).filter(Boolean));
+      const groundings = unique(current.map((item) => item.item_grounding || item.category_binding));
+      elements.modeFilter.innerHTML = '<option value="all">全部后置 mode</option>'
+        + modes.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+      elements.modeFilter.value = state.mode;
+      elements.bindingFilter.innerHTML = '<option value="all">全部参与层级</option>'
+        + groundings.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
+      elements.bindingFilter.value = groundings.includes(state.grounding) ? state.grounding : 'all';
+      if (!groundings.includes(state.grounding)) state.grounding = 'all';
+    }
+
+    function bindEvents() {
+      elements.poolNav.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-pool]');
+        if (!button || button.dataset.pool === state.pool) return;
+        state.pool = button.dataset.pool;
+        state.attribute = attributesForCurrentSelection()[0];
+        state.attributeSearch = '';
+        state.grounding = 'all';
+        elements.attributeSearch.value = '';
+        setupFilters();
+        render();
+      });
+
+      elements.categoryNav.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-category]');
+        if (!button || state.pool !== 'category_bound') return;
+        state.category = button.dataset.category;
+        state.attribute = attributesForCurrentSelection()[0];
+        state.attributeSearch = '';
+        elements.attributeSearch.value = '';
+        state.grounding = 'all';
+        setupFilters();
+        render();
+      });
+
+      elements.attributeList.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-attribute]');
+        if (!button) return;
+        state.attribute = button.dataset.attribute;
+        state.grounding = 'all';
+        setupFilters();
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      elements.attributeSearch.addEventListener('input', (event) => {
+        state.attributeSearch = event.target.value.trim().toLowerCase();
+        renderAttributes();
+      });
+
+      elements.scenarioSearch.addEventListener('input', (event) => {
+        state.search = event.target.value.trim().toLowerCase();
+        renderScenarios();
+      });
+
+      elements.modeFilter.addEventListener('change', (event) => {
+        state.mode = event.target.value;
+        renderScenarios();
+      });
+
+      elements.bindingFilter.addEventListener('change', (event) => {
+        state.grounding = event.target.value;
+        renderScenarios();
+      });
+
+      elements.reviewFilter.addEventListener('change', (event) => {
+        state.review = event.target.value;
+        renderScenarios();
+      });
+
+      elements.scenarioList.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-review-status]');
+        if (!button) return;
+        const id = button.closest('[data-scenario-id]').dataset.scenarioId;
+        const status = button.dataset.reviewStatus;
+        const existing = state.reviews[id] || {};
+        if (status === 'unreviewed') {
+          delete state.reviews[id];
+        } else {
+          state.reviews[id] = { ...existing, scenario_id: id, status, updated_at: new Date().toISOString() };
+        }
+        clearTimeout(noteSaveTimers.get(id));
+        noteSaveTimers.delete(id);
+        saveReviews();
+        render();
+        persistReview(id);
+      });
+
+      elements.scenarioList.addEventListener('input', (event) => {
+        const textarea = event.target.closest('[data-review-note]');
+        if (!textarea) return;
+        const id = textarea.closest('[data-scenario-id]').dataset.scenarioId;
+        const existing = state.reviews[id] || { scenario_id: id, status: 'unreviewed' };
+        state.reviews[id] = { ...existing, note: textarea.value, updated_at: new Date().toISOString() };
+        saveReviews();
+        setSaveStatus('saving', '保存中');
+        clearTimeout(noteSaveTimers.get(id));
+        noteSaveTimers.set(id, setTimeout(() => {
+          noteSaveTimers.delete(id);
+          persistReview(id);
+        }, 400));
+      });
+
+      elements.exportBtn.addEventListener('click', exportReviews);
+      elements.reviewerName.addEventListener('input', () => {
+        localStorage.setItem(REVIEWER_STORAGE_KEY, elements.reviewerName.value);
+      });
+      elements.resetBtn.addEventListener('click', async () => {
+        const locationLabel = state.storageMode === 'server' ? '共享文件中' : '当前浏览器内';
+        if (!confirm(`清除${locationLabel}的全部人工标记与备注？`)) return;
+        noteSaveTimers.forEach((timer) => clearTimeout(timer));
+        noteSaveTimers.clear();
+        state.reviews = {};
+        saveReviews();
+        render();
+        if (state.storageMode === 'browser') {
+          setSaveStatus('saved', '已清空');
+          return;
+        }
+        try {
+          await writeReviews({ action: 'reset' });
+          setSaveStatus('saved', '已清空');
+        } catch (error) {
+          setSaveStatus('error', '保存失败');
+          alert(`无法清空审查文件：${error.message}`);
+        }
+      });
+    }
+
+    function render() {
+      renderPools();
+      renderHeader();
+      renderCategories();
+      renderAttributes();
+      renderOverview();
+      renderScenarios();
+      updateUrl();
+    }
+
+    function renderPools() {
+      elements.poolNav.querySelectorAll('[data-pool]').forEach((button) => {
+        button.classList.toggle('active', button.dataset.pool === state.pool);
+      });
+    }
+
+    function renderHeader() {
+      const reviewed = Object.values(state.reviews).filter((item) => item.status === 'pass' || item.status === 'revise').length;
+      const counts = state.manifest.counts;
+      elements.datasetStatus.textContent = `v4 正式双池 · ${counts.category_bound_scenarios} 条类别绑定 · ${counts.category_unbound_scenarios} 条不绑定商品 · 普通 [X] ${counts.ordinary_total} / 职业角色 ${counts.professional_total} · 人工复核 ${reviewed}/${state.scenarios.length}`;
+    }
+
+    function renderCategories() {
+      if (state.pool === 'category_unbound') {
+        elements.categoryLabel.textContent = '正式集合';
+        elements.categoryNav.innerHTML = `
+          <button type="button" class="category-button active">
+            <span class="category-name"><span class="category-code">ALL</span><span>不绑定商品场景</span></span>
+            <span class="count">${state.manifest.counts.category_unbound_scenarios}</span>
+          </button>`;
+        return;
+      }
+      elements.categoryLabel.textContent = '类目';
+      elements.categoryNav.innerHTML = CATEGORY_CONFIG.map((category) => {
+        const count = state.manifest.category_bound.categories[category.id].scenario_count;
+        return `
+          <button type="button" class="category-button${state.category === category.id ? ' active' : ''}" data-category="${category.id}">
+            <span class="category-name"><span class="category-code">${category.code}</span><span>${category.label}</span></span>
+            <span class="count">${count}</span>
+          </button>`;
+      }).join('');
+    }
+
+    function renderAttributes() {
+      const attributes = attributesForCurrentSelection();
+      const visible = attributes.filter((attribute) => !state.attributeSearch || attribute.toLowerCase().includes(state.attributeSearch));
+      elements.attributeCount.textContent = `${attributes.length} 项`;
+      elements.attributeList.innerHTML = visible.map((attribute) => {
+        const scenarios = scenariosForSelection(attribute);
+        const reviewState = attributeReviewState(scenarios);
+        return `
+          <button type="button" class="attribute-button${state.attribute === attribute ? ' active' : ''}" data-attribute="${escapeHtml(attribute)}">
+            <span class="attribute-info"><span class="review-dot ${reviewState}"></span><span>${escapeHtml(attribute)}</span></span>
+            <span class="count">${scenarios.length}</span>
+          </button>`;
+      }).join('') || '<div class="empty">没有匹配属性</div>';
+    }
+
+    function renderOverview() {
+      const scenarios = scenariosForCurrentAttribute();
+      const reviewed = scenarios.filter((item) => ['pass', 'revise'].includes(state.reviews[item.scenario_id]?.status)).length;
+      const passed = scenarios.filter((item) => state.reviews[item.scenario_id]?.status === 'pass').length;
+      const revised = scenarios.filter((item) => state.reviews[item.scenario_id]?.status === 'revise').length;
+      const isBound = state.pool === 'category_bound';
+      const config = CATEGORY_CONFIG.find((item) => item.id === state.category);
+      const metadata = isBound
+        ? state.manifest.category_bound.categories[state.category].attributes[state.attribute]
+        : state.manifest.category_unbound.attribute_concepts[state.attribute];
+      const sharedPool = isBound ? null : state.sharedPoolByConcept.get(state.attribute);
+      const ordinary = scenarios.filter((item) => quotaClass(item) === 'ordinary').length;
+      const professional = scenarios.filter((item) => quotaClass(item) === 'professional').length;
+      const breadcrumb = isBound
+        ? `类别绑定 / ${config.label} / ${escapeHtml(state.category)}`
+        : '不绑定商品 / 跨类别共享属性';
+      const scopeMetrics = isBound
+        ? `
+          ${renderMetric(scenarios.filter((item) => item.item_grounding === 'category_level').length, 'category_level')}
+          ${renderMetric(scenarios.filter((item) => item.item_grounding === 'concrete_item').length, 'concrete_item')}`
+        : `
+          ${renderMetric(metadata.eligible_targets.length, '兼容 category.attribute')}
+          ${renderMetric(state.releaseAudit.status, '发布审计')}`;
+      const targetChips = isBound
+        ? `<span class="chip binding">${metadata.category_level_count ? '有 category_level' : '缺 category_level'}</span>
+           <span class="chip binding">${metadata.concrete_item_count ? '有 concrete_item' : '缺 concrete_item'}</span>
+           <span class="chip">两种机制均属于类别绑定，不设比例配额</span>`
+        : `<span class="chip">正式 no-product 场景，不依赖目标商品</span>
+           ${(sharedPool?.eligible_targets || []).map((target) => `<span class="chip binding">${escapeHtml(target)}</span>`).join('')}`;
+
+      elements.overview.innerHTML = `
+        <div class="overview-head">
+          <div>
+            <div class="breadcrumb">${breadcrumb}</div>
+            <h2>${escapeHtml(state.attribute)}</h2>
+          </div>
+        </div>
+        <div class="metrics">
+          ${renderMetric(scenarios.length, isBound ? '类别绑定 scenario' : '不绑定商品 scenario')}
+          ${renderMetric(ordinary, '普通基础配额 · 双语 [X]')}
+          ${renderMetric(professional, '职业角色场景')}
+          ${scopeMetrics}
+          ${renderMetric(`${reviewed}/${scenarios.length}`, `人工复核 · 通过 ${passed} · 待改 ${revised}`)}
+        </div>
+        <div class="coverage-line">
+          <span class="chip ${isBound ? 'covered' : 'weak'}">${isBound ? 'Category-bound' : 'No-product'}</span>
+          <div class="value-chips">${targetChips}</div>
+        </div>
+        ${renderDemonstrations(metadata, isBound)}`;
+    }
+
+    function renderDemonstrations(metadata, isBound) {
+      const targets = isBound
+        ? [`${state.category}.${state.attribute}`]
+        : (metadata.eligible_targets || []);
+      const groups = targets
+        .map((target) => [target, state.demonstrationByTarget.get(target)])
+        .filter(([, group]) => group);
+      const provenance = isBound
+        ? '生成该属性场景时使用的类别绑定示范；每组同时包含 category_level 与 concrete_item。'
+        : '以下是兼容 category.attribute 的属性语义示范，用于审查迁移边界；no-product 成品场景未被倒置成生成示范。';
+      const bodies = groups.map(([target, group], index) => {
+        const demonstrations = (group.demonstrations || []).map((demo) => {
+          const review = demo.quality_review || {};
+          const grounding = demo.item_grounding || demo.binding_level || '未标注';
+          return `
+            <article class="demonstration-item">
+              <div class="scenario-meta">
+                <span class="scenario-id">${escapeHtml(demo.demo_id)}</span>
+                <span class="chip binding">${escapeHtml(grounding)}</span>
+                <span class="chip covered">${escapeHtml(review.status || 'reviewed')}</span>
+              </div>
+              <div class="demonstration-abstracts">
+                <div class="demonstration-abstract-row">
+                  <span class="language-label">中文</span>
+                  <p>${escapeHtml(demo.scenario_abstract_zh || '暂无中文对照')}</p>
+                </div>
+                <div class="demonstration-abstract-row">
+                  <span class="language-label">English</span>
+                  <p lang="en">${escapeHtml(demo.scenario_abstract)}</p>
+                </div>
+              </div>
+              <p class="demo-review-note">审核：${escapeHtml(review.note || demo.why_this_is_valid || '已逐条复核')}</p>
+            </article>`;
+        }).join('');
+        return `
+          <details class="demonstration-group" ${isBound || index === 0 ? 'open' : ''}>
+            <summary>${escapeHtml(target)} · ${group.demonstrations.length} demonstrations</summary>
+            <p class="demonstration-pair-note">${escapeHtml(group.pair_review_note || '')}</p>
+            <div class="demonstration-grid">${demonstrations}</div>
+          </details>`;
+      }).join('');
+      return `
+        <section class="demonstration-band" aria-label="Demonstrations">
+          <div class="demonstration-head">
+            <h3>Demonstrations</h3>
+            <p>${escapeHtml(provenance)}</p>
+          </div>
+          <div class="demonstration-groups">${bodies || '<div class="empty">未找到关联 demonstration</div>'}</div>
+        </section>`;
+    }
+
+    function renderMetric(value, label) {
+      return `<div class="metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
+    }
+
+    function renderScenarios() {
+      const all = scenariosForCurrentAttribute();
+      const visible = all.filter((scenario) => {
+        const source = state.sourceById.get(scenario.scenario_id) || {};
+        const translation = scenario.scenario_abstract_zh || '';
+        const review = state.reviews[scenario.scenario_id] || { status: 'unreviewed' };
+        const queryText = [
+          scenario.scenario_id,
+          scenario.scenario_abstract,
+          translation,
+          ...(scenario.examples || []),
+          scenario.posthoc_mode,
+          scenario.item_grounding,
+          scenario.category_binding,
+          scenario.origin_target,
+          ...(scenario.covered_values || []),
+          ...(scenario.possible_overlap_cluster_ids || []),
+          source.dataset,
+          source.source_support,
+          source.activation_path,
+          source.activation_explanation,
+          source.mechanism_label,
+          source.mechanism_family,
+          source.quality_review?.note
+        ].join(' ').toLowerCase();
+        const grounding = scenario.item_grounding || scenario.category_binding;
+        return (state.mode === 'all' || scenario.posthoc_mode === state.mode)
+          && (state.grounding === 'all' || grounding === state.grounding)
+          && (state.review === 'all' || review.status === state.review)
+          && (!state.search || queryText.includes(state.search));
+      });
+
+      if (!visible.length) {
+        elements.scenarioList.innerHTML = '<div class="empty">当前筛选条件下没有 scenario</div>';
+        return;
+      }
+
+      const sections = [
+        {
+          quota: 'ordinary',
+          title: '普通场景 · [X]',
+          description: '普通场景统一以 [X] 指代焦点人物；家庭成员、伴侣、朋友等第三方关系按场景原意保留。'
+        },
+        {
+          quota: 'professional',
+          title: '职业场景 · 保留职业身份',
+          description: '仅收录职业本身构成属性触发机制的稀少附加场景，不使用 [X]，不计入每组十条普通配额。'
+        }
+      ];
+      elements.scenarioList.innerHTML = sections.map((section) => {
+        const total = all.filter((scenario) => quotaClass(scenario) === section.quota).length;
+        const records = visible.filter((scenario) => quotaClass(scenario) === section.quota);
+        const body = records.length
+          ? records.map((scenario) => renderScenario(scenario, all.indexOf(scenario) + 1)).join('')
+          : '<div class="empty">当前属性或筛选条件下没有此类 scenario</div>';
+        return `
+          <section class="quota-section" data-quota-class="${section.quota}">
+            <div class="quota-section-head">
+              <div>
+                <h3>${section.title}</h3>
+                <p>${section.description}</p>
+              </div>
+              <span class="quota-section-count">显示 ${records.length} / 共 ${total}</span>
+            </div>
+            <div class="quota-scenario-grid">${body}</div>
+          </section>`;
+      }).join('');
+    }
+
+    function renderScenario(scenario, index) {
+      const source = state.sourceById.get(scenario.scenario_id) || {};
+      const translation = scenario.scenario_abstract_zh || '暂无中文翻译';
+      const review = state.reviews[scenario.scenario_id] || { status: 'unreviewed', note: '' };
+      const qualityNote = source.quality_review?.note || '';
+      const cardClass = review.status === 'pass' ? ' review-pass' : review.status === 'revise' ? ' review-revise' : '';
+      const isBound = scenario.category_binding === 'category_bound';
+      const grounding = isBound ? scenario.item_grounding : 'no_product';
+      const quota = quotaClass(scenario);
+      const overlapIds = scenario.possible_overlap_cluster_ids || [];
+      const presentation = state.presentationById.get(scenario.scenario_id);
+      const passLabel = isBound ? '通过' : '保留';
+
+      return `
+        <article class="scenario-card${cardClass}" data-scenario-id="${escapeHtml(scenario.scenario_id)}">
+          <div class="scenario-head">
+            <div class="scenario-number">${String(index).padStart(2, '0')}</div>
+            <div>
+              <div class="scenario-meta">
+                <span class="scenario-id">${escapeHtml(scenario.scenario_id)}</span>
+                <span class="chip binding">${escapeHtml(grounding)}</span>
+                <span class="chip ${quota === 'professional' ? 'weak' : 'covered'}">${quota === 'professional' ? '职业身份' : '[X] 焦点人物'}</span>
+                <span class="chip ${quota === 'professional' ? 'weak' : 'covered'}">${quota === 'professional' ? '职业附加' : '普通基础配额'}</span>
+                ${scenario.posthoc_mode ? `<span class="chip mode">后置 ${escapeHtml(scenario.posthoc_mode)}</span>` : ''}
+                ${scenario.origin_target ? `<span class="chip">来源 ${escapeHtml(scenario.origin_target)}</span>` : ''}
+                ${overlapIds.length ? `<span class="chip weak">可能重合 ${overlapIds.length} 组</span>` : ''}
+                <span class="chip">候选 ${escapeHtml(source.candidate_order ?? '--')}</span>
+                <span class="chip">${escapeHtml(source.dataset || 'unknown')}</span>
+              </div>
+              <div class="bilingual-abstract">
+                <div class="abstract-row">
+                  <span class="language-label">中文</span>
+                  <p class="abstract zh">${escapeHtml(translation)}</p>
+                </div>
+                <div class="abstract-row">
+                  <span class="language-label">English</span>
+                  <p class="abstract en" lang="en">${escapeHtml(scenario.scenario_abstract)}</p>
+                </div>
+              </div>
+            </div>
+            <div class="review-control" aria-label="人工审查状态">
+              <button type="button" class="${review.status === 'pass' ? 'selected pass' : ''}" data-review-status="pass">${passLabel}</button>
+              <button type="button" class="${review.status === 'revise' ? 'selected revise' : ''}" data-review-status="revise">待改</button>
+              <button type="button" data-review-status="unreviewed">清除</button>
+            </div>
+          </div>
+          <div class="scenario-body">
+            <div>
+              <div class="section-label">机制实例</div>
+              <ol class="examples">${(scenario.examples || []).map((example) => `<li>${escapeHtml(example)}</li>`).join('') || '<li>该 no-product 场景以覆盖值域和来源机制说明适用边界。</li>'}</ol>
+            </div>
+            <div class="scenario-side">
+              <div class="section-label">单场景直接覆盖值</div>
+              <div class="chips">
+                ${(scenario.covered_values || []).map((value) => `<span class="chip covered">${escapeHtml(value)}</span>`).join('') || '<span class="chip">由组级 coverage 审计</span>'}
+              </div>
+              <textarea class="review-note" data-review-note placeholder="人工审查备注">${escapeHtml(review.note || '')}</textarea>
+            </div>
+          </div>
+          ${renderPresentation(presentation)}
+          <details>
+            <summary>来源与机制 · ${escapeHtml(source.mechanism_label || '未映射')}</summary>
+            <dl class="source-detail">
+              ${sourceField('Dataset', source.dataset)}
+              ${sourceField('Candidate', source.candidate_order)}
+              ${sourceField('Original rank', source.original_rank)}
+              ${sourceField('Locator', source.locator)}
+              ${sourceField('Parent ID', source.parent_id, 'half')}
+              ${sourceField('Chunk ID', source.chunk_id, 'half')}
+              ${sourceField('Mechanism family', source.mechanism_family, 'half')}
+              ${sourceField('Mechanism label', source.mechanism_label, 'half')}
+              ${sourceField('Pool type', scenario.category_binding, 'half')}
+              ${sourceField('Quota class', quota, 'half')}
+              ${sourceField('Item grounding', scenario.item_grounding || '--', 'half')}
+              ${sourceField('Origin target', scenario.origin_target || (isBound ? `${scenario.category}.${scenario.attribute}` : scenario.attribute_concept), 'half')}
+              ${sourceField('Possible overlap clusters', overlapIds.join(', ') || '--', 'half')}
+              ${sourceField('Source support', source.source_support, 'wide')}
+              ${sourceField('Activation path', source.activation_path, 'wide')}
+              ${sourceField('Activation explanation', source.activation_explanation, 'wide')}
+              ${sourceField('Quality review', qualityNote, 'wide')}
+              ${sourceField('Source path', source.source_path, 'wide')}
+            </dl>
+          </details>
+        </article>`;
+    }
+
+    function renderPresentation(presentation) {
+      if (!presentation) return '<div class="scenario-presentation"><div class="empty">缺少 cover / fill 展示审计</div></div>';
+      const targetCovers = presentation.cover_by_target || [];
+      const cover = targetCovers.length
+        ? `<div class="cover-targets">${targetCovers.map((target) => `
+            <div class="cover-target">
+              <span class="cover-target-name">${escapeHtml(target.target)}</span>
+              <div class="chips">${target.values.map((value) => `<span class="chip covered">${escapeHtml(value.en)} / ${escapeHtml(value.zh)}</span>`).join('')}</div>
+            </div>`).join('')}</div>`
+        : presentation.cover
+          .map((value) => `<span class="chip covered">${escapeHtml(value.en)} / ${escapeHtml(value.zh)}</span>`)
+          .join('');
+      const textExample = presentation.filled_examples.text;
+      const imageExample = presentation.filled_examples.image;
+      const imageCopy = imageExample.applicable
+        ? `<p>${escapeHtml(imageExample.zh)}</p><p lang="en">${escapeHtml(imageExample.en)}</p>`
+        : `<p>不适用：${escapeHtml(imageExample.reason_zh)}</p><p lang="en">N/A: ${escapeHtml(imageExample.reason_en)}</p>`;
+      return `
+        <section class="scenario-presentation" aria-label="Coverage and filled examples">
+          <div class="evidence-row">
+            <div class="section-label">Cover / 覆盖值</div>
+            <div class="chips">${cover}</div>
+          </div>
+          <div class="evidence-row">
+            <div class="section-label">文字证据填充</div>
+            <div class="evidence-copy"><p>${escapeHtml(textExample.zh)}</p><p lang="en">${escapeHtml(textExample.en)}</p></div>
+          </div>
+          <div class="evidence-row">
+            <div class="section-label">图片证据填充</div>
+            <div class="evidence-copy">${imageCopy}</div>
+          </div>
+        </section>`;
+    }
+
+    function sourceField(label, value, className = '') {
+      return `<div class="source-field ${className}"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value ?? '--')}</dd></div>`;
+    }
+
+    function scenariosForSelection(attribute) {
+      if (state.pool === 'category_bound') {
+        return state.scenarios.filter((item) =>
+          item.category_binding === 'category_bound'
+          && item.category === state.category
+          && item.attribute === attribute
+        );
+      }
+      const pool = state.sharedPoolByConcept.get(attribute);
+      return pool ? [...(pool.scenarios || []), ...(pool.professional_scenarios || [])] : [];
+    }
+
+    function scenariosForCurrentAttribute() {
+      return scenariosForSelection(state.attribute);
+    }
+
+    function attributesForCurrentSelection() {
+      if (state.pool === 'category_bound') {
+        return Object.keys(state.manifest.category_bound.categories[state.category].attributes);
+      }
+      return Object.keys(state.manifest.category_unbound.attribute_concepts);
+    }
+
+    function attributeReviewState(scenarios) {
+      const statuses = scenarios.map((item) => state.reviews[item.scenario_id]?.status || 'unreviewed');
+      if (statuses.includes('revise')) return 'revise';
+      const reviewed = statuses.filter((status) => status === 'pass').length;
+      if (reviewed === scenarios.length && scenarios.length) return 'complete';
+      if (reviewed > 0) return 'partial';
+      return '';
+    }
+
+    function updateUrl() {
+      const url = new URL(location.href);
+      url.searchParams.set('pool', state.pool);
+      if (state.pool === 'category_bound') {
+        url.searchParams.set('category', state.category);
+      } else {
+        url.searchParams.delete('category');
+      }
+      url.searchParams.set('attribute', state.attribute);
+      history.replaceState(null, '', url);
+    }
+
+    function loadReviews() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function saveReviews() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.reviews));
+    }
+
+    function loadReviewerName() {
+      return localStorage.getItem(REVIEWER_STORAGE_KEY) || '';
+    }
+
+    async function persistReview(scenarioId) {
+      setSaveStatus('saving', '保存中');
+      saveReviews();
+      if (state.storageMode === 'browser') {
+        setSavedStatus();
+        renderHeader();
+        renderAttributes();
+        return;
+      }
+      const review = state.reviews[scenarioId] || {
+        scenario_id: scenarioId,
+        status: 'unreviewed',
+        note: ''
+      };
+      try {
+        const payload = await writeReviews({ action: 'upsert', review });
+        state.reviews = payload.reviews || {};
+        saveReviews();
+        setSavedStatus();
+        renderHeader();
+        renderAttributes();
+      } catch (error) {
+        setSaveStatus('error', '保存失败');
+        alert(`无法写入本地审查文件：${error.message}`);
+      }
+    }
+
+    async function writeReviews(payload) {
+      const response = await fetch(REVIEW_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) {
+        const detail = await response.json().catch(() => ({}));
+        throw new Error(detail.error || `${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    }
+
+    function setSaveStatus(className, text) {
+      elements.saveStatus.className = `save-status ${className}`;
+      elements.saveStatus.textContent = text;
+    }
+
+    function setSavedStatus() {
+      setSaveStatus('saved', state.storageMode === 'server' ? '已落盘' : '浏览器内已保存');
+    }
+
+    function exportReviews() {
+      const reviewerName = elements.reviewerName.value.trim();
+      if (!reviewerName) {
+        elements.reviewerName.focus();
+        alert('请先填写审核者姓名。');
+        return;
+      }
+      localStorage.setItem(REVIEWER_STORAGE_KEY, reviewerName);
+      const entries = Object.values(state.reviews)
+        .filter((item) => item.status !== 'unreviewed' || item.note)
+        .sort((a, b) => a.scenario_id.localeCompare(b.scenario_id));
+      const payload = {
+        schema_version: '4.0',
+        exported_at: new Date().toISOString(),
+        reviewer_name: reviewerName,
+        storage_mode: state.storageMode,
+        source_snapshot: state.manifest.source_snapshot,
+        release_status: state.releaseAudit.status,
+        scenario_count: state.scenarios.length,
+        reviewed_count: entries.filter((item) => item.status === 'pass' || item.status === 'revise').length,
+        pass_count: entries.filter((item) => item.status === 'pass').length,
+        revise_count: entries.filter((item) => item.status === 'revise').length,
+        reviews: entries
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      const reviewerFilePart = reviewerName.replace(/[^a-zA-Z0-9\u3400-\u9fff._-]+/g, '_').replace(/^_+|_+$/g, '') || 'reviewer';
+      anchor.download = `personamir_scenario_review_${reviewerFilePart}_${new Date().toISOString().slice(0, 10)}.json`;
+      anchor.style.display = 'none';
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 0);
+      setSaveStatus('saved', '已导出');
+    }
+
+    function unique(values) {
+      return [...new Set(values)].sort((a, b) => a.localeCompare(b));
+    }
+
+    function quotaClass(scenario) {
+      return scenario.quota_class
+        || state.sourceById.get(scenario.scenario_id)?.quota_class
+        || (scenario.scenario_id.includes('_PRO_') ? 'professional' : 'ordinary');
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+  </script>
+</body>
+</html>
