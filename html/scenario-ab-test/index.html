@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Scenario 盲测</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-content">
+        <div>
+          <h1>Scenario 盲测</h1>
+          <p id="progressText" class="progress-text" aria-live="polite"></p>
+        </div>
+        <button id="finishButton" class="button button-primary" type="button" disabled>
+          查看结果
+        </button>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </header>
+
+    <main id="app" class="app-main">
+      <div id="comparisonList" class="comparison-list"></div>
+    </main>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <div class="results-inner">
+        <p class="results-kicker">评审结果</p>
+        <h2 id="resultTitle"></h2>
+        <p id="resultSummary" class="result-summary"></p>
+
+        <div class="result-bars">
+          <div class="result-row">
+            <div class="result-label">
+              <strong>A 组</strong>
+              <span id="resultACount"></span>
+            </div>
+            <div class="result-track">
+              <div id="resultABar" class="result-bar result-bar-a"></div>
+            </div>
+            <strong id="resultAPercentage" class="result-percentage"></strong>
+          </div>
+          <div class="result-row">
+            <div class="result-label">
+              <strong>B 组</strong>
+              <span id="resultBCount"></span>
+            </div>
+            <div class="result-track">
+              <div id="resultBBar" class="result-bar result-bar-b"></div>
+            </div>
+            <strong id="resultBPercentage" class="result-percentage"></strong>
+          </div>
+        </div>
+
+        <dl class="source-list">
+          <div>
+            <dt>A 组</dt>
+            <dd>external scenario / manual-v1</dd>
+          </div>
+          <div>
+            <dt>B 组</dt>
+            <dd>fashion_v10_stable_preference_usable_20260805</dd>
+          </div>
+        </dl>
+
+        <div class="result-actions">
+          <button id="continueButton" class="button button-secondary" type="button">
+            继续评审
+          </button>
+          <button id="exportButton" class="button button-secondary" type="button">
+            导出结果
+          </button>
+          <button id="restartButton" class="button button-primary" type="button">
+            开始新一轮
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script src="scenario-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
