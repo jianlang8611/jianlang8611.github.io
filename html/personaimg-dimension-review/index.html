@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG Dimension Review</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5b6b78;
+      --line: #d7e0e5;
+      --paper: #ffffff;
+      --canvas: #f4f7f8;
+      --navy: #163d5c;
+      --teal: #007c79;
+      --teal-pale: #e7f5f3;
+      --blue-pale: #eaf2f8;
+      --amber: #a85d00;
+      --danger: #9b2c2c;
+      --shadow: 0 8px 24px rgba(32, 57, 73, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .site-header {
+      background: var(--navy);
+      color: #fff;
+      border-bottom: 4px solid var(--teal);
+    }
+    .header-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 28px 32px 25px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .product-mark {
+      margin: 0 0 5px;
+      color: #9bd7d2;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-size: 28px; letter-spacing: 0; }
+    .instruction { margin: 7px 0 0; color: #d6e6ee; font-size: 15px; }
+    .header-status { min-width: 216px; text-align: right; }
+    .header-status .label { display: block; color: #b6cad5; font-size: 12px; }
+    .header-status strong { font-size: 22px; }
+
+    main { max-width: 1480px; margin: 0 auto; padding: 24px 32px 48px; }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .notice {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .notice b { color: var(--teal); }
+    .toolbar-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: end; }
+    .button {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      min-height: 38px;
+      padding: 8px 13px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .button:hover { border-color: var(--teal); color: var(--teal); }
+    .button.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .button.primary:hover { background: #006966; color: #fff; }
+    .button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+    .category-tabs {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      background: var(--paper);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .category-tab {
+      min-height: 72px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .category-tab:last-child { border-right: 0; }
+    .category-tab:hover { background: #f8fbfc; }
+    .category-tab[aria-selected="true"] { color: var(--navy); background: var(--blue-pale); box-shadow: inset 0 -3px 0 var(--teal); }
+    .tab-zh { display: block; font-weight: 750; font-size: 15px; }
+    .tab-en { display: block; font-size: 12px; }
+    .tab-count { display: block; margin-top: 2px; color: var(--teal); font-size: 12px; font-weight: 650; }
+
+    .category-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 8px 0 14px;
+    }
+    .category-heading h2 { margin: 0; font-size: 23px; letter-spacing: 0; }
+    .category-heading h2 span { color: var(--muted); font-size: 16px; font-weight: 500; }
+    .category-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .group-list { display: grid; gap: 13px; }
+    .group {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      box-shadow: 0 3px 12px rgba(32, 57, 73, 0.04);
+      overflow: hidden;
+    }
+    .group-header {
+      width: 100%;
+      min-height: 64px;
+      border: 0;
+      background: var(--paper);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 18px;
+      text-align: left;
+    }
+    .group-header:hover { background: #fbfcfd; }
+    .group-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; }
+    .group-title strong { font-size: 16px; }
+    .group-title span { color: var(--muted); font-size: 13px; }
+    .group-kind { color: var(--muted); font-size: 12px; }
+    .group-status {
+      min-width: 70px;
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+    }
+    .group-status.ready { color: var(--teal); }
+    .chevron { color: var(--teal); font-size: 17px; line-height: 1; }
+    .group-body { border-top: 1px solid var(--line); padding: 18px; }
+    .group[hidden] { display: none; }
+    .group-body[hidden] { display: none; }
+    .group-tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .group-tools p { margin: 0; }
+    .group-tool-actions { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; }
+    .text-action { border: 0; background: transparent; color: var(--teal); padding: 3px 0; font-size: 13px; font-weight: 650; }
+    .text-action:hover { color: #005e5c; text-decoration: underline; }
+
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .dimension-card {
+      position: relative;
+      min-height: 258px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .dimension-card:hover { border-color: #91bbb9; box-shadow: 0 5px 13px rgba(0, 124, 121, 0.08); }
+    .dimension-card.selected { border-color: var(--teal); box-shadow: inset 3px 0 0 var(--teal); background: #fbfefe; }
+    .dimension-card.relocation-marked { border-color: #d79a45; box-shadow: inset 3px 0 0 var(--amber); background: #fffdf8; }
+    .dimension-card.relocation-needs-reason { border-color: var(--danger); box-shadow: inset 3px 0 0 var(--danger); }
+    .select-control {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 21px;
+      height: 21px;
+      accent-color: var(--teal);
+    }
+    .select-control:disabled { cursor: not-allowed; }
+    .dimension-label { margin: 0; color: var(--teal); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; }
+    .dimension-title { margin: 0; padding-right: 30px; font-size: 17px; line-height: 1.25; letter-spacing: 0; }
+    .dimension-title .en { display: block; }
+    .dimension-title .zh { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; font-weight: 550; }
+    .intro { margin: 0; color: #29414d; font-size: 14px; line-height: 1.62; }
+    .dialogue-note { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .dialogue-note b { color: #395663; }
+    .values { margin-top: auto; }
+    .values-label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; font-weight: 750; }
+    .value-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+    .value { min-width: 0; border: 1px solid #cbd8de; border-radius: 3px; background: #f7fafb; color: #34505d; padding: 5px 6px; }
+    .value-en { display: block; overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; line-height: 1.3; }
+    .value-zh { display: block; margin-top: 4px; color: var(--muted); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 1.35; }
+    .relocation-review { border-top: 1px solid #e4d7c7; padding-top: 10px; }
+    .relocation-toggle { display: inline-flex; align-items: center; gap: 7px; color: var(--amber); font-size: 13px; font-weight: 750; cursor: pointer; }
+    .relocation-toggle input { width: 16px; height: 16px; margin: 0; accent-color: var(--amber); }
+    .relocation-reason { display: block; margin-top: 9px; }
+    .relocation-reason span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .relocation-reason textarea { width: 100%; min-height: 66px; resize: vertical; border: 1px solid #cdbb9f; border-radius: 4px; background: #fff; color: var(--ink); padding: 7px 8px; line-height: 1.45; }
+    .relocation-reason textarea:focus { outline: 2px solid #f2d4a8; border-color: var(--amber); }
+    .reason-error { margin: 5px 0 0; color: var(--danger); font-size: 12px; font-weight: 650; }
+    .custom-dimension { border-style: dashed; border-color: #79aaa7; }
+    .custom-dimension .dimension-label { color: var(--amber); }
+    .custom-dimension .dimension-title { padding-right: 56px; }
+    .remove-custom {
+      position: absolute;
+      top: 13px;
+      right: 43px;
+      width: 23px;
+      height: 23px;
+      border: 1px solid #d7b27a;
+      border-radius: 50%;
+      background: #fffaf3;
+      color: var(--amber);
+      font-size: 18px;
+      line-height: 18px;
+      padding: 0;
+    }
+    .remove-custom:hover { border-color: var(--danger); color: var(--danger); }
+    .dialog-shell {
+      width: min(820px, calc(100vw - 32px));
+      max-height: calc(100vh - 32px);
+      border: 0;
+      border-radius: 6px;
+      padding: 0;
+      color: var(--ink);
+      box-shadow: 0 24px 72px rgba(17, 35, 48, 0.3);
+      overflow: auto;
+    }
+    .dialog-shell::backdrop { background: rgba(15, 32, 45, 0.58); }
+    .dialog-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--line); background: #fbfcfd; }
+    .dialog-header h2 { margin: 0; font-size: 21px; }
+    .dialog-header p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .add-dimension-form { padding: 20px 24px 24px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+    .form-field { display: block; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field span { display: block; margin-bottom: 6px; color: #38505c; font-size: 13px; font-weight: 750; }
+    .form-field input, .form-field textarea {
+      width: 100%;
+      border: 1px solid #bdcbd2;
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 9px;
+    }
+    .form-field textarea { min-height: 74px; resize: vertical; line-height: 1.5; }
+    .form-field input:focus, .form-field textarea:focus { outline: 2px solid #bae2de; border-color: var(--teal); }
+    .value-fields { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 17px; }
+    .value-fields h3 { margin: 0 0 10px; font-size: 15px; }
+    .value-row { display: grid; grid-template-columns: 70px minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: center; margin-top: 9px; }
+    .value-row label { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .value-row input { min-width: 0; border: 1px solid #bdcbd2; border-radius: 4px; padding: 8px 9px; }
+    .form-error { min-height: 20px; margin: 14px 0 0; color: var(--danger); font-size: 13px; font-weight: 650; }
+    .dialog-actions { display: flex; justify-content: end; gap: 10px; margin-top: 6px; }
+
+    .empty, .loading, .error {
+      border: 1px dashed #b5c7cf;
+      background: var(--paper);
+      color: var(--muted);
+      padding: 32px;
+      text-align: center;
+    }
+    .error { border-color: #e6aaaa; color: var(--danger); }
+
+    @media (max-width: 1100px) {
+      .category-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .category-tab:nth-child(3) { border-right: 0; }
+      .category-tab:nth-child(-n + 3) { border-bottom: 1px solid var(--line); }
+      .dimension-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .header-inner, main { padding-left: 16px; padding-right: 16px; }
+      .header-inner { display: block; padding-top: 22px; padding-bottom: 20px; }
+      .header-status { margin-top: 14px; text-align: left; }
+      .toolbar, .group-tools, .category-heading { align-items: flex-start; flex-direction: column; }
+      .toolbar-actions { justify-content: start; }
+      .category-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-tab { border-bottom: 1px solid var(--line); }
+      .category-tab:nth-child(2n) { border-right: 0; }
+      .category-tab:nth-child(5), .category-tab:nth-child(6) { border-bottom: 0; }
+      .dimension-grid { grid-template-columns: 1fr; }
+      .group-header { grid-template-columns: 1fr auto; gap: 8px; padding: 12px 14px; }
+      .group-kind { display: none; }
+      .group-status { grid-column: 1; text-align: left; }
+      .chevron { grid-column: 2; grid-row: 1 / span 2; }
+      .group-body { padding: 12px; }
+      .form-grid, .value-row { grid-template-columns: 1fr; }
+      .value-row { gap: 6px; margin-top: 16px; }
+      .value-row label { margin-bottom: 0; }
+      .dialog-header, .add-dimension-form { padding-left: 16px; padding-right: 16px; }
+      .dialog-actions { justify-content: stretch; }
+      .dialog-actions .button { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="product-mark">PersonaIMG · 审核工作台</p>
+        <h1>Dimension Review</h1>
+        <p class="instruction">建议为每一个大类和每一个子类选择最好的 dimension；父类候选不足 8 个时，可按质量选择 0 至全部候选。</p>
+      </div>
+      <div class="header-status" aria-live="polite">
+        <span class="label">审核进度</span>
+        <strong id="overall-progress">正在载入</strong>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="审核控制">
+      <div class="notice">通常建议每组选择 <b>8-10</b> 个维度；父类候选不足 8 个时，建议选择 <b>0 至全部候选</b>。可在任意父类或子类中新增属性，内容仅保存在当前浏览器直至导出。</div>
+      <div class="toolbar-actions">
+        <button class="button" id="expand-all" type="button">展开当前大类</button>
+        <button class="button" id="collapse-all" type="button">收起当前大类</button>
+        <button class="button primary" id="export-selection" type="button">导出已选 JSON</button>
+      </div>
+    </section>
+
+    <nav class="category-tabs" id="category-tabs" aria-label="大类"></nav>
+    <section id="review-area" aria-live="polite"><div class="loading">正在载入审核目录…</div></section>
+  </main>
+
+  <dialog class="dialog-shell" id="add-dimension-dialog" aria-labelledby="add-dimension-title">
+    <div class="dialog-header">
+      <h2 id="add-dimension-title">新增属性</h2>
+      <p id="add-dimension-target"></p>
+    </div>
+    <form class="add-dimension-form" id="add-dimension-form" novalidate>
+      <div class="form-grid">
+        <label class="form-field"><span>属性名（英文）</span><input id="new-dimension-en" name="dimension_en" required autocomplete="off" placeholder="例如 Culinary refinement"></label>
+        <label class="form-field"><span>属性名（中文）</span><input id="new-dimension-zh" name="dimension_zh" required autocomplete="off" placeholder="例如 制作精细度"></label>
+        <label class="form-field full"><span>属性解释（中文）</span><textarea id="new-dimension-intro" name="intro_zh" required placeholder="说明该属性控制什么视觉信息，以及它与相近属性的边界。"></textarea></label>
+        <label class="form-field full"><span>对话可得性（中文）</span><textarea id="new-dimension-interaction" name="interaction_zh" required placeholder="说明用户为什么会在日常对话或情境互动中表达这项信息。"></textarea></label>
+      </div>
+      <section class="value-fields" aria-labelledby="new-value-title">
+        <h3 id="new-value-title">三个候选取值</h3>
+        <div class="value-row"><label>取值 1</label><input name="value_en_1" required autocomplete="off" placeholder="英文"><input name="value_zh_1" required autocomplete="off" placeholder="中文"></div>
+        <div class="value-row"><label>取值 2</label><input name="value_en_2" required autocomplete="off" placeholder="英文"><input name="value_zh_2" required autocomplete="off" placeholder="中文"></div>
+        <div class="value-row"><label>取值 3</label><input name="value_en_3" required autocomplete="off" placeholder="英文"><input name="value_zh_3" required autocomplete="off" placeholder="中文"></div>
+      </section>
+      <p class="form-error" id="add-dimension-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="button" type="button" id="cancel-add-dimension">取消</button>
+        <button class="button primary" type="submit">新增并选中</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    (() => {
+      const STANDARD_MIN_SELECTIONS = 8;
+      const STANDARD_MAX_SELECTIONS = 10;
+      const STORAGE_KEY = "personaimg-dimension-review-v4";
+      const PREVIOUS_REVIEW_STORAGE_KEY = "personaimg-dimension-review-v3";
+      const LEGACY_SELECTION_STORAGE_KEY = "personaimg-dimension-review-v2";
+      const tabRoot = document.querySelector("#category-tabs");
+      const reviewArea = document.querySelector("#review-area");
+      const progressElement = document.querySelector("#overall-progress");
+      const exportButton = document.querySelector("#export-selection");
+      const expandAllButton = document.querySelector("#expand-all");
+      const collapseAllButton = document.querySelector("#collapse-all");
+      const addDimensionDialog = document.querySelector("#add-dimension-dialog");
+      const addDimensionForm = document.querySelector("#add-dimension-form");
+      const addDimensionTarget = document.querySelector("#add-dimension-target");
+      const addDimensionError = document.querySelector("#add-dimension-error");
+      const cancelAddDimensionButton = document.querySelector("#cancel-add-dimension");
+      let catalog;
+      let activeCategoryId;
+      const savedReview = loadReview();
+      let selections = savedReview.selections;
+      let subtypeMoves = savedReview.subtypeMoves;
+      let addedDimensions = savedReview.addedDimensions;
+      let addTargetGroupId;
+      let openGroups = new Set();
+
+      function deserializeSelections(raw) {
+        if (!raw || typeof raw !== "object") return {};
+        return Object.fromEntries(Object.entries(raw).map(([groupId, ids]) => [groupId, new Set(Array.isArray(ids) ? ids : [])]));
+      }
+
+      function textValue(value) {
+        return typeof value === "string" ? value.trim() : "";
+      }
+
+      function deserializeAddedDimensions(raw) {
+        if (!raw || typeof raw !== "object") return {};
+        return Object.fromEntries(Object.entries(raw)
+          .filter(([, dimensions]) => Array.isArray(dimensions))
+          .map(([groupId, dimensions]) => [groupId, dimensions.map(normalizeAddedDimension).filter(Boolean)])
+          .filter(([, dimensions]) => dimensions.length));
+      }
+
+      function normalizeAddedDimension(raw) {
+        if (!raw || typeof raw !== "object") return null;
+        const dimension = textValue(raw.dimension);
+        const dimensionZh = textValue(raw.dimension_zh);
+        const introZh = textValue(raw.intro_zh);
+        const interactionZh = textValue(raw.interaction_zh);
+        const values = Array.isArray(raw.value_domain) ? raw.value_domain.map(textValue) : [];
+        const valuesZh = Array.isArray(raw.value_domain_zh) ? raw.value_domain_zh.map(textValue) : [];
+        const id = textValue(raw.id);
+        if (!/^reviewer-added-[A-Za-z0-9-]+$/.test(id) || !dimension || !dimensionZh || !introZh || !interactionZh || values.length !== 3 || valuesZh.length !== 3 || values.some(value => !value) || valuesZh.some(value => !value)) return null;
+        return {
+          id,
+          source: "reviewer_added",
+          dimension,
+          dimension_zh: dimensionZh,
+          intro_zh: introZh,
+          interaction_zh: interactionZh,
+          value_domain: values,
+          value_domain_zh: valuesZh,
+          added_at: textValue(raw.added_at) || null,
+        };
+      }
+
+      function reviewFromSavedObject(saved) {
+        const rawMoves = saved.subtypeMoves && typeof saved.subtypeMoves === "object" ? saved.subtypeMoves : {};
+        const subtypeMoves = Object.fromEntries(Object.entries(rawMoves)
+          .filter(([, value]) => value && typeof value === "object")
+          .map(([id, value]) => [id, { reason: typeof value.reason === "string" ? value.reason : "" }]));
+        return {
+          selections: deserializeSelections(saved.selections),
+          subtypeMoves,
+          addedDimensions: deserializeAddedDimensions(saved.addedDimensions),
+        };
+      }
+
+      function loadReview() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+          if (saved && typeof saved === "object") return reviewFromSavedObject(saved);
+          const previous = JSON.parse(localStorage.getItem(PREVIOUS_REVIEW_STORAGE_KEY) || "null");
+          if (previous && typeof previous === "object") return reviewFromSavedObject(previous);
+          const legacy = JSON.parse(localStorage.getItem(LEGACY_SELECTION_STORAGE_KEY) || "{}");
+          return { selections: deserializeSelections(legacy), subtypeMoves: {}, addedDimensions: {} };
+        } catch (_) {
+          return { selections: {}, subtypeMoves: {}, addedDimensions: {} };
+        }
+      }
+
+      function saveReview() {
+        const serializable = Object.fromEntries(Object.entries(selections).map(([groupId, ids]) => [groupId, [...ids]]));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections: serializable, subtypeMoves, addedDimensions }));
+      }
+
+      function saveSelections() {
+        saveReview();
+      }
+
+      function groupSelection(groupId) {
+        if (!selections[groupId]) selections[groupId] = new Set();
+        return selections[groupId];
+      }
+
+      function allGroups() {
+        return catalog.categories.flatMap(category => category.groups);
+      }
+
+      function attachAddedDimensions() {
+        const groupsById = new Map(allGroups().map(group => [group.id, group]));
+        addedDimensions = Object.fromEntries(Object.entries(addedDimensions)
+          .filter(([groupId]) => groupsById.has(groupId))
+          .map(([groupId, dimensions]) => [groupId, dimensions.filter(dimension => !groupsById.get(groupId).dimensions.some(existing => existing.id === dimension.id))]));
+        Object.entries(addedDimensions).forEach(([groupId, dimensions]) => {
+          groupsById.get(groupId).dimensions.push(...dimensions);
+        });
+      }
+
+      function isCustomDimension(dimension) {
+        return dimension.source === "reviewer_added";
+      }
+
+      function customCount(group) {
+        return group.dimensions.filter(isCustomDimension).length;
+      }
+
+      function pruneStoredReview() {
+        const validByGroup = new Map(allGroups().map(group => [group.id, new Set(group.dimensions.map(dimension => dimension.id))]));
+        selections = Object.fromEntries(Object.entries(selections)
+          .filter(([groupId]) => validByGroup.has(groupId))
+          .map(([groupId, ids]) => [groupId, new Set([...ids].filter(id => validByGroup.get(groupId).has(id)))]));
+        const categoryDimensionIds = new Set(allGroups()
+          .filter(group => group.level === "category")
+          .flatMap(group => group.dimensions.map(dimension => dimension.id)));
+        subtypeMoves = Object.fromEntries(Object.entries(subtypeMoves)
+          .filter(([dimensionId]) => categoryDimensionIds.has(dimensionId)));
+        saveReview();
+      }
+
+      function selectedCount(group) {
+        return groupSelection(group.id).size;
+      }
+
+      function moveRecord(dimensionId) {
+        return subtypeMoves[dimensionId];
+      }
+
+      function groupMoveCount(group) {
+        return group.level === "category" ? group.dimensions.filter(dimension => Boolean(moveRecord(dimension.id))).length : 0;
+      }
+
+      function missingMoveReasons() {
+        return Object.entries(subtypeMoves)
+          .filter(([, review]) => !review.reason.trim())
+          .map(([dimensionId]) => dimensionId);
+      }
+
+      function recommendedRange(group) {
+        const candidateCount = group.dimensions.length;
+        if (group.level === "category" && candidateCount < STANDARD_MIN_SELECTIONS) {
+          return { min: 0, max: candidateCount };
+        }
+        return { min: STANDARD_MIN_SELECTIONS, max: Math.min(STANDARD_MAX_SELECTIONS, candidateCount) };
+      }
+
+      function recommendationLabel(group) {
+        const range = recommendedRange(group);
+        return `${range.min}-${range.max}`;
+      }
+
+      function statusText(group) {
+        const count = selectedCount(group);
+        if (isWithinRecommendation(group)) return `已选 ${count} · 位于推荐范围`;
+        return `已选 ${count} · 建议 ${recommendationLabel(group)}`;
+      }
+
+      function isWithinRecommendation(group) {
+        const count = selectedCount(group);
+        const range = recommendedRange(group);
+        return count >= range.min && count <= range.max;
+      }
+
+      function updateProgress() {
+        const groups = allGroups();
+        const recommended = groups.filter(isWithinRecommendation).length;
+        const reviewed = groups.filter(group => selectedCount(group) > 0).length;
+        const relocationCount = Object.keys(subtypeMoves).length;
+        const missingReasons = missingMoveReasons().length;
+        progressElement.textContent = `${reviewed} / ${groups.length} 组已选择 · ${recommended} 组在推荐范围 · ${relocationCount} 条建议下放${missingReasons ? ` · ${missingReasons} 条待说明` : ""}`;
+        exportButton.disabled = missingReasons > 0;
+        exportButton.title = missingReasons ? "请先填写所有下放建议的原因" : "导出当前所有选择与下放建议";
+      }
+
+      function categoryForId(id) {
+        return catalog.categories.find(category => category.id === id);
+      }
+
+      function groupForId(id) {
+        return allGroups().find(group => group.id === id);
+      }
+
+      function normalizeDimensionName(name) {
+        return name.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "");
+      }
+
+      function newDimensionId() {
+        const suffix = globalThis.crypto && typeof globalThis.crypto.randomUUID === "function"
+          ? globalThis.crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        return `reviewer-added-${suffix}`;
+      }
+
+      function openAddDimensionDialog(groupId) {
+        const group = groupForId(groupId);
+        if (!group) return;
+        addTargetGroupId = groupId;
+        addDimensionForm.reset();
+        addDimensionError.textContent = "";
+        addDimensionTarget.textContent = `${group.name_zh} · ${group.name}（${group.level === "category" ? "大类维度" : "子类维度"}）`;
+        addDimensionDialog.showModal();
+        document.querySelector("#new-dimension-en").focus();
+      }
+
+      function closeAddDimensionDialog() {
+        addDimensionDialog.close();
+        addTargetGroupId = undefined;
+      }
+
+      function removeCustomDimension(groupId, dimensionId) {
+        const group = groupForId(groupId);
+        const dimension = group && group.dimensions.find(item => item.id === dimensionId);
+        if (!group || !dimension || !isCustomDimension(dimension)) return;
+        if (!window.confirm(`删除新增属性“${dimension.dimension}”？`)) return;
+        group.dimensions = group.dimensions.filter(item => item.id !== dimensionId);
+        addedDimensions[groupId] = (addedDimensions[groupId] || []).filter(item => item.id !== dimensionId);
+        if (!addedDimensions[groupId].length) delete addedDimensions[groupId];
+        groupSelection(groupId).delete(dimensionId);
+        delete subtypeMoves[dimensionId];
+        saveReview();
+        renderTabs();
+        renderCategory();
+        updateProgress();
+      }
+
+      function renderTabs() {
+        tabRoot.innerHTML = catalog.categories.map(category => {
+          const groups = category.groups;
+          const reviewed = groups.filter(group => selectedCount(group) > 0).length;
+          const active = category.id === activeCategoryId;
+          return `<button class="category-tab" type="button" data-category-id="${category.id}" aria-selected="${active}">
+            <span class="tab-zh">${category.name_zh}</span>
+            <span class="tab-en">${category.name}</span>
+            <span class="tab-count">${reviewed} / ${groups.length} 组已选择</span>
+          </button>`;
+        }).join("");
+        tabRoot.querySelectorAll("button").forEach(button => {
+          button.addEventListener("click", () => {
+            activeCategoryId = button.dataset.categoryId;
+            const category = categoryForId(activeCategoryId);
+            openGroups = new Set(category.groups.slice(0, 2).map(group => group.id));
+            renderTabs();
+            renderCategory();
+          });
+        });
+      }
+
+      function cardHtml(group, dimension) {
+        const isSelected = groupSelection(group.id).has(dimension.id);
+        const move = moveRecord(dimension.id);
+        const needsReason = Boolean(move && !move.reason.trim());
+        const isCustom = isCustomDimension(dimension);
+        const values = dimension.value_domain.map((value, index) => {
+          const valueZh = (dimension.value_domain_zh || [])[index] || "中文释义待补充";
+          return `<span class="value"><span class="value-en">${escapeHtml(value)}</span><span class="value-zh">${escapeHtml(valueZh)}</span></span>`;
+        }).join("");
+        const relocationReview = group.level === "category" ? `<div class="relocation-review">
+          <label class="relocation-toggle"><input class="relocate-control" type="checkbox" data-group-id="${group.id}" data-dimension-id="${dimension.id}" ${move ? "checked" : ""}>建议下放到子类</label>
+          ${move ? `<label class="relocation-reason"><span>下放原因</span><textarea class="relocation-reason-input" data-dimension-id="${dimension.id}" placeholder="例如：该维度的值域更适合按子类定义" aria-label="${escapeHtml(dimension.dimension)} 的下放原因">${escapeHtml(move.reason)}</textarea><p class="reason-error" ${needsReason ? "" : "hidden"}>请填写下放原因后再导出。</p></label>` : ""}
+        </div>` : "";
+        const removeAction = isCustom ? `<button class="remove-custom" type="button" data-action="remove-custom-dimension" data-group-id="${group.id}" data-dimension-id="${dimension.id}" aria-label="删除新增属性 ${escapeHtml(dimension.dimension)}" title="删除新增属性">×</button>` : "";
+        return `<article class="dimension-card${isSelected ? " selected" : ""}${move ? " relocation-marked" : ""}${needsReason ? " relocation-needs-reason" : ""}${isCustom ? " custom-dimension" : ""}">
+          <input class="select-control" type="checkbox" data-group-id="${group.id}" data-dimension-id="${dimension.id}" ${isSelected ? "checked" : ""} aria-label="选择 ${escapeHtml(dimension.dimension)}">
+          ${removeAction}
+          <p class="dimension-label">${isCustom ? "新增属性" : "DIMENSION"}</p>
+          <h3 class="dimension-title"><span class="en">${escapeHtml(dimension.dimension)}</span><span class="zh">${escapeHtml(dimension.dimension_zh)}</span></h3>
+          <p class="intro">${escapeHtml(dimension.intro_zh)}</p>
+          <p class="dialogue-note"><b>对话可得性：</b>${escapeHtml(dimension.interaction_zh)}</p>
+          <div class="values"><span class="values-label">三个候选取值（英文 / 中文）</span><div class="value-list">${values}</div></div>
+          ${relocationReview}
+        </article>`;
+      }
+
+      function groupHtml(group) {
+        const open = openGroups.has(group.id);
+        const kind = group.level === "category" ? "大类维度" : "子类维度";
+        const count = selectedCount(group);
+        const moveCount = groupMoveCount(group);
+        const addedCount = customCount(group);
+        return `<article class="group" data-group-id="${group.id}">
+          <button class="group-header" type="button" data-action="toggle-group" data-group-id="${group.id}" aria-expanded="${open}">
+            <span class="group-title"><strong>${escapeHtml(group.name_zh)}</strong><span>${escapeHtml(group.name)}</span></span>
+            <span class="group-kind">${kind} · ${group.dimensions.length} 个候选${addedCount ? ` · ${addedCount} 条新增` : ""}${moveCount ? ` · ${moveCount} 条建议下放` : ""}</span>
+            <span class="group-status${isWithinRecommendation(group) ? " ready" : ""}">${statusText(group)}</span>
+            <span class="chevron" aria-hidden="true">${open ? "−" : "+"}</span>
+          </button>
+          <div class="group-body" ${open ? "" : "hidden"}>
+            <div class="group-tools">
+              <p>${count === 0 ? `尚未选择维度；建议选择 ${recommendationLabel(group)} 个` : isWithinRecommendation(group) ? "本组选择数量位于推荐范围" : `当前已选择 ${count} 个；建议选择 ${recommendationLabel(group)} 个`}</p>
+              <div class="group-tool-actions">
+                <button class="text-action" type="button" data-action="open-add-dimension" data-group-id="${group.id}">新增属性</button>
+                <button class="text-action" type="button" data-action="clear-group" data-group-id="${group.id}">清空本组选择</button>
+              </div>
+            </div>
+            <div class="dimension-grid">${group.dimensions.map(dimension => cardHtml(group, dimension)).join("")}</div>
+          </div>
+        </article>`;
+      }
+
+      function renderCategory() {
+        const category = categoryForId(activeCategoryId);
+        reviewArea.innerHTML = `<div class="category-heading"><h2>${escapeHtml(category.name_zh)} <span>${escapeHtml(category.name)}</span></h2><p>先审核大类维度，再审核各子类维度</p></div><div class="group-list">${category.groups.map(groupHtml).join("")}</div>`;
+        reviewArea.querySelectorAll("[data-action='toggle-group']").forEach(button => {
+          button.addEventListener("click", () => {
+            const id = button.dataset.groupId;
+            if (openGroups.has(id)) openGroups.delete(id); else openGroups.add(id);
+            renderCategory();
+          });
+        });
+        reviewArea.querySelectorAll("[data-action='clear-group']").forEach(button => {
+          button.addEventListener("click", () => {
+            const group = allGroups().find(item => item.id === button.dataset.groupId);
+            selections[group.id] = new Set();
+            if (group.level === "category") {
+              group.dimensions.forEach(dimension => delete subtypeMoves[dimension.id]);
+            }
+            saveSelections();
+            renderTabs();
+            renderCategory();
+            updateProgress();
+          });
+        });
+        reviewArea.querySelectorAll("[data-action='open-add-dimension']").forEach(button => {
+          button.addEventListener("click", () => openAddDimensionDialog(button.dataset.groupId));
+        });
+        reviewArea.querySelectorAll("[data-action='remove-custom-dimension']").forEach(button => {
+          button.addEventListener("click", () => removeCustomDimension(button.dataset.groupId, button.dataset.dimensionId));
+        });
+        reviewArea.querySelectorAll(".select-control").forEach(input => {
+          input.addEventListener("change", () => {
+            const group = allGroups().find(item => item.id === input.dataset.groupId);
+            const picked = groupSelection(group.id);
+            if (input.checked) {
+              picked.add(input.dataset.dimensionId);
+            } else {
+              picked.delete(input.dataset.dimensionId);
+            }
+            saveSelections();
+            renderTabs();
+            renderCategory();
+            updateProgress();
+          });
+        });
+        reviewArea.querySelectorAll(".relocate-control").forEach(input => {
+          input.addEventListener("change", () => {
+            const id = input.dataset.dimensionId;
+            if (input.checked) {
+              subtypeMoves[id] = subtypeMoves[id] || { reason: "" };
+            } else {
+              delete subtypeMoves[id];
+            }
+            saveReview();
+            renderTabs();
+            renderCategory();
+            updateProgress();
+          });
+        });
+        reviewArea.querySelectorAll(".relocation-reason-input").forEach(input => {
+          input.addEventListener("input", () => {
+            const review = moveRecord(input.dataset.dimensionId);
+            if (!review) return;
+            review.reason = input.value;
+            const card = input.closest(".dimension-card");
+            const missing = !input.value.trim();
+            card.classList.toggle("relocation-needs-reason", missing);
+            const error = card.querySelector(".reason-error");
+            error.hidden = !missing;
+            saveReview();
+            updateProgress();
+          });
+        });
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+      }
+
+      function dimensionForExport(dimension) {
+        return {
+          id: dimension.id,
+          source: isCustomDimension(dimension) ? "reviewer_added" : "catalog",
+          dimension: dimension.dimension,
+          dimension_zh: dimension.dimension_zh,
+          explanation_zh: dimension.intro_zh,
+          interaction_rationale_zh: dimension.interaction_zh,
+          value_domain: dimension.value_domain,
+          value_domain_zh: dimension.value_domain_zh,
+          ...(isCustomDimension(dimension) && dimension.added_at ? { added_at: dimension.added_at } : {}),
+        };
+      }
+
+      function handleAddDimension(event) {
+        event.preventDefault();
+        const group = groupForId(addTargetGroupId);
+        if (!group) {
+          addDimensionError.textContent = "未找到目标分组，请关闭后重试。";
+          return;
+        }
+        const formData = new FormData(addDimensionForm);
+        const dimension = textValue(formData.get("dimension_en"));
+        const dimensionZh = textValue(formData.get("dimension_zh"));
+        const introZh = textValue(formData.get("intro_zh"));
+        const interactionZh = textValue(formData.get("interaction_zh"));
+        const values = [1, 2, 3].map(index => textValue(formData.get(`value_en_${index}`)));
+        const valuesZh = [1, 2, 3].map(index => textValue(formData.get(`value_zh_${index}`)));
+        const englishFields = [dimension, ...values];
+        const duplicateName = group.dimensions.some(existing => normalizeDimensionName(existing.dimension) === normalizeDimensionName(dimension));
+        const duplicateValues = new Set(values.map(value => value.toLocaleLowerCase())).size !== values.length;
+
+        if (!dimension || !dimensionZh || !introZh || !interactionZh || values.some(value => !value) || valuesZh.some(value => !value)) {
+          addDimensionError.textContent = "请填写属性的全部信息，以及三组中英文候选值。";
+          return;
+        }
+        if (englishFields.some(value => !/^[\x20-\x7E]+$/.test(value))) {
+          addDimensionError.textContent = "英文属性名和英文候选值只能包含英文字符、数字和常用英文标点。";
+          return;
+        }
+        if (duplicateName) {
+          addDimensionError.textContent = "本分组已经有同名或语义相同的英文属性，请检查后再新增。";
+          return;
+        }
+        if (duplicateValues) {
+          addDimensionError.textContent = "三个英文候选值必须彼此不同。";
+          return;
+        }
+
+        const addedDimension = {
+          id: newDimensionId(),
+          source: "reviewer_added",
+          dimension,
+          dimension_zh: dimensionZh,
+          intro_zh: introZh,
+          interaction_zh: interactionZh,
+          value_domain: values,
+          value_domain_zh: valuesZh,
+          added_at: new Date().toISOString(),
+        };
+        group.dimensions.push(addedDimension);
+        if (!addedDimensions[group.id]) addedDimensions[group.id] = [];
+        addedDimensions[group.id].push(addedDimension);
+        groupSelection(group.id).add(addedDimension.id);
+        openGroups.add(group.id);
+        saveReview();
+        closeAddDimensionDialog();
+        renderTabs();
+        renderCategory();
+        updateProgress();
+      }
+
+      function exportSelection() {
+        const incomplete = missingMoveReasons();
+        if (incomplete.length) {
+          window.alert("请为所有标记为“建议下放到子类”的维度填写原因。");
+          return;
+        }
+        const groups = catalog.categories.flatMap(category => category.groups.map(group => ({
+          category_id: category.id,
+          category: category.name,
+          category_zh: category.name_zh,
+          group_id: group.id,
+          level: group.level,
+          group: group.name,
+          group_zh: group.name_zh,
+          selected_count: selectedCount(group),
+          selected_dimensions: group.dimensions
+            .filter(dimension => groupSelection(group.id).has(dimension.id))
+            .map(dimensionForExport),
+          added_dimensions: group.dimensions
+            .filter(isCustomDimension)
+            .map(dimensionForExport),
+          subcategory_recommendations: group.level === "category" ? group.dimensions
+            .filter(dimension => Boolean(moveRecord(dimension.id)))
+            .map(dimension => ({
+              id: dimension.id,
+              source: isCustomDimension(dimension) ? "reviewer_added" : "catalog",
+              dimension: dimension.dimension,
+              dimension_zh: dimension.dimension_zh,
+              reason: moveRecord(dimension.id).reason.trim(),
+            })) : [],
+        })));
+        const payload = {
+          schema_version: "personaimg_dimension_review_selection_v3",
+          exported_at: new Date().toISOString(),
+          selection_guideline: "8-10 dimensions are normally recommended per group, capped by the available candidate count. Category groups with fewer than 8 candidates have a 0-to-all-candidates recommendation; fewer or more selections remain allowed when justified by quality.",
+          subcategory_recommendation_guideline: "A subcategory recommendation is recorded only for a category-level dimension and must include a reviewer reason.",
+          added_dimension_guideline: "Each reviewer-added dimension includes bilingual names, a Chinese explanation, a Chinese interaction rationale, and exactly three bilingual candidate values. Added dimensions are exported even when not selected.",
+          groups,
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "personaimg_dimension_review.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      expandAllButton.addEventListener("click", () => {
+        openGroups = new Set(categoryForId(activeCategoryId).groups.map(group => group.id));
+        renderCategory();
+      });
+      collapseAllButton.addEventListener("click", () => {
+        openGroups = new Set();
+        renderCategory();
+      });
+      exportButton.addEventListener("click", exportSelection);
+      addDimensionForm.addEventListener("submit", handleAddDimension);
+      cancelAddDimensionButton.addEventListener("click", closeAddDimensionDialog);
+      addDimensionDialog.addEventListener("cancel", () => {
+        addTargetGroupId = undefined;
+      });
+
+      fetch("./dimension_review_data.json")
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          catalog = data;
+          attachAddedDimensions();
+          pruneStoredReview();
+          activeCategoryId = catalog.categories[0].id;
+          openGroups = new Set(catalog.categories[0].groups.slice(0, 2).map(group => group.id));
+          renderTabs();
+          renderCategory();
+          updateProgress();
+        })
+        .catch(error => {
+          reviewArea.innerHTML = `<div class="error">无法载入审核目录：${escapeHtml(error.message)}。请通过本地 HTTP 服务打开此页面。</div>`;
+          progressElement.textContent = "载入失败";
+        });
+    })();
+  </script>
+</body>
+</html>
