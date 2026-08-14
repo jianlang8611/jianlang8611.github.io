@@ -58,6 +58,10 @@
     .header-status { min-width: 216px; text-align: right; }
     .header-status .label { display: block; color: #b6cad5; font-size: 12px; }
     .header-status strong { font-size: 22px; }
+    .reviewer-status { margin-top: 8px; }
+    .reviewer-status strong { color: #d6e6ee; font-size: 14px; font-weight: 650; }
+    .change-reviewer { margin-left: 8px; border: 0; background: transparent; color: #9bd7d2; font-size: 12px; font-weight: 700; padding: 0; }
+    .change-reviewer:hover { color: #fff; text-decoration: underline; }
 
     main { max-width: 1480px; margin: 0 auto; padding: 24px 32px 48px; }
     .toolbar {
@@ -278,6 +282,8 @@
     .value-row input { min-width: 0; border: 1px solid #bdcbd2; border-radius: 4px; padding: 8px 9px; }
     .form-error { min-height: 20px; margin: 14px 0 0; color: var(--danger); font-size: 13px; font-weight: 650; }
     .dialog-actions { display: flex; justify-content: end; gap: 10px; margin-top: 6px; }
+    .reviewer-dialog .dialog-header { border-bottom: 0; padding-bottom: 8px; }
+    .reviewer-form { padding-top: 8px; }
 
     .empty, .loading, .error {
       border: 1px dashed #b5c7cf;
@@ -330,6 +336,11 @@
       <div class="header-status" aria-live="polite">
         <span class="label">审核进度</span>
         <strong id="overall-progress">正在载入</strong>
+        <div class="reviewer-status">
+          <span class="label">志愿者</span>
+          <strong id="reviewer-name-display">待登记</strong>
+          <button class="change-reviewer" id="change-reviewer" type="button">更改</button>
+        </div>
       </div>
     </div>
   </header>
@@ -374,6 +385,20 @@
     </form>
   </dialog>
 
+  <dialog class="dialog-shell reviewer-dialog" id="reviewer-dialog" aria-labelledby="reviewer-dialog-title">
+    <div class="dialog-header">
+      <h2 id="reviewer-dialog-title">志愿者登记</h2>
+      <p>请输入你的英文姓名。该姓名会写入导出文件，并用于文件命名。</p>
+    </div>
+    <form class="add-dimension-form reviewer-form" id="reviewer-form" novalidate>
+      <label class="form-field full"><span>英文姓名</span><input id="reviewer-name-input" name="reviewer_name" required autocomplete="name" placeholder="例如 Jane Doe"></label>
+      <p class="form-error" id="reviewer-name-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="button primary" type="submit">开始审核</button>
+      </div>
+    </form>
+  </dialog>
+
   <script>
     (() => {
       const STANDARD_MIN_SELECTIONS = 8;
@@ -392,12 +417,19 @@
       const addDimensionTarget = document.querySelector("#add-dimension-target");
       const addDimensionError = document.querySelector("#add-dimension-error");
       const cancelAddDimensionButton = document.querySelector("#cancel-add-dimension");
+      const reviewerDialog = document.querySelector("#reviewer-dialog");
+      const reviewerForm = document.querySelector("#reviewer-form");
+      const reviewerNameInput = document.querySelector("#reviewer-name-input");
+      const reviewerNameError = document.querySelector("#reviewer-name-error");
+      const reviewerNameDisplay = document.querySelector("#reviewer-name-display");
+      const changeReviewerButton = document.querySelector("#change-reviewer");
       let catalog;
       let activeCategoryId;
       const savedReview = loadReview();
       let selections = savedReview.selections;
       let subtypeMoves = savedReview.subtypeMoves;
       let addedDimensions = savedReview.addedDimensions;
+      let reviewerName = savedReview.reviewerName;
       let addTargetGroupId;
       let openGroups = new Set();
 
@@ -408,6 +440,22 @@
 
       function textValue(value) {
         return typeof value === "string" ? value.trim() : "";
+      }
+
+      function normalizeReviewerName(value) {
+        return textValue(value).replace(/\s+/g, " ");
+      }
+
+      function reviewerNameIsValid(name) {
+        return /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/.test(name);
+      }
+
+      function updateReviewerDisplay() {
+        reviewerNameDisplay.textContent = reviewerName || "待登记";
+      }
+
+      function reviewerFilenamePart() {
+        return reviewerName.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
       }
 
       function deserializeAddedDimensions(raw) {
@@ -450,6 +498,7 @@
           selections: deserializeSelections(saved.selections),
           subtypeMoves,
           addedDimensions: deserializeAddedDimensions(saved.addedDimensions),
+          reviewerName: normalizeReviewerName(saved.reviewerName),
         };
       }
 
@@ -460,15 +509,15 @@
           const previous = JSON.parse(localStorage.getItem(PREVIOUS_REVIEW_STORAGE_KEY) || "null");
           if (previous && typeof previous === "object") return reviewFromSavedObject(previous);
           const legacy = JSON.parse(localStorage.getItem(LEGACY_SELECTION_STORAGE_KEY) || "{}");
-          return { selections: deserializeSelections(legacy), subtypeMoves: {}, addedDimensions: {} };
+          return { selections: deserializeSelections(legacy), subtypeMoves: {}, addedDimensions: {}, reviewerName: "" };
         } catch (_) {
-          return { selections: {}, subtypeMoves: {}, addedDimensions: {} };
+          return { selections: {}, subtypeMoves: {}, addedDimensions: {}, reviewerName: "" };
         }
       }
 
       function saveReview() {
         const serializable = Object.fromEntries(Object.entries(selections).map(([groupId, ids]) => [groupId, [...ids]]));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections: serializable, subtypeMoves, addedDimensions }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections: serializable, subtypeMoves, addedDimensions, reviewerName }));
       }
 
       function saveSelections() {
@@ -602,6 +651,27 @@
       function closeAddDimensionDialog() {
         addDimensionDialog.close();
         addTargetGroupId = undefined;
+      }
+
+      function openReviewerDialog() {
+        reviewerNameInput.value = reviewerName;
+        reviewerNameError.textContent = "";
+        if (!reviewerDialog.open) reviewerDialog.showModal();
+        reviewerNameInput.focus();
+      }
+
+      function handleReviewerForm(event) {
+        event.preventDefault();
+        const name = normalizeReviewerName(new FormData(reviewerForm).get("reviewer_name"));
+        if (!reviewerNameIsValid(name)) {
+          reviewerNameError.textContent = "请使用英文姓名，仅可包含英文字母、空格、连字符或英文撇号。";
+          reviewerNameInput.focus();
+          return;
+        }
+        reviewerName = name;
+        saveReview();
+        updateReviewerDisplay();
+        reviewerDialog.close();
       }
 
       function removeCustomDimension(groupId, dimensionId) {
@@ -845,6 +915,11 @@
       }
 
       function exportSelection() {
+        if (!reviewerNameIsValid(reviewerName)) {
+          window.alert("请先登记英文姓名后再导出。");
+          openReviewerDialog();
+          return;
+        }
         const incomplete = missingMoveReasons();
         if (incomplete.length) {
           window.alert("请为所有标记为“建议下放到子类”的维度填写原因。");
@@ -876,8 +951,9 @@
             })) : [],
         })));
         const payload = {
-          schema_version: "personaimg_dimension_review_selection_v3",
+          schema_version: "personaimg_dimension_review_selection_v4",
           exported_at: new Date().toISOString(),
+          reviewer: { english_name: reviewerName },
           selection_guideline: "8-10 dimensions are normally recommended per group, capped by the available candidate count. Category groups with fewer than 8 candidates have a 0-to-all-candidates recommendation; fewer or more selections remain allowed when justified by quality.",
           subcategory_recommendation_guideline: "A subcategory recommendation is recorded only for a category-level dimension and must include a reviewer reason.",
           added_dimension_guideline: "Each reviewer-added dimension includes bilingual names, a Chinese explanation, a Chinese interaction rationale, and exactly three bilingual candidate values. Added dimensions are exported even when not selected.",
@@ -887,7 +963,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "personaimg_dimension_review.json";
+        link.download = `personaimg_dimension_review_${reviewerFilenamePart()}.json`;
         document.body.appendChild(link);
         link.click();
         link.remove();
@@ -904,9 +980,15 @@
       });
       exportButton.addEventListener("click", exportSelection);
       addDimensionForm.addEventListener("submit", handleAddDimension);
+      reviewerForm.addEventListener("submit", handleReviewerForm);
+      changeReviewerButton.addEventListener("click", openReviewerDialog);
       cancelAddDimensionButton.addEventListener("click", closeAddDimensionDialog);
       addDimensionDialog.addEventListener("cancel", () => {
         addTargetGroupId = undefined;
+      });
+      reviewerDialog.addEventListener("cancel", event => {
+        event.preventDefault();
+        reviewerNameError.textContent = "请填写英文姓名后再开始审核。";
       });
 
       fetch("./dimension_review_data.json")
@@ -923,6 +1005,8 @@
           renderTabs();
           renderCategory();
           updateProgress();
+          updateReviewerDisplay();
+          if (!reviewerNameIsValid(reviewerName)) openReviewerDialog();
         })
         .catch(error => {
           reviewArea.innerHTML = `<div class="error">无法载入审核目录：${escapeHtml(error.message)}。请通过本地 HTTP 服务打开此页面。</div>`;
