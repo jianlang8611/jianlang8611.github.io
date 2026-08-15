@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PersonaMIR Scenario Pub V2 human quality audit">
+  <title>PersonaMIR Scenario Human Audit</title>
+  <link rel="stylesheet" href="scenario-audit.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <span class="brand">PersonaMIR</span>
+      <span class="product-name">Scenario Human Audit</span>
+      <span class="version">Pub V2</span>
+    </div>
+    <div class="header-actions">
+      <button class="reviewer-button" id="reviewerButton" type="button" title="更换审计人">
+        <span class="reviewer-label">Reviewer</span>
+        <strong id="reviewerName">Not set</strong>
+      </button>
+      <button class="primary-button" id="exportButton" type="button">导出 JSON</button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <p class="sidebar-label">绑定性</p>
+        <div class="binding-switch" role="tablist" aria-label="Scenario 绑定性">
+          <button class="binding-tab is-active" id="productBoundTab" type="button" role="tab" aria-selected="true" data-view="product_bound">
+            <span>绑定商品</span>
+            <strong id="productBoundCount">0</strong>
+          </button>
+          <button class="binding-tab" id="nonProductTab" type="button" role="tab" aria-selected="false" data-view="non_product">
+            <span>不绑定商品</span>
+            <strong id="nonProductCount">0</strong>
+          </button>
+        </div>
+      </div>
+
+      <nav class="category-nav" id="categoryNav" aria-label="大类导航"></nav>
+
+      <div class="sidebar-summary">
+        <p class="sidebar-label">当前标记</p>
+        <div class="summary-line">
+          <span>已标记丢弃</span>
+          <strong id="discardedCount">0</strong>
+        </div>
+        <p>未标记只表示“未发现需要丢弃”，不构成通过判断。</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow" id="viewEyebrow">Product-bound</p>
+          <h1 id="viewTitle">绑定商品 Scenario</h1>
+          <p id="viewDescription">按大类和属性审阅。只标记应当丢弃的场景。</p>
+        </div>
+        <div class="view-total">
+          <strong id="visibleCount">0</strong>
+          <span>当前显示</span>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="筛选工具">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="搜索属性、覆盖值或 Scenario 正文">
+        </label>
+        <label class="filter-toggle">
+          <input id="discardedOnlyInput" type="checkbox">
+          <span>只看已标记丢弃</span>
+        </label>
+        <button class="quiet-button" id="clearFiltersButton" type="button">清除筛选</button>
+      </section>
+
+      <div id="auditContent" class="audit-content" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <dialog class="name-dialog" id="nameDialog">
+    <form method="dialog" id="nameForm" novalidate>
+      <p class="dialog-kicker">PersonaMIR · Human Audit</p>
+      <h2>输入审计人英文名</h2>
+      <p>名字会写入导出的 JSON 文件名和结果内容。输入相同名字可继续本机上次保存的进度。</p>
+      <label class="name-field">
+        <span>English name</span>
+        <input id="nameInput" name="reviewer" type="text" autocomplete="name" placeholder="e.g. Alex Chen" maxlength="80" required>
+      </label>
+      <p class="field-error" id="nameError" role="alert"></p>
+      <button class="primary-button dialog-submit" type="submit">开始审计</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="scenario-pub-v2-data.js"></script>
+  <script src="scenario-audit.js"></script>
+</body>
+</html>
