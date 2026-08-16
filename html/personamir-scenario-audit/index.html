@@ -14,7 +14,9 @@
       <span class="product-name">Scenario Human Audit</span>
       <span class="version">Pub V2</span>
     </div>
-    <div class="header-actions">
+    <div class="guide-status" id="guideStatus">开始前必读</div>
+    <div class="header-actions" id="auditHeaderActions" hidden>
+      <button class="guide-return-button" id="guideButton" type="button">审核说明</button>
       <button class="reviewer-button" id="reviewerButton" type="button" title="更换审计人">
         <span class="reviewer-label">Reviewer</span>
         <strong id="reviewerName">Not set</strong>
@@ -23,7 +25,156 @@
     </div>
   </header>
 
-  <div class="app-shell">
+  <main class="guide-page" id="guidePage">
+    <header class="guide-hero">
+      <p class="eyebrow">Human Review Guide</p>
+      <h1>Scenario 人工审核说明</h1>
+      <p class="guide-intro">请在开始打分前完整阅读以下标准和示例。进入审核后，可以随时返回本页查看。</p>
+      <div class="first-principle">
+        <strong>Scenario 的定义与第一性原则</strong>
+        <p>Scenario 是以用户 <span class="placeholder-x">[X]</span> 为主体、发生在后续交流之前的一段真实生活情境；第一性原则是只保留让现实事件成立、让目标属性成为核心、并让稳定偏好（或明确的当前状态）自然显露的最小充分事实，同时为后续对话留下展开空间。</p>
+      </div>
+    </header>
+
+    <section class="guide-section" aria-labelledby="scenarioCriteriaTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">01</p>
+        <div>
+          <h2 id="scenarioCriteriaTitle">单条 Scenario 审核重点</h2>
+          <p>逐条阅读正文，并结合绑定性、商品类型、属性和覆盖值进行判断。</p>
+        </div>
+      </div>
+      <ol class="criteria-list">
+        <li>
+          <strong>真实、自然</strong>
+          <span>应是现实中可能发生的生活事件，而不是画像、实验说明、值域模板或完整对话剧本；中文表达应自然。</span>
+        </li>
+        <li>
+          <strong>目标属性居中</strong>
+          <span>目标属性应直接影响事件中的动作、感受、判断或结果，不能只是顺带出现。</span>
+        </li>
+        <li>
+          <strong>偏好依据成立</strong>
+          <span>稳定偏好应从体验、习惯、现实取舍或熟人认知中自然显露，不能只靠“长期、一直、多次”等总结。Season 等近期状态类 Scenario 只需当前状态明确。</span>
+        </li>
+        <li>
+          <strong>属性值能够自然代入</strong>
+          <span>覆盖值代入 <span class="placeholder-y">[Y]</span> 后，语言、人物行为、物理结果和现实常识仍应成立。</span>
+        </li>
+        <li>
+          <strong>信息充分但保持开放</strong>
+          <span>应说明属性为什么重要，但不提前写完选择、处理及最终结果，给后续对话留下空间。</span>
+        </li>
+        <li>
+          <strong>绑定关系合理</strong>
+          <span>Product-bound 可以自然省略商品名，但商品类别必须能够从语境恢复；Non-product 不应依赖某个具体商品类别。</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="guide-section" aria-labelledby="categoryCriteriaTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">02</p>
+        <div>
+          <h2 id="categoryCriteriaTitle">大类如何评价</h2>
+          <p>大类评价关注整体是否存在系统性问题，不要求零丢弃。</p>
+        </div>
+      </div>
+      <div class="category-rule-grid">
+        <article class="category-rule">
+          <span class="quality-mark is-positive">满意</span>
+          <p>单条问题较为孤立；各属性组整体自然，值映射基本合理，生活事件和偏好证据具有多样性。</p>
+        </article>
+        <article class="category-rule">
+          <span class="quality-mark is-negative">不满意</span>
+          <p>同一种问题反复出现，影响完整属性组或多个属性；例如属性因果普遍错误、值域被强行覆盖、语言模板化，或大量 Scenario 只是更换人物和地点。</p>
+        </article>
+      </div>
+      <p class="category-note">少量单条 Scenario 被丢弃，不自动意味着整个大类不满意。选择“不满意”时，只需简要填写主要问题。</p>
+    </section>
+
+    <section class="guide-section" aria-labelledby="goodExamplesTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">03</p>
+        <div>
+          <h2 id="goodExamplesTitle">好的 Scenario 示例</h2>
+          <p>以下示例分别展示自然省略、商品名显式出现、属性直接因果和真正 Non-product。</p>
+        </div>
+      </div>
+      <div class="example-list">
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Product-bound · 商品名自然省略 · Tops / Color</span>
+          </div>
+          <blockquote><span class="placeholder-x">[X]</span>在试衣间面对一排候选，拿起<span class="placeholder-y">[Y]</span>那件套过头。领口和袖口落回熟悉的近脸色调后，<span class="placeholder-x">[X]</span>不再用围巾遮挡，同行人也把另外两件重新挂回原位。</blockquote>
+          <p>试衣间、套过头、领口和袖口可以自然恢复上装类别；颜色直接影响行为，偏好也从熟悉动作中显露。</p>
+        </article>
+
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Product-bound · 商品名显式出现 · Bags / Material</span>
+          </div>
+          <blockquote>第一只替代包在普通使用中失效，<span class="placeholder-x">[X]</span>回到换货柜台试一只<span class="placeholder-y">[Y]</span>材质的候选。店员说可以把平时随身带的东西装进去试试，<span class="placeholder-x">[X]</span>便照自己平时挑日用包的习惯，留意提手受力后稳不稳、肩带贴在身上会不会硌。</blockquote>
+          <p>“替代包”和“日用包”自然说出商品类别；材质通过真实试装和身体感受参与判断，稳定依据来自既有挑选习惯。</p>
+        </article>
+
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Product-bound · 属性直接因果 · Glasses / Frame Pattern</span>
+          </div>
+          <blockquote><span class="placeholder-x">[X]</span>正在为夏日渡轮航程做准备，拿出平时常戴的<span class="placeholder-y">[Y]</span>纹样眼镜。想到船舱里的近距离交谈，<span class="placeholder-x">[X]</span>觉得这副镜框能保留自己的辨识度。</blockquote>
+          <p>镜框纹样与近距离交流中的个人辨识度直接相关，“平时常戴”提供了简洁的稳定依据。</p>
+        </article>
+
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Non-product · Sport</span>
+          </div>
+          <blockquote><span class="placeholder-x">[X]</span>从家人那里学会在山地进行<span class="placeholder-y">[Y]</span>，熟悉路线边界、天气变化和如何不惊扰周围动物。最近旧路线被倒木截断，<span class="placeholder-x">[X]</span>没有冒险穿过，而是带同伴沿安全方向重新寻找通路。</blockquote>
+          <p>运动项目本身决定行为和判断，不依赖具体商品；经验、熟练动作和现场选择共同体现持续投入。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="guide-section" aria-labelledby="badExampleTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">04</p>
+        <div>
+          <h2 id="badExampleTitle">不好的 Scenario 示例</h2>
+          <p>信息看似丰富，但目标属性没有形成真实因果。</p>
+        </div>
+      </div>
+      <article class="example-card is-bad">
+        <div class="example-meta">
+          <span class="example-status">反例</span>
+          <span>Product-bound · Glasses / Frame Pattern</span>
+        </div>
+        <blockquote><span class="placeholder-x">[X]</span>正在为夏日渡轮航程做准备，拿出平时常戴的<span class="placeholder-y">[Y]</span>纹样眼镜。想到甲板强光、旅行照片和同行人的目光，<span class="placeholder-x">[X]</span>觉得还是自己一直喜欢的<span class="placeholder-y">[Y]</span>最好。</blockquote>
+        <p>甲板强光实际关联镜片功能，而不是镜框纹样；旅行照片和旁人目光没有形成必要因果；“一直喜欢”只是作者总结，没有通过具体行为或判断体现偏好。</p>
+      </article>
+    </section>
+
+    <section class="guide-start" aria-labelledby="startAuditTitle">
+      <div>
+        <p class="eyebrow">Before You Start</p>
+        <h2 id="startAuditTitle">阅读完成后进入打分界面</h2>
+        <p>进入后将先填写审核员英文名。页面会自动保存本机进度，并支持导出 JSON。</p>
+      </div>
+      <div class="guide-start-actions">
+        <label class="guide-acknowledgement">
+          <input id="guideAcknowledgement" type="checkbox">
+          <span>我已阅读并理解上述审核标准</span>
+        </label>
+        <button class="primary-button guide-start-button" id="startAuditButton" type="button" disabled>进入打分界面</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="app-shell" id="auditApp" hidden>
     <aside class="sidebar">
       <div class="sidebar-section">
         <p class="sidebar-label">绑定性</p>
@@ -47,7 +198,6 @@
           <span>已标记丢弃</span>
           <strong id="discardedCount">0</strong>
         </div>
-        <p>未标记只表示“未发现需要丢弃”，不构成通过判断。</p>
       </div>
     </aside>
 

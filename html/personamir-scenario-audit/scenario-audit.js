@@ -8,12 +8,18 @@
   }
 
   const elements = {
+    auditApp: document.getElementById("auditApp"),
     auditContent: document.getElementById("auditContent"),
+    auditHeaderActions: document.getElementById("auditHeaderActions"),
     categoryNav: document.getElementById("categoryNav"),
     clearFiltersButton: document.getElementById("clearFiltersButton"),
     discardedCount: document.getElementById("discardedCount"),
     discardedOnlyInput: document.getElementById("discardedOnlyInput"),
     exportButton: document.getElementById("exportButton"),
+    guideAcknowledgement: document.getElementById("guideAcknowledgement"),
+    guideButton: document.getElementById("guideButton"),
+    guidePage: document.getElementById("guidePage"),
+    guideStatus: document.getElementById("guideStatus"),
     nameDialog: document.getElementById("nameDialog"),
     nameError: document.getElementById("nameError"),
     nameForm: document.getElementById("nameForm"),
@@ -25,6 +31,7 @@
     reviewerButton: document.getElementById("reviewerButton"),
     reviewerName: document.getElementById("reviewerName"),
     searchInput: document.getElementById("searchInput"),
+    startAuditButton: document.getElementById("startAuditButton"),
     toast: document.getElementById("toast"),
     viewDescription: document.getElementById("viewDescription"),
     viewEyebrow: document.getElementById("viewEyebrow"),
@@ -142,6 +149,28 @@
 
   function displayCategory(category) {
     return data.categoryLabels[category] || category;
+  }
+
+  function showGuide() {
+    if (elements.nameDialog.open) elements.nameDialog.close();
+    elements.guidePage.hidden = false;
+    elements.auditApp.hidden = true;
+    elements.guideStatus.hidden = false;
+    elements.auditHeaderActions.hidden = true;
+    document.title = "PersonaMIR Scenario Human Audit Guide";
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function enterAudit() {
+    if (!elements.guideAcknowledgement.checked) return;
+    elements.guidePage.hidden = true;
+    elements.auditApp.hidden = false;
+    elements.guideStatus.hidden = true;
+    elements.auditHeaderActions.hidden = false;
+    document.title = "PersonaMIR Scenario Human Audit";
+    render();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    if (!reviewer) window.setTimeout(showNameDialog, 0);
   }
 
   function recordsForActiveView() {
@@ -553,6 +582,11 @@
 
   elements.reviewerButton.addEventListener("click", showNameDialog);
   elements.exportButton.addEventListener("click", exportAudit);
+  elements.guideButton.addEventListener("click", showGuide);
+  elements.guideAcknowledgement.addEventListener("change", () => {
+    elements.startAuditButton.disabled = !elements.guideAcknowledgement.checked;
+  });
+  elements.startAuditButton.addEventListener("click", enterAudit);
 
   document.querySelectorAll("[data-view]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -601,5 +635,5 @@
   elements.productBoundCount.textContent = productRecords.length.toLocaleString("en-US");
   elements.nonProductCount.textContent = nonProductRecords.length.toLocaleString("en-US");
   render();
-  showNameDialog();
+  showGuide();
 })();
