@@ -3,6 +3,9 @@
 本目录存放 PersonaIMG 视觉维度的人工审核页面和已收集的审核结果。本文件专门登记
 每个 HTML 与 JSON 的审核轮次、用途和语义，避免将不同轮次的结果混用。
 
+值域和“手持物 / 非手持工具设备”构建规范见
+[`DIMENSION_VALUE_DOMAIN_GUIDELINES.md`](DIMENSION_VALUE_DOMAIN_GUIDELINES.md)。
+
 ## HTML 页面
 
 ### `html/round1_dimension_selection.html`
@@ -17,7 +20,7 @@
 ### `html/index.html`
 
 - **审核轮次：** 第二轮
-- **用途：** 只复核页面生成时已经被标为 final 的 499 个维度。
+- **用途：** 只复核页面生成时已经被标为 final 的 497 个维度。
 - **审核者操作：** 将某个 final 维度标为“有疑问”，并必须填写评论，说明其定义、
   命名、值域、重复、冲突或层级问题。
 - **未标记维度的含义：** 该审核者在本轮没有报告这个维度存在疑问。
@@ -26,7 +29,16 @@
 - **导出文件命名：**
   `personaimg_round2_final_dimension_questions_<reviewer>.json`
 
-两个 HTML 都是自包含页面，审核数据已嵌入 HTML，不依赖相邻的目录 JSON 或 API 服务。
+### `html/round2_result_review_ronpay.html`
+
+- **页面类型：** 第二轮结果投射页，仅供本地复核。
+- **对应审核者：** ronpay
+- **用途：** 将 ronpay 报告的 6 条疑问及原始评论投射回对应的 final dimension 卡片。
+- **默认视图：** 这是基于上一版 499 条 final 的历史投射页；当前入口已更新为 497 条。
+- **状态：** 其中“花卉环境”和“防护装具等级”随后已按确认决定移除，其余意见仍保留为历史证据。
+- **编辑状态：** 只读，不会修改原始结果，也不作为后续志愿者的盲审入口。
+
+以上 HTML 都是自包含页面，审核数据已嵌入 HTML，不依赖相邻的目录 JSON 或 API 服务。
 
 ## 已收集结果
 
@@ -46,8 +58,17 @@
 - **源 schema：** `personaimg_dimension_review_selection_v3`
 - **导出时间：** `2026-08-10T06:34:39.597Z`
 
-本目录暂未收集第二轮审核结果。收集后必须保留导出文件名中的审核者英文姓名，不能覆盖
-其他审核者的结果。
+### `results/personaimg_round2_final_dimension_questions_ronpay.json`
+
+- **审核轮次：** 第二轮
+- **审核者：** ronpay
+- **结果类型：** 对 499 条 final dimension 的疑问标记和文字评论。
+- **疑问数量：** 6
+- **对应 final 版本：** 导出时的 499 条 final；不是当前 497 条审核入口的直接快照。
+- **源 schema：** `personaimg_dimension_round2_question_review_v1`
+- **导出时间：** `2026-08-19T08:30:48.264Z`
+
+继续收集第二轮结果时，必须保留导出文件名中的审核者英文姓名，不能覆盖其他审核者的结果。
 
 ## 目录规则
 
