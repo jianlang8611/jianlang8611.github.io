@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PersonaMIR Food attribute volunteer audit">
+  <title>Food 属性志愿者审核</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <strong>PersonaMIR</strong>
+      <span>Food 属性志愿者审核</span>
+      <em id="versionLabel">Loading</em>
+    </div>
+    <div class="header-progress" aria-label="整体进度">
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <strong id="progressLabel">0 / 0</strong>
+    </div>
+    <div class="header-actions">
+      <button class="reviewer-button" id="reviewerButton" type="button" title="更换署名">
+        <span>审核人</span>
+        <strong id="reviewerName">未署名</strong>
+      </button>
+      <button class="primary-button" id="exportButton" type="button" disabled>导出 JSON</button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <span>审核范围</span>
+        <strong id="scopeProgress">0 / 0</strong>
+      </div>
+      <nav id="scopeNav" aria-label="Food 属性范围"></nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="scope-heading">
+        <div>
+          <p class="eyebrow" id="scopeEyebrow">FOOD ATTRIBUTE</p>
+          <h1 id="scopeTitle">属性审核</h1>
+          <p id="scopeNote"></p>
+        </div>
+        <button class="quiet-button" id="nextPendingButton" type="button">下一项未审核</button>
+      </section>
+
+      <section class="toolbar" aria-label="筛选工具">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="属性、定义或值域" autocomplete="off">
+        </label>
+        <div class="segments" id="reviewFilter" role="group" aria-label="审核状态">
+          <button class="active" type="button" data-filter="all">全部</button>
+          <button type="button" data-filter="pending">未完成</button>
+          <button type="button" data-filter="issue">有问题</button>
+        </div>
+      </section>
+
+      <section class="attribute-list" id="attributeList" aria-live="polite"></section>
+      <div class="empty-state" id="emptyState" hidden>当前筛选下没有属性。</div>
+    </main>
+  </div>
+
+  <dialog id="signatureDialog" class="signature-dialog">
+    <form method="dialog" id="signatureForm" novalidate>
+      <p class="dialog-kicker">PERSONAMIR · VOLUNTEER AUDIT</p>
+      <h2>请先署名</h2>
+      <p>署名会写入审核进度与最终导出的 JSON。</p>
+      <label>
+        <span>审核人姓名</span>
+        <input id="signatureInput" type="text" maxlength="80" autocomplete="name" placeholder="请输入真实姓名" required>
+      </label>
+      <p class="field-error" id="signatureError" role="alert"></p>
+      <button class="primary-button dialog-submit" type="submit">进入审核</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
