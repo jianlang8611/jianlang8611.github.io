@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PersonaMIR movie attribute and value-domain review editor">
+  <title>PersonaMIR Movie 属性审查</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <strong>PersonaMIR</strong>
+      <span>Movie Attribute Review</span>
+      <span class="tag">Draft</span>
+    </div>
+    <div class="header-actions">
+      <button class="button" id="undoButton" type="button" disabled>撤销</button>
+      <button class="button" id="showDeletedButton" type="button">显示已删除</button>
+      <button class="button primary" id="exportButton" type="button">导出 JSON</button>
+    </div>
+  </header>
+
+  <div class="shell" id="app" hidden>
+    <aside class="sidebar">
+      <p class="side-label">属性范围</p>
+      <nav id="scopeNav" class="scope-nav" aria-label="Movie attribute scopes"></nav>
+      <section class="side-section">
+        <p class="side-label">当前草稿</p>
+        <div class="status-row"><span>通用属性</span><strong id="globalCount">0</strong></div>
+        <div class="status-row"><span>类型专属</span><strong id="specificCount">0</strong></div>
+        <div class="status-row"><span>逻辑类型</span><strong id="subtypeCount">9</strong></div>
+        <div class="status-row"><span>写回状态</span><strong id="saveStatus">等待编辑</strong></div>
+      </section>
+      <p class="side-note">每个专属属性只在电影命中对应逻辑类型时启用。类型可以多值，电影条目本身仍存放在同一池中。</p>
+    </aside>
+
+    <main class="main">
+      <section class="heading">
+        <div>
+          <p class="eyebrow" id="scopeEyebrow">GLOBAL ATTRIBUTES</p>
+          <h1 id="scopeTitle">电影通用属性</h1>
+          <p id="scopeDescription">所有电影共享，重点判断它是否会在自然交互中形成稳定偏好。</p>
+        </div>
+        <button class="button primary add-button" id="addButton" type="button">+ 新增属性</button>
+      </section>
+
+      <section class="summary-band">
+        <div><span>当前属性</span><strong id="activeMetric">0</strong></div>
+        <div><span>核心属性</span><strong id="coreMetric">0</strong></div>
+        <div><span>种子值</span><strong id="valueMetric">0</strong></div>
+        <p id="scopeRule">初始每项只放 2 个中英文值，方便快速判断值域层级，不代表最终值域只有两个值。</p>
+      </section>
+
+      <section class="toolbar">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="属性名、中文名、值域或对话示例">
+        </label>
+        <label class="filter-field">
+          <span>筛选</span>
+          <select id="filterSelect">
+            <option value="all">全部</option>
+            <option value="core">只看核心</option>
+            <option value="single">只看单值</option>
+            <option value="multi">只看多值</option>
+          </select>
+        </label>
+      </section>
+
+      <section id="attributeGrid" class="attribute-grid" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div class="loading" id="loadingState">正在读取电影属性草案...</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="attributeDialog">
+    <form id="attributeForm" method="dialog">
+      <header class="dialog-head">
+        <div>
+          <p id="dialogScope">Global</p>
+          <h2 id="dialogTitle">编辑属性</h2>
+        </div>
+        <button class="icon-button" id="closeDialogButton" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="dialog-body">
+        <input id="attributeId" type="hidden">
+        <div class="form-grid">
+          <label class="field"><span>属性键</span><input id="attributeKey" required pattern="[a-z][a-z0-9_]*" placeholder="example_attribute"></label>
+          <label class="field"><span>中文名</span><input id="attributeZh" required placeholder="属性中文名"></label>
+          <label class="field"><span>取值方式</span><select id="attributeCardinality"><option value="single">单值</option><option value="multi_max_2">多值，最多 2 个</option><option value="multi_max_3">多值，最多 3 个</option><option value="multi_max_4">多值，最多 4 个</option><option value="multi_max_5">多值，最多 5 个</option></select></label>
+          <label class="field"><span>证据来源</span><input id="attributeEvidence" required placeholder="metadata_and_content"></label>
+          <label class="field full"><span>严格定义</span><textarea id="attributeDefinition" required></textarea></label>
+          <label class="field full"><span>自然对话示例</span><textarea id="attributeDialogue" required></textarea></label>
+          <label class="check-field full"><input id="attributeCore" type="checkbox"><span>标记为核心属性</span></label>
+        </div>
+
+        <section class="values-editor">
+          <div class="values-head">
+            <div><h3>值域</h3><p>一个值只表达一个概念；英文值和中文值必须同时填写。</p></div>
+            <button class="button" id="addValueButton" type="button">+ 增加属性值</button>
+          </div>
+          <div id="valueRows" class="value-rows"></div>
+        </section>
+      </div>
+      <footer class="dialog-actions">
+        <button class="button" id="cancelDialogButton" type="button">取消</button>
+        <button class="button primary" type="submit">保存属性</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script src="schema-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
