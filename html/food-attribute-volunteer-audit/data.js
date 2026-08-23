@@ -1,12 +1,13 @@
 window.FOOD_ATTRIBUTE_AUDIT_DATA = {
-  "auditType": "food_attribute_volunteer_audit",
-  "sourceVersion": "food-attribute-draft-v9",
-  "sourceUpdatedAt": "2026-08-22T08:25:26.689Z",
-  "sourceSha256": "5515fa6ddc3eabc559e844e16414e4264def6b671f0fc65edd7ed4b2abd189b3",
-  "builtAt": "2026-08-22T08:31:27.320Z",
-  "totalAttributes": 286,
+  "auditType": "food_attribute_design_volunteer_audit",
+  "sourceVersion": "food-attribute-draft-v11",
+  "sourceUpdatedAt": "2026-08-23T03:42:40.431Z",
+  "sourceSha256": "19af37c5b396cdeeea2c7b4d52aa124e98eaacb177ad12bdca30016280a984fe",
+  "builtAt": "2026-08-23T03:42:40.529Z",
+  "totalAttributes": 287,
   "instructions": {
-    "decision": "逐项判断属性定义、单多值规则和值域是否存在问题。",
+    "decision": "只判断属性本身：推荐意义、属性重叠、维度纯度、单多值设置和定义清晰度。",
+    "excluded": "不审核属性值；值域由后续商品池决定。",
     "issue": "选择有问题时必须填写具体问题；选择无问题时不填写说明。"
   },
   "scopes": [
@@ -19,11 +20,12 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "subtypeKey": null,
       "subtypeZh": "全局属性",
       "subtypeEn": "Global Attributes",
-      "note": "当前有效全局属性只保留食用准备程度、储存要求和主要过敏原；饮食方式适配暂存为候选，不进入当前属性表。",
+      "note": "仅保留能够脱离具体食品类型表达、且偏好能跨 subtype 稳定迁移的属性；当前包括食用准备程度、储存要求、主要过敏原和标称保质期。",
       "recordIds": [
         "g-preparation-effort",
         "g-storage-requirement",
-        "g-major-allergens"
+        "g-major-allergens",
+        "v11-global-shelf_life"
       ]
     },
     {
@@ -653,11 +655,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "食用准备程度",
       "cardinality": "single",
       "definition": "完整食品从开封到可安全食用所需的最终处理程度；本属性不允许原料、粉料或半成品进入池子。完整配方且无需拆分、配料或组装的专用微波爆米花包归入 Heat and Eat。",
-      "valueLevel": "只保留开封即可食用饮用和加热后食用两档；Heat and Eat 仅允许加热完整成品以及完整配方的专用微波爆米花包，不得出现配料、调制、组装、烘焙制作或完整烹饪等原料加工阶段。",
-      "values": [
-        "Ready to Consume / 开封即食即饮",
-        "Heat and Eat / 加热后食用"
-      ],
       "dialogueExample": "我想要开封就能吃的，不需要再加热。",
       "scopeId": "global",
       "scopeType": "global",
@@ -674,12 +671,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "储存要求",
       "cardinality": "single",
       "definition": "未开封商品正常保存所需的主要温度条件。",
-      "valueLevel": "全部值是互斥的主要储存温度类别。",
-      "values": [
-        "Shelf-Stable / 常温保存",
-        "Refrigerated / 冷藏",
-        "Frozen / 冷冻"
-      ],
       "dialogueExample": "我没有冷冻空间，优先常温保存的。",
       "scopeId": "global",
       "scopeType": "global",
@@ -696,16 +687,23 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要过敏原",
       "cardinality": "multi_max_5",
       "definition": "商品含有或包装明确声明可能含有的主要食物过敏原。",
-      "valueLevel": "只使用同一级别的主要过敏原类别，不混入症状、饮食方式或模糊的敏感成分。",
-      "values": [
-        "Milk / 牛奶",
-        "Egg / 鸡蛋",
-        "Peanut / 花生",
-        "Tree Nuts / 坚果",
-        "Wheat / 小麦",
-        "Soy / 大豆"
-      ],
       "dialogueExample": "不要含花生和牛奶的商品。",
+      "scopeId": "global",
+      "scopeType": "global",
+      "categoryKey": "global",
+      "categoryZh": "全部食品",
+      "categoryEn": "All Food",
+      "subtypeKey": null,
+      "subtypeZh": "全局属性",
+      "subtypeEn": "Global Attributes"
+    },
+    {
+      "id": "v11-global-shelf_life",
+      "key": "shelf_life",
+      "zh": "标称保质期",
+      "cardinality": "single",
+      "definition": "商品在未开封并按包装要求储存时，由生产者明确标称的可保存时长；不记录具体到期日期、当前剩余保质期或开封后保存期。",
+      "dialogueExample": "我想囤一些保质期长、适合慢慢吃的食品。",
       "scopeId": "global",
       "scopeType": "global",
       "categoryKey": "global",
@@ -721,12 +719,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -743,13 +735,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -766,13 +751,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -789,17 +767,7 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "即饮咖啡除咖啡基底外最主要的命名风味。",
-      "valueLevel": "全部值是可独立识别的附加风味；原味咖啡使用 Unflavored，不把烘焙度或奶类型混入。",
-      "values": [
-        "Unflavored / 原味",
-        "Vanilla / 香草",
-        "Caramel / 焦糖",
-        "Chocolate / 巧克力",
-        "Hazelnut / 榛果",
-        "Coconut / 椰香",
-        "Pumpkin Spice / 南瓜香料"
-      ],
-      "dialogueExample": "我比较喜欢桃子味的饮料。",
+      "dialogueExample": "我想要焦糖味或榛果味的即饮咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
       "categoryKey": "beverages",
@@ -815,13 +783,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖量",
       "cardinality": "single",
       "definition": "成品饮料按营养标示中每 100 mL 总糖含量划分的等级。",
-      "valueLevel": "全部值位于同一总糖含量序列；正式构池前须统一确定互斥的每 100 mL 数值阈值，不用主观甜感代替。",
-      "values": [
-        "No Sugar / 无糖",
-        "Low Sugar / 低糖",
-        "Moderate Sugar / 中等含糖",
-        "High Sugar / 高糖"
-      ],
       "dialogueExample": "我想要低糖饮料，不要高糖的。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -838,13 +799,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡因水平",
       "cardinality": "single",
       "definition": "按每份咖啡因含量划分的等级。",
-      "valueLevel": "全部值基于统一的每份毫克阈值。",
-      "values": [
-        "Caffeine-Free / 无咖啡因",
-        "Low / 低",
-        "Moderate / 中",
-        "High / 高"
-      ],
       "dialogueExample": "晚上喝，必须是无咖啡因的。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -861,12 +815,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用温度",
       "cardinality": "multi_max_2",
       "definition": "商品最自然的饮用温度。",
-      "valueLevel": "只使用温度使用方式，不混入储存温度。",
-      "values": [
-        "Hot / 热饮",
-        "Cold / 冷饮",
-        "Either / 冷热皆可"
-      ],
       "dialogueExample": "给我找一款适合冰着喝的。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -883,15 +831,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜味来源",
       "cardinality": "multi_max_2",
       "definition": "即饮咖啡配方中的主要甜味来源；未添加甜味剂是明确状态。",
-      "valueLevel": "全部值是甜味来源类别，不混入甜度等级。",
-      "values": [
-        "No Added Sweetener / 未加甜味剂",
-        "Sugar / 糖",
-        "Syrup / 糖浆",
-        "Artificial Sweetener / 人工代糖",
-        "Stevia / 甜菊糖",
-        "Monk Fruit / 罗汉果甜味剂"
-      ],
       "dialogueExample": "可以有甜味，但不要人工代糖。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -908,13 +847,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡萃取风格",
       "cardinality": "single",
       "definition": "即饮咖啡所采用或明确标称的主导咖啡萃取风格。",
-      "valueLevel": "全部值描述咖啡液的主导萃取或处理风格，不混入豆种、奶类型或附加风味。",
-      "values": [
-        "Drip Brew / 滴滤",
-        "Immersion Brew / 浸泡萃取",
-        "Cold Brew / 冷萃",
-        "Espresso Extraction / 意式浓缩萃取"
-      ],
       "dialogueExample": "我想要冷萃风格的即饮咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -931,12 +863,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "烘焙度",
       "cardinality": "single",
       "definition": "咖啡豆的烘焙深浅。",
-      "valueLevel": "全部值位于同一烘焙程度序列。",
-      "values": [
-        "Light Roast / 浅烘",
-        "Medium Roast / 中烘",
-        "Dark Roast / 深烘"
-      ],
       "dialogueExample": "想要一款中度烘焙的咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -953,12 +879,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "苦度",
       "cardinality": "single",
       "definition": "即饮咖啡入口时咖啡苦味的主导强度。",
-      "valueLevel": "全部值位于同一苦味强度序列，不把烘焙度或甜度直接当作苦度。",
-      "values": [
-        "Mild / 低苦",
-        "Moderate / 中等",
-        "Strong / 高苦"
-      ],
       "dialogueExample": "我不喜欢太苦，选低苦的即饮咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -975,13 +895,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "奶基底",
       "cardinality": "single",
       "definition": "即饮咖啡中是否含奶以及所用奶的主要类型。",
-      "valueLevel": "全部值描述咖啡中的奶基底，不混入拿铁、摩卡等商品名称。",
-      "values": [
-        "No Milk / 无奶",
-        "Dairy Milk / 动物乳",
-        "Plant-Based Milk / 植物奶",
-        "Mixed Milk Base / 混合奶基底"
-      ],
       "dialogueExample": "给我一款使用植物奶的即饮咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -998,16 +911,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡饮品类型",
       "cardinality": "single",
       "definition": "即饮咖啡成品在咖啡、奶和泡沫等构成关系上对应的主要饮品类型。",
-      "valueLevel": "全部值是消费者可直接识别的成品咖啡饮品类型；冷萃归 brew_style，冰饮或热饮归 serving_temperature，香草或焦糖等附加味归 flavor。",
-      "values": [
-        "Black Coffee / 黑咖啡",
-        "Americano / 美式咖啡",
-        "Latte / 拿铁",
-        "Cappuccino / 卡布奇诺",
-        "Mocha / 摩卡",
-        "Macchiato / 玛奇朵",
-        "Espresso / 浓缩咖啡"
-      ],
       "dialogueExample": "我想要一款即饮卡布奇诺，不要普通黑咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -1024,12 +927,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡豆种类",
       "cardinality": "multi_max_2",
       "definition": "制作即饮咖啡基底所使用的主要咖啡豆种类。",
-      "valueLevel": "全部值是同一级别的咖啡豆种类；混合豆直接选择最多两个实际豆种，不新增与具体豆种重叠的 Blend 值。",
-      "values": [
-        "Arabica / 阿拉比卡",
-        "Robusta / 罗布斯塔",
-        "Liberica / 利比里卡"
-      ],
       "dialogueExample": "我想要使用阿拉比卡豆的瓶装咖啡。",
       "scopeId": "beverages.coffee",
       "scopeType": "subtype",
@@ -1046,12 +943,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1068,13 +959,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1091,13 +975,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1114,16 +991,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "瓶装茶饮除茶基底外最主要的命名风味。",
-      "valueLevel": "全部值是瓶装茶饮可独立识别的附加风味；不把红茶、绿茶等茶基底混入。",
-      "values": [
-        "Unflavored / 原味",
-        "Jasmine / 茉莉",
-        "Lemon / 柠檬",
-        "Peach / 桃",
-        "Honey / 蜂蜜",
-        "Berry / 浆果",
-        "Ginger / 姜"
-      ],
       "dialogueExample": "我比较喜欢桃子味的饮料。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1140,13 +1007,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖量",
       "cardinality": "single",
       "definition": "成品饮料按营养标示中每 100 mL 总糖含量划分的等级。",
-      "valueLevel": "全部值位于同一总糖含量序列；正式构池前须统一确定互斥的每 100 mL 数值阈值，不用主观甜感代替。",
-      "values": [
-        "No Sugar / 无糖",
-        "Low Sugar / 低糖",
-        "Moderate Sugar / 中等含糖",
-        "High Sugar / 高糖"
-      ],
       "dialogueExample": "我想要低糖饮料，不要高糖的。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1163,13 +1023,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡因水平",
       "cardinality": "single",
       "definition": "按每份咖啡因含量划分的等级。",
-      "valueLevel": "全部值基于统一的每份毫克阈值。",
-      "values": [
-        "Caffeine-Free / 无咖啡因",
-        "Low / 低",
-        "Moderate / 中",
-        "High / 高"
-      ],
       "dialogueExample": "晚上喝，必须是无咖啡因的。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1186,12 +1039,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用温度",
       "cardinality": "multi_max_2",
       "definition": "商品最自然的饮用温度。",
-      "valueLevel": "只使用温度使用方式，不混入储存温度。",
-      "values": [
-        "Hot / 热饮",
-        "Cold / 冷饮",
-        "Either / 冷热皆可"
-      ],
       "dialogueExample": "给我找一款适合冰着喝的。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1208,13 +1055,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜味来源",
       "cardinality": "multi_max_2",
       "definition": "饮料主要使用的甜味来源。",
-      "valueLevel": "全部值是甜味来源类别，不混入甜度等级。",
-      "values": [
-        "Unsweetened / 未加甜味剂",
-        "Sugar / 糖",
-        "Artificial Sweetener / 人工代糖",
-        "Plant-Based Sweetener / 植物代糖"
-      ],
       "dialogueExample": "可以有甜味，但不要人工代糖。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1231,14 +1071,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "茶类",
       "cardinality": "single",
       "definition": "茶饮的主要茶类身份。",
-      "valueLevel": "全部值是消费者识别的茶类。",
-      "values": [
-        "Black Tea / 红茶",
-        "Green Tea / 绿茶",
-        "Oolong / 乌龙茶",
-        "White Tea / 白茶",
-        "Herbal Tea / 草本茶"
-      ],
       "dialogueExample": "我想要清淡一点的绿茶。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1255,13 +1087,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "茶饮风格",
       "cardinality": "single",
       "definition": "瓶装茶饮面向消费者呈现的主导成品风格。",
-      "valueLevel": "全部值是成品茶饮风格，不重复表达具体茶基底或单一风味。",
-      "values": [
-        "Plain Brewed Tea / 清茶",
-        "Fruit Tea / 果味茶",
-        "Milk Tea / 奶茶",
-        "Spiced Tea / 香料茶"
-      ],
       "dialogueExample": "我想要一瓶清茶，不要奶茶。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1278,13 +1103,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "奶基底",
       "cardinality": "single",
       "definition": "瓶装茶饮中是否含奶以及所用奶的主要类型。",
-      "valueLevel": "全部值描述茶饮中的奶基底；非奶茶明确使用 No Milk。",
-      "values": [
-        "No Milk / 无奶",
-        "Dairy Milk / 动物乳",
-        "Plant-Based Milk / 植物奶",
-        "Mixed Milk Base / 混合奶基底"
-      ],
       "dialogueExample": "找一瓶植物奶做的奶茶。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1301,12 +1119,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "茶味浓度",
       "cardinality": "single",
       "definition": "瓶装茶饮中茶汤主体风味的明显浓淡。",
-      "valueLevel": "全部值位于同一茶味浓度序列，不把含糖量、咖啡因或茶类混入。",
-      "values": [
-        "Light / 清淡",
-        "Medium / 适中",
-        "Strong / 浓郁"
-      ],
       "dialogueExample": "我想喝茶味浓一点的瓶装茶。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1323,13 +1135,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "涩感程度",
       "cardinality": "single",
       "definition": "瓶装茶饮入口后由茶汤产生的收敛涩感强度。",
-      "valueLevel": "全部值位于同一涩感强度序列，不用酸味或苦味替代。",
-      "values": [
-        "None / 无涩感",
-        "Low / 低",
-        "Moderate / 中等",
-        "High / 高"
-      ],
       "dialogueExample": "我不喜欢涩口的茶饮。",
       "scopeId": "beverages.tea",
       "scopeType": "subtype",
@@ -1346,12 +1151,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1368,13 +1167,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1391,13 +1183,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1414,14 +1199,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "包装或配方中的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份，不混入 Sweet、Strong 等强度描述。",
-      "values": [
-        "Vanilla / 香草",
-        "Lemon / 柠檬",
-        "Peach / 桃子",
-        "Berry / 浆果",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "我比较喜欢桃子味的饮料。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1438,13 +1215,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖量",
       "cardinality": "single",
       "definition": "成品饮料按营养标示中每 100 mL 总糖含量划分的等级。",
-      "valueLevel": "全部值位于同一总糖含量序列；正式构池前须统一确定互斥的每 100 mL 数值阈值，不用主观甜感代替。",
-      "values": [
-        "No Sugar / 无糖",
-        "Low Sugar / 低糖",
-        "Moderate Sugar / 中等含糖",
-        "High Sugar / 高糖"
-      ],
       "dialogueExample": "我想要低糖饮料，不要高糖的。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1461,12 +1231,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用温度",
       "cardinality": "multi_max_2",
       "definition": "商品最自然的饮用温度。",
-      "valueLevel": "只使用温度使用方式，不混入储存温度。",
-      "values": [
-        "Hot / 热饮",
-        "Cold / 冷饮",
-        "Either / 冷热皆可"
-      ],
       "dialogueExample": "给我找一款适合冰着喝的。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1483,13 +1247,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜味来源",
       "cardinality": "multi_max_2",
       "definition": "饮料主要使用的甜味来源。",
-      "valueLevel": "全部值是甜味来源类别，不混入甜度等级。",
-      "values": [
-        "Unsweetened / 未加甜味剂",
-        "Sugar / 糖",
-        "Artificial Sweetener / 人工代糖",
-        "Plant-Based Sweetener / 植物代糖"
-      ],
       "dialogueExample": "可以有甜味，但不要人工代糖。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1506,14 +1263,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "水果基底",
       "cardinality": "multi_max_2",
       "definition": "果汁的主要水果来源。",
-      "valueLevel": "全部值是具体水果，不混入 Tropical、Breakfast 等营销概念。",
-      "values": [
-        "Orange / 橙子",
-        "Apple / 苹果",
-        "Grape / 葡萄",
-        "Pineapple / 菠萝",
-        "Cranberry / 蔓越莓"
-      ],
       "dialogueExample": "我更喜欢苹果和蔓越莓果汁。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1530,12 +1279,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "果汁含量",
       "cardinality": "single",
       "definition": "成品中真实果蔬汁所占比例档位。",
-      "valueLevel": "全部值基于果汁百分比区间。",
-      "values": [
-        "100% Juice / 纯果汁",
-        "High Juice Content / 高果汁含量",
-        "Juice Drink / 果汁饮料"
-      ],
       "dialogueExample": "优先百分之百果汁。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1552,12 +1295,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "果肉程度",
       "cardinality": "single",
       "definition": "成品中可感知果肉的多少。",
-      "valueLevel": "全部值位于同一果肉含量序列。",
-      "values": [
-        "No Pulp / 无果肉",
-        "Some Pulp / 少量果肉",
-        "High Pulp / 多果肉"
-      ],
       "dialogueExample": "不要果肉太多的。",
       "scopeId": "beverages.juice",
       "scopeType": "subtype",
@@ -1574,12 +1311,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1596,13 +1327,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1619,13 +1343,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1642,14 +1359,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "包装或配方中的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份，不混入 Sweet、Strong 等强度描述。",
-      "values": [
-        "Vanilla / 香草",
-        "Lemon / 柠檬",
-        "Peach / 桃子",
-        "Berry / 浆果",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "我比较喜欢桃子味的饮料。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1666,13 +1375,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖量",
       "cardinality": "single",
       "definition": "成品饮料按营养标示中每 100 mL 总糖含量划分的等级。",
-      "valueLevel": "全部值位于同一总糖含量序列；正式构池前须统一确定互斥的每 100 mL 数值阈值，不用主观甜感代替。",
-      "values": [
-        "No Sugar / 无糖",
-        "Low Sugar / 低糖",
-        "Moderate Sugar / 中等含糖",
-        "High Sugar / 高糖"
-      ],
       "dialogueExample": "我想要低糖饮料，不要高糖的。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1689,13 +1391,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咖啡因水平",
       "cardinality": "single",
       "definition": "按每份咖啡因含量划分的等级。",
-      "valueLevel": "全部值基于统一的每份毫克阈值。",
-      "values": [
-        "Caffeine-Free / 无咖啡因",
-        "Low / 低",
-        "Moderate / 中",
-        "High / 高"
-      ],
       "dialogueExample": "晚上喝，必须是无咖啡因的。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1712,12 +1407,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "碳酸程度",
       "cardinality": "single",
       "definition": "碳酸饮料开封时可感知的气泡强度。",
-      "valueLevel": "全部值位于同一气泡强度序列；Still 与碳酸饮料 subtype 冲突，已删除。",
-      "values": [
-        "Lightly Carbonated / 微气泡",
-        "Regular Carbonation / 标准气泡",
-        "Highly Carbonated / 强气泡"
-      ],
       "dialogueExample": "想喝有气泡的，但不要太冲。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1734,13 +1423,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜味来源",
       "cardinality": "multi_max_2",
       "definition": "饮料主要使用的甜味来源。",
-      "valueLevel": "全部值是甜味来源类别，不混入甜度等级。",
-      "values": [
-        "Unsweetened / 未加甜味剂",
-        "Sugar / 糖",
-        "Artificial Sweetener / 人工代糖",
-        "Plant-Based Sweetener / 植物代糖"
-      ],
       "dialogueExample": "可以有甜味，但不要人工代糖。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1757,14 +1439,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "碳酸饮料类型",
       "cardinality": "single",
       "definition": "消费者通常识别的碳酸饮料类型。",
-      "valueLevel": "全部值是同级饮料类型，不混入具体品牌。",
-      "values": [
-        "Cola / 可乐",
-        "Lemon-Lime Soda / 柠檬青柠汽水",
-        "Root Beer / 根汁汽水",
-        "Ginger Ale / 姜汁汽水",
-        "Cream Soda / 奶油汽水"
-      ],
       "dialogueExample": "不要可乐，想试试姜汁汽水。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1781,12 +1455,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酸感程度",
       "cardinality": "single",
       "definition": "碳酸饮料入口时由酸味配方产生的主导酸感强度。",
-      "valueLevel": "全部值位于同一酸感强度序列，不把柠檬等具体风味混入。",
-      "values": [
-        "Low / 低",
-        "Moderate / 中等",
-        "High / 高"
-      ],
       "dialogueExample": "我想要酸感明显一点的汽水。",
       "scopeId": "beverages.carbonated_drinks",
       "scopeType": "subtype",
@@ -1803,12 +1471,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1825,13 +1487,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1848,13 +1503,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1871,14 +1519,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "包装或配方中的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份，不混入 Sweet、Strong 等强度描述。",
-      "values": [
-        "Vanilla / 香草",
-        "Lemon / 柠檬",
-        "Peach / 桃子",
-        "Berry / 浆果",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "我比较喜欢桃子味的饮料。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1895,13 +1535,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖量",
       "cardinality": "single",
       "definition": "成品饮料按营养标示中每 100 mL 总糖含量划分的等级。",
-      "valueLevel": "全部值位于同一总糖含量序列；正式构池前须统一确定互斥的每 100 mL 数值阈值，不用主观甜感代替。",
-      "values": [
-        "No Sugar / 无糖",
-        "Low Sugar / 低糖",
-        "Moderate Sugar / 中等含糖",
-        "High Sugar / 高糖"
-      ],
       "dialogueExample": "我想要低糖饮料，不要高糖的。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1918,12 +1551,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用温度",
       "cardinality": "multi_max_2",
       "definition": "商品最自然的饮用温度。",
-      "valueLevel": "只使用温度使用方式，不混入储存温度。",
-      "values": [
-        "Hot / 热饮",
-        "Cold / 冷饮",
-        "Either / 冷热皆可"
-      ],
       "dialogueExample": "给我找一款适合冰着喝的。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1940,13 +1567,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜味来源",
       "cardinality": "multi_max_2",
       "definition": "饮料主要使用的甜味来源。",
-      "valueLevel": "全部值是甜味来源类别，不混入甜度等级。",
-      "values": [
-        "Unsweetened / 未加甜味剂",
-        "Sugar / 糖",
-        "Artificial Sweetener / 人工代糖",
-        "Plant-Based Sweetener / 植物代糖"
-      ],
       "dialogueExample": "可以有甜味，但不要人工代糖。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1963,13 +1583,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "电解质构成",
       "cardinality": "multi_max_3",
       "definition": "配方明确提供的主要电解质。",
-      "valueLevel": "全部值是具体电解质，不混入维生素或功能口号。",
-      "values": [
-        "Sodium / 钠",
-        "Potassium / 钾",
-        "Magnesium / 镁",
-        "Calcium / 钙"
-      ],
       "dialogueExample": "运动后想补充钠和钾。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -1986,12 +1599,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要功能目标",
       "cardinality": "multi_max_2",
       "definition": "运动饮料明确面向的主要使用目标。",
-      "valueLevel": "全部值是运动补给目标，不混入成分名称。",
-      "values": [
-        "Hydration / 补水",
-        "Endurance / 耐力支持",
-        "Recovery / 恢复"
-      ],
       "dialogueExample": "长距离运动时想要偏耐力补给的。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -2008,12 +1615,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "钠含量等级",
       "cardinality": "single",
       "definition": "运动饮料按营养标示中每 100 mL 钠含量划分的等级。",
-      "valueLevel": "全部值位于同一钠含量序列；正式构池前须给出互斥的每 100 mL 数值阈值。",
-      "values": [
-        "Low / 低",
-        "Moderate / 中等",
-        "High / 高"
-      ],
       "dialogueExample": "长时间运动后我想选钠含量高一些的。",
       "scopeId": "beverages.sports_drinks",
       "scopeType": "subtype",
@@ -2030,12 +1631,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2052,13 +1647,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2075,13 +1663,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2098,12 +1679,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒精强度",
       "cardinality": "single",
       "definition": "依据 ABV 划分的酒精强度。",
-      "valueLevel": "全部值使用统一 ABV 阈值。",
-      "values": [
-        "Low / 低度",
-        "Moderate / 中度",
-        "High / 高度"
-      ],
       "dialogueExample": "今晚想喝低度一点的。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2120,13 +1695,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "酒体从干型到甜型的感知甜度。",
-      "valueLevel": "全部值位于同一干甜序列。",
-      "values": [
-        "Dry / 干型",
-        "Off-Dry / 半干",
-        "Medium Sweet / 半甜",
-        "Sweet / 甜型"
-      ],
       "dialogueExample": "我不太喜欢甜酒，尽量干一点。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2143,12 +1711,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒体",
       "cardinality": "single",
       "definition": "入口的整体厚重程度。",
-      "valueLevel": "全部值位于同一酒体序列。",
-      "values": [
-        "Light-Bodied / 轻盈",
-        "Medium-Bodied / 中等",
-        "Full-Bodied / 饱满"
-      ],
       "dialogueExample": "想要酒体轻一点的。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2165,15 +1727,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味调性",
       "cardinality": "multi_max_3",
       "definition": "酒中可感知的主要感官调性。",
-      "valueLevel": "全部值是感官风味调性，不混入原料、酒种或甜度。",
-      "values": [
-        "Fruity / 果香",
-        "Floral / 花香",
-        "Herbal / 草本",
-        "Spicy / 辛香",
-        "Smoky / 烟熏",
-        "Oaky / 橡木"
-      ],
       "dialogueExample": "我喜欢带果香、不要太烟熏的。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2190,18 +1743,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "啤酒风格类型",
       "cardinality": "single",
       "definition": "消费者通常用于识别成品啤酒的主要风格类型。",
-      "valueLevel": "全部值是常见成品啤酒风格；不把品牌或仅表示颜色的白啤、黑啤作为独立值。",
-      "values": [
-        "Pale Lager / 淡色拉格",
-        "Amber Lager / 琥珀拉格",
-        "Dark Lager / 深色拉格",
-        "Pale Ale / 淡色艾尔",
-        "India Pale Ale / 印度淡色艾尔",
-        "Wheat Beer / 小麦啤酒",
-        "Stout / 世涛",
-        "Porter / 波特",
-        "Sour Beer / 酸啤酒"
-      ],
       "dialogueExample": "我比较喜欢世涛，不太想要拉格。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2218,12 +1759,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "苦度",
       "cardinality": "single",
       "definition": "依据 IBU 或明确描述划分的苦味等级。",
-      "valueLevel": "全部值位于同一苦度序列。",
-      "values": [
-        "Low / 低苦",
-        "Moderate / 中等",
-        "High / 高苦"
-      ],
       "dialogueExample": "不要太苦的啤酒。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2240,14 +1775,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒花调性",
       "cardinality": "multi_max_2",
       "definition": "啤酒花带来的主要香气调性。",
-      "valueLevel": "全部值是酒花香气调性。",
-      "values": [
-        "Citrus / 柑橘",
-        "Floral / 花香",
-        "Pine / 松针",
-        "Tropical / 热带水果",
-        "Earthy / 泥土"
-      ],
       "dialogueExample": "想要柑橘酒花香明显的。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2264,14 +1791,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒液颜色",
       "cardinality": "single",
       "definition": "啤酒酒液本身最主要的视觉颜色等级。",
-      "valueLevel": "全部值位于同一颜色深浅序列，不用白啤或黑啤等模糊商品称呼替代。",
-      "values": [
-        "Pale / 浅色",
-        "Golden / 金色",
-        "Amber / 琥珀色",
-        "Brown / 棕色",
-        "Dark / 深色"
-      ],
       "dialogueExample": "我想试试颜色较深的啤酒。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2288,16 +1807,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "麦芽调性",
       "cardinality": "multi_max_2",
       "definition": "成品啤酒中由麦芽贡献的最主要香气或味道调性。",
-      "valueLevel": "全部值是同一级别的麦芽感官调性，不混入酒花、发酵水果香或啤酒风格。",
-      "values": [
-        "Grainy / 谷物",
-        "Bready / 面包",
-        "Biscuit / 饼干",
-        "Toasty / 烘烤",
-        "Caramel / 焦糖",
-        "Chocolate / 巧克力",
-        "Roasted / 烘焙焦香"
-      ],
       "dialogueExample": "我喜欢有烘烤麦芽和焦糖调性的啤酒。",
       "scopeId": "alcoholic_drinks.beer",
       "scopeType": "subtype",
@@ -2314,12 +1823,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2336,13 +1839,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2359,13 +1855,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2382,12 +1871,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒精强度",
       "cardinality": "single",
       "definition": "依据 ABV 划分的酒精强度。",
-      "valueLevel": "全部值使用统一 ABV 阈值。",
-      "values": [
-        "Low / 低度",
-        "Moderate / 中度",
-        "High / 高度"
-      ],
       "dialogueExample": "今晚想喝低度一点的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2404,13 +1887,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "酒体从干型到甜型的感知甜度。",
-      "valueLevel": "全部值位于同一干甜序列。",
-      "values": [
-        "Dry / 干型",
-        "Off-Dry / 半干",
-        "Medium Sweet / 半甜",
-        "Sweet / 甜型"
-      ],
       "dialogueExample": "我不太喜欢甜酒，尽量干一点。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2427,12 +1903,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒体",
       "cardinality": "single",
       "definition": "入口的整体厚重程度。",
-      "valueLevel": "全部值位于同一酒体序列。",
-      "values": [
-        "Light-Bodied / 轻盈",
-        "Medium-Bodied / 中等",
-        "Full-Bodied / 饱满"
-      ],
       "dialogueExample": "想要酒体轻一点的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2449,15 +1919,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味调性",
       "cardinality": "multi_max_3",
       "definition": "酒中可感知的主要感官调性。",
-      "valueLevel": "全部值是感官风味调性，不混入原料、酒种或甜度。",
-      "values": [
-        "Fruity / 果香",
-        "Floral / 花香",
-        "Herbal / 草本",
-        "Spicy / 辛香",
-        "Smoky / 烟熏",
-        "Oaky / 橡木"
-      ],
       "dialogueExample": "我喜欢带果香、不要太烟熏的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2474,13 +1935,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用方式",
       "cardinality": "multi_max_2",
       "definition": "该酒最自然的饮用温度或方式。",
-      "valueLevel": "全部值是饮用方式，不混入鸡尾酒名称。",
-      "values": [
-        "Chilled / 冰镇",
-        "Room Temperature / 室温",
-        "Over Ice / 加冰",
-        "Mixed / 调饮"
-      ],
       "dialogueExample": "想找一款适合加冰直接喝的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2497,14 +1951,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "葡萄酒类型",
       "cardinality": "single",
       "definition": "按成品风格划分的葡萄酒类型。",
-      "valueLevel": "全部值是同级成品酒风格。",
-      "values": [
-        "Red Wine / 红葡萄酒",
-        "White Wine / 白葡萄酒",
-        "Rose Wine / 桃红葡萄酒",
-        "Sparkling Wine / 起泡酒",
-        "Dessert Wine / 甜点酒"
-      ],
       "dialogueExample": "这顿饭更想配白葡萄酒。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2521,13 +1967,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "葡萄品种",
       "cardinality": "multi_max_2",
       "definition": "酿酒使用的主要葡萄品种。",
-      "valueLevel": "全部值是具体葡萄品种。",
-      "values": [
-        "Cabernet Sauvignon / 赤霞珠",
-        "Pinot Noir / 黑皮诺",
-        "Chardonnay / 霞多丽",
-        "Riesling / 雷司令"
-      ],
       "dialogueExample": "我通常更喜欢黑皮诺。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2544,12 +1983,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "单宁程度",
       "cardinality": "single",
       "definition": "葡萄酒的收敛感等级。",
-      "valueLevel": "全部值位于同一单宁序列。",
-      "values": [
-        "Low / 低",
-        "Moderate / 中",
-        "High / 高"
-      ],
       "dialogueExample": "我不喜欢单宁太重的红酒。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2566,12 +1999,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酸度",
       "cardinality": "single",
       "definition": "葡萄酒的感知酸度。",
-      "valueLevel": "全部值位于同一酸度序列。",
-      "values": [
-        "Low / 低",
-        "Moderate / 中",
-        "High / 高"
-      ],
       "dialogueExample": "想要清爽、酸度高一些的。",
       "scopeId": "alcoholic_drinks.wine",
       "scopeType": "subtype",
@@ -2588,12 +2015,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2610,13 +2031,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2633,13 +2047,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2656,12 +2063,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒精强度",
       "cardinality": "single",
       "definition": "依据 ABV 划分的酒精强度。",
-      "valueLevel": "全部值使用统一 ABV 阈值。",
-      "values": [
-        "Low / 低度",
-        "Moderate / 中度",
-        "High / 高度"
-      ],
       "dialogueExample": "今晚想喝低度一点的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2678,13 +2079,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "酒体从干型到甜型的感知甜度。",
-      "valueLevel": "全部值位于同一干甜序列。",
-      "values": [
-        "Dry / 干型",
-        "Off-Dry / 半干",
-        "Medium Sweet / 半甜",
-        "Sweet / 甜型"
-      ],
       "dialogueExample": "我不太喜欢甜酒，尽量干一点。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2701,12 +2095,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒体",
       "cardinality": "single",
       "definition": "入口的整体厚重程度。",
-      "valueLevel": "全部值位于同一酒体序列。",
-      "values": [
-        "Light-Bodied / 轻盈",
-        "Medium-Bodied / 中等",
-        "Full-Bodied / 饱满"
-      ],
       "dialogueExample": "想要酒体轻一点的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2723,15 +2111,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味调性",
       "cardinality": "multi_max_3",
       "definition": "酒中可感知的主要感官调性。",
-      "valueLevel": "全部值是感官风味调性，不混入原料、酒种或甜度。",
-      "values": [
-        "Fruity / 果香",
-        "Floral / 花香",
-        "Herbal / 草本",
-        "Spicy / 辛香",
-        "Smoky / 烟熏",
-        "Oaky / 橡木"
-      ],
       "dialogueExample": "我喜欢带果香、不要太烟熏的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2748,13 +2127,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "常见饮用方式",
       "cardinality": "multi_max_2",
       "definition": "该酒最自然的饮用温度或方式。",
-      "valueLevel": "全部值是饮用方式，不混入鸡尾酒名称。",
-      "values": [
-        "Chilled / 冰镇",
-        "Room Temperature / 室温",
-        "Over Ice / 加冰",
-        "Mixed / 调饮"
-      ],
       "dialogueExample": "想找一款适合加冰直接喝的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2771,15 +2143,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "烈酒类型",
       "cardinality": "single",
       "definition": "蒸馏酒的主要商品类型。",
-      "valueLevel": "全部值是同级蒸馏酒类型。",
-      "values": [
-        "Whiskey / 威士忌",
-        "Vodka / 伏特加",
-        "Gin / 金酒",
-        "Rum / 朗姆酒",
-        "Tequila / 龙舌兰",
-        "Brandy / 白兰地"
-      ],
       "dialogueExample": "这次想选一瓶金酒。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2796,14 +2159,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "蒸馏原料",
       "cardinality": "multi_max_2",
       "definition": "用于发酵和蒸馏的主要原料。",
-      "valueLevel": "全部值是原料家族。",
-      "values": [
-        "Grain / 谷物",
-        "Sugarcane / 甘蔗",
-        "Agave / 龙舌兰",
-        "Grape / 葡萄",
-        "Fruit / 水果"
-      ],
       "dialogueExample": "更想试试甘蔗原料的烈酒。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2820,13 +2175,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "陈酿类别",
       "cardinality": "single",
       "definition": "烈酒是否陈酿以及主要陈酿阶段。",
-      "valueLevel": "全部值是陈酿状态，不混入具体桶材或年份。",
-      "values": [
-        "Unaged / 未陈酿",
-        "Lightly Aged / 短期陈酿",
-        "Aged / 陈酿",
-        "Long-Aged / 长期陈酿"
-      ],
       "dialogueExample": "我想要有一定陈酿感的。",
       "scopeId": "alcoholic_drinks.spirits",
       "scopeType": "subtype",
@@ -2843,12 +2191,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2865,13 +2207,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2888,13 +2223,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2911,14 +2239,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "零食明确使用的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Barbecue / 烧烤",
-        "Cheese / 芝士",
-        "Sea Salt / 海盐",
-        "Garlic / 大蒜",
-        "Teriyaki / 照烧"
-      ],
       "dialogueExample": "想吃烧烤味或者芝士味的。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2935,14 +2255,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "零食最明显的基本味觉方向。",
-      "valueLevel": "全部值是基本味型，不混入具体香料或命名风味。",
-      "values": [
-        "Salty / 咸",
-        "Sweet / 甜",
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sour / 酸"
-      ],
       "dialogueExample": "我想吃咸辣的，不要甜口。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2959,14 +2271,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "食用时最明显的物理口感。",
-      "valueLevel": "全部值是口感形容，不混入厚度、切法或含水率。",
-      "values": [
-        "Crispy / 酥脆",
-        "Crunchy / 松脆",
-        "Chewy / 耐嚼",
-        "Tender / 软嫩",
-        "Crumbly / 易碎"
-      ],
       "dialogueExample": "我想吃脆一点的零食。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -2983,13 +2287,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味强度",
       "cardinality": "single",
       "definition": "表面或配方调味的明显程度。",
-      "valueLevel": "全部值位于同一调味强度序列。",
-      "values": [
-        "Unseasoned / 未调味",
-        "Light / 清淡",
-        "Moderate / 中等",
-        "Bold / 浓重"
-      ],
       "dialogueExample": "想要调味轻一点的。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -3006,15 +2303,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要加工方式",
       "cardinality": "multi_max_2",
       "definition": "形成零食主要质地的加工方法。",
-      "valueLevel": "全部值是食品加工方法。",
-      "values": [
-        "Fried / 油炸",
-        "Baked / 烘烤",
-        "Roasted / 烘焙",
-        "Air-Dried / 风干",
-        "Smoked / 烟熏",
-        "Popped / 膨爆"
-      ],
       "dialogueExample": "优先烘烤的，不要油炸。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -3031,15 +2319,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "脆片基础原料",
       "cardinality": "single",
       "definition": "构成脆片主体的主要原料。",
-      "valueLevel": "全部值是主体原料家族。",
-      "values": [
-        "Potato / 马铃薯",
-        "Corn / 玉米",
-        "Plantain / 大蕉",
-        "Vegetable / 蔬菜",
-        "Legume / 豆类",
-        "Grain / 谷物"
-      ],
       "dialogueExample": "不要土豆片，想试试大蕉脆片。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -3056,14 +2335,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "脆片形态",
       "cardinality": "single",
       "definition": "单片脆片的主要成型外观。",
-      "valueLevel": "全部值是脆片成品形态，不混入加工方法。",
-      "values": [
-        "Flat / 平片",
-        "Ridged / 波纹片",
-        "Wavy / 宽波浪片",
-        "Strips / 条形",
-        "Puffed / 膨化形"
-      ],
       "dialogueExample": "我更喜欢波纹的。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -3080,12 +2351,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "厚薄",
       "cardinality": "single",
       "definition": "单片脆片的相对厚薄。",
-      "valueLevel": "全部值位于 Chips 自己的厚度序列。",
-      "values": [
-        "Thin / 薄",
-        "Regular / 常规",
-        "Thick / 厚"
-      ],
       "dialogueExample": "我喜欢厚一点、咬起来更实的。",
       "scopeId": "snacks.chips",
       "scopeType": "subtype",
@@ -3102,12 +2367,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3124,13 +2383,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3147,13 +2399,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3170,14 +2415,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "零食明确使用的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Barbecue / 烧烤",
-        "Cheese / 芝士",
-        "Sea Salt / 海盐",
-        "Garlic / 大蒜",
-        "Teriyaki / 照烧"
-      ],
       "dialogueExample": "想吃烧烤味或者芝士味的。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3194,14 +2431,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "零食最明显的基本味觉方向。",
-      "valueLevel": "全部值是基本味型，不混入具体香料或命名风味。",
-      "values": [
-        "Salty / 咸",
-        "Sweet / 甜",
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sour / 酸"
-      ],
       "dialogueExample": "我想吃咸辣的，不要甜口。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3218,14 +2447,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "食用时最明显的物理口感。",
-      "valueLevel": "全部值是口感形容，不混入厚度、切法或含水率。",
-      "values": [
-        "Crispy / 酥脆",
-        "Crunchy / 松脆",
-        "Chewy / 耐嚼",
-        "Tender / 软嫩",
-        "Crumbly / 易碎"
-      ],
       "dialogueExample": "我想吃脆一点的零食。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3242,13 +2463,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味强度",
       "cardinality": "single",
       "definition": "表面或配方调味的明显程度。",
-      "valueLevel": "全部值位于同一调味强度序列。",
-      "values": [
-        "Unseasoned / 未调味",
-        "Light / 清淡",
-        "Moderate / 中等",
-        "Bold / 浓重"
-      ],
       "dialogueExample": "想要调味轻一点的。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3265,15 +2479,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要加工方式",
       "cardinality": "multi_max_2",
       "definition": "形成零食主要质地的加工方法。",
-      "valueLevel": "全部值是食品加工方法。",
-      "values": [
-        "Fried / 油炸",
-        "Baked / 烘烤",
-        "Roasted / 烘焙",
-        "Air-Dried / 风干",
-        "Smoked / 烟熏",
-        "Popped / 膨爆"
-      ],
       "dialogueExample": "优先烘烤的，不要油炸。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3290,13 +2495,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "饼干类型",
       "cardinality": "single",
       "definition": "消费者识别的主要饼干结构类型。",
-      "valueLevel": "全部值是商品类型，不使用口味词。",
-      "values": [
-        "Cookie / 甜饼干",
-        "Cracker / 咸味脆饼",
-        "Shortbread / 黄油酥饼",
-        "Wafer / 威化饼"
-      ],
       "dialogueExample": "想要威化饼，不要普通曲奇。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3313,14 +2511,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要谷物原料",
       "cardinality": "multi_max_2",
       "definition": "饼干面体的主要谷物或替代粉来源。",
-      "valueLevel": "全部值是面体基础原料。",
-      "values": [
-        "Wheat / 小麦",
-        "Oat / 燕麦",
-        "Rice / 大米",
-        "Corn / 玉米",
-        "Almond / 杏仁"
-      ],
       "dialogueExample": "我想吃燕麦做的饼干。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3337,13 +2527,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "饼干结构",
       "cardinality": "single",
       "definition": "饼干本体的组合结构。",
-      "valueLevel": "全部值是成品结构。",
-      "values": [
-        "Plain / 单层",
-        "Sandwich / 夹心",
-        "Filled / 内馅",
-        "Wafer-Layered / 威化分层"
-      ],
       "dialogueExample": "想要夹心的。",
       "scopeId": "snacks.biscuits",
       "scopeType": "subtype",
@@ -3360,12 +2543,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3382,13 +2559,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3405,13 +2575,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3428,14 +2591,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "零食明确使用的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Barbecue / 烧烤",
-        "Cheese / 芝士",
-        "Sea Salt / 海盐",
-        "Garlic / 大蒜",
-        "Teriyaki / 照烧"
-      ],
       "dialogueExample": "想吃烧烤味或者芝士味的。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3452,14 +2607,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "零食最明显的基本味觉方向。",
-      "valueLevel": "全部值是基本味型，不混入具体香料或命名风味。",
-      "values": [
-        "Salty / 咸",
-        "Sweet / 甜",
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sour / 酸"
-      ],
       "dialogueExample": "我想吃咸辣的，不要甜口。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3476,14 +2623,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "食用时最明显的物理口感。",
-      "valueLevel": "全部值是口感形容，不混入厚度、切法或含水率。",
-      "values": [
-        "Crispy / 酥脆",
-        "Crunchy / 松脆",
-        "Chewy / 耐嚼",
-        "Tender / 软嫩",
-        "Crumbly / 易碎"
-      ],
       "dialogueExample": "我想吃脆一点的零食。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3500,13 +2639,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味强度",
       "cardinality": "single",
       "definition": "表面或配方调味的明显程度。",
-      "valueLevel": "全部值位于同一调味强度序列。",
-      "values": [
-        "Unseasoned / 未调味",
-        "Light / 清淡",
-        "Moderate / 中等",
-        "Bold / 浓重"
-      ],
       "dialogueExample": "想要调味轻一点的。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3523,15 +2655,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要加工方式",
       "cardinality": "multi_max_2",
       "definition": "形成零食主要质地的加工方法。",
-      "valueLevel": "全部值是食品加工方法。",
-      "values": [
-        "Fried / 油炸",
-        "Baked / 烘烤",
-        "Roasted / 烘焙",
-        "Air-Dried / 风干",
-        "Smoked / 烟熏",
-        "Popped / 膨爆"
-      ],
       "dialogueExample": "优先烘烤的，不要油炸。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3548,15 +2671,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "坚果种类",
       "cardinality": "multi_max_3",
       "definition": "零食中的主要坚果种类。",
-      "valueLevel": "全部值是具体坚果类别。",
-      "values": [
-        "Almond / 杏仁",
-        "Cashew / 腰果",
-        "Peanut / 花生",
-        "Pistachio / 开心果",
-        "Pecan / 碧根果",
-        "Walnut / 核桃"
-      ],
       "dialogueExample": "想买腰果或者开心果。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3573,11 +2687,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "混合形式",
       "cardinality": "single",
       "definition": "包装中是单一坚果还是多种坚果组合。",
-      "valueLevel": "全部值描述纯坚果商品的组合结构。",
-      "values": [
-        "Single Nut / 单一种类",
-        "Mixed Nuts / 混合坚果"
-      ],
       "dialogueExample": "想要混合坚果，不要单一种类。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3594,11 +2703,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "带壳状态",
       "cardinality": "single",
       "definition": "坚果成品出售时是否保留需要消费者剥除的外壳。",
-      "valueLevel": "两个值互斥，不把薄皮或调味包衣当作外壳。",
-      "values": [
-        "Shelled / 去壳",
-        "In-Shell / 带壳"
-      ],
       "dialogueExample": "我想买已经去壳、打开就能吃的坚果。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3615,15 +2719,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "营养功能",
       "cardinality": "multi_max_3",
       "definition": "坚果包装或商品正文明确声明的主要营养特点；不记录未经商品证据支持的健康结果。",
-      "valueLevel": "全部值是可由包装营养声称直接核验的同级标签；补脑、护心或治疗性功效不得推断。No Highlighted Nutrition Claim 不得与具体声称并存。",
-      "values": [
-        "No Highlighted Nutrition Claim / 无明确营养声称",
-        "High Protein / 高蛋白",
-        "High Fiber / 高膳食纤维",
-        "Omega-3 Source / Omega-3 来源",
-        "Low Sodium / 低钠",
-        "No Added Sugar / 无添加糖"
-      ],
       "dialogueExample": "我想找明确标注高蛋白或高膳食纤维的坚果。",
       "scopeId": "snacks.nuts",
       "scopeType": "subtype",
@@ -3640,12 +2735,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3662,13 +2751,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3685,13 +2767,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3708,14 +2783,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "零食明确使用的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Barbecue / 烧烤",
-        "Cheese / 芝士",
-        "Sea Salt / 海盐",
-        "Garlic / 大蒜",
-        "Teriyaki / 照烧"
-      ],
       "dialogueExample": "想吃烧烤味或者芝士味的。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3732,14 +2799,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "零食最明显的基本味觉方向。",
-      "valueLevel": "全部值是基本味型，不混入具体香料或命名风味。",
-      "values": [
-        "Salty / 咸",
-        "Sweet / 甜",
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sour / 酸"
-      ],
       "dialogueExample": "我想吃咸辣的，不要甜口。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3756,14 +2815,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "食用时最明显的物理口感。",
-      "valueLevel": "全部值是口感形容，不混入厚度、切法或含水率。",
-      "values": [
-        "Crispy / 酥脆",
-        "Crunchy / 松脆",
-        "Chewy / 耐嚼",
-        "Tender / 软嫩",
-        "Crumbly / 易碎"
-      ],
       "dialogueExample": "我想吃脆一点的零食。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3780,13 +2831,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味强度",
       "cardinality": "single",
       "definition": "表面或配方调味的明显程度。",
-      "valueLevel": "全部值位于同一调味强度序列。",
-      "values": [
-        "Unseasoned / 未调味",
-        "Light / 清淡",
-        "Moderate / 中等",
-        "Bold / 浓重"
-      ],
       "dialogueExample": "想要调味轻一点的。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3803,15 +2847,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要加工方式",
       "cardinality": "multi_max_2",
       "definition": "形成零食主要质地的加工方法。",
-      "valueLevel": "全部值是食品加工方法。",
-      "values": [
-        "Fried / 油炸",
-        "Baked / 烘烤",
-        "Roasted / 烘焙",
-        "Air-Dried / 风干",
-        "Smoked / 烟熏",
-        "Popped / 膨爆"
-      ],
       "dialogueExample": "优先烘烤的，不要油炸。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3828,14 +2863,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "肉类来源",
       "cardinality": "multi_max_2",
       "definition": "肉干主体使用的动物肉类。",
-      "valueLevel": "全部值是具体肉类来源。",
-      "values": [
-        "Beef / 牛肉",
-        "Turkey / 火鸡肉",
-        "Pork / 猪肉",
-        "Venison / 鹿肉",
-        "Bison / 野牛肉"
-      ],
       "dialogueExample": "我想要牛肉或者火鸡肉干。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3852,13 +2879,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "切制形态",
       "cardinality": "single",
       "definition": "肉干成品的主要外形。",
-      "valueLevel": "全部值是肉干切制形态。",
-      "values": [
-        "Strips / 条状",
-        "Sticks / 棒状",
-        "Bites / 小块",
-        "Shredded / 肉丝"
-      ],
       "dialogueExample": "想要小块的，比较方便分享。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3875,12 +2895,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "干湿程度",
       "cardinality": "single",
       "definition": "肉干从干硬到软嫩的含水口感。",
-      "valueLevel": "全部值位于 Jerky 自己的干湿序列。",
-      "values": [
-        "Dry / 偏干",
-        "Classic / 适中",
-        "Moist / 偏湿软"
-      ],
       "dialogueExample": "牙口一般，想要软嫩一点的。",
       "scopeId": "snacks.jerky",
       "scopeType": "subtype",
@@ -3897,12 +2911,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -3919,13 +2927,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -3942,13 +2943,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -3965,14 +2959,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "零食明确使用的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Barbecue / 烧烤",
-        "Cheese / 芝士",
-        "Sea Salt / 海盐",
-        "Garlic / 大蒜",
-        "Teriyaki / 照烧"
-      ],
       "dialogueExample": "想吃烧烤味或者芝士味的。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -3989,14 +2975,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "零食最明显的基本味觉方向。",
-      "valueLevel": "全部值是基本味型，不混入具体香料或命名风味。",
-      "values": [
-        "Salty / 咸",
-        "Sweet / 甜",
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sour / 酸"
-      ],
       "dialogueExample": "我想吃咸辣的，不要甜口。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4013,14 +2991,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "食用时最明显的物理口感。",
-      "valueLevel": "全部值是口感形容，不混入厚度、切法或含水率。",
-      "values": [
-        "Crispy / 酥脆",
-        "Crunchy / 松脆",
-        "Chewy / 耐嚼",
-        "Tender / 软嫩",
-        "Crumbly / 易碎"
-      ],
       "dialogueExample": "我想吃脆一点的零食。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4037,13 +3007,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味强度",
       "cardinality": "single",
       "definition": "表面或配方调味的明显程度。",
-      "valueLevel": "全部值位于同一调味强度序列。",
-      "values": [
-        "Unseasoned / 未调味",
-        "Light / 清淡",
-        "Moderate / 中等",
-        "Bold / 浓重"
-      ],
       "dialogueExample": "想要调味轻一点的。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4060,13 +3023,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "爆制方式",
       "cardinality": "single",
       "definition": "爆米花成品或包装明确采用的主要爆制方式。",
-      "valueLevel": "全部值是爆米花的爆制方式，不混入包衣、调味或商品准备形态。",
-      "values": [
-        "Air-Popped / 空气爆制",
-        "Oil-Popped / 油爆",
-        "Kettle-Popped / 锅爆",
-        "Microwave-Popped / 微波爆制"
-      ],
       "dialogueExample": "我想要空气爆制的爆米花。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4083,11 +3039,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "商品形态",
       "cardinality": "single",
       "definition": "完整爆米花商品在购买时属于即食成品还是专用微波包。",
-      "valueLevel": "只允许即食成品和已经完整配方的微波包；爆米花原粒不是完整食品，不得进入值域。",
-      "values": [
-        "Ready-to-Eat / 即食",
-        "Microwave Pack / 微波包"
-      ],
       "dialogueExample": "我只想买打开就能吃的。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4104,13 +3055,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "包衣形式",
       "cardinality": "single",
       "definition": "爆米花表面的主要调味或糖衣结构。",
-      "valueLevel": "全部值是表面处理方式。",
-      "values": [
-        "Dry Seasoned / 干式调味",
-        "Butter Coated / 黄油包裹",
-        "Caramel Coated / 焦糖包衣",
-        "Chocolate Drizzled / 巧克力淋面"
-      ],
       "dialogueExample": "想要焦糖包衣的，不要普通咸味。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4127,14 +3071,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "玉米品种颜色",
       "cardinality": "single",
       "definition": "已经通过完整食品接纳审核的爆米花成品，其包装或文字明确标称所用玉米的颜色品种。",
-      "valueLevel": "全部值是成品爆米花所用玉米的颜色品种，不把焦糖或芝士等成品颜色混入；该属性不能反向证明爆米花原粒商品可被接纳。",
-      "values": [
-        "Yellow Corn / 黄玉米",
-        "White Corn / 白玉米",
-        "Blue Corn / 蓝玉米",
-        "Red Corn / 红玉米",
-        "Mixed Corn / 混合玉米"
-      ],
       "dialogueExample": "我想试试白玉米做的爆米花。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4151,12 +3087,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "爆花形态",
       "cardinality": "single",
       "definition": "爆开后玉米花的主导几何形态。",
-      "valueLevel": "全部值是爆开后的结构形态，不表达颗粒大小或包衣。",
-      "values": [
-        "Butterfly / 蝶形",
-        "Mushroom / 球形",
-        "Mixed / 混合形态"
-      ],
       "dialogueExample": "选球形爆花的，包衣通常更完整。",
       "scopeId": "snacks.popcorn",
       "scopeType": "subtype",
@@ -4173,12 +3103,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4195,13 +3119,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4218,13 +3135,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4241,15 +3151,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "菜品地域风格",
       "cardinality": "single",
       "definition": "该 米饭餐 在成品结构、调味和命名上明确对应的地域菜品风格。",
-      "valueLevel": "全部值是当前 subtype 内可识别的地域菜品风格，不使用宽泛国家来源替代。",
-      "values": [
-        "Chinese-Style / 中式",
-        "Japanese-Style / 日式",
-        "Indian-Style / 印度式",
-        "Thai-Style / 泰式",
-        "Mexican-Style / 墨西哥式",
-        "Mediterranean-Style / 地中海式"
-      ],
       "dialogueExample": "我想要更接近中式风格的米饭餐。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4266,14 +3167,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "餐食最明显的基本味觉方向。",
-      "valueLevel": "全部值是消费者可直接表达的基本味型，不混入香气或烹饪方式。",
-      "values": [
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sweet / 甜",
-        "Sour / 酸",
-        "Salty / 咸"
-      ],
       "dialogueExample": "想吃鲜香偏辣的。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4290,13 +3183,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "辣度",
       "cardinality": "single",
       "definition": "餐食的辣味强度。",
-      "valueLevel": "全部值位于同一辣度序列。",
-      "values": [
-        "Not Spicy / 不辣",
-        "Mild / 微辣",
-        "Medium / 中辣",
-        "Hot / 辣"
-      ],
       "dialogueExample": "可以微辣，但不要太辣。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4313,16 +3199,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要配菜构成",
       "cardinality": "multi_max_3",
       "definition": "完整餐食除米饭、面条或意面主体外，实际包含的主要配菜类别。",
-      "valueLevel": "全部值是可并列出现的主要配菜类别；肉类和蔬菜可以同时选择，No Added Components 不得与其他值并存。",
-      "values": [
-        "No Added Components / 无主要配菜",
-        "Meat / 肉类",
-        "Seafood / 海鲜",
-        "Vegetables / 蔬菜",
-        "Egg / 蛋类",
-        "Dairy / 乳制品",
-        "Plant Protein / 植物蛋白"
-      ],
       "dialogueExample": "我想要同时有肉和蔬菜的完整餐食。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4339,15 +3215,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酱汁基底",
       "cardinality": "single",
       "definition": "餐食的主要湿润调味基底。",
-      "valueLevel": "全部值是酱汁或汤汁基底类别。",
-      "values": [
-        "No Sauce / 无酱汁",
-        "Tomato-Based / 番茄基底",
-        "Cream-Based / 奶油基底",
-        "Broth-Based / 汤汁基底",
-        "Soy-Based / 酱油基底",
-        "Oil-Based / 油汁基底"
-      ],
       "dialogueExample": "想要番茄酱汁的，不要奶油酱。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4364,14 +3231,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "米饭餐类型",
       "cardinality": "single",
       "definition": "消费者识别的完整米饭餐类型。",
-      "valueLevel": "全部值是成品米饭菜式。",
-      "values": [
-        "Fried Rice / 炒饭",
-        "Pilaf / 抓饭",
-        "Risotto / 烩饭",
-        "Paella / 西班牙海鲜饭",
-        "Jambalaya / 什锦饭"
-      ],
       "dialogueExample": "想吃烩饭，不想吃炒饭。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4388,13 +3247,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "米粒口感",
       "cardinality": "single",
       "definition": "成品米饭的主要米粒口感。",
-      "valueLevel": "全部值是米饭口感状态。",
-      "values": [
-        "Separate / 粒粒分明",
-        "Soft / 软糯",
-        "Sticky / 黏软",
-        "Creamy / 绵密"
-      ],
       "dialogueExample": "我喜欢粒粒分明的，不要太黏。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4411,12 +3263,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味浓淡程度",
       "cardinality": "single",
       "definition": "完整餐食成菜时整体调味下得轻或重的程度。",
-      "valueLevel": "全部值位于同一整体调味强度序列；不把辣度、具体味型、油脂含量或酱汁类型混入。",
-      "values": [
-        "Lightly Seasoned / 清淡",
-        "Moderately Seasoned / 适中",
-        "Heavily Seasoned / 重口"
-      ],
       "dialogueExample": "我想要调味清淡一点的完整餐食，不要重口。",
       "scopeId": "meals.rice_meals",
       "scopeType": "subtype",
@@ -4433,12 +3279,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4455,13 +3295,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4478,13 +3311,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4501,15 +3327,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "菜品地域风格",
       "cardinality": "single",
       "definition": "该 面条餐 在成品结构、调味和命名上明确对应的地域菜品风格。",
-      "valueLevel": "全部值是当前 subtype 内可识别的地域菜品风格，不使用宽泛国家来源替代。",
-      "values": [
-        "Chinese-Style / 中式",
-        "Japanese-Style / 日式",
-        "Korean-Style / 韩式",
-        "Thai-Style / 泰式",
-        "Vietnamese-Style / 越南式",
-        "Southeast Asian-Style / 东南亚式"
-      ],
       "dialogueExample": "我想要更接近中式风格的面条餐。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4526,14 +3343,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "餐食最明显的基本味觉方向。",
-      "valueLevel": "全部值是消费者可直接表达的基本味型，不混入香气或烹饪方式。",
-      "values": [
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sweet / 甜",
-        "Sour / 酸",
-        "Salty / 咸"
-      ],
       "dialogueExample": "想吃鲜香偏辣的。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4550,13 +3359,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "辣度",
       "cardinality": "single",
       "definition": "餐食的辣味强度。",
-      "valueLevel": "全部值位于同一辣度序列。",
-      "values": [
-        "Not Spicy / 不辣",
-        "Mild / 微辣",
-        "Medium / 中辣",
-        "Hot / 辣"
-      ],
       "dialogueExample": "可以微辣，但不要太辣。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4573,16 +3375,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要配菜构成",
       "cardinality": "multi_max_3",
       "definition": "完整餐食除米饭、面条或意面主体外，实际包含的主要配菜类别。",
-      "valueLevel": "全部值是可并列出现的主要配菜类别；肉类和蔬菜可以同时选择，No Added Components 不得与其他值并存。",
-      "values": [
-        "No Added Components / 无主要配菜",
-        "Meat / 肉类",
-        "Seafood / 海鲜",
-        "Vegetables / 蔬菜",
-        "Egg / 蛋类",
-        "Dairy / 乳制品",
-        "Plant Protein / 植物蛋白"
-      ],
       "dialogueExample": "我想要同时有肉和蔬菜的完整餐食。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4599,15 +3391,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酱汁基底",
       "cardinality": "single",
       "definition": "餐食的主要湿润调味基底。",
-      "valueLevel": "全部值是酱汁或汤汁基底类别。",
-      "values": [
-        "No Sauce / 无酱汁",
-        "Tomato-Based / 番茄基底",
-        "Cream-Based / 奶油基底",
-        "Broth-Based / 汤汁基底",
-        "Soy-Based / 酱油基底",
-        "Oil-Based / 油汁基底"
-      ],
       "dialogueExample": "想要番茄酱汁的，不要奶油酱。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4624,14 +3407,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面条类型",
       "cardinality": "single",
       "definition": "成品餐中使用的主要亚洲面条类型。",
-      "valueLevel": "全部值是消费者识别的面条类型。",
-      "values": [
-        "Udon / 乌冬面",
-        "Soba / 荞麦面",
-        "Rice Noodles / 米粉",
-        "Egg Noodles / 鸡蛋面",
-        "Glass Noodles / 粉丝"
-      ],
       "dialogueExample": "想吃乌冬面，不要米粉。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4648,13 +3423,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "汤汁形式",
       "cardinality": "single",
       "definition": "面条餐的主要汤汁或干拌形式。",
-      "valueLevel": "全部值是成品面条的汤汁结构。",
-      "values": [
-        "Soup / 汤面",
-        "Dry / 干拌",
-        "Stir-Fried / 炒面",
-        "Dipping / 蘸面"
-      ],
       "dialogueExample": "我想要汤面，不要干拌的。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4671,12 +3439,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面条粗细",
       "cardinality": "single",
       "definition": "面条主体的相对宽度。",
-      "valueLevel": "全部值位于该 subtype 自己的宽度序列。",
-      "values": [
-        "Thin / 细",
-        "Medium / 中等",
-        "Wide / 宽"
-      ],
       "dialogueExample": "我更喜欢宽一点的面。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4693,12 +3455,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味浓淡程度",
       "cardinality": "single",
       "definition": "完整餐食成菜时整体调味下得轻或重的程度。",
-      "valueLevel": "全部值位于同一整体调味强度序列；不把辣度、具体味型、油脂含量或酱汁类型混入。",
-      "values": [
-        "Lightly Seasoned / 清淡",
-        "Moderately Seasoned / 适中",
-        "Heavily Seasoned / 重口"
-      ],
       "dialogueExample": "我想要调味清淡一点的完整餐食，不要重口。",
       "scopeId": "meals.noodle_meals",
       "scopeType": "subtype",
@@ -4715,12 +3471,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4737,13 +3487,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4760,13 +3503,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4783,13 +3519,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "菜品地域风格",
       "cardinality": "single",
       "definition": "该 意面餐 在成品结构、调味和命名上明确对应的地域菜品风格。",
-      "valueLevel": "全部值是当前 subtype 内可识别的地域菜品风格，不使用宽泛国家来源替代。",
-      "values": [
-        "Italian-Style / 意式",
-        "Italian-American / 意大利美式",
-        "Mediterranean-Style / 地中海式",
-        "American Comfort-Style / 美式家常"
-      ],
       "dialogueExample": "我想要更接近意式风格的意面餐。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4806,14 +3535,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "餐食最明显的基本味觉方向。",
-      "valueLevel": "全部值是消费者可直接表达的基本味型，不混入香气或烹饪方式。",
-      "values": [
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sweet / 甜",
-        "Sour / 酸",
-        "Salty / 咸"
-      ],
       "dialogueExample": "想吃鲜香偏辣的。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4830,13 +3551,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "辣度",
       "cardinality": "single",
       "definition": "餐食的辣味强度。",
-      "valueLevel": "全部值位于同一辣度序列。",
-      "values": [
-        "Not Spicy / 不辣",
-        "Mild / 微辣",
-        "Medium / 中辣",
-        "Hot / 辣"
-      ],
       "dialogueExample": "可以微辣，但不要太辣。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4853,16 +3567,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要配菜构成",
       "cardinality": "multi_max_3",
       "definition": "完整餐食除米饭、面条或意面主体外，实际包含的主要配菜类别。",
-      "valueLevel": "全部值是可并列出现的主要配菜类别；肉类和蔬菜可以同时选择，No Added Components 不得与其他值并存。",
-      "values": [
-        "No Added Components / 无主要配菜",
-        "Meat / 肉类",
-        "Seafood / 海鲜",
-        "Vegetables / 蔬菜",
-        "Egg / 蛋类",
-        "Dairy / 乳制品",
-        "Plant Protein / 植物蛋白"
-      ],
       "dialogueExample": "我想要同时有肉和蔬菜的完整餐食。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4879,15 +3583,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酱汁基底",
       "cardinality": "single",
       "definition": "餐食的主要湿润调味基底。",
-      "valueLevel": "全部值是酱汁或汤汁基底类别。",
-      "values": [
-        "No Sauce / 无酱汁",
-        "Tomato-Based / 番茄基底",
-        "Cream-Based / 奶油基底",
-        "Broth-Based / 汤汁基底",
-        "Soy-Based / 酱油基底",
-        "Oil-Based / 油汁基底"
-      ],
       "dialogueExample": "想要番茄酱汁的，不要奶油酱。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4904,15 +3599,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "意面类型",
       "cardinality": "single",
       "definition": "完整意面餐中消费者直接识别的主要意面类型。",
-      "valueLevel": "全部值是市场上并列的意面产品类型，不再另设重复的结构属性。",
-      "values": [
-        "Spaghetti / 意大利细面",
-        "Penne / 斜管面",
-        "Fusilli / 螺旋面",
-        "Fettuccine / 宽面",
-        "Lasagna / 千层面",
-        "Ravioli / 意式饺子"
-      ],
       "dialogueExample": "想吃千层面，不要细面。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4929,13 +3615,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "成菜结构",
       "cardinality": "single",
       "definition": "意面作为完整菜品呈现的主导结构。",
-      "valueLevel": "全部值描述完整意面菜品的结构，不重复具体面型或酱汁。",
-      "values": [
-        "Tossed Pasta / 拌合意面",
-        "Baked Pasta / 焗烤意面",
-        "Stuffed Pasta / 馅心意面",
-        "Layered Pasta / 分层意面"
-      ],
       "dialogueExample": "我想要焗烤结构的意面餐。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4952,13 +3631,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "芝士程度",
       "cardinality": "single",
       "definition": "完整意面菜品中芝士的主导存在程度。",
-      "valueLevel": "全部值描述芝士在成菜中的存在程度或替代类型。",
-      "values": [
-        "No Cheese / 无芝士",
-        "Light Cheese / 少量芝士",
-        "Cheese-Forward / 芝士为主",
-        "Plant-Based Cheese / 植物芝士"
-      ],
       "dialogueExample": "选芝士味明显一点的意面。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4975,12 +3647,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "调味浓淡程度",
       "cardinality": "single",
       "definition": "完整餐食成菜时整体调味下得轻或重的程度。",
-      "valueLevel": "全部值位于同一整体调味强度序列；不把辣度、具体味型、油脂含量或酱汁类型混入。",
-      "values": [
-        "Lightly Seasoned / 清淡",
-        "Moderately Seasoned / 适中",
-        "Heavily Seasoned / 重口"
-      ],
       "dialogueExample": "我想要调味清淡一点的完整餐食，不要重口。",
       "scopeId": "meals.pasta_meals",
       "scopeType": "subtype",
@@ -4997,12 +3663,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5019,13 +3679,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5042,13 +3695,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5065,15 +3711,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "披萨地域风格",
       "cardinality": "single",
       "definition": "该 披萨 在成品结构、调味和命名上明确对应的地域菜品风格。",
-      "valueLevel": "全部值是当前 subtype 内可识别的地域菜品风格，不使用宽泛国家来源替代。",
-      "values": [
-        "Neapolitan / 那不勒斯式",
-        "New York / 纽约式",
-        "Chicago Deep-Dish / 芝加哥深盘",
-        "Sicilian / 西西里式",
-        "Roman / 罗马式",
-        "American Classic / 美式经典"
-      ],
       "dialogueExample": "我想要更接近那不勒斯式风格的披萨。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5090,14 +3727,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "基本味型",
       "cardinality": "multi_max_2",
       "definition": "餐食最明显的基本味觉方向。",
-      "valueLevel": "全部值是消费者可直接表达的基本味型，不混入香气或烹饪方式。",
-      "values": [
-        "Savory / 鲜香",
-        "Spicy / 辣",
-        "Sweet / 甜",
-        "Sour / 酸",
-        "Salty / 咸"
-      ],
       "dialogueExample": "想吃鲜香偏辣的。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5114,13 +3743,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "辣度",
       "cardinality": "single",
       "definition": "餐食的辣味强度。",
-      "valueLevel": "全部值位于同一辣度序列。",
-      "values": [
-        "Not Spicy / 不辣",
-        "Mild / 微辣",
-        "Medium / 中辣",
-        "Hot / 辣"
-      ],
       "dialogueExample": "可以微辣，但不要太辣。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5137,12 +3759,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "浓郁程度",
       "cardinality": "single",
       "definition": "油脂、奶酪、酱汁和整体口感共同形成的厚重程度。",
-      "valueLevel": "全部值位于同一浓郁程度序列。",
-      "values": [
-        "Light / 清淡",
-        "Moderate / 适中",
-        "Rich / 浓郁"
-      ],
       "dialogueExample": "想吃清淡一点的正餐。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5159,15 +3775,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酱汁基底",
       "cardinality": "single",
       "definition": "餐食的主要湿润调味基底。",
-      "valueLevel": "全部值是酱汁或汤汁基底类别。",
-      "values": [
-        "No Sauce / 无酱汁",
-        "Tomato-Based / 番茄基底",
-        "Cream-Based / 奶油基底",
-        "Broth-Based / 汤汁基底",
-        "Soy-Based / 酱油基底",
-        "Oil-Based / 油汁基底"
-      ],
       "dialogueExample": "想要番茄酱汁的，不要奶油酱。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5184,13 +3791,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "饼底类型",
       "cardinality": "single",
       "definition": "完整披萨的主要饼底结构。",
-      "valueLevel": "全部值是披萨饼底结构。",
-      "values": [
-        "Thin Crust / 薄底",
-        "Classic Crust / 经典饼底",
-        "Deep Dish / 深盘",
-        "Stuffed Crust / 芝心饼边"
-      ],
       "dialogueExample": "我想要薄底披萨。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5207,12 +3807,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "饼底原料基底",
       "cardinality": "single",
       "definition": "形成披萨饼底的主要原料体系。",
-      "valueLevel": "全部值是饼底原料体系。",
-      "values": [
-        "Wheat / 小麦",
-        "Cauliflower / 花椰菜",
-        "Gluten-Free Grain Blend / 无麸质谷物混合"
-      ],
       "dialogueExample": "想试试花椰菜饼底。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5229,13 +3823,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "芝士配置",
       "cardinality": "single",
       "definition": "披萨使用的主要芝士配置。",
-      "valueLevel": "全部值是互斥的芝士配置，不把具体品种和宽泛混合状态平级。",
-      "values": [
-        "Mozzarella-Dominant / 马苏里拉为主",
-        "Mixed Dairy Cheese / 混合乳制芝士",
-        "Plant-Based Cheese / 植物芝士",
-        "No Cheese / 无芝士"
-      ],
       "dialogueExample": "最好是马苏里拉为主，不要植物芝士。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5252,17 +3839,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "肉类配料",
       "cardinality": "multi_max_2",
       "definition": "披萨表面最主要的肉类或海鲜配料。",
-      "valueLevel": "全部值是具体肉类配料类别；No Meat 不得与其他值并存。",
-      "values": [
-        "No Meat / 无肉",
-        "Pepperoni / 意式辣香肠",
-        "Sausage / 香肠",
-        "Ham / 火腿",
-        "Bacon / 培根",
-        "Chicken / 鸡肉",
-        "Beef / 牛肉",
-        "Seafood / 海鲜"
-      ],
       "dialogueExample": "我想要有意式辣香肠、不要混合肉类的披萨。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5279,16 +3855,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "蔬菜配料",
       "cardinality": "multi_max_2",
       "definition": "披萨表面最主要的蔬菜类配料。",
-      "valueLevel": "全部值是具体蔬菜配料类别；No Vegetable 不得与其他值并存。",
-      "values": [
-        "No Vegetable / 无蔬菜",
-        "Mushroom / 蘑菇",
-        "Pepper / 彩椒",
-        "Onion / 洋葱",
-        "Olive / 橄榄",
-        "Spinach / 菠菜",
-        "Mixed Vegetables / 混合蔬菜"
-      ],
       "dialogueExample": "找蘑菇和洋葱配料的披萨。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5305,13 +3871,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "芝士拉丝程度",
       "cardinality": "single",
       "definition": "披萨加热后融化芝士形成拉丝的明显程度。",
-      "valueLevel": "全部值位于同一拉丝强度序列；无芝士或不形成拉丝时使用 None。",
-      "values": [
-        "None / 不拉丝",
-        "Light / 轻微",
-        "Moderate / 中等",
-        "Strong / 明显"
-      ],
       "dialogueExample": "我想要芝士拉丝很明显的披萨。",
       "scopeId": "meals.pizza",
       "scopeType": "subtype",
@@ -5328,12 +3887,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5350,13 +3903,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5373,13 +3919,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5396,15 +3935,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主味型",
       "cardinality": "single",
       "definition": "面包入口时最主导的整体味型。",
-      "valueLevel": "全部值是同级主味型；具体火腿、肉松、芝士等配料另由 inclusion_type 表达。",
-      "values": [
-        "Plain / 原味",
-        "Grainy / 谷物香",
-        "Sweet / 甜味",
-        "Savory / 咸香",
-        "Buttery / 黄油香",
-        "Tangy / 酸香"
-      ],
       "dialogueExample": "我想要咸香口的面包，不要甜面包。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5421,13 +3951,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "烘焙品入口的整体甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Not Sweet / 无明显甜味",
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想要低甜的烘焙食品。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5444,15 +3967,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "烘焙品最明显的内部或外部口感。",
-      "valueLevel": "全部值是口感形容。",
-      "values": [
-        "Soft / 松软",
-        "Chewy / 有嚼劲",
-        "Flaky / 酥层",
-        "Crumbly / 松碎",
-        "Dense / 扎实",
-        "Moist / 湿润"
-      ],
       "dialogueExample": "我喜欢湿润松软的，不要太干。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5469,15 +3983,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面粉基底",
       "cardinality": "multi_max_2",
       "definition": "形成烘焙品主体结构的主要粉类来源。",
-      "valueLevel": "全部值是粉类原料来源，不混入 Whole Grain 等加工等级。",
-      "values": [
-        "Wheat / 小麦",
-        "Rye / 黑麦",
-        "Oat / 燕麦",
-        "Corn / 玉米",
-        "Rice / 大米",
-        "Almond / 杏仁"
-      ],
       "dialogueExample": "想找燕麦或杏仁粉做的。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5494,16 +3999,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "馅料基底",
       "cardinality": "multi_max_2",
       "definition": "烘焙品内部主要馅料的原料家族。",
-      "valueLevel": "全部值是馅料基底家族；无馅是明确状态。",
-      "values": [
-        "No Filling / 无馅",
-        "Fruit-Based / 水果馅",
-        "Cream-Based / 奶油馅",
-        "Chocolate-Based / 巧克力馅",
-        "Nut-Based / 坚果馅",
-        "Meat-Based / 肉类馅",
-        "Vegetable-Based / 蔬菜馅"
-      ],
       "dialogueExample": "想要水果馅，不要奶油馅。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5520,15 +4015,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面包类型",
       "cardinality": "single",
       "definition": "消费者识别的主要面包类型。",
-      "valueLevel": "全部值是成品面包类型。",
-      "values": [
-        "Sandwich Bread / 吐司面包",
-        "Baguette / 法棍",
-        "Sourdough / 酸面包",
-        "Pita / 皮塔饼",
-        "Naan / 馕",
-        "Brioche / 布里欧修"
-      ],
       "dialogueExample": "想买酸面包，不要普通吐司。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5545,12 +4031,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面包外皮",
       "cardinality": "single",
       "definition": "面包外皮的主要质地。",
-      "valueLevel": "全部值是面包外皮质地，不混入表面配料。",
-      "values": [
-        "Soft Crust / 软皮",
-        "Crisp Crust / 脆皮",
-        "Chewy Crust / 韧皮"
-      ],
       "dialogueExample": "想要外皮脆一点的。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5567,13 +4047,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "发酵方式",
       "cardinality": "single",
       "definition": "形成面包膨松结构的主要发酵方式。",
-      "valueLevel": "全部值是发酵体系。",
-      "values": [
-        "Commercial Yeast / 商业酵母",
-        "Natural Starter / 天然酵种",
-        "Chemical Leavening / 化学膨松",
-        "Unleavened / 未发酵"
-      ],
       "dialogueExample": "我更想要天然酵种的。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5590,19 +4063,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "附加配料",
       "cardinality": "multi_max_2",
       "definition": "混入面包主体或明确附着在面包表面的主要可见配料；内部夹心继续由 filling_type 表达。",
-      "valueLevel": "全部值是可见的附加食材类别，不把夹心、主面粉或风味名称重复计入。",
-      "values": [
-        "No Added Ingredients / 无附加配料",
-        "Seeds / 籽类",
-        "Nuts / 坚果",
-        "Dried Fruit / 果干",
-        "Cheese / 芝士",
-        "Ham / 火腿",
-        "Sausage / 香肠",
-        "Meat Floss / 肉松",
-        "Herbs / 香草",
-        "Vegetables / 蔬菜"
-      ],
       "dialogueExample": "找有肉松或火腿肠配料的咸面包。",
       "scopeId": "baked_goods.bread",
       "scopeType": "subtype",
@@ -5619,12 +4079,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5641,13 +4095,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5664,13 +4111,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5687,14 +4127,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "烘焙品主体或配方的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份，不保留宽泛 Fruit。",
-      "values": [
-        "Vanilla / 香草",
-        "Chocolate / 巧克力",
-        "Apple / 苹果",
-        "Cinnamon / 肉桂",
-        "Butter / 黄油"
-      ],
       "dialogueExample": "我想要肉桂或者黄油风味的。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5711,13 +4143,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "烘焙品入口的整体甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Not Sweet / 无明显甜味",
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想要低甜的烘焙食品。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5734,15 +4159,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "烘焙品最明显的内部或外部口感。",
-      "valueLevel": "全部值是口感形容。",
-      "values": [
-        "Soft / 松软",
-        "Chewy / 有嚼劲",
-        "Flaky / 酥层",
-        "Crumbly / 松碎",
-        "Dense / 扎实",
-        "Moist / 湿润"
-      ],
       "dialogueExample": "我喜欢湿润松软的，不要太干。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5759,15 +4175,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面粉基底",
       "cardinality": "multi_max_2",
       "definition": "形成烘焙品主体结构的主要粉类来源。",
-      "valueLevel": "全部值是粉类原料来源，不混入 Whole Grain 等加工等级。",
-      "values": [
-        "Wheat / 小麦",
-        "Rye / 黑麦",
-        "Oat / 燕麦",
-        "Corn / 玉米",
-        "Rice / 大米",
-        "Almond / 杏仁"
-      ],
       "dialogueExample": "想找燕麦或杏仁粉做的。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5784,16 +4191,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "馅料基底",
       "cardinality": "multi_max_2",
       "definition": "烘焙品内部主要馅料的原料家族。",
-      "valueLevel": "全部值是馅料基底家族；无馅是明确状态。",
-      "values": [
-        "No Filling / 无馅",
-        "Fruit-Based / 水果馅",
-        "Cream-Based / 奶油馅",
-        "Chocolate-Based / 巧克力馅",
-        "Nut-Based / 坚果馅",
-        "Meat-Based / 肉类馅",
-        "Vegetable-Based / 蔬菜馅"
-      ],
       "dialogueExample": "想要水果馅，不要奶油馅。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5810,14 +4207,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "蛋糕结构类型",
       "cardinality": "single",
       "definition": "蛋糕主体在配方和组织结构上的主要类型。",
-      "valueLevel": "全部值是蛋糕主体结构类型，不混入水果、酒味或装饰主题。",
-      "values": [
-        "Sponge Cake / 海绵蛋糕",
-        "Chiffon Cake / 戚风蛋糕",
-        "Pound Cake / 磅蛋糕",
-        "Cheesecake / 芝士蛋糕",
-        "Mousse Cake / 慕斯蛋糕"
-      ],
       "dialogueExample": "我想要轻盈一点的戚风蛋糕。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5834,15 +4223,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外层奶油或糖霜类型",
       "cardinality": "single",
       "definition": "蛋糕外层覆盖的主要奶油、糖霜或巧克力体系。",
-      "valueLevel": "全部值是糖霜体系；无糖霜是明确状态。",
-      "values": [
-        "No Frosting / 无外层奶油糖霜",
-        "Buttercream / 奶油霜",
-        "Cream Cheese Frosting / 奶油奶酪霜",
-        "Whipped Cream / 鲜奶油",
-        "Fondant / 翻糖",
-        "Ganache / 甘纳许"
-      ],
       "dialogueExample": "不要翻糖，鲜奶油就可以。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5859,13 +4239,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "层次结构",
       "cardinality": "single",
       "definition": "蛋糕主体的层次组合方式。",
-      "valueLevel": "全部值是蛋糕结构。",
-      "values": [
-        "Single Layer / 单层",
-        "Layered / 多层",
-        "Filled Layers / 夹馅多层",
-        "Rolled / 卷制"
-      ],
       "dialogueExample": "我想要有夹馅的多层蛋糕。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5882,16 +4255,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "蛋糕造型",
       "cardinality": "single",
       "definition": "完整蛋糕主体最主要的外形结构。",
-      "valueLevel": "全部值是蛋糕主体外形，不表达层数、装饰或主题。",
-      "values": [
-        "Round / 圆形",
-        "Square / 方形",
-        "Rectangular / 长方形",
-        "Loaf / 长条形",
-        "Ring / 环形",
-        "Roll / 卷形",
-        "Novelty Shape / 特殊造型"
-      ],
       "dialogueExample": "我想要一个圆形蛋糕。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5908,15 +4271,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "视觉主题",
       "cardinality": "single",
       "definition": "蛋糕通过图案、配色和装饰形成的主导视觉主题。",
-      "valueLevel": "全部值是整体视觉主题，不把具体奶油类型或蛋糕形状混入。",
-      "values": [
-        "Minimal / 简约",
-        "Floral / 花卉",
-        "Character / 角色",
-        "Celebration / 庆祝",
-        "Romantic / 浪漫",
-        "Novelty / 趣味创意"
-      ],
       "dialogueExample": "找一个花卉主题、不要角色造型的蛋糕。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5933,13 +4287,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "奶油来源",
       "cardinality": "single",
       "definition": "蛋糕中主要奶油层或奶油装饰所使用的脂肪来源。",
-      "valueLevel": "全部值描述奶油来源；没有奶油层或奶油装饰时使用 No Cream。",
-      "values": [
-        "No Cream / 无奶油",
-        "Dairy Cream / 动物奶油",
-        "Plant-Based Cream / 植物奶油",
-        "Mixed Cream / 混合奶油"
-      ],
       "dialogueExample": "我想要动物奶油蛋糕，不要植物奶油。",
       "scopeId": "baked_goods.cakes",
       "scopeType": "subtype",
@@ -5956,12 +4303,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -5978,13 +4319,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6001,13 +4335,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6024,13 +4351,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "烘焙品入口的整体甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Not Sweet / 无明显甜味",
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想要低甜的烘焙食品。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6047,15 +4367,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "烘焙品最明显的内部或外部口感。",
-      "valueLevel": "全部值是口感形容。",
-      "values": [
-        "Soft / 松软",
-        "Chewy / 有嚼劲",
-        "Flaky / 酥层",
-        "Crumbly / 松碎",
-        "Dense / 扎实",
-        "Moist / 湿润"
-      ],
       "dialogueExample": "我喜欢湿润松软的，不要太干。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6072,15 +4383,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "面粉基底",
       "cardinality": "multi_max_2",
       "definition": "形成烘焙品主体结构的主要粉类来源。",
-      "valueLevel": "全部值是粉类原料来源，不混入 Whole Grain 等加工等级。",
-      "values": [
-        "Wheat / 小麦",
-        "Rye / 黑麦",
-        "Oat / 燕麦",
-        "Corn / 玉米",
-        "Rice / 大米",
-        "Almond / 杏仁"
-      ],
       "dialogueExample": "想找燕麦或杏仁粉做的。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6097,13 +4399,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "派皮结构",
       "cardinality": "single",
       "definition": "完整派所使用的主要派皮结构。",
-      "valueLevel": "全部值是派皮结构。",
-      "values": [
-        "Single Crust / 单层派皮",
-        "Double Crust / 双层派皮",
-        "Lattice / 网格派皮",
-        "Crumb Crust / 碎屑派皮"
-      ],
       "dialogueExample": "我喜欢网格派皮的水果派。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6120,14 +4415,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "馅料质地",
       "cardinality": "single",
       "definition": "派馅在成品中的主导物理质地。",
-      "valueLevel": "全部值是馅料质地，不重复水果、奶油、肉类等馅料基底。",
-      "values": [
-        "Chunky / 颗粒块状",
-        "Smooth / 细腻顺滑",
-        "Custard-Like / 蛋奶凝固状",
-        "Jam-Like / 果酱状",
-        "Dense / 扎实"
-      ],
       "dialogueExample": "我想要馅料细腻顺滑的派。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6144,13 +4431,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "派皮基底",
       "cardinality": "single",
       "definition": "派皮最主要的成品材料体系。",
-      "valueLevel": "全部值是派皮成品材料体系，不重复单层、双层或网格等 crust_type 结构。",
-      "values": [
-        "Pastry Crust / 酥皮",
-        "Graham Cracker Crust / 全麦饼干碎派皮",
-        "Cookie Crumb Crust / 曲奇碎派皮",
-        "Nut Crust / 坚果派皮"
-      ],
       "dialogueExample": "我更喜欢曲奇碎派皮。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6167,22 +4447,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要馅料",
       "cardinality": "multi_max_2",
       "definition": "完整派中消费者直接识别的一个或两个主要馅料身份。",
-      "valueLevel": "全部值是具体主要食材，不使用 Fruit、Savory 等过宽上位类别。",
-      "values": [
-        "Apple / 苹果",
-        "Cherry / 樱桃",
-        "Berry / 浆果",
-        "Peach / 桃",
-        "Lemon / 柠檬",
-        "Pumpkin / 南瓜",
-        "Sweet Potato / 红薯",
-        "Pecan / 山核桃",
-        "Chocolate / 巧克力",
-        "Custard / 蛋奶馅",
-        "Chicken / 鸡肉",
-        "Beef / 牛肉",
-        "Vegetables / 蔬菜"
-      ],
       "dialogueExample": "我想要苹果馅或山核桃馅的派。",
       "scopeId": "baked_goods.pies",
       "scopeType": "subtype",
@@ -6199,12 +4463,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6221,13 +4479,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6244,13 +4495,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6267,14 +4511,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "糖果主体的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Mint / 薄荷",
-        "Strawberry / 草莓",
-        "Cherry / 樱桃",
-        "Chocolate / 巧克力",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "想要薄荷或者樱桃味的糖。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6291,12 +4527,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "糖果的整体感知甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想吃糖，但不要甜得发腻。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6313,14 +4543,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口感质地",
       "cardinality": "multi_max_2",
       "definition": "糖果入口时最明显的物理口感。",
-      "valueLevel": "全部值是口感状态，不混入商品形状。",
-      "values": [
-        "Hard / 硬",
-        "Chewy / 耐嚼",
-        "Soft / 柔软",
-        "Crunchy / 松脆",
-        "Aerated / 充气松软"
-      ],
       "dialogueExample": "想要耐嚼的，不要硬糖。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6337,15 +4559,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "夹心类型",
       "cardinality": "multi_max_2",
       "definition": "糖果内部主要夹心的原料基底。",
-      "valueLevel": "全部值是夹心基底类别；无夹心是明确状态。",
-      "values": [
-        "No Filling / 无夹心",
-        "Fruit-Based / 水果夹心",
-        "Cream-Based / 奶油夹心",
-        "Caramel-Based / 焦糖夹心",
-        "Nut-Based / 坚果夹心",
-        "Syrup-Based / 糖浆夹心"
-      ],
       "dialogueExample": "我想要焦糖夹心的。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6362,14 +4575,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外层包衣",
       "cardinality": "multi_max_2",
       "definition": "糖果表面的主要包衣类型。",
-      "valueLevel": "全部值是表面包衣体系。",
-      "values": [
-        "No Coating / 无包衣",
-        "Sugar-Coated / 糖衣",
-        "Sour Sugar / 酸砂糖",
-        "Chocolate-Coated / 巧克力包衣",
-        "Yogurt-Coated / 酸奶包衣"
-      ],
       "dialogueExample": "想要外面有酸砂糖的。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6386,13 +4591,7 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖状态",
       "cardinality": "single",
       "definition": "配方对糖含量的明确声明状态。",
-      "valueLevel": "全部值是营养声明状态，不等同于感知甜度。",
-      "values": [
-        "Regular Sugar / 常规含糖",
-        "Reduced Sugar / 减糖",
-        "Sugar-Free / 无糖"
-      ],
-      "dialogueExample": "想要无糖口香糖或者无糖硬糖。",
+      "dialogueExample": "我想要无糖的巧克力。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
       "categoryKey": "confectionery",
@@ -6408,13 +4607,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "巧克力类型",
       "cardinality": "single",
       "definition": "巧克力主体的可可和乳成分类型。",
-      "valueLevel": "全部值是同级巧克力类型。",
-      "values": [
-        "Dark Chocolate / 黑巧克力",
-        "Milk Chocolate / 牛奶巧克力",
-        "White Chocolate / 白巧克力",
-        "Ruby Chocolate / 红宝石巧克力"
-      ],
       "dialogueExample": "我想要黑巧克力，不要白巧克力。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6431,13 +4623,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "可可含量",
       "cardinality": "single",
       "definition": "包装标示的可可固形物比例档位。",
-      "valueLevel": "全部值基于明确百分比区间。",
-      "values": [
-        "Low Cocoa / 低可可",
-        "Medium Cocoa / 中等可可",
-        "High Cocoa / 高可可",
-        "Very High Cocoa / 极高可可"
-      ],
       "dialogueExample": "想要可可含量百分之七十以上的。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6454,14 +4639,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "内含物",
       "cardinality": "multi_max_2",
       "definition": "混入巧克力主体中的主要固体配料。",
-      "valueLevel": "全部值是内含配料家族。",
-      "values": [
-        "No Inclusions / 无内含物",
-        "Nuts / 坚果",
-        "Fruit / 水果",
-        "Crisp / 脆米",
-        "Cookie / 饼干"
-      ],
       "dialogueExample": "想要带坚果的黑巧克力。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6478,15 +4655,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "酒心类型",
       "cardinality": "single",
       "definition": "巧克力内部是否含酒心以及酒心使用的主要酒类。",
-      "valueLevel": "全部值描述酒心的主要酒类身份；没有含酒夹心时使用 No Alcohol Filling。",
-      "values": [
-        "No Alcohol Filling / 无酒心",
-        "Liqueur / 利口酒",
-        "Brandy / 白兰地",
-        "Whisky / 威士忌",
-        "Rum / 朗姆酒",
-        "Wine / 葡萄酒"
-      ],
       "dialogueExample": "我想要白兰地酒心巧克力。",
       "scopeId": "confectionery.chocolate",
       "scopeType": "subtype",
@@ -6503,12 +4671,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6525,13 +4687,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6548,13 +4703,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6571,14 +4719,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "糖果主体的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Mint / 薄荷",
-        "Strawberry / 草莓",
-        "Cherry / 樱桃",
-        "Chocolate / 巧克力",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "想要薄荷或者樱桃味的糖。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6595,12 +4735,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "糖果的整体感知甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想吃糖，但不要甜得发腻。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6617,15 +4751,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "夹心类型",
       "cardinality": "multi_max_2",
       "definition": "糖果内部主要夹心的原料基底。",
-      "valueLevel": "全部值是夹心基底类别；无夹心是明确状态。",
-      "values": [
-        "No Filling / 无夹心",
-        "Fruit-Based / 水果夹心",
-        "Cream-Based / 奶油夹心",
-        "Caramel-Based / 焦糖夹心",
-        "Nut-Based / 坚果夹心",
-        "Syrup-Based / 糖浆夹心"
-      ],
       "dialogueExample": "我想要焦糖夹心的。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6642,14 +4767,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外层包衣",
       "cardinality": "multi_max_2",
       "definition": "糖果表面的主要包衣类型。",
-      "valueLevel": "全部值是表面包衣体系。",
-      "values": [
-        "No Coating / 无包衣",
-        "Sugar-Coated / 糖衣",
-        "Sour Sugar / 酸砂糖",
-        "Chocolate-Coated / 巧克力包衣",
-        "Yogurt-Coated / 酸奶包衣"
-      ],
       "dialogueExample": "想要外面有酸砂糖的。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6666,12 +4783,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖状态",
       "cardinality": "single",
       "definition": "配方对糖含量的明确声明状态。",
-      "valueLevel": "全部值是营养声明状态，不等同于感知甜度。",
-      "values": [
-        "Regular Sugar / 常规含糖",
-        "Reduced Sugar / 减糖",
-        "Sugar-Free / 无糖"
-      ],
       "dialogueExample": "想要无糖口香糖或者无糖硬糖。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6688,14 +4799,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "硬糖形态",
       "cardinality": "single",
       "definition": "单件硬糖成品最主要的消费形态。",
-      "valueLevel": "全部值是硬糖成品形态，不混入风味、夹心或表面处理。",
-      "values": [
-        "Drop / 糖粒",
-        "Lollipop / 棒棒糖",
-        "Lozenge Candy / 含片形硬糖",
-        "Candy Cane / 糖果手杖",
-        "Rock Candy / 冰糖棒"
-      ],
       "dialogueExample": "给我普通糖粒形态的硬糖，不要棒棒糖。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6712,13 +4815,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "糖心结构",
       "cardinality": "single",
       "definition": "硬糖中心是否存在另一种明确的馅心结构。",
-      "valueLevel": "全部值描述硬糖中心结构；具体夹心风味仍由 filling_type 表达。",
-      "values": [
-        "Solid Center / 实心",
-        "Liquid-Filled / 液体夹心",
-        "Powder-Filled / 粉末夹心",
-        "Chewy Center / 软糖心"
-      ],
       "dialogueExample": "我想要液体夹心的硬糖。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6735,14 +4831,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外观样式",
       "cardinality": "single",
       "definition": "硬糖糖体本身最明显的视觉样式。",
-      "valueLevel": "全部值是糖体视觉样式，不表达商品形状或表面包衣。",
-      "values": [
-        "Clear / 透明",
-        "Opaque / 不透明",
-        "Swirled / 旋纹",
-        "Layered / 分层",
-        "Patterned / 图案化"
-      ],
       "dialogueExample": "找透明糖体的硬糖。",
       "scopeId": "confectionery.hard_candy",
       "scopeType": "subtype",
@@ -6759,12 +4847,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6781,13 +4863,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6804,13 +4879,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6827,14 +4895,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "糖果主体的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Mint / 薄荷",
-        "Strawberry / 草莓",
-        "Cherry / 樱桃",
-        "Chocolate / 巧克力",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "想要薄荷或者樱桃味的糖。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6851,12 +4911,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "糖果的整体感知甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想吃糖，但不要甜得发腻。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6873,15 +4927,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "夹心类型",
       "cardinality": "multi_max_2",
       "definition": "糖果内部主要夹心的原料基底。",
-      "valueLevel": "全部值是夹心基底类别；无夹心是明确状态。",
-      "values": [
-        "No Filling / 无夹心",
-        "Fruit-Based / 水果夹心",
-        "Cream-Based / 奶油夹心",
-        "Caramel-Based / 焦糖夹心",
-        "Nut-Based / 坚果夹心",
-        "Syrup-Based / 糖浆夹心"
-      ],
       "dialogueExample": "我想要焦糖夹心的。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6898,14 +4943,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外层包衣",
       "cardinality": "multi_max_2",
       "definition": "糖果表面的主要包衣类型。",
-      "valueLevel": "全部值是表面包衣体系。",
-      "values": [
-        "No Coating / 无包衣",
-        "Sugar-Coated / 糖衣",
-        "Sour Sugar / 酸砂糖",
-        "Chocolate-Coated / 巧克力包衣",
-        "Yogurt-Coated / 酸奶包衣"
-      ],
       "dialogueExample": "想要外面有酸砂糖的。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6922,13 +4959,7 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖状态",
       "cardinality": "single",
       "definition": "配方对糖含量的明确声明状态。",
-      "valueLevel": "全部值是营养声明状态，不等同于感知甜度。",
-      "values": [
-        "Regular Sugar / 常规含糖",
-        "Reduced Sugar / 减糖",
-        "Sugar-Free / 无糖"
-      ],
-      "dialogueExample": "想要无糖口香糖或者无糖硬糖。",
+      "dialogueExample": "我想要无糖的软糖。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
       "categoryKey": "confectionery",
@@ -6944,12 +4975,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "软糖类型",
       "cardinality": "single",
       "definition": "软糖在配方结构和咀嚼方式上的主要消费类型。",
-      "valueLevel": "全部值是互斥的软糖类型，不把酸味、包衣、夹心或造型混入。",
-      "values": [
-        "Gummy Candy / 凝胶软糖",
-        "Taffy / 太妃拉糖",
-        "Fruit Chew / 水果咀嚼糖"
-      ],
       "dialogueExample": "我更喜欢凝胶软糖，不想要太妃拉糖。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6966,12 +4991,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咀嚼硬度",
       "cardinality": "single",
       "definition": "咀嚼时从柔软到紧实的阻力。",
-      "valueLevel": "全部值位于同一咀嚼硬度序列。",
-      "values": [
-        "Soft / 柔软",
-        "Medium / 适中",
-        "Firm / 紧实"
-      ],
       "dialogueExample": "想要软一点、不要太费牙的。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -6988,14 +5007,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "造型主题",
       "cardinality": "single",
       "definition": "软糖成品最主要的造型主题。",
-      "valueLevel": "全部值是造型主题家族。",
-      "values": [
-        "Bears / 熊形",
-        "Worms / 虫形",
-        "Rings / 圆环",
-        "Fruit Shapes / 水果形",
-        "Abstract Shapes / 抽象造型"
-      ],
       "dialogueExample": "聚会分享想要熊形软糖。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -7012,14 +5023,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "凝胶基底",
       "cardinality": "single",
       "definition": "形成软糖主体凝胶或韧性结构的主要配方基底。",
-      "valueLevel": "全部值是成型凝胶基底，不把糖、风味或功能成分混入。",
-      "values": [
-        "Gelatin-Based / 明胶基底",
-        "Pectin-Based / 果胶基底",
-        "Starch-Based / 淀粉基底",
-        "Agar-Based / 琼脂基底",
-        "Mixed Gelling System / 混合凝胶体系"
-      ],
       "dialogueExample": "我想要果胶基底的软糖。",
       "scopeId": "confectionery.chewy_candy",
       "scopeType": "subtype",
@@ -7036,12 +5039,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "品牌",
       "cardinality": "single",
       "definition": "商品对消费者公开使用的品牌；不把卖家名、店铺名或描述性短语当作品牌。",
-      "valueLevel": "全部值必须是经过验证的消费品牌名称。",
-      "values": [
-        "Nestle / 雀巢",
-        "Coca-Cola / 可口可乐",
-        "Lindt / 瑞士莲"
-      ],
       "dialogueExample": "我更想要一个熟悉品牌的食品。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7058,13 +5055,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "相对价格档位",
       "cardinality": "single",
       "definition": "按 subtype 内可比规格归一化后的价格档位，不直接比较不同食品的原始总价。",
-      "valueLevel": "全部值是相对市场档位，不混入具体金额或促销状态。",
-      "values": [
-        "Budget / 经济型",
-        "Mid-Range / 中档",
-        "Premium / 高端",
-        "Luxury / 奢华"
-      ],
       "dialogueExample": "这次想选中等价位，不需要最贵的。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7081,13 +5071,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "原产国家",
       "cardinality": "single",
       "definition": "商品本体生产或加工的国家，不使用卖家所在地或进口商地址。",
-      "valueLevel": "全部值使用国家层级，不与地区、城市或 cuisine 混在一起。",
-      "values": [
-        "United States / 美国",
-        "Japan / 日本",
-        "Italy / 意大利",
-        "Mexico / 墨西哥"
-      ],
       "dialogueExample": "这次想试试日本产的食品。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7104,14 +5087,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "风味",
       "cardinality": "multi_max_2",
       "definition": "糖果主体的主要命名风味。",
-      "valueLevel": "全部值是具体风味身份。",
-      "values": [
-        "Mint / 薄荷",
-        "Strawberry / 草莓",
-        "Cherry / 樱桃",
-        "Chocolate / 巧克力",
-        "Caramel / 焦糖"
-      ],
       "dialogueExample": "想要薄荷或者樱桃味的糖。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7128,12 +5103,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "甜度",
       "cardinality": "single",
       "definition": "糖果的整体感知甜度。",
-      "valueLevel": "全部值位于同一甜度序列。",
-      "values": [
-        "Low / 低甜",
-        "Moderate / 中甜",
-        "High / 高甜"
-      ],
       "dialogueExample": "想吃糖，但不要甜得发腻。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7150,12 +5119,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "咀嚼软硬度",
       "cardinality": "single",
       "definition": "口香糖开始稳定咀嚼后主体的软硬程度。",
-      "valueLevel": "全部值位于同一咀嚼软硬序列，不使用 Crunchy 或 Aerated 等不适合口香糖的通用糖果值。",
-      "values": [
-        "Soft / 柔软",
-        "Medium / 适中",
-        "Firm / 紧实"
-      ],
       "dialogueExample": "我更喜欢咬起来柔软的口香糖。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7172,15 +5135,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "夹心类型",
       "cardinality": "multi_max_2",
       "definition": "糖果内部主要夹心的原料基底。",
-      "valueLevel": "全部值是夹心基底类别；无夹心是明确状态。",
-      "values": [
-        "No Filling / 无夹心",
-        "Fruit-Based / 水果夹心",
-        "Cream-Based / 奶油夹心",
-        "Caramel-Based / 焦糖夹心",
-        "Nut-Based / 坚果夹心",
-        "Syrup-Based / 糖浆夹心"
-      ],
       "dialogueExample": "我想要焦糖夹心的。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7197,14 +5151,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "外层包衣",
       "cardinality": "multi_max_2",
       "definition": "糖果表面的主要包衣类型。",
-      "valueLevel": "全部值是表面包衣体系。",
-      "values": [
-        "No Coating / 无包衣",
-        "Sugar-Coated / 糖衣",
-        "Sour Sugar / 酸砂糖",
-        "Chocolate-Coated / 巧克力包衣",
-        "Yogurt-Coated / 酸奶包衣"
-      ],
       "dialogueExample": "想要外面有酸砂糖的。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7221,12 +5167,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "含糖状态",
       "cardinality": "single",
       "definition": "配方对糖含量的明确声明状态。",
-      "valueLevel": "全部值是营养声明状态，不等同于感知甜度。",
-      "values": [
-        "Regular Sugar / 常规含糖",
-        "Reduced Sugar / 减糖",
-        "Sugar-Free / 无糖"
-      ],
       "dialogueExample": "想要无糖口香糖或者无糖硬糖。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7243,12 +5183,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "口香糖类型",
       "cardinality": "single",
       "definition": "口香糖的主要使用类型。",
-      "valueLevel": "全部值是口香糖消费类型。",
-      "values": [
-        "Chewing Gum / 咀嚼口香糖",
-        "Bubble Gum / 泡泡糖",
-        "Dental Gum / 口腔护理口香糖"
-      ],
       "dialogueExample": "想要普通咀嚼口香糖，不要泡泡糖。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7265,13 +5199,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "商品形态",
       "cardinality": "single",
       "definition": "单颗口香糖的主要物理形态。",
-      "valueLevel": "全部值是口香糖物理形态。",
-      "values": [
-        "Stick / 片状",
-        "Pellet / 粒状",
-        "Tablet / 片剂状",
-        "Gumball / 球形"
-      ],
       "dialogueExample": "想要粒状口香糖，不要大片的。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7288,12 +5215,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "明确功能",
       "cardinality": "multi_max_2",
       "definition": "包装明确声明的非医疗性口腔功能。",
-      "valueLevel": "全部值是口腔使用功能，不混入味道或成分。",
-      "values": [
-        "Breath Freshening / 清新口气",
-        "Dental Care / 牙齿护理",
-        "Whitening / 美白"
-      ],
       "dialogueExample": "想要能清新口气的。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",
@@ -7310,14 +5231,6 @@ window.FOOD_ATTRIBUTE_AUDIT_DATA = {
       "zh": "主要甜味剂",
       "cardinality": "multi_max_2",
       "definition": "口香糖配方中提供甜味的主要糖或代糖成分。",
-      "valueLevel": "全部值是具体甜味剂；sugar_status 继续表达常规含糖、减糖或无糖声明。",
-      "values": [
-        "Sugar / 糖",
-        "Xylitol / 木糖醇",
-        "Sorbitol / 山梨糖醇",
-        "Aspartame / 阿斯巴甜",
-        "Stevia / 甜菊糖"
-      ],
       "dialogueExample": "找以木糖醇为主要甜味剂的口香糖。",
       "scopeId": "confectionery.gum",
       "scopeType": "subtype",

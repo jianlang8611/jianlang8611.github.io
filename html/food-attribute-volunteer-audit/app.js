@@ -57,7 +57,7 @@
   }
 
   function storageKey(name) {
-    return `personamir-food-attribute-volunteer:${data.sourceVersion}:${slugify(name)}`;
+    return `personamir-food-attribute-volunteer:${data.sourceVersion}:${data.sourceSha256}:${slugify(name)}`;
   }
 
   function emptyReview() {
@@ -131,7 +131,7 @@
   }
 
   function searchable(record) {
-    return [record.key, record.zh, record.definition, record.valueLevel, record.dialogueExample, ...record.values]
+    return [record.key, record.zh, record.definition, record.dialogueExample]
       .join(" ").toLocaleLowerCase();
   }
 
@@ -164,7 +164,7 @@
         </div>
         <label class="issue-field ${issueSelected ? "visible" : ""}">
           <span>问题说明 <strong>必填</strong></span>
-          <textarea data-issue-input rows="3" maxlength="1200" ${issueSelected ? "required" : ""} placeholder="请具体说明属性、规则或值域存在的问题">${escapeHtml(review.issue)}</textarea>
+          <textarea data-issue-input rows="3" maxlength="1200" ${issueSelected ? "required" : ""} placeholder="请具体说明属性本身存在的问题；本轮不评论属性值">${escapeHtml(review.issue)}</textarea>
           <small class="${missingIssue ? "show" : ""}">选择“有问题”后必须填写说明。</small>
         </label>
       </div>`;
@@ -183,8 +183,6 @@
             <span class="cardinality">${escapeHtml(cardinalityLabel(record.cardinality))}</span>
           </header>
           <p class="definition">${escapeHtml(record.definition)}</p>
-          <p class="value-rule"><strong>值域规则</strong>${escapeHtml(record.valueLevel)}</p>
-          <div class="value-list">${record.values.map((value) => `<span>${escapeHtml(value)}</span>`).join("")}</div>
           <p class="dialogue-example"><strong>对话示例</strong>${escapeHtml(record.dialogueExample)}</p>
           ${renderReview(record)}
         </div>
