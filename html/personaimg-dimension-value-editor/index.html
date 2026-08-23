@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG 属性与值域管理</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <p class="eyebrow">PersonaIMG</p>
+        <h1>属性与值域管理</h1>
+        <p class="scope" id="scope">正在读取发布数据</p>
+      </div>
+      <div class="save-state" aria-live="polite">
+        <strong id="save-state">正在初始化</strong>
+        <span id="change-summary"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="category-tabs" id="category-tabs" aria-label="大类"></nav>
+
+    <div class="toolbar">
+      <label class="search-wrap">
+        <span class="sr-only">搜索属性和值域</span>
+        <input id="search" type="search" placeholder="搜索中英文属性、说明或取值">
+      </label>
+      <label class="check-control">
+        <input id="changed-only" type="checkbox">
+        <span>只看改动</span>
+      </label>
+      <button class="button" id="import-button" type="button">导入 JSON</button>
+      <button class="button primary" id="export-button" type="button">导出 results JSON</button>
+      <button class="button danger-text" id="reset-button" type="button">恢复发布版本</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </div>
+
+    <div class="status-strip" id="status-strip" aria-live="polite">浏览器草稿已启用</div>
+    <nav class="group-tabs" id="group-tabs" aria-label="父类与子类"></nav>
+
+    <section class="section-head" id="section-head"></section>
+    <section class="dimension-list" id="dimension-list">
+      <div class="empty">正在载入属性</div>
+    </section>
+  </main>
+
+  <dialog id="dimension-dialog">
+    <form method="dialog" id="dimension-form">
+      <header class="dialog-head">
+        <div>
+          <p class="dialog-kicker" id="dialog-kicker">属性</p>
+          <h2 id="dialog-title">编辑属性</h2>
+        </div>
+        <button class="icon-button" type="button" id="dialog-close" title="关闭" aria-label="关闭">×</button>
+      </header>
+      <div class="dialog-body">
+        <input id="dimension-id" type="hidden">
+        <label class="field">
+          <span>所属分组</span>
+          <select id="dimension-group" required></select>
+        </label>
+        <div class="two-column">
+          <label class="field">
+            <span>Dimension</span>
+            <input id="dimension-en" required maxlength="160">
+          </label>
+          <label class="field">
+            <span>属性中文名</span>
+            <input id="dimension-zh" required maxlength="160">
+          </label>
+        </div>
+        <label class="field">
+          <span>属性解释</span>
+          <textarea id="dimension-explanation" rows="4" required></textarea>
+        </label>
+        <label class="field">
+          <span>对话可表达性</span>
+          <textarea id="dimension-rationale" rows="3" required></textarea>
+        </label>
+      </div>
+      <footer class="dialog-actions">
+        <button class="button" type="button" id="dialog-cancel">取消</button>
+        <button class="button primary" type="submit">保存属性</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

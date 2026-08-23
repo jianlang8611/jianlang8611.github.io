@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG 值域编辑器</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #66737d;
+      --line: #d8e0e4;
+      --paper: #ffffff;
+      --canvas: #f3f6f7;
+      --header: #183646;
+      --teal: #087f72;
+      --teal-soft: #e8f5f2;
+      --amber: #a36108;
+      --amber-soft: #fff5df;
+      --red: #b13a3a;
+      --red-soft: #fff0f0;
+      --shadow: 0 5px 18px rgba(24, 54, 70, .07);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--canvas); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.45; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+
+    .site-header { background: var(--header); color: #fff; border-bottom: 4px solid var(--teal); }
+    .header-inner { max-width: 1460px; margin: 0 auto; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .eyebrow { margin: 0 0 3px; color: #9dd5cc; font-size: 12px; font-weight: 800; letter-spacing: 0; }
+    h1 { margin: 0; font-size: 27px; letter-spacing: 0; }
+    .scope { margin: 5px 0 0; color: #d4e3e8; font-size: 14px; }
+    .header-status { min-width: 240px; text-align: right; }
+    .header-status strong { display: block; font-size: 16px; }
+    .header-status span { display: block; margin-top: 3px; color: #c6d8df; font-size: 12px; }
+
+    main { max-width: 1460px; margin: 0 auto; padding: 20px 28px 48px; }
+    .toolbar { display: grid; grid-template-columns: minmax(260px, 1fr) auto; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .search { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); padding: 9px 12px; color: var(--ink); }
+    .search:focus, .value-input:focus { outline: 2px solid rgba(8, 127, 114, .22); border-color: var(--teal); }
+    .button { min-height: 40px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); color: var(--ink); padding: 8px 13px; font-weight: 700; }
+    .button:hover { border-color: var(--teal); color: var(--teal); }
+    .save-strip { min-height: 40px; border: 1px solid #b7d6d1; background: var(--teal-soft); color: #08665d; padding: 9px 12px; margin-bottom: 16px; font-size: 13px; }
+    .save-strip.saving { border-color: #e1c38e; background: var(--amber-soft); color: var(--amber); }
+    .save-strip.error { border-color: #e0abab; background: var(--red-soft); color: var(--red); }
+
+    .category-tabs { display: grid; grid-template-columns: repeat(3, minmax(160px, 240px)); gap: 8px; margin-bottom: 14px; }
+    .category-tab { min-height: 42px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); color: var(--muted); padding: 8px 13px; text-align: left; font-weight: 800; }
+    .category-tab:hover { border-color: var(--teal); color: var(--teal); }
+    .category-tab[aria-selected="true"] { border-color: var(--teal); background: var(--teal-soft); color: var(--header); box-shadow: inset 3px 0 0 var(--teal); }
+
+    .group-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--paper); box-shadow: var(--shadow); margin-bottom: 18px; }
+    .group-tab { min-height: 66px; border: 0; border-right: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 9px 12px; text-align: left; }
+    .group-tab:last-child { border-right: 0; }
+    .group-tab:hover { background: #f8fbfb; }
+    .group-tab[aria-selected="true"] { background: var(--teal-soft); color: var(--header); box-shadow: inset 0 -3px 0 var(--teal); }
+    .tab-title { display: block; font-size: 15px; font-weight: 800; }
+    .tab-meta { display: block; margin-top: 2px; font-size: 12px; color: var(--teal); }
+
+    .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0 0 12px; }
+    .section-heading h2 { margin: 0; font-size: 21px; letter-spacing: 0; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .dimension-list { display: grid; gap: 12px; }
+    .dimension-card { border: 1px solid var(--line); border-radius: 6px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
+    .card-head { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(320px, 1.6fr) auto; align-items: start; gap: 18px; padding: 15px 17px; border-bottom: 1px solid var(--line); }
+    .dimension-title { margin: 0; color: var(--header); font-size: 17px; letter-spacing: 0; }
+    .dimension-title span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .dimension-copy { margin: 0; color: #40515b; font-size: 13px; }
+    .card-save { min-width: 94px; color: var(--teal); font-size: 12px; font-weight: 800; text-align: right; }
+    .card-save.dirty, .card-save.saving { color: var(--amber); }
+    .card-save.error { color: var(--red); }
+
+    .values { padding: 12px 17px 15px; }
+    .value-columns, .value-row { display: grid; grid-template-columns: 34px minmax(180px, 1fr) minmax(180px, 1fr) 112px; gap: 9px; align-items: center; }
+    .value-columns { margin-bottom: 6px; color: var(--muted); font-size: 11px; font-weight: 800; }
+    .value-row { margin-top: 7px; }
+    .value-index { color: var(--muted); font-size: 12px; text-align: center; }
+    .value-input { width: 100%; min-height: 38px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); padding: 7px 9px; }
+    .row-actions { display: grid; grid-template-columns: repeat(3, 34px); justify-content: end; gap: 5px; }
+    .icon-button { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--muted); font-weight: 800; line-height: 1; }
+    .icon-button:hover { border-color: var(--teal); color: var(--teal); }
+    .icon-button.danger:hover { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+    .icon-button:disabled { cursor: default; opacity: .35; }
+    .add-value { margin-top: 11px; border: 1px solid #abd0ca; border-radius: 4px; background: var(--teal-soft); color: #08665d; padding: 7px 10px; font-weight: 750; }
+    .add-value:hover { border-color: var(--teal); }
+    .empty { border: 1px dashed #aebec6; background: var(--paper); color: var(--muted); padding: 34px; text-align: center; }
+
+    @media (max-width: 980px) {
+      .group-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .group-tab:nth-child(3n) { border-right: 0; }
+      .group-tab:nth-child(-n + 3) { border-bottom: 1px solid var(--line); }
+      .card-head { grid-template-columns: 1fr auto; }
+      .dimension-copy { grid-column: 1 / -1; grid-row: 2; }
+    }
+    @media (max-width: 680px) {
+      .header-inner, main { padding-left: 14px; padding-right: 14px; }
+      .header-inner { display: block; }
+      .header-status { margin-top: 12px; text-align: left; }
+      .toolbar { grid-template-columns: 1fr; }
+      .category-tabs { grid-template-columns: 1fr; }
+      .group-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .group-tab:nth-child(3n) { border-right: 1px solid var(--line); }
+      .group-tab:nth-child(2n) { border-right: 0; }
+      .group-tab:nth-child(-n + 4) { border-bottom: 1px solid var(--line); }
+      .card-head { grid-template-columns: 1fr; gap: 8px; }
+      .dimension-copy, .card-save { grid-column: auto; grid-row: auto; text-align: left; }
+      .value-columns { display: none; }
+      .value-row { grid-template-columns: 28px 1fr 102px; align-items: start; }
+      .value-input[data-language="zh"] { grid-column: 2; }
+      .row-actions { grid-column: 3; grid-row: 1 / span 2; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">PersonaIMG · Local Workspace</p>
+        <h1 id="page-title">值域编辑器</h1>
+        <p class="scope" id="scope">正在读取本地数据</p>
+      </div>
+      <div class="header-status" aria-live="polite">
+        <strong id="connection-status">正在连接写入服务</strong>
+        <span id="revision-status"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="category-tabs" id="category-tabs" aria-label="已完成的类别"></nav>
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="搜索属性或取值" aria-label="搜索属性或取值">
+      <button class="button" id="reload" type="button">重新载入</button>
+    </div>
+    <div class="save-strip" id="save-strip" aria-live="polite">正在连接本地写入服务</div>
+    <nav class="group-tabs" id="group-tabs" aria-label="类别分组"></nav>
+    <section id="workspace"><div class="empty">正在载入值域</div></section>
+  </main>
+
+  <script>
+    (() => {
+      const SAVE_PATH = "/api/value-domain";
+      const categoryTabs = document.querySelector("#category-tabs");
+      const groupTabs = document.querySelector("#group-tabs");
+      const workspace = document.querySelector("#workspace");
+      const searchInput = document.querySelector("#search");
+      const reloadButton = document.querySelector("#reload");
+      const saveStrip = document.querySelector("#save-strip");
+      const connectionStatus = document.querySelector("#connection-status");
+      const revisionStatus = document.querySelector("#revision-status");
+      const scope = document.querySelector("#scope");
+      const pageTitle = document.querySelector("#page-title");
+
+      let report;
+      let activeCategoryId = "food";
+      let activeGroupId = "";
+      let query = "";
+      const dimensionById = new Map();
+      const savedById = new Map();
+      const saveState = new Map();
+      const timers = new Map();
+      const saving = new Set();
+      const queued = new Set();
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+      }
+
+      function cloneValues(values) {
+        return Array.isArray(values) ? values.map(value => String(value)) : [];
+      }
+
+      function valuesEqual(first, second) {
+        return first.length === second.length && first.every((value, index) => value === second[index]);
+      }
+
+      function setGlobalStatus(message, state = "saved") {
+        saveStrip.textContent = message;
+        saveStrip.className = `save-strip ${state === "saved" ? "" : state}`.trim();
+      }
+
+      function setCardStatus(dimensionId, state, message) {
+        saveState.set(dimensionId, { state, message });
+        const element = document.querySelector(`[data-save-status="${CSS.escape(dimensionId)}"]`);
+        if (element) {
+          element.className = `card-save ${state}`.trim();
+          element.textContent = message;
+        }
+        updateGlobalStatus();
+      }
+
+      function updateGlobalStatus() {
+        const states = [...saveState.values()];
+        const errors = states.filter(item => item.state === "error").length;
+        const pending = states.filter(item => item.state === "dirty" || item.state === "saving").length;
+        if (errors) setGlobalStatus(`${errors} 个属性保存失败`, "error");
+        else if (pending) setGlobalStatus(`${pending} 个属性等待写回`, "saving");
+        else setGlobalStatus("所有修改均已实时写回本地", "saved");
+      }
+
+      function hasPendingWrites() {
+        return [...saveState.values()].some(item => item.state === "dirty" || item.state === "saving");
+      }
+
+      function indexReport() {
+        dimensionById.clear();
+        savedById.clear();
+        saveState.clear();
+        report.groups.forEach(group => group.final_dimensions.forEach(dimension => {
+          dimensionById.set(dimension.id, dimension);
+          savedById.set(dimension.id, {
+            en: cloneValues(dimension.value_domain),
+            zh: cloneValues(dimension.value_domain_zh),
+          });
+          saveState.set(dimension.id, { state: "saved", message: "已写回" });
+        }));
+      }
+
+      function renderTabs() {
+        groupTabs.innerHTML = report.groups.map(group => {
+          const valueCount = group.final_dimensions.reduce((sum, dimension) => sum + dimension.value_domain.length, 0);
+          return `<button class="group-tab" type="button" data-group-id="${escapeHtml(group.group_id)}" aria-selected="${group.group_id === activeGroupId}">
+            <span class="tab-title">${escapeHtml(group.group_zh)} · ${escapeHtml(group.group)}</span>
+            <span class="tab-meta">${group.final_dimensions.length} 属性 · ${valueCount} 值</span>
+          </button>`;
+        }).join("");
+      }
+
+      function renderCategoryTabs() {
+        const categories = report?.available_categories || [];
+        categoryTabs.innerHTML = categories.map(category => `<button class="category-tab" type="button" data-category-id="${escapeHtml(category.category_id)}" aria-selected="${category.category_id === activeCategoryId}">${escapeHtml(category.category_zh)} · ${escapeHtml(category.category)}</button>`).join("");
+      }
+
+      function matchesQuery(dimension) {
+        if (!query) return true;
+        const text = [dimension.dimension, dimension.dimension_zh, ...dimension.value_domain, ...dimension.value_domain_zh].join(" ").toLowerCase();
+        return text.includes(query);
+      }
+
+      function valueRows(dimension) {
+        return dimension.value_domain.map((value, index) => `<div class="value-row" data-value-row="${index}">
+          <span class="value-index">${index + 1}</span>
+          <input class="value-input" data-dimension-id="${escapeHtml(dimension.id)}" data-index="${index}" data-language="en" value="${escapeHtml(value)}" aria-label="${escapeHtml(dimension.dimension)} English value ${index + 1}">
+          <input class="value-input" data-dimension-id="${escapeHtml(dimension.id)}" data-index="${index}" data-language="zh" value="${escapeHtml(dimension.value_domain_zh[index])}" aria-label="${escapeHtml(dimension.dimension_zh)} 中文值 ${index + 1}">
+          <span class="row-actions">
+            <button class="icon-button" type="button" data-action="up" data-dimension-id="${escapeHtml(dimension.id)}" data-index="${index}" title="上移" aria-label="上移" ${index === 0 ? "disabled" : ""}>↑</button>
+            <button class="icon-button" type="button" data-action="down" data-dimension-id="${escapeHtml(dimension.id)}" data-index="${index}" title="下移" aria-label="下移" ${index === dimension.value_domain.length - 1 ? "disabled" : ""}>↓</button>
+            <button class="icon-button danger" type="button" data-action="remove" data-dimension-id="${escapeHtml(dimension.id)}" data-index="${index}" title="删除该值" aria-label="删除该值">×</button>
+          </span>
+        </div>`).join("");
+      }
+
+      function dimensionCard(dimension) {
+        const status = saveState.get(dimension.id) || { state: "saved", message: "已写回" };
+        return `<article class="dimension-card" data-card-id="${escapeHtml(dimension.id)}">
+          <header class="card-head">
+            <h3 class="dimension-title">${escapeHtml(dimension.dimension)}<span>${escapeHtml(dimension.dimension_zh)}</span></h3>
+            <p class="dimension-copy">${escapeHtml(dimension.explanation_zh)}</p>
+            <span class="card-save ${status.state}" data-save-status="${escapeHtml(dimension.id)}">${escapeHtml(status.message)}</span>
+          </header>
+          <div class="values">
+            <div class="value-columns"><span>#</span><span>English</span><span>中文</span><span>排序 / 删除</span></div>
+            <div data-value-list="${escapeHtml(dimension.id)}">${valueRows(dimension)}</div>
+            <button class="add-value" type="button" data-action="add" data-dimension-id="${escapeHtml(dimension.id)}">+ 添加取值</button>
+          </div>
+        </article>`;
+      }
+
+      function renderWorkspace() {
+        const group = report.groups.find(item => item.group_id === activeGroupId) || report.groups[0];
+        if (!group) {
+          workspace.innerHTML = '<div class="empty">没有可审核的 Animal 值域</div>';
+          return;
+        }
+        const dimensions = group.final_dimensions.filter(matchesQuery);
+        workspace.innerHTML = `<div class="section-heading"><h2>${escapeHtml(group.group_zh)} <span>${escapeHtml(group.group)}</span></h2><p>${dimensions.length} / ${group.final_dimensions.length} 个属性</p></div>
+          <div class="dimension-list">${dimensions.length ? dimensions.map(dimensionCard).join("") : '<div class="empty">当前分组没有匹配结果</div>'}</div>`;
+      }
+
+      function render() {
+        renderCategoryTabs();
+        renderTabs();
+        renderWorkspace();
+        updateGlobalStatus();
+      }
+
+      function scheduleSave(dimensionId, delay = 700) {
+        clearTimeout(timers.get(dimensionId));
+        setCardStatus(dimensionId, "dirty", "等待写回");
+        timers.set(dimensionId, setTimeout(() => saveDimension(dimensionId), delay));
+      }
+
+      function validDimensionValues(dimension) {
+        if (!dimension.value_domain.length || dimension.value_domain.length !== dimension.value_domain_zh.length) return false;
+        if (dimension.value_domain.some(value => !value.trim()) || dimension.value_domain_zh.some(value => !value.trim())) return false;
+        if (new Set(dimension.value_domain).size !== dimension.value_domain.length) return false;
+        if (new Set(dimension.value_domain_zh).size !== dimension.value_domain_zh.length) return false;
+        return true;
+      }
+
+      async function saveDimension(dimensionId) {
+        clearTimeout(timers.get(dimensionId));
+        timers.delete(dimensionId);
+        if (saving.has(dimensionId)) {
+          queued.add(dimensionId);
+          return;
+        }
+        const dimension = dimensionById.get(dimensionId);
+        const previous = savedById.get(dimensionId);
+        if (!dimension || !previous) return;
+        if (!validDimensionValues(dimension)) {
+          setCardStatus(dimensionId, "error", "请补全并去重");
+          return;
+        }
+        if (valuesEqual(dimension.value_domain, previous.en) && valuesEqual(dimension.value_domain_zh, previous.zh)) {
+          setCardStatus(dimensionId, "saved", "已写回");
+          return;
+        }
+        saving.add(dimensionId);
+        setCardStatus(dimensionId, "saving", "正在写回");
+        try {
+          const response = await fetch(SAVE_PATH, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              dimension_id: dimensionId,
+              value_domain: dimension.value_domain,
+              value_domain_zh: dimension.value_domain_zh,
+              expected_value_domain: previous.en,
+              expected_value_domain_zh: previous.zh,
+            }),
+            cache: "no-store",
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.ok) throw new Error(result.error || `HTTP ${response.status}`);
+          savedById.set(dimensionId, { en: cloneValues(result.value_domain), zh: cloneValues(result.value_domain_zh) });
+          report.revision = result.revision;
+          report.last_edited_at = result.saved_at;
+          report.value_count = result.total_value_count;
+          revisionStatus.textContent = `本地修订 ${result.revision} · ${result.total_value_count} 个值`;
+          setCardStatus(dimensionId, "saved", "已实时写回");
+        } catch (error) {
+          setCardStatus(dimensionId, "error", error.message);
+        } finally {
+          saving.delete(dimensionId);
+          if (queued.delete(dimensionId)) scheduleSave(dimensionId, 50);
+        }
+      }
+
+      function moveValue(dimension, from, to) {
+        if (to < 0 || to >= dimension.value_domain.length) return;
+        [dimension.value_domain[from], dimension.value_domain[to]] = [dimension.value_domain[to], dimension.value_domain[from]];
+        [dimension.value_domain_zh[from], dimension.value_domain_zh[to]] = [dimension.value_domain_zh[to], dimension.value_domain_zh[from]];
+        scheduleSave(dimension.id, 150);
+        renderWorkspace();
+      }
+
+      async function loadReport() {
+        setGlobalStatus("正在读取本地值域", "saving");
+        try {
+          const response = await fetch(`/api/value-domains?category=${encodeURIComponent(activeCategoryId)}`, { cache: "no-store" });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.ok) throw new Error(result.error || `HTTP ${response.status}`);
+          report = result;
+          activeCategoryId = report.category_id;
+          activeGroupId = activeGroupId && report.groups.some(group => group.group_id === activeGroupId) ? activeGroupId : report.groups[0].group_id;
+          indexReport();
+          pageTitle.textContent = `${report.category} 值域编辑器`;
+          document.title = `PersonaIMG ${report.category} 值域编辑器`;
+          scope.textContent = `${report.dimension_count} 个属性 · ${report.value_count} 个值 · 仅限本地`;
+          connectionStatus.textContent = "本地实时写回已连接";
+          revisionStatus.textContent = `本地修订 ${report.revision}`;
+          render();
+        } catch (error) {
+          connectionStatus.textContent = "写入服务未连接";
+          setGlobalStatus(`载入失败：${error.message}`, "error");
+          workspace.innerHTML = '<div class="empty">请通过本地值域服务打开此页面</div>';
+        }
+      }
+
+      categoryTabs.addEventListener("click", event => {
+        const button = event.target.closest("[data-category-id]");
+        if (!button || button.dataset.categoryId === activeCategoryId) return;
+        if (hasPendingWrites()) {
+          setGlobalStatus("请等待当前修改写回后再切换类别", "saving");
+          return;
+        }
+        activeCategoryId = button.dataset.categoryId;
+        activeGroupId = "";
+        query = "";
+        searchInput.value = "";
+        loadReport();
+      });
+
+      groupTabs.addEventListener("click", event => {
+        const button = event.target.closest("[data-group-id]");
+        if (!button) return;
+        activeGroupId = button.dataset.groupId;
+        render();
+      });
+
+      workspace.addEventListener("input", event => {
+        const input = event.target.closest(".value-input");
+        if (!input) return;
+        const dimension = dimensionById.get(input.dataset.dimensionId);
+        const index = Number(input.dataset.index);
+        if (!dimension || !Number.isInteger(index)) return;
+        if (input.dataset.language === "en") dimension.value_domain[index] = input.value;
+        else dimension.value_domain_zh[index] = input.value;
+        scheduleSave(dimension.id);
+      });
+
+      workspace.addEventListener("focusout", event => {
+        const input = event.target.closest(".value-input");
+        if (input) scheduleSave(input.dataset.dimensionId, 120);
+      });
+
+      workspace.addEventListener("click", event => {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
+        const dimension = dimensionById.get(button.dataset.dimensionId);
+        if (!dimension) return;
+        const index = Number(button.dataset.index);
+        if (button.dataset.action === "add") {
+          dimension.value_domain.push("");
+          dimension.value_domain_zh.push("");
+          setCardStatus(dimension.id, "dirty", "请填写新值");
+          renderWorkspace();
+          const inputs = document.querySelectorAll(`[data-card-id="${CSS.escape(dimension.id)}"] .value-input[data-language="en"]`);
+          inputs[inputs.length - 1]?.focus();
+        } else if (button.dataset.action === "remove") {
+          if (dimension.value_domain.length === 1) {
+            setCardStatus(dimension.id, "error", "至少保留一个值");
+            return;
+          }
+          dimension.value_domain.splice(index, 1);
+          dimension.value_domain_zh.splice(index, 1);
+          scheduleSave(dimension.id, 150);
+          renderWorkspace();
+        } else if (button.dataset.action === "up") moveValue(dimension, index, index - 1);
+        else if (button.dataset.action === "down") moveValue(dimension, index, index + 1);
+      });
+
+      searchInput.addEventListener("input", () => {
+        query = searchInput.value.trim().toLowerCase();
+        renderWorkspace();
+      });
+      reloadButton.addEventListener("click", () => {
+        if (hasPendingWrites()) {
+          setGlobalStatus("请等待当前修改写回后再重新载入", "saving");
+          return;
+        }
+        loadReport();
+      });
+      window.addEventListener("beforeunload", event => {
+        if (!hasPendingWrites()) return;
+        event.preventDefault();
+        event.returnValue = "";
+      });
+      loadReport();
+    })();
+  </script>
+</body>
+</html>
