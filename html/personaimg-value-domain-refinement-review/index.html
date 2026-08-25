@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG 本轮值域修改复核</title>
+  <style>
+    :root {
+      --ink: #1c2730;
+      --muted: #66747e;
+      --line: #d7dfe3;
+      --paper: #fff;
+      --canvas: #f3f6f7;
+      --navy: #153847;
+      --teal: #087f72;
+      --teal-soft: #e7f5f1;
+      --amber: #a56108;
+      --amber-soft: #fff4dc;
+      --red: #b53d3d;
+      --red-soft: #fff0f0;
+      --blue: #23699b;
+      --blue-soft: #edf6fc;
+      --shadow: 0 5px 18px rgba(21, 56, 71, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body { margin: 0; color: var(--ink); background: var(--canvas); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.5; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+
+    .site-header { color: white; background: var(--navy); border-bottom: 4px solid var(--teal); }
+    .header-inner { max-width: 1480px; margin: 0 auto; padding: 22px 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+    .eyebrow { margin: 0 0 3px; color: #9ed8cf; font-size: 12px; font-weight: 800; }
+    h1 { margin: 0; font-size: 27px; letter-spacing: 0; }
+    .scope { margin: 5px 0 0; color: #d4e3e8; font-size: 14px; }
+    .summary { display: flex; gap: 17px; align-items: end; }
+    .summary-item { min-width: 62px; text-align: right; }
+    .summary-item strong { display: block; font-size: 20px; }
+    .summary-item span { color: #c4d8df; font-size: 11px; }
+
+    main { max-width: 1480px; margin: 0 auto; padding: 18px 28px 50px; }
+    .notice { margin-bottom: 14px; border: 1px solid #b8d8d2; background: var(--teal-soft); color: #0a625b; padding: 10px 13px; font-size: 13px; }
+    .category-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+    .tab, .filter-button, .button { min-height: 38px; border: 1px solid var(--line); border-radius: 5px; background: var(--paper); color: #52616b; padding: 7px 12px; font-weight: 750; }
+    .tab:hover, .filter-button:hover, .button:hover { color: var(--teal); border-color: var(--teal); }
+    .tab[aria-selected="true"], .filter-button[aria-pressed="true"] { color: #075f57; border-color: #72b9af; background: var(--teal-soft); }
+    .toolbar { display: grid; grid-template-columns: minmax(260px, 1fr) auto auto; gap: 10px; margin-bottom: 14px; }
+    .search { min-height: 42px; width: 100%; border: 1px solid var(--line); border-radius: 5px; background: white; padding: 8px 12px; }
+    .search:focus, textarea:focus { outline: 2px solid rgba(8, 127, 114, .2); border-color: var(--teal); }
+    .status-filters { display: flex; gap: 6px; }
+    .button.primary { color: white; border-color: var(--teal); background: var(--teal); }
+
+    .progress { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 16px; color: var(--muted); font-size: 13px; }
+    .progress strong { color: var(--ink); }
+    .change-list { display: grid; gap: 12px; }
+    .change-card { border: 1px solid var(--line); border-left-width: 5px; border-radius: 6px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
+    .change-card.modified { border-left-color: var(--amber); }
+    .change-card.added { border-left-color: var(--blue); }
+    .change-card.deleted { border-left-color: var(--red); }
+    .card-head { display: grid; grid-template-columns: minmax(250px, 1fr) auto; gap: 14px; padding: 14px 16px 11px; border-bottom: 1px solid var(--line); }
+    .meta { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 5px; }
+    .badge { display: inline-flex; align-items: center; min-height: 23px; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 850; }
+    .badge.modified { color: #865008; background: var(--amber-soft); }
+    .badge.added { color: #175a88; background: var(--blue-soft); }
+    .badge.deleted { color: #9c3030; background: var(--red-soft); }
+    .group-name { color: var(--muted); font-size: 12px; }
+    h2 { margin: 0; color: var(--navy); font-size: 17px; letter-spacing: 0; }
+    h2 span { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 650; }
+    .review-controls { display: flex; gap: 6px; align-items: start; }
+    .review-button { min-height: 34px; border: 1px solid var(--line); border-radius: 4px; background: white; padding: 5px 9px; color: var(--muted); font-size: 12px; font-weight: 800; }
+    .review-button.pass.active { color: #087266; border-color: #74bdb3; background: var(--teal-soft); }
+    .review-button.issue.active { color: #a33636; border-color: #dfa6a6; background: var(--red-soft); }
+    .card-body { padding: 13px 16px 15px; }
+    .rename { margin: 0 0 11px; color: #3f505a; font-size: 13px; }
+    .rename strong { color: var(--amber); }
+    .explanation { margin: 0 0 12px; color: #40515b; font-size: 13px; }
+    .value-heading { margin: 0 0 7px; color: var(--muted); font-size: 11px; font-weight: 850; }
+    .values { display: flex; flex-wrap: wrap; gap: 7px; }
+    .value { min-width: 110px; border: 1px solid #cbd6da; border-radius: 4px; background: #f8fafb; padding: 6px 8px; }
+    .value strong, .value span { display: block; }
+    .value strong { color: #263740; font-size: 12px; }
+    .value span { margin-top: 1px; color: var(--muted); font-size: 11px; }
+    .deleted-copy { color: var(--red); font-weight: 750; }
+    details { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 9px; }
+    summary { color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 750; }
+    details .values { margin-top: 8px; opacity: .76; }
+    .comment-wrap { margin-top: 12px; }
+    textarea { width: 100%; min-height: 72px; resize: vertical; border: 1px solid #deb0b0; border-radius: 4px; background: #fffafa; padding: 8px 10px; }
+    .empty { border: 1px dashed #aab9c0; background: white; padding: 36px; color: var(--muted); text-align: center; }
+
+    @media (max-width: 800px) {
+      .header-inner { display: block; padding: 19px 15px; }
+      .scope { overflow-wrap: anywhere; }
+      .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 7px; margin-top: 14px; }
+      .summary-item { min-width: 0; text-align: left; }
+      .summary-item strong { font-size: 18px; }
+      .summary-item span { font-size: 10px; }
+      main { padding: 14px 15px 40px; }
+      .toolbar { grid-template-columns: 1fr; }
+      .status-filters { overflow-x: auto; }
+      .card-head { grid-template-columns: 1fr; }
+      .review-controls { justify-content: flex-start; }
+      .progress { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">PersonaIMG · 2026-08-25</p>
+        <h1>本轮值域修改复核</h1>
+        <p class="scope">只显示仍需确认的修改；颜色扩展与数量轴收口已通过，不再展示</p>
+      </div>
+      <div class="summary" id="summary"></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice">当前只复核物种化场景与互动、类型粒度统一、属性边界调整及导出批注的正式化处理。颜色扩展和数量轴收口已经稳定通过。</div>
+    <nav class="category-tabs" id="category-tabs" aria-label="类别筛选"></nav>
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="搜索属性、分组或中英文取值" aria-label="搜索本轮改动">
+      <div class="status-filters" id="status-filters" aria-label="改动类型筛选"></div>
+      <button class="button primary" id="export" type="button">导出复核结果</button>
+    </div>
+    <div class="progress" id="progress"></div>
+    <section class="change-list" id="change-list"><div class="empty">正在读取本轮改动</div></section>
+  </main>
+
+  <script>
+    (() => {
+      const DATA_PATH = "value_domain_refinement_2026_08_25.json";
+      const STORAGE_KEY = "personaimg_value_domain_refinement_review_2026_08_25";
+      const labels = { modified: "修改", added: "新增", deleted: "删除" };
+      const categoryTabs = document.querySelector("#category-tabs");
+      const statusFilters = document.querySelector("#status-filters");
+      const list = document.querySelector("#change-list");
+      const summary = document.querySelector("#summary");
+      const progress = document.querySelector("#progress");
+      const search = document.querySelector("#search");
+      const exportButton = document.querySelector("#export");
+      let report;
+      let activeCategory = "all";
+      let activeStatus = "all";
+      let query = "";
+      let decisions = loadDecisions();
+
+      function escapeHtml(value) {
+        return String(value ?? "").replace(/[&<>'"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+      }
+
+      function loadDecisions() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+        catch { return {}; }
+      }
+
+      function saveDecisions() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(decisions));
+        renderProgress();
+      }
+
+      function pruneDecisions() {
+        const visibleIds = new Set(report.changes.map(changeId));
+        decisions = Object.fromEntries(Object.entries(decisions).filter(([id]) => visibleIds.has(id)));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(decisions));
+      }
+
+      function changeId(change) {
+        return (change.after || change.before).id;
+      }
+
+      function valuesMarkup(dimension) {
+        if (!dimension) return "";
+        return dimension.value_domain.map((value, index) => `<div class="value"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(dimension.value_domain_zh[index])}</span></div>`).join("");
+      }
+
+      function changeSummary(change) {
+        if (!change.before || !change.after) return "";
+        const oldValues = new Set(change.before.value_domain);
+        const newValues = new Set(change.after.value_domain);
+        const added = [...newValues].filter(value => !oldValues.has(value)).length;
+        const removed = [...oldValues].filter(value => !newValues.has(value)).length;
+        const renamed = change.before.dimension !== change.after.dimension;
+        const parts = [];
+        if (renamed) parts.push("属性重新命名并收紧边界");
+        if (added) parts.push(`新增 ${added} 个值`);
+        if (removed) parts.push(`删除或替换 ${removed} 个值`);
+        return parts.join(" · ") || "说明或中文表达已调整";
+      }
+
+      function renderSummary() {
+        const s = report.summary;
+        summary.innerHTML = [
+          [s.changed_dimension_count, "本轮变化"],
+          [s.added_dimension_count, "新增"],
+          [s.modified_dimension_count, "修改"],
+          [s.deleted_dimension_count, "删除"],
+          [s.final_bilingual_value_count, "最终值域"],
+        ].map(([value, label]) => `<div class="summary-item"><strong>${value}</strong><span>${label}</span></div>`).join("");
+      }
+
+      function renderTabs() {
+        const categories = [...new Map(report.changes.map(change => [change.category_id, `${change.category_zh} · ${change.category}`])).entries()];
+        categoryTabs.innerHTML = [["all", "全部"], ...categories].map(([id, label]) => {
+          const count = id === "all" ? report.changes.length : report.changes.filter(change => change.category_id === id).length;
+          return `<button class="tab" type="button" data-category="${id}" aria-selected="${id === activeCategory}">${escapeHtml(label)} · ${count}</button>`;
+        }).join("");
+        statusFilters.innerHTML = [["all", "全部"], ["modified", "修改"], ["added", "新增"], ["deleted", "删除"]].map(([id, label]) => `<button class="filter-button" type="button" data-status="${id}" aria-pressed="${id === activeStatus}">${label}</button>`).join("");
+      }
+
+      function matches(change) {
+        if (activeCategory !== "all" && change.category_id !== activeCategory) return false;
+        if (activeStatus !== "all" && change.status !== activeStatus) return false;
+        if (!query) return true;
+        const dimensions = [change.before, change.after].filter(Boolean);
+        const text = [change.group, change.group_zh, ...dimensions.flatMap(dimension => [dimension.dimension, dimension.dimension_zh, dimension.explanation_zh, ...dimension.value_domain, ...dimension.value_domain_zh])].join(" ").toLowerCase();
+        return text.includes(query);
+      }
+
+      function cardMarkup(change) {
+        const current = change.after || change.before;
+        const id = changeId(change);
+        const decision = decisions[id] || {};
+        const rename = change.before && change.after && change.before.dimension !== change.after.dimension
+          ? `<p class="rename"><strong>命名调整</strong>：${escapeHtml(change.before.dimension)} / ${escapeHtml(change.before.dimension_zh)} → ${escapeHtml(change.after.dimension)} / ${escapeHtml(change.after.dimension_zh)}</p>`
+          : "";
+        const body = change.status === "deleted"
+          ? `<p class="deleted-copy">该属性已从最终集合删除。</p><details><summary>查看删除前的属性和值域</summary><div class="values">${valuesMarkup(change.before)}</div></details>`
+          : `${rename}<p class="explanation">${escapeHtml(change.after.explanation_zh)}</p><p class="value-heading">修改后值域 · ${change.after.value_domain.length} 个</p><div class="values">${valuesMarkup(change.after)}</div>${change.before ? `<details><summary>查看修改前值域 · ${escapeHtml(changeSummary(change))}</summary><div class="values">${valuesMarkup(change.before)}</div></details>` : ""}`;
+        return `<article class="change-card ${change.status}" data-change-id="${escapeHtml(id)}">
+          <header class="card-head">
+            <div><div class="meta"><span class="badge ${change.status}">${labels[change.status]}</span><span class="group-name">${escapeHtml(change.category_zh)} / ${escapeHtml(change.group_zh)} · ${escapeHtml(change.group)}</span></div><h2>${escapeHtml(current.dimension)}<span>${escapeHtml(current.dimension_zh)}</span></h2></div>
+            <div class="review-controls"><button class="review-button pass ${decision.status === "pass" ? "active" : ""}" type="button" data-review="pass">通过</button><button class="review-button issue ${decision.status === "issue" ? "active" : ""}" type="button" data-review="issue">有问题</button></div>
+          </header>
+          <div class="card-body">${body}<div class="comment-wrap" ${decision.status === "issue" ? "" : "hidden"}><textarea data-comment placeholder="请写下仍需调整的具体问题">${escapeHtml(decision.comment || "")}</textarea></div></div>
+        </article>`;
+      }
+
+      function renderList() {
+        const visible = report.changes.filter(matches);
+        list.innerHTML = visible.length ? visible.map(cardMarkup).join("") : '<div class="empty">当前筛选下没有本轮改动</div>';
+        renderProgress(visible.length);
+      }
+
+      function renderProgress(visibleCount) {
+        const reviewed = Object.values(decisions).filter(item => item.status).length;
+        const issues = Object.values(decisions).filter(item => item.status === "issue").length;
+        progress.innerHTML = `<span>当前显示 <strong>${visibleCount ?? report.changes.filter(matches).length}</strong> 项</span><span>已复核 <strong>${reviewed} / ${report.changes.length}</strong> 项 · 仍有问题 <strong>${issues}</strong> 项 · 状态已保存在本浏览器</span>`;
+      }
+
+      categoryTabs.addEventListener("click", event => {
+        const button = event.target.closest("[data-category]");
+        if (!button) return;
+        activeCategory = button.dataset.category;
+        renderTabs(); renderList();
+      });
+      statusFilters.addEventListener("click", event => {
+        const button = event.target.closest("[data-status]");
+        if (!button) return;
+        activeStatus = button.dataset.status;
+        renderTabs(); renderList();
+      });
+      search.addEventListener("input", () => { query = search.value.trim().toLowerCase(); renderList(); });
+      list.addEventListener("click", event => {
+        const button = event.target.closest("[data-review]");
+        if (!button) return;
+        const card = button.closest("[data-change-id]");
+        const id = card.dataset.changeId;
+        const status = button.dataset.review;
+        const current = decisions[id] || {};
+        decisions[id] = { status: current.status === status ? "" : status, comment: current.comment || "" };
+        saveDecisions(); renderList();
+      });
+      list.addEventListener("input", event => {
+        if (!event.target.matches("[data-comment]")) return;
+        const id = event.target.closest("[data-change-id]").dataset.changeId;
+        decisions[id] = { ...(decisions[id] || {}), status: "issue", comment: event.target.value };
+        saveDecisions();
+      });
+      exportButton.addEventListener("click", () => {
+        const payload = {
+          schema_version: "personaimg_value_domain_refinement_review_result_v1",
+          exported_at: new Date().toISOString(),
+          source: report.source_result,
+          refinement_revision: report.result_revision,
+          summary: {
+            total_changes: report.changes.length,
+            reviewed: Object.values(decisions).filter(item => item.status).length,
+            passed: Object.values(decisions).filter(item => item.status === "pass").length,
+            issues: Object.values(decisions).filter(item => item.status === "issue").length,
+          },
+          decisions,
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `personaimg_value_domain_refinement_review_${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      });
+
+      fetch(DATA_PATH, { cache: "no-store" })
+        .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+        .then(data => { report = data; pruneDecisions(); renderSummary(); renderTabs(); renderList(); })
+        .catch(error => { list.innerHTML = `<div class="empty">读取失败：${escapeHtml(error.message)}。请通过本地 HTTP 服务打开页面。</div>`; });
+    })();
+  </script>
+</body>
+</html>
