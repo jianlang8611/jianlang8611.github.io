@@ -15,6 +15,7 @@
       <span class="tag">Draft</span>
     </div>
     <div class="header-actions">
+      <button class="button reviewer-button" id="reviewerButton" type="button">审核人：未填写</button>
       <button class="button" id="undoButton" type="button" disabled>撤销</button>
       <button class="button" id="showDeletedButton" type="button">显示已删除</button>
       <button class="button primary" id="exportButton" type="button">导出 JSON</button>
@@ -30,6 +31,7 @@
         <div class="status-row"><span>通用属性</span><strong id="globalCount">0</strong></div>
         <div class="status-row"><span>类型专属</span><strong id="specificCount">0</strong></div>
         <div class="status-row"><span>逻辑类型</span><strong id="subtypeCount">9</strong></div>
+        <div class="status-row"><span>审核人</span><strong id="reviewerStatus">未填写</strong></div>
         <div class="status-row"><span>写回状态</span><strong id="saveStatus">等待编辑</strong></div>
       </section>
       <p class="side-note">每个专属属性只在电影命中对应逻辑类型时启用。类型可以多值，电影条目本身仍存放在同一池中。</p>
@@ -64,6 +66,7 @@
             <option value="core">只看核心</option>
             <option value="single">只看单值</option>
             <option value="multi">只看多值</option>
+            <option value="annotated">只看有批注</option>
           </select>
         </label>
       </section>
@@ -107,6 +110,47 @@
       <footer class="dialog-actions">
         <button class="button" id="cancelDialogButton" type="button">取消</button>
         <button class="button primary" type="submit">保存属性</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="annotationDialog" class="annotation-dialog">
+    <form id="annotationForm" method="dialog">
+      <header class="dialog-head">
+        <div>
+          <p id="annotationScope">ATTRIBUTE COMMENT</p>
+          <h2 id="annotationTitle">批注属性问题</h2>
+        </div>
+        <button class="icon-button" id="closeAnnotationButton" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="dialog-body">
+        <input id="annotationAttributeId" type="hidden">
+        <p class="reviewer-copy">这里只记录问题，不会修改属性名、定义或值域。请写清楚具体问题和建议处理方式。</p>
+        <label class="field"><span>问题批注</span><textarea id="annotationText" required maxlength="3000" placeholder="例如：该属性与 XXX 实质重复；建议删除，或将值域调整为……"></textarea></label>
+      </div>
+      <footer class="dialog-actions split-actions">
+        <button class="button danger-button" id="clearAnnotationButton" type="button">清除批注</button>
+        <span class="action-spacer"></span>
+        <button class="button" id="cancelAnnotationButton" type="button">取消</button>
+        <button class="button primary" type="submit">保存批注</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="reviewerDialog" class="reviewer-dialog">
+    <form id="reviewerForm" method="dialog">
+      <header class="dialog-head">
+        <div>
+          <p>REVIEWER IDENTITY</p>
+          <h2>请输入审核人姓名</h2>
+        </div>
+      </header>
+      <div class="dialog-body">
+        <p class="reviewer-copy">姓名会写入导出的 JSON，并成为导出文件名的一部分，用于区分不同志愿者的审核结果。</p>
+        <label class="field"><span>姓名</span><input id="reviewerNameInput" required maxlength="80" autocomplete="name" placeholder="例如：张三 / Zhang San"></label>
+      </div>
+      <footer class="dialog-actions">
+        <button class="button primary" type="submit">进入审核</button>
       </footer>
     </form>
   </dialog>

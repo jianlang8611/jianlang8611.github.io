@@ -1,7 +1,7 @@
 window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
   "schema": "personamir-movie-attribute-draft-v1",
-  "version": "draft-v1",
-  "updated_at": "2026-08-23T03:57:54.809Z",
+  "version": "draft-v2-human-review-followup",
+  "updated_at": "2026-08-25T10:03:57.667Z",
   "domain": {
     "key": "movie",
     "zh": "电影"
@@ -176,7 +176,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
       "dialogue_example": "要和家里人一起看，分级别太高。",
       "core": true,
       "evidence": "certification_metadata",
-      "deleted": false
+      "deleted": true
     },
     {
       "id": "g-director",
@@ -764,7 +764,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
       "dialogue_example": "和家人看，最好没有明显性内容。",
       "core": true,
       "evidence": "content_advisory",
-      "deleted": false
+      "deleted": true
     },
     {
       "id": "g-audio-format",
@@ -785,7 +785,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
       "dialogue_example": "我想找支持杜比全景声的电影。",
       "core": false,
       "evidence": "dated_offer_metadata",
-      "deleted": false
+      "deleted": true
     },
     {
       "id": "g-streaming-access",
@@ -857,7 +857,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "今晚想看大场面的动作电影。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "a-action-realism",
@@ -1025,7 +1025,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看生存压力很强的动作片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         }
       ]
     },
@@ -1097,7 +1097,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不要低俗笑话，最好全家都能看。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "c-comedic-focus",
@@ -1181,7 +1181,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我不太能接受一直让人脚趾抓地的喜剧。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "c-physical",
@@ -1244,7 +1244,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想找一部认真戏仿经典类型片的喜剧。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         }
       ]
     },
@@ -1316,7 +1316,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "更想看婚后关系，而不是初恋。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "r-outcome",
@@ -1379,7 +1379,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看温柔一点的爱情，不要太激烈。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "r-pacing",
@@ -1400,7 +1400,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我比较喜欢慢热型感情。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "r-realism",
@@ -1421,7 +1421,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看现实一点的感情，不要童话式爱情。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "r-conflict",
@@ -1463,7 +1463,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看围绕长期承诺展开的关系。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         }
       ]
     },
@@ -1535,7 +1535,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢有完整调查和取证过程的。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "cr-scale",
@@ -1640,7 +1640,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢人物立场比较灰的犯罪片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "cr-underworld",
@@ -1775,7 +1775,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不要频繁出现 jump scare。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "h-threat-source",
@@ -1817,7 +1817,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我更喜欢怪物一直不完全露面的。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "h-isolation",
@@ -1838,7 +1838,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看那种角色被困住、完全孤立无援的。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "h-psych-pressure",
@@ -1880,7 +1880,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看以逃生求存为核心的恐怖片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "h-threat-resolution",
@@ -1974,7 +1974,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看慢慢升温的，不要全程紧绷。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-twist",
@@ -1995,7 +1995,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不要完全依赖最后反转的电影。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-audience-knowledge",
@@ -2016,7 +2016,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢和主角一起发现真相。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-clue-fairness",
@@ -2037,7 +2037,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢观众也有机会推理出来的。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-investigation-complexity",
@@ -2058,7 +2058,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看调查线索层层展开的。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-time-pressure",
@@ -2079,7 +2079,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看有持续时间压力的悬疑片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-cat-mouse",
@@ -2100,7 +2100,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢双方互相算计的猫鼠游戏。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "s-narrator",
@@ -2121,7 +2121,73 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看不可靠叙述者的悬疑片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
+        },
+        {
+          "id": "s-narrative-goal",
+          "key": "suspense_narrative_goal",
+          "zh": "悬疑叙事目标",
+          "cardinality": "single",
+          "definition": "影片的主要观看目标是查明未知真相，还是摆脱已经存在的危险。",
+          "values": [
+            {
+              "value": "Solving a Mystery",
+              "zh": "查明谜团"
+            },
+            {
+              "value": "Escaping a Threat",
+              "zh": "逃离威胁"
+            }
+          ],
+          "dialogue_example": "我今天想看认真查谜团的，不想看一直逃命的惊悚片。",
+          "core": true,
+          "evidence": "synopsis_and_plot_structure",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
+        },
+        {
+          "id": "s-protagonist-role",
+          "key": "suspense_protagonist_role",
+          "zh": "悬疑主角身份",
+          "cardinality": "single",
+          "definition": "推动主要悬疑线的角色是职业调查者，还是因个人关系或意外被卷入的普通人。",
+          "values": [
+            {
+              "value": "Professional Investigator",
+              "zh": "职业调查者"
+            },
+            {
+              "value": "Personally Involved Civilian",
+              "zh": "个人卷入的普通人"
+            }
+          ],
+          "dialogue_example": "我更想看普通人意外卷进谜案，而不是职业侦探办案。",
+          "core": true,
+          "evidence": "synopsis_and_character_metadata",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
+        },
+        {
+          "id": "s-adversary-status",
+          "key": "adversary_identity_status",
+          "zh": "对手身份状态",
+          "cardinality": "single",
+          "definition": "主要威胁者在故事前期已明确，还是其身份本身构成需要揭开的核心未知。",
+          "values": [
+            {
+              "value": "Known Adversary",
+              "zh": "已知对手"
+            },
+            {
+              "value": "Hidden Identity",
+              "zh": "身份未知"
+            }
+          ],
+          "dialogue_example": "这次想看需要猜幕后对手是谁的悬疑片。",
+          "core": false,
+          "evidence": "synopsis_and_plot_structure",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
         }
       ]
     },
@@ -2214,7 +2280,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看议题成熟一点的动画。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "an-world-focus",
@@ -2277,12 +2343,12 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我更想看动作非常流畅的动画。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "an-narrative-style",
           "key": "animation_narrative_style",
-          "zh": "动画叙事取向",
+          "zh": "动画故事主题",
           "cardinality": "single",
           "definition": "动画主要呈现日常生活还是目标明确的冒险旅程。",
           "values": [
@@ -2319,7 +2385,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看对白少、主要靠画面讲故事的动画。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "an-musical",
@@ -2341,6 +2407,28 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "core": false,
           "evidence": "metadata_and_content",
           "deleted": false
+        },
+        {
+          "id": "an-known-franchise",
+          "key": "animation_franchise",
+          "zh": "动画知名系列",
+          "cardinality": "single",
+          "definition": "电影明确归属的长期动画角色、品牌或故事系列；独立原创动画不强行赋值。",
+          "values": [
+            {
+              "value": "Boonie Bears",
+              "zh": "熊出没"
+            },
+            {
+              "value": "Mickey Mouse",
+              "zh": "米老鼠"
+            }
+          ],
+          "dialogue_example": "孩子最近只想看熊出没系列，其他动画先不推荐。",
+          "core": true,
+          "evidence": "official_franchise_and_collection_metadata",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
         }
       ]
     },
@@ -2433,7 +2521,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不要反乌托邦，想看乐观未来。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-distance",
@@ -2454,7 +2542,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我更喜欢离现实很近的近未来设定。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-tech-centrality",
@@ -2475,7 +2563,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我希望科技本身就是故事核心。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-worldbuilding",
@@ -2496,7 +2584,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "想看世界观构建很完整的科幻片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-explanation",
@@ -2517,7 +2605,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢把科学设定解释清楚的电影。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-philosophy",
@@ -2538,7 +2626,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看有哲学思辨的科幻，而不是只有特效。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "sf-balance",
@@ -2559,7 +2647,73 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "这次想看思想驱动的科幻片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
+        },
+        {
+          "id": "sf-extraterrestrial-presence",
+          "key": "extraterrestrial_presence",
+          "zh": "外星生命参与度",
+          "cardinality": "single",
+          "definition": "外星生命是否实际参与主要故事，而不是只作为未出现的背景设定。",
+          "values": [
+            {
+              "value": "No Extraterrestrial Presence",
+              "zh": "无外星生命参与"
+            },
+            {
+              "value": "Central Extraterrestrial Presence",
+              "zh": "外星生命核心参与"
+            }
+          ],
+          "dialogue_example": "我想看外星生命真正参与剧情的科幻片。",
+          "core": true,
+          "evidence": "synopsis_and_character_metadata",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
+        },
+        {
+          "id": "sf-exploration-focus",
+          "key": "space_exploration_focus",
+          "zh": "太空探索比重",
+          "cardinality": "single",
+          "definition": "探索未知星球、宇宙区域或太空环境是否构成影片的主要行动目标。",
+          "values": [
+            {
+              "value": "Minimal",
+              "zh": "很少"
+            },
+            {
+              "value": "Central",
+              "zh": "核心"
+            }
+          ],
+          "dialogue_example": "我更想看以探索未知星球为核心的科幻片。",
+          "core": true,
+          "evidence": "synopsis_and_keywords",
+          "deleted": true,
+          "review_marker": "added_after_human_review_2026_08_25"
+        },
+        {
+          "id": "sf-effects-style",
+          "key": "science_fiction_effects_style",
+          "zh": "科幻特效实现方式",
+          "cardinality": "multi_max_2",
+          "definition": "科幻视觉元素主要通过实景模型、机械装置等物理特效，还是通过计算机生成的数字视觉特效实现；评价的是实现方式而非特效质量。",
+          "values": [
+            {
+              "value": "Practical Effects",
+              "zh": "实景、模型与机械特效"
+            },
+            {
+              "value": "Digital VFX",
+              "zh": "数字视觉特效"
+            }
+          ],
+          "dialogue_example": "我更喜欢模型和实景特效，不想看全靠 CGI 的科幻片。",
+          "core": true,
+          "evidence": "production_notes_credits_and_behind_the_scenes_sources",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
         }
       ]
     },
@@ -2652,7 +2806,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不喜欢大量演员重演的纪录片。",
           "core": true,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-narrator",
@@ -2673,7 +2827,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢旁白少、让素材自己说话的。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-interviews",
@@ -2694,7 +2848,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "不要整部片都只是坐着采访。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-archive",
@@ -2715,7 +2869,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看历史档案影像丰富的纪录片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-depth",
@@ -2736,7 +2890,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我想看真正深入调查的，不要概览式介绍。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-personal",
@@ -2757,7 +2911,7 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "dialogue_example": "我喜欢从一个人的经历切入的大主题纪录片。",
           "core": false,
           "evidence": "metadata_and_content",
-          "deleted": false
+          "deleted": true
         },
         {
           "id": "d-scope",
@@ -2779,6 +2933,28 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
           "core": false,
           "evidence": "metadata_and_content",
           "deleted": false
+        },
+        {
+          "id": "d-subject-focus",
+          "key": "documentary_subject_focus",
+          "zh": "纪录对象重心",
+          "cardinality": "single",
+          "definition": "影片主要通过一个具体人物的经历展开，还是围绕群体、组织或社会议题展开。",
+          "values": [
+            {
+              "value": "Individual Life",
+              "zh": "个人经历"
+            },
+            {
+              "value": "Collective or System",
+              "zh": "群体或系统"
+            }
+          ],
+          "dialogue_example": "我想看聚焦一个具体人物一生的纪录片，不要宏观社会调查。",
+          "core": true,
+          "evidence": "synopsis_and_documentary_metadata",
+          "deleted": false,
+          "review_marker": "added_after_human_review_2026_08_25"
         }
       ]
     }
@@ -2789,6 +2965,9 @@ window.PERSONAMIR_MOVIE_ATTRIBUTE_SCHEMA = {
     "availability_requires": [
       "availability_region",
       "availability_checked_at"
-    ]
+    ],
+    "latest_human_review": "human-audit/results/personamir-movie-attribute-review-2026-08-25-round2.json",
+    "latest_addition_marker": "added_after_human_review_2026_08_25",
+    "latest_addition_count": 1
   }
 };

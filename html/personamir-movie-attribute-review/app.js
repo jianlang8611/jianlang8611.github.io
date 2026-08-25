@@ -2,7 +2,8 @@
   "use strict";
 
   const apiUrl = "/api/movie-attribute-schema";
-  const storageKey = "personamir-movie-attribute-review-draft-v1";
+  const storageKey = "personamir-movie-attribute-review-draft-v2-20260825";
+  const reviewerStorageKey = "personamir-movie-attribute-review-reviewer-v1";
   const clone = (value) => JSON.parse(JSON.stringify(value));
 
   const elements = {
@@ -16,6 +17,8 @@
     globalCount: document.getElementById("globalCount"),
     specificCount: document.getElementById("specificCount"),
     subtypeCount: document.getElementById("subtypeCount"),
+    reviewerButton: document.getElementById("reviewerButton"),
+    reviewerStatus: document.getElementById("reviewerStatus"),
     saveStatus: document.getElementById("saveStatus"),
     activeMetric: document.getElementById("activeMetric"),
     coreMetric: document.getElementById("coreMetric"),
@@ -44,6 +47,18 @@
     attributeCore: document.getElementById("attributeCore"),
     addValueButton: document.getElementById("addValueButton"),
     valueRows: document.getElementById("valueRows"),
+    reviewerDialog: document.getElementById("reviewerDialog"),
+    reviewerForm: document.getElementById("reviewerForm"),
+    reviewerNameInput: document.getElementById("reviewerNameInput"),
+    annotationDialog: document.getElementById("annotationDialog"),
+    annotationForm: document.getElementById("annotationForm"),
+    annotationScope: document.getElementById("annotationScope"),
+    annotationTitle: document.getElementById("annotationTitle"),
+    annotationAttributeId: document.getElementById("annotationAttributeId"),
+    annotationText: document.getElementById("annotationText"),
+    closeAnnotationButton: document.getElementById("closeAnnotationButton"),
+    cancelAnnotationButton: document.getElementById("cancelAnnotationButton"),
+    clearAnnotationButton: document.getElementById("clearAnnotationButton"),
   };
 
   let state = null;
@@ -53,6 +68,7 @@
   let history = [];
   let saveTimer = null;
   let toastTimer = null;
+  let reviewerName = localStorage.getItem(reviewerStorageKey)?.trim() ?? "";
 
   function escapeHtml(value) {
     return String(value)
@@ -96,6 +112,18 @@
     elements.toast.textContent = message;
     elements.toast.className = `toast show${error ? " error" : ""}`;
     toastTimer = setTimeout(() => { elements.toast.className = "toast"; }, 2600);
+  }
+
+  function renderReviewer() {
+    const label = reviewerName || "未填写";
+    elements.reviewerButton.textContent = `审核人：${label}`;
+    elements.reviewerStatus.textContent = label;
+  }
+
+  function openReviewerDialog() {
+    elements.reviewerNameInput.value = reviewerName;
+    elements.reviewerDialog.showModal();
+    elements.reviewerNameInput.focus();
   }
 
   function saveLocal() {
@@ -173,6 +201,7 @@
       if (filter === "core" && !item.core) return false;
       if (filter === "single" && item.cardinality !== "single") return false;
       if (filter === "multi" && item.cardinality === "single") return false;
+      if (filter === "annotated" && !item.review_annotation?.note) return false;
       if (!query) return true;
       return [item.key, item.zh, item.definition, item.dialogue_example, item.evidence,
         ...item.values.flatMap((entry) => [entry.value, entry.zh])]
@@ -196,24 +225,30 @@
       elements.grid.innerHTML = '<div class="empty">当前筛选条件下没有属性。</div>';
       return;
     }
-    elements.grid.innerHTML = visible.map((item) => `
-      <article class="attribute-card${item.deleted ? " deleted" : ""}">
+    elements.grid.innerHTML = visible.map((item) => {
+      const newlyAdded = item.review_marker === "added_after_human_review_2026_08_25";
+      const annotation = item.review_annotation?.note ? item.review_annotation : null;
+      return `
+      <article class="attribute-card${item.deleted ? " deleted" : ""}${newlyAdded ? " newly-added" : ""}${annotation ? " annotated" : ""}">
         <header class="card-head">
           <div class="card-title"><h2>${escapeHtml(item.zh)}<span>${escapeHtml(item.key)}</span></h2><div class="key">${escapeHtml(item.id)}</div></div>
           <div class="card-actions">
+            <button class="mini annotation-action" type="button" data-action="annotate" data-id="${escapeHtml(item.id)}" title="不确定如何直接修改时，在这里说明问题">${annotation ? "修改批注" : "批注问题"}</button>
             <button class="mini" type="button" data-action="edit" data-id="${escapeHtml(item.id)}">编辑</button>
             <button class="mini ${item.deleted ? "" : "danger"}" type="button" data-action="${item.deleted ? "restore" : "delete"}" data-id="${escapeHtml(item.id)}">${item.deleted ? "恢复" : "删除"}</button>
           </div>
         </header>
         <div class="card-body">
-          <div class="badges"><span class="badge${item.cardinality === "single" ? "" : " multi"}">${cardinalityLabel(item.cardinality)}</span>${item.core ? '<span class="badge core">核心属性</span>' : ""}${item.deleted ? '<span class="badge">已删除</span>' : ""}</div>
+          <div class="badges"><span class="badge${item.cardinality === "single" ? "" : " multi"}">${cardinalityLabel(item.cardinality)}</span>${item.core ? '<span class="badge core">核心属性</span>' : ""}${newlyAdded ? '<span class="badge new">本轮新增</span>' : ""}${annotation ? '<span class="badge annotation">有问题批注</span>' : ""}${item.deleted ? '<span class="badge">已删除</span>' : ""}</div>
           <p class="definition">${escapeHtml(item.definition)}</p>
           <div class="values">${item.values.map((entry) => `<span class="value-chip">${escapeHtml(entry.value)} / ${escapeHtml(entry.zh)}</span>`).join("")}</div>
           <p class="dialogue">“${escapeHtml(item.dialogue_example)}”</p>
           <p class="evidence">evidence: ${escapeHtml(item.evidence)}</p>
+          ${annotation ? `<div class="annotation-note">${escapeHtml(annotation.note)}<small>${escapeHtml(annotation.reviewer_name || "未署名")} · ${escapeHtml(annotation.updated_at || "")}</small></div>` : ""}
         </div>
       </article>
-    `).join("");
+    `;
+    }).join("");
   }
 
   function render() {
@@ -224,6 +259,7 @@
     elements.specificCount.textContent = state.subtypes.reduce((total, item) => total + totalActive(item.attributes), 0);
     elements.subtypeCount.textContent = state.subtypes.length;
     elements.showDeletedButton.textContent = showDeleted ? "隐藏已删除" : "显示已删除";
+    renderReviewer();
   }
 
   function addValueRow(entry = { value: "", zh: "" }) {
@@ -256,6 +292,20 @@
     elements.attributeKey.focus();
   }
 
+  function openAnnotation(attribute) {
+    if (!reviewerName) {
+      openReviewerDialog();
+      return;
+    }
+    elements.annotationAttributeId.value = attribute.id;
+    elements.annotationScope.textContent = activeScopeLabel();
+    elements.annotationTitle.textContent = `批注：${attribute.zh} / ${attribute.key}`;
+    elements.annotationText.value = attribute.review_annotation?.note ?? "";
+    elements.clearAnnotationButton.hidden = !attribute.review_annotation?.note;
+    elements.annotationDialog.showModal();
+    elements.annotationText.focus();
+  }
+
   function readEditor() {
     const values = [...elements.valueRows.querySelectorAll(".value-row")].map((row) => ({
       value: row.querySelector(".value-en").value.trim(),
@@ -264,6 +314,7 @@
     if (!values.length) throw new Error("至少保留一个属性值。 ");
     const normalized = values.map((entry) => entry.value.toLocaleLowerCase());
     if (new Set(normalized).size !== normalized.length) throw new Error("英文属性值不能重复。 ");
+    const existing = activeAttributes().find((item) => item.id === elements.attributeId.value);
     return {
       id: elements.attributeId.value || makeId(),
       key: elements.attributeKey.value.trim(),
@@ -275,16 +326,34 @@
       core: elements.attributeCore.checked,
       evidence: elements.attributeEvidence.value.trim(),
       deleted: false,
+      ...(existing?.review_marker ? { review_marker: existing.review_marker } : {}),
+      ...(existing?.review_annotation ? { review_annotation: existing.review_annotation } : {}),
     };
   }
 
   function exportJson() {
+    if (!reviewerName) {
+      openReviewerDialog();
+      return;
+    }
     const payload = clone(state);
     payload.updated_at = new Date().toISOString();
+    payload.review_export = {
+      reviewer_name: reviewerName,
+      exported_at: payload.updated_at,
+      annotation_count: [
+        ...payload.global_attributes,
+        ...payload.subtypes.flatMap((item) => item.attributes),
+      ].filter((item) => item.review_annotation?.note).length,
+    };
     const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], { type: "application/json" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `personamir-movie-attribute-review-${payload.updated_at.slice(0, 10)}.json`;
+    const filenameName = reviewerName
+      .normalize("NFKC")
+      .replace(/[^\p{Letter}\p{Number}_-]+/gu, "-")
+      .replace(/^-+|-+$/g, "") || "reviewer";
+    link.download = `personamir-movie-attribute-review-${filenameName}-${payload.updated_at.slice(0, 10)}.json`;
     document.body.append(link);
     link.click();
     link.remove();
@@ -327,6 +396,7 @@
     if (!button) return;
     const attribute = activeAttributes().find((item) => item.id === button.dataset.id);
     if (!attribute) return;
+    if (button.dataset.action === "annotate") return openAnnotation(attribute);
     if (button.dataset.action === "edit") return openEditor(attribute);
     if (button.dataset.action === "delete") {
       mutate(() => { attribute.deleted = true; }, `已删除 ${attribute.zh}。`);
@@ -340,6 +410,20 @@
   elements.filterSelect.addEventListener("change", renderCards);
   elements.showDeletedButton.addEventListener("click", () => { showDeleted = !showDeleted; render(); });
   elements.exportButton.addEventListener("click", exportJson);
+  elements.reviewerButton.addEventListener("click", openReviewerDialog);
+  elements.reviewerDialog.addEventListener("cancel", (event) => {
+    if (!reviewerName) event.preventDefault();
+  });
+  elements.reviewerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const nextName = elements.reviewerNameInput.value.trim();
+    if (!nextName) return elements.reviewerNameInput.reportValidity();
+    reviewerName = nextName;
+    localStorage.setItem(reviewerStorageKey, reviewerName);
+    renderReviewer();
+    elements.reviewerDialog.close();
+    showToast(`审核人已设置为 ${reviewerName}。`);
+  });
   elements.undoButton.addEventListener("click", () => {
     if (!history.length) return;
     state = history.pop();
@@ -356,6 +440,29 @@
     if (!button) return;
     if (elements.valueRows.children.length <= 1) return showToast("至少保留一个属性值。", true);
     button.closest(".value-row").remove();
+  });
+  elements.closeAnnotationButton.addEventListener("click", () => elements.annotationDialog.close());
+  elements.cancelAnnotationButton.addEventListener("click", () => elements.annotationDialog.close());
+  elements.annotationForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!elements.annotationForm.reportValidity()) return;
+    const attribute = activeAttributes().find((item) => item.id === elements.annotationAttributeId.value);
+    if (!attribute) return showToast("找不到要批注的属性。", true);
+    const note = elements.annotationText.value.trim();
+    mutate(() => {
+      attribute.review_annotation = {
+        note,
+        reviewer_name: reviewerName,
+        updated_at: new Date().toISOString(),
+      };
+    }, `已批注 ${attribute.zh}。`);
+    elements.annotationDialog.close();
+  });
+  elements.clearAnnotationButton.addEventListener("click", () => {
+    const attribute = activeAttributes().find((item) => item.id === elements.annotationAttributeId.value);
+    if (!attribute?.review_annotation) return elements.annotationDialog.close();
+    mutate(() => { delete attribute.review_annotation; }, `已清除 ${attribute.zh} 的批注。`);
+    elements.annotationDialog.close();
   });
   elements.form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -380,6 +487,7 @@
     elements.loading.hidden = true;
     elements.app.hidden = false;
     render();
+    if (!reviewerName) openReviewerDialog();
   }).catch((error) => {
     elements.loading.textContent = `加载失败：${error.message}`;
     showToast(error.message, true);
