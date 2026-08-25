@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fashion Scenario 修订复核 · Yao Jietong</title>
+  <style>
+    :root { color-scheme: light; --ink:#17202a; --muted:#65717d; --line:#d8dee5; --soft:#f5f7f9; --old:#fff7ed; --new:#eef8f2; --accent:#176b48; --danger:#a73535; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#fff; color:var(--ink); font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; letter-spacing:0; }
+    header { border-bottom:1px solid var(--line); background:#fff; position:sticky; top:0; z-index:2; }
+    .bar, main { width:min(1180px, calc(100% - 32px)); margin:auto; }
+    .bar { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    h1 { margin:0; font-size:21px; font-weight:650; }
+    .summary { color:var(--muted); white-space:nowrap; }
+    main { padding:28px 0 64px; }
+    .meta { display:flex; gap:20px; flex-wrap:wrap; padding:14px 0 24px; color:var(--muted); }
+    article { border:1px solid var(--line); border-radius:6px; margin:0 0 22px; overflow:hidden; background:#fff; }
+    .title { padding:16px 18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
+    h2 { margin:0; font-size:17px; }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; color:var(--muted); }
+    .analysis { padding:14px 18px; border-bottom:1px solid var(--line); display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .analysis strong, .version strong { display:block; margin-bottom:5px; font-size:13px; }
+    .compare { display:grid; grid-template-columns:1fr 1fr; }
+    .version { padding:18px; min-width:0; }
+    .version + .version { border-left:1px solid var(--line); }
+    .old { background:var(--old); } .new { background:var(--new); }
+    blockquote { margin:8px 0 14px; font-size:16px; }
+    .values { color:var(--muted); font-size:13px; overflow-wrap:anywhere; }
+    .decision { border-top:1px solid var(--line); padding:16px 18px; display:grid; grid-template-columns:auto 1fr; gap:14px 18px; align-items:start; }
+    .buttons { display:flex; gap:8px; }
+    button { border:1px solid #aeb8c2; background:#fff; color:var(--ink); min-height:38px; padding:7px 14px; border-radius:5px; cursor:pointer; font-weight:600; }
+    button:hover { border-color:#687581; }
+    button.accept.selected { color:#fff; background:var(--accent); border-color:var(--accent); }
+    button.reject.selected { color:#fff; background:var(--danger); border-color:var(--danger); }
+    textarea { width:100%; min-height:72px; resize:vertical; border:1px solid #b9c2cb; border-radius:5px; padding:9px 10px; font:inherit; letter-spacing:0; }
+    .footer { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-top:28px; padding-top:20px; border-top:1px solid var(--line); }
+    #export { background:#17202a; color:#fff; border-color:#17202a; }
+    #export:disabled { opacity:.4; cursor:not-allowed; }
+    @media (max-width:760px) { .bar { align-items:flex-start; padding:14px 0; flex-direction:column; gap:4px; } header { position:static; } .analysis,.compare { grid-template-columns:1fr; } .version + .version { border-left:0; border-top:1px solid var(--line); } .decision { grid-template-columns:1fr; } .footer { align-items:stretch; flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <header><div class="bar"><h1>Fashion Scenario 修订复核</h1><div class="summary" id="summary"></div></div></header>
+  <main>
+    <div class="meta"><span>Reviewer: Yao Jietong</span><span>Baseline: Pub V9</span><span>Candidate: Pub V10</span><span>共 6 条</span></div>
+    <section id="records"></section>
+    <div class="footer"><span id="completion"></span><button id="export" disabled>导出复核结果</button></div>
+  </main>
+  <script>
+    const data = {"audit_schema":"scenario-revision-review-v1","review_id":"jietong-yao-fashion-pub-v10","reviewer":"Yao Jietong","baseline":{"internal_version":"pub-v9","external_commit":"12d45f2d837d902dc5838ff09c1d14a65dd81eb6","source_audit":"human-audit/results/followup-yao-jietong-human-audit-yao-jietong-20260823-1826.json"},"candidate":{"internal_version":"pub-v10","external_sync_status":"not_synced_pending_review"},"records":[{"scenario_id":"BAGS_WEIGHT_WALLET_PB_V6_05","category":"bags","attribute":"weight_class","scenario_source":"manual","issue":"原文把凭手感找到钱包归因于自重，但现实中位置、形状和材质才是主要线索，不能可靠证明重量偏好。","revision_summary":"用相同的日常卡片和零钱控制装载内容，让钱包自重直接影响拿取、入口袋以及走动坐下时的身体体验。","original":{"scenario":"排队结账时，[X]没有低头翻包，伸手便凭熟悉的分量摸到一只属于[Y]自重等级的钱包。它空着时也有清楚的手感，不会和纸巾或卡套混在一起；[X]喜欢这种拿在手里有明确存在感的重量。","applicable_attribute_values":["Heavy","Standard Weight"]},"revised":{"scenario":"[X]到皮具店换钱包，把每天随身带的卡和零钱原样装进一只属于[Y]自重等级的样品。东西一件没少，拿起来就是[X]平时用惯的分量；[X]准备再把它放进常穿外套的口袋，试试走动和坐下时是否仍然舒服。","applicable_attribute_values":["Heavy","Standard Weight"],"value_expression_rationale":"装入相同的日常物品后，钱包自重会直接影响拿取和放进口袋活动时的整体负担，[Y]自然进入试用判断。","stable_preference_basis":"[X]用固定的日常装载和平时用惯的分量判断新钱包，说明重量取向来自持续使用而非一次试拿。","image_content_guidance":"图片应呈现皮具店内[X]将日常卡片和零钱装入钱包样品，并把钱包放进外套口袋试用；具体自重等级由文字说明。"}},{"scenario_id":"BAGS_WEIGHT_CLUTCH_PB_V6_02","category":"bags","attribute":"weight_class","scenario_source":"real_dialogue_derived","issue":"原文把厚实轮廓和雕塑感归因于重量，混入结构、材质与风格；“存在感”也偏分析式表达。","revision_summary":"保留真实对话中的展览背景，改为单独掂量空包，并围绕展览期间长时间握持、换手和夹臂弯的体验判断自重。","original":{"scenario":"展览开幕时，[X]双手托着一只属于[Y]自重等级的手拿包，厚实包体让她能清楚感到它的位置，也形成了想要的雕塑感。这样的分量并不适合所有人，却一直是[X]在结构感手拿包上愿意接受的存在感。","applicable_attribute_values":["Heavy","Standard Weight"]},"revised":{"scenario":"出发参加展览开幕前，[X]把准备带的东西暂时放在桌上，单独掂了掂一只属于[Y]自重等级的空手拿包。这个分量正是[X]平时拿着最顺手的；想到开幕后大部分时间都要把它握在手里，[X]准备装好东西后再试一次换手和夹在臂弯里的感觉。","applicable_attribute_values":["Heavy","Standard Weight"],"value_expression_rationale":"先单独掂量空包，再结合活动中的长时间手持动作，能够把判断直接落到手拿包自重及其身体负担上。","stable_preference_basis":"[X]以平时拿手拿包时已经形成的顺手分量评估这只空包，偏好早于本次展览。","image_content_guidance":"图片应呈现[X]参加展览开幕前单独掂量空手拿包，并尝试换手和夹在臂弯里的动作；具体自重等级由文字说明。"}},{"scenario_id":"JEWELRY_GEMSTONE_TYPE_PB_V5_09","category":"jewelry","attribute":"gemstone_type","scenario_source":"manual","issue":"原文只能证明反复拿取同一件首饰，且固定摆放位置会混淆便利性，无法泛化为宝石类型偏好。","revision_summary":"改用伴侣依据长期了解，从不同款式首饰中挑出采用同一种宝石的多件实例，使稳定偏好明确落到宝石类型。","original":{"scenario":"早晨赶时间，[X]没有重新搭配，只从首饰盘里顺手拿起一件[Y]首饰。盘里还有其他类型，但靠近镜子的这一类总被最先取走，底下的软垫也在同一处留下了反复拿放的痕迹。","applicable_attribute_values":["Agate","Alexandrite","Amazonite","Amber","Amethyst","Ammonite","Aquamarine","Citrine","Coral","Crystal","Cubic Zirconia","Diamond","Emerald","Garnet","Hematite","Howlite","Jade","Jasper","Lapis Lazuli","Larimar","Malachite","Marble","Marcasite","Moonstone","Morganite","Mother of Pearl","Natural Stone","Obsidian","Onyx","Opal","Pearl","Peridot","Quartz","Rhinestone","Rhodonite","Rose Quartz","Ruby","Sapphire","Shungite","Spinel","Sunstone","Tiger's Eye","Topaz","Tourmaline","Turquoise","Zircon"]},"revised":{"scenario":"[X]出差前请伴侣从首饰盒里挑几件带上。对方拿出的几件款式不同，却都用了[Y]；伴侣熟悉[X]平时戴首饰的习惯，知道[X]挑选时往往先留意这种宝石，再看几件能不能搭在一起。","applicable_attribute_values":["Agate","Alexandrite","Amazonite","Amber","Amethyst","Ammonite","Aquamarine","Citrine","Coral","Crystal","Cubic Zirconia","Diamond","Emerald","Garnet","Hematite","Howlite","Jade","Jasper","Lapis Lazuli","Larimar","Malachite","Marble","Marcasite","Moonstone","Morganite","Mother of Pearl","Natural Stone","Obsidian","Onyx","Opal","Pearl","Peridot","Quartz","Rhinestone","Rhodonite","Rose Quartz","Ruby","Sapphire","Shungite","Spinel","Sunstone","Tiger's Eye","Topaz","Tourmaline","Turquoise","Zircon"],"value_expression_rationale":"几件款式不同的首饰共同采用[Y]，而伴侣的选择依据明确落在宝石类型上，避免把单件首饰的使用习惯误当成属性偏好。","stable_preference_basis":"伴侣能够依据[X]平时跨首饰实例的挑选顺序准备行李，说明该宝石类型偏好已经稳定形成。","image_content_guidance":"图片应呈现出差准备时伴侣从首饰盒中挑出几件款式不同的首饰；具体宝石类型由文字确认。"}},{"scenario_id":"JEWELRY_RING_WIDTH_PB_V5_03","category":"jewelry","attribute":"ring_width","scenario_source":"manual","issue":"原文用无镶石、无装饰和雕塑感证明宽度，实际混入图案与极简风格。","revision_summary":"保留设计市集试戴，改由戒圈在手指上占据的比例和自然垂手时的轮廓直接体现宽度偏好。","original":{"scenario":"[X]在周末设计市集停在一组[Y]戒圈前，拿起其中一枚先看完整金属轮廓，而不是先找镶石。宽阔表面和明确边缘本身已经像一件小型雕塑；[X]平时挑宽戒指，也总被这种不依赖装饰的设计感吸引。","applicable_attribute_values":["Wide"]},"revised":{"scenario":"[X]在周末设计市集试戴一枚[Y]戒圈，抬手看了看圈面在手指上占据的比例。手垂回身侧时，戒圈仍有[X]平时喜欢的清楚轮廓；摊主正等着[X]确认尺码和试戴感受。","applicable_attribute_values":["Wide"],"value_expression_rationale":"戒圈宽度直接决定圈面在手指上占据的比例以及自然垂手时的轮廓，[Y]是当前视觉判断的中心。","stable_preference_basis":"[X]以平时已经喜欢的手部轮廓判断当前试戴，而不是因市集或某一枚戒指临时改变取向。","image_content_guidance":"图片应呈现设计市集里[X]试戴戒指，并清楚展示戒圈在手指上占据的宽度比例和手垂下时的轮廓。"}},{"scenario_id":"JEWELRY_RING_WIDTH_PB_V5_07","category":"jewelry","attribute":"ring_width","scenario_source":"manual","issue":"原文把宽度与无纹样、唯一视觉重点绑定，并在文字和图片指导中直接泄露 Wide。","revision_summary":"保留金工课，改用贴肤范围和指节活动感体现宽度；具体宽度仅由 [Y] 和图片承载，不在正文提前写死。","original":{"scenario":"[X]在金工课为自己做戒指，选了一条较宽的金属片弯成[Y]戒圈，只把接缝和边缘磨平，没有继续加纹样。完整而有分量的表面本身就是[X]喜欢的样子；她平时戴宽戒指，也常把它当成手上唯一的重点。","applicable_attribute_values":["Wide"]},"revised":{"scenario":"[X]在金工课为自己做戒指，选了一条金属片弯成[Y]戒圈。半成品套上手指后，[X]先握拳又把手伸开，确认圈面贴住皮肤的范围不会让指节活动别扭。这样的宽度是[X]平时戴着最习惯的，老师正在等[X]决定下一步怎么收边。","applicable_attribute_values":["Wide"],"value_expression_rationale":"戒圈宽度直接改变贴肤范围和指节活动感，[Y]自然成为半成品试戴与后续收边判断的中心。","stable_preference_basis":"[X]以平时最习惯的佩戴宽度评估亲手制作的半成品，说明偏好早于本次课程。","image_content_guidance":"图片应呈现金工课上[X]把金属片弯成戒圈，并通过握拳和伸手试戴半成品；戒圈宽度及其贴肤范围应清楚可见。"}},{"scenario_id":"GLASSES_STYLE_SWIM_PB_V6_03","category":"glasses","attribute":"style","scenario_source":"manual","issue":"原文用泳帽、浮标和路线证明泳镜风格，因果无关；同时把防护与运动镜 group 的联合值域误当作泳镜自己的值域。","revision_summary":"改由队友跨多副、不同颜色泳镜辨认稳定风格；适配值按泳镜实际商品标注收窄为 Classic 和 Sporty。","original":{"scenario":"开放水域训练前，[X]把呈[Y]风格的泳镜与鲜明的泳帽、浮标放在一起。泳帽和浮标已经足够醒目，她喜欢泳镜用自己一贯认可的气质把整套装备收住；路线和配色会变，这项判断很少变。","applicable_attribute_values":["Classic","Elegant","Modern","Sporty","Vintage"]},"revised":{"scenario":"开放水域训练结束后，几副泳镜一起晾在岸边，队友拿起呈[Y]风格的那副递给[X]。虽然[X]用过的泳镜有过不同颜色，外形给人的感觉却总是这一类，队友已经很少认错。","applicable_attribute_values":["Classic","Sporty"],"value_expression_rationale":"颜色不同的多副泳镜仍保持相同整体风格，队友据此辨认归属，使[Y]而非颜色成为当前判断中心。","stable_preference_basis":"队友能够依据[X]跨泳镜实例保持的风格取向准确辨认，说明偏好已经在共同训练中稳定显露。","image_content_guidance":"图片应呈现开放水域训练后几副泳镜一起晾在岸边，队友正拿起其中一副递给[X]；具体风格由文字说明。"}}]};
+    const storageKey = "scenario-revision-review:jietong-yao-fashion-pub-v10";
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    const state = saved.decisions || {};
+    const esc = value => String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[ch]);
+    const values = list => list.map(esc).join(" · ");
+
+    function render() {
+      document.querySelector("#records").innerHTML = data.records.map((record, index) => {
+        const current = state[record.scenario_id] || { decision:"", note:"" };
+        return `<article data-id="${esc(record.scenario_id)}">
+          <div class="title"><div><h2>${index + 1}. ${esc(record.category)} / ${esc(record.attribute)}</h2><code>${esc(record.scenario_id)} · ${esc(record.scenario_source)}</code></div></div>
+          <div class="analysis"><div><strong>原问题</strong>${esc(record.issue)}</div><div><strong>修订重点</strong>${esc(record.revision_summary)}</div></div>
+          <div class="compare">
+            <div class="version old"><strong>原始版本</strong><blockquote>${esc(record.original.scenario)}</blockquote><div class="values">适配值：${values(record.original.applicable_attribute_values)}</div></div>
+            <div class="version new"><strong>修订版本</strong><blockquote>${esc(record.revised.scenario)}</blockquote><div class="values">适配值：${values(record.revised.applicable_attribute_values)}</div></div>
+          </div>
+          <div class="decision"><div class="buttons"><button class="accept ${current.decision === "accept" ? "selected" : ""}" data-decision="accept">可接受</button><button class="reject ${current.decision === "needs_revision" ? "selected" : ""}" data-decision="needs_revision">仍需修改</button></div><textarea placeholder="复核意见" aria-label="复核意见">${esc(current.note || "")}</textarea></div>
+        </article>`;
+      }).join("");
+      bind(); updateSummary();
+    }
+
+    function bind() {
+      document.querySelectorAll("article").forEach(article => {
+        const id = article.dataset.id;
+        article.querySelectorAll("button[data-decision]").forEach(button => button.addEventListener("click", () => {
+          state[id] = state[id] || { decision:"", note:"" };
+          state[id].decision = button.dataset.decision;
+          save(); render();
+        }));
+        article.querySelector("textarea").addEventListener("input", event => {
+          state[id] = state[id] || { decision:"", note:"" };
+          state[id].note = event.target.value;
+          save(); updateSummary();
+        });
+      });
+    }
+
+    function save() { localStorage.setItem(storageKey, JSON.stringify({ decisions:state })); }
+    function updateSummary() {
+      const reviewed = data.records.filter(record => state[record.scenario_id]?.decision).length;
+      const accepted = data.records.filter(record => state[record.scenario_id]?.decision === "accept").length;
+      document.querySelector("#summary").textContent = `已复核 ${reviewed}/${data.records.length} · 可接受 ${accepted}`;
+      document.querySelector("#completion").textContent = reviewed === data.records.length ? "全部条目已完成复核" : `尚有 ${data.records.length - reviewed} 条未复核`;
+      document.querySelector("#export").disabled = reviewed !== data.records.length;
+    }
+
+    document.querySelector("#export").addEventListener("click", () => {
+      const output = { audit_schema:"scenario-revision-review-result-v1", review_id:data.review_id, reviewer:data.reviewer, exported_at:new Date().toISOString(), baseline:data.baseline, candidate:data.candidate, decisions:data.records.map(record => ({ scenario_id:record.scenario_id, decision:state[record.scenario_id].decision, note:state[record.scenario_id].note || "" })) };
+      const blob = new Blob([JSON.stringify(output, null, 2) + "\n"], { type:"application/json" });
+      const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "jietong-yao-fashion-pub-v10-review.json"; link.click(); URL.revokeObjectURL(link.href);
+    });
+    render();
+  </script>
+</body>
+</html>
