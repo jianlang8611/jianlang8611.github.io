@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG 第三轮志愿者值域复核</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <p class="eyebrow">PersonaIMG · Volunteer Review · Round 3</p>
+        <h1>第三轮：属性值域复核</h1>
+        <p class="scope" id="scope">正在读取发布数据</p>
+      </div>
+      <div class="save-state" aria-live="polite">
+        <strong id="save-state">正在初始化</strong>
+        <span id="change-summary"></span>
+        <button class="reviewer-button" id="reviewer-button" type="button" hidden></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="category-tabs" id="category-tabs" aria-label="大类"></nav>
+
+    <div class="toolbar">
+      <label class="search-wrap">
+        <span class="sr-only">搜索属性和值域</span>
+        <input id="search" type="search" placeholder="搜索中英文属性、说明或取值">
+      </label>
+      <label class="check-control">
+        <input id="changed-only" type="checkbox">
+        <span>只看改动</span>
+      </label>
+      <label class="check-control">
+        <input id="commented-only" type="checkbox">
+        <span>只看有批注</span>
+      </label>
+      <button class="button primary" id="export-button" type="button">导出审核 JSON</button>
+      <button class="button danger-text" id="reset-button" type="button">恢复发布版本</button>
+    </div>
+
+    <div class="status-strip" id="status-strip" aria-live="polite">浏览器草稿已启用</div>
+    <nav class="group-tabs" id="group-tabs" aria-label="父类与子类"></nav>
+
+    <section class="section-head" id="section-head"></section>
+    <section class="dimension-list" id="dimension-list">
+      <div class="empty">正在载入属性</div>
+    </section>
+  </main>
+
+  <dialog id="reviewer-dialog" class="reviewer-dialog">
+    <form method="dialog" id="reviewer-form">
+      <header class="dialog-head">
+        <div>
+          <p class="dialog-kicker">PersonaIMG · Round 3</p>
+          <h2>请输入英文姓名</h2>
+        </div>
+      </header>
+      <div class="dialog-body">
+        <label class="field">
+          <span>English name</span>
+          <input id="reviewer-name" autocomplete="name" required maxlength="80" placeholder="e.g. Zijun Wang">
+        </label>
+        <p class="dialog-note">姓名只用于区分浏览器草稿和导出文件，不会修改审核内容。</p>
+      </div>
+      <footer class="dialog-actions">
+        <button class="button primary" type="submit">进入审核</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
