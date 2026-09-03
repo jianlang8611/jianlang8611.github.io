@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LIP-Rec Movie internal value-domain volunteer audit">
+  <title>LIP-Rec Movie 值域审核</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <strong>LIP-Rec</strong>
+      <span>Movie 值域审核</span>
+      <em id="versionLabel">Internal</em>
+    </div>
+    <div class="source-summary" id="sourceSummary">正在载入 Movie 值域</div>
+    <div class="header-actions">
+      <button class="reviewer-button" id="reviewerButton" type="button" title="更换审核人">
+        <span>Reviewer</span>
+        <strong id="reviewerName">未署名</strong>
+      </button>
+      <button class="primary-button" id="exportButton" type="button">导出 JSON</button>
+    </div>
+  </header>
+
+  <div class="app-layout" id="auditApp" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-summary">
+        <span>审核范围</span>
+        <strong id="scopeCount">0 个作用域</strong>
+        <small id="changeSummary">0 新增 · 0 修改 · 0 删除 · 0 批注</small>
+      </div>
+      <nav id="scopeNav" aria-label="Movie 值域作用域"></nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="scope-heading">
+        <div>
+          <p class="eyebrow" id="scopeEyebrow">COMMON ATTRIBUTES</p>
+          <h1 id="scopeTitle">通用属性</h1>
+          <p id="scopeMeta"></p>
+        </div>
+        <button class="quiet-button" id="resetScopeButton" type="button" title="恢复当前作用域的原始值域">恢复当前作用域</button>
+      </section>
+
+      <section class="audit-guidance" aria-label="审核说明">
+        <strong>审核封闭取值是否准确、同级、无重复，并适合电影推荐。</strong>
+        <span>封闭值域可直接新增、重命名或删除；开放实体只需审核定义和规范，问题写在属性批注中。</span>
+      </section>
+
+      <section class="toolbar" aria-label="筛选工具">
+        <label class="search-field">
+          <span>搜索全部作用域</span>
+          <input id="searchInput" type="search" placeholder="搜索 subtype、属性或取值">
+        </label>
+        <label class="filter-toggle">
+          <input id="changedOnlyInput" type="checkbox">
+          <span>只看有改动或批注</span>
+        </label>
+        <button class="quiet-button" id="clearFiltersButton" type="button">清除筛选</button>
+      </section>
+
+      <div class="result-summary" id="resultSummary"></div>
+      <div class="attribute-list" id="attributeList" aria-live="polite"></div>
+      <div class="empty-state" id="emptyState" hidden>当前筛选条件下没有属性。</div>
+    </main>
+  </div>
+
+  <dialog class="signature-dialog" id="signatureDialog">
+    <form id="signatureForm" novalidate>
+      <p class="dialog-kicker">LIP-Rec · Movie Value Domain Audit</p>
+      <h2>请先输入审核人姓名</h2>
+      <p>姓名会写入导出的 JSON 内容和文件名；同一姓名可继续本浏览器里的审核进度。</p>
+      <label>
+        <span>姓名 / Name</span>
+        <input id="signatureInput" type="text" autocomplete="name" maxlength="80" placeholder="例如：Jietong Yao" required>
+      </label>
+      <p class="field-error" id="signatureError" role="alert"></p>
+      <button class="primary-button dialog-submit" type="submit">进入审核</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
