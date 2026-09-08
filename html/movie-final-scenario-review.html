@@ -1,0 +1,2252 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LIP-Rec Movie final scenario review: 206 revised scenarios">
+  <title>LIP-Rec Movie Scenario 审核</title>
+  <style>
+:root {
+  --canvas: #f4f6f7;
+  --surface: #ffffff;
+  --surface-subtle: #f9fafb;
+  --ink: #20262d;
+  --muted: #68737f;
+  --line: #dce1e5;
+  --line-strong: #c8d0d6;
+  --teal: #0f766e;
+  --teal-soft: #e3f2f0;
+  --blue: #235e9c;
+  --blue-soft: #eaf1f8;
+  --amber: #956300;
+  --amber-soft: #fff3cd;
+  --red: #a43737;
+  --red-dark: #7f2828;
+  --red-soft: #faeaea;
+  --shadow: 0 5px 18px rgba(29, 37, 44, 0.06);
+  --sidebar-width: 248px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 82px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+button {
+  color: inherit;
+}
+
+.topbar {
+  position: sticky;
+  z-index: 40;
+  top: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.97);
+}
+
+.brand-block,
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.guide-status {
+  padding: 5px 9px;
+  border: 1px solid #c6d4df;
+  border-radius: 4px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.brand {
+  font-weight: 800;
+}
+
+.product-name {
+  padding-left: 12px;
+  border-left: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.version {
+  padding: 3px 7px;
+  border: 1px solid #b9d7d3;
+  border-radius: 4px;
+  color: var(--teal);
+  background: var(--teal-soft);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.reviewer-button {
+  min-width: 130px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reviewer-button:hover {
+  background: var(--surface-subtle);
+}
+
+.reviewer-label {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.reviewer-button strong {
+  display: block;
+  max-width: 170px;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primary-button,
+.quiet-button,
+.discard-button,
+.expand-values-button,
+.guide-return-button {
+  min-height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary-button {
+  padding: 7px 15px;
+  border: 1px solid var(--teal);
+  color: #ffffff;
+  background: var(--teal);
+  font-weight: 700;
+}
+
+.primary-button:hover {
+  background: #0b655e;
+}
+
+.primary-button:disabled {
+  border-color: #aeb8bf;
+  color: #eef1f3;
+  background: #aeb8bf;
+  cursor: not-allowed;
+}
+
+.guide-return-button {
+  padding: 7px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.guide-return-button:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.guide-page {
+  width: min(1040px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 58px 0 88px;
+}
+
+.guide-hero {
+  padding-bottom: 46px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.guide-hero h1 {
+  margin-bottom: 10px;
+  font-size: 36px;
+}
+
+.guide-intro {
+  max-width: 720px;
+  margin-bottom: 28px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.first-principle {
+  padding: 20px 22px;
+  border-left: 4px solid var(--teal);
+  background: #edf7f5;
+}
+
+.first-principle strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #0b5f58;
+  font-size: 13px;
+}
+
+.first-principle p {
+  max-width: 900px;
+  margin-bottom: 0;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.guide-section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-section-heading {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.guide-section-heading h2 {
+  margin-bottom: 3px;
+  font-size: 23px;
+}
+
+.guide-section-heading div > p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.section-number {
+  margin: 3px 0 0;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.criteria-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 38px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: criteria;
+}
+
+.criteria-list li {
+  position: relative;
+  min-height: 116px;
+  padding: 20px 0 20px 42px;
+  border-top: 1px solid var(--line);
+  counter-increment: criteria;
+}
+
+.criteria-list li::before {
+  content: counter(criteria);
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #acd0cb;
+  border-radius: 50%;
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.criteria-list strong,
+.criteria-list span {
+  display: block;
+}
+
+.criteria-list strong {
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.criteria-list span {
+  color: #4f5b65;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.criteria-list .placeholder-y {
+  display: inline;
+}
+
+.category-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.category-rule {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.category-rule p {
+  margin: 11px 0 0;
+  color: #4f5b65;
+  font-size: 13px;
+}
+
+.quality-mark {
+  display: inline-flex;
+  min-height: 27px;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.quality-mark.is-positive {
+  color: #0b5f58;
+  background: var(--teal-soft);
+}
+
+.quality-mark.is-negative {
+  color: var(--red-dark);
+  background: var(--red-soft);
+}
+
+.category-note {
+  margin: 18px 0 0;
+  padding: 13px 15px;
+  border-left: 3px solid var(--blue);
+  color: #40556a;
+  background: var(--blue-soft);
+  font-size: 13px;
+}
+
+.example-list {
+  display: grid;
+  gap: 12px;
+}
+
+.example-card {
+  padding: 21px 22px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.example-card.is-bad {
+  border-color: #dfb7b7;
+  background: #fffafa;
+}
+
+.example-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 13px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.example-status {
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: #0b5f58;
+  background: var(--teal-soft);
+}
+
+.example-card.is-bad .example-status {
+  color: var(--red-dark);
+  background: var(--red-soft);
+}
+
+.example-card blockquote {
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.example-card > p {
+  margin: 0;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.guide-start {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 410px);
+  gap: 42px;
+  align-items: center;
+  margin-top: 48px;
+  padding: 28px;
+  border: 1px solid #b8d3cf;
+  border-radius: 6px;
+  background: #edf7f5;
+}
+
+.guide-start h2 {
+  margin-bottom: 5px;
+  font-size: 21px;
+}
+
+.guide-start div > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.guide-start-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-acknowledgement {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #33413f;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.guide-acknowledgement input {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin: 3px 0 0;
+  accent-color: var(--teal);
+}
+
+.guide-start-button {
+  width: 100%;
+  min-height: 43px;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  width: min(1500px, 100%);
+  margin: 0 auto;
+}
+
+.sidebar {
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  align-self: start;
+  overflow-y: auto;
+  padding: 26px 18px;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.sidebar-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sidebar-label {
+  margin: 0 0 9px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.binding-switch {
+  display: grid;
+  gap: 6px;
+}
+
+.binding-tab {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+}
+
+.binding-tab:hover {
+  border-color: #9fc7c2;
+}
+
+.binding-tab.is-active {
+  border-color: #86bbb5;
+  color: #0b5f58;
+  background: var(--teal-soft);
+}
+
+.binding-tab strong {
+  font-size: 12px;
+}
+
+.category-nav {
+  display: grid;
+  gap: 3px;
+  padding: 20px 0;
+}
+
+.category-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 9px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.category-link:hover {
+  color: var(--ink);
+  background: var(--surface-subtle);
+}
+
+.category-link span:last-child {
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sidebar-summary {
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.summary-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summary-line strong {
+  color: var(--red);
+  font-size: 22px;
+}
+
+.sidebar-summary > p:last-child {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.main-content {
+  min-width: 0;
+  padding: 42px clamp(22px, 4vw, 64px) 80px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 7px;
+  font-size: 29px;
+  line-height: 1.25;
+}
+
+.page-heading p:last-child {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.view-total {
+  flex: 0 0 auto;
+  min-width: 92px;
+  text-align: right;
+}
+
+.view-total strong,
+.view-total span {
+  display: block;
+}
+
+.view-total strong {
+  color: var(--blue);
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.view-total span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.toolbar {
+  position: sticky;
+  z-index: 20;
+  top: 64px;
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto auto;
+  gap: 12px;
+  align-items: end;
+  margin: 0 -2px 34px;
+  padding: 15px 2px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(244, 246, 247, 0.97);
+}
+
+.search-field span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.search-field input {
+  width: 100%;
+  height: 38px;
+  padding: 7px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  color: var(--ink);
+  background: var(--surface);
+  outline: none;
+}
+
+.search-field input:focus,
+.quality-reason:focus,
+.name-field input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+}
+
+.filter-toggle {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.filter-toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--red);
+}
+
+.quiet-button {
+  padding: 7px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.quiet-button:hover {
+  border-color: #9aa6af;
+}
+
+.audit-content {
+  display: grid;
+  gap: 58px;
+}
+
+.category-section {
+  min-width: 0;
+}
+
+.category-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 22px;
+  margin-bottom: 24px;
+  padding-bottom: 13px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.category-heading h2 {
+  margin-bottom: 2px;
+  font-size: 22px;
+}
+
+.category-heading p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.category-stats {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.category-stats strong {
+  color: var(--red);
+}
+
+.attribute-section + .attribute-section {
+  margin-top: 36px;
+}
+
+.attribute-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.attribute-heading h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.attribute-heading span {
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.scenario-list {
+  display: grid;
+  gap: 9px;
+}
+
+.scenario-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 126px;
+  gap: 20px;
+  padding: 18px 18px 17px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.scenario-row.is-discarded {
+  border-color: #d8a4a4;
+  background: #fffafa;
+}
+
+.scenario-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 13px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.binding-label {
+  color: var(--teal);
+  font-weight: 750;
+}
+
+.category-label {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.scenario-text {
+  margin-bottom: 13px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.placeholder-x,
+.placeholder-y {
+  padding: 0 3px;
+  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+  font-weight: 800;
+}
+
+.placeholder-x {
+  color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.placeholder-y {
+  color: var(--amber);
+  background: var(--amber-soft);
+}
+
+.coverage-label {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.value-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.value-chip {
+  max-width: 100%;
+  padding: 3px 7px;
+  overflow-wrap: anywhere;
+  border: 1px solid #c9d8e7;
+  border-radius: 999px;
+  color: #345774;
+  background: #f4f8fb;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.expand-values-button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-subtle);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.scenario-action {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.discard-button {
+  width: 126px;
+  min-height: 40px;
+  padding: 7px 10px;
+  border: 1px solid #d5a6a6;
+  color: var(--red);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.discard-button:hover {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+.discard-button.is-active {
+  border-color: var(--red);
+  color: #ffffff;
+  background: var(--red);
+}
+
+.discard-button.is-active:hover {
+  background: var(--red-dark);
+}
+
+.quality-panel {
+  margin-top: 32px;
+  padding: 22px;
+  border: 1px solid #bdd2ce;
+  border-left: 4px solid var(--teal);
+  border-radius: 6px;
+  background: #f1f8f7;
+}
+
+.quality-panel.has-error {
+  border-color: #d99b9b;
+  border-left-color: var(--red);
+  background: var(--red-soft);
+}
+
+.quality-panel h3 {
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
+.quality-panel > p {
+  margin-bottom: 15px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.quality-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quality-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.quality-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quality-option span {
+  min-width: 92px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.quality-option input:checked + span {
+  border-color: var(--teal);
+  color: #0b5f58;
+  background: var(--teal-soft);
+  font-weight: 750;
+}
+
+.quality-option.is-negative input:checked + span {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-soft);
+}
+
+.reason-field {
+  display: none;
+  margin-top: 14px;
+}
+
+.reason-field.is-visible {
+  display: block;
+}
+
+.reason-field span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--red-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.quality-reason {
+  width: 100%;
+  min-height: 92px;
+  resize: vertical;
+  padding: 10px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  color: var(--ink);
+  background: var(--surface);
+  outline: none;
+}
+
+.empty-state {
+  padding: 54px 20px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 6px;
+  color: var(--muted);
+  background: var(--surface-subtle);
+  text-align: center;
+}
+
+.name-dialog {
+  width: min(460px, calc(100% - 28px));
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 18px 55px rgba(24, 31, 37, 0.2);
+}
+
+.name-dialog::backdrop {
+  background: rgba(28, 35, 41, 0.62);
+}
+
+.name-dialog form {
+  padding: 30px;
+}
+
+.dialog-kicker {
+  margin-bottom: 6px;
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.name-dialog h2 {
+  margin-bottom: 8px;
+  font-size: 23px;
+}
+
+.name-dialog form > p:not(.dialog-kicker):not(.field-error) {
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.name-field span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.name-field input {
+  width: 100%;
+  height: 42px;
+  padding: 8px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+  outline: none;
+}
+
+.field-error {
+  min-height: 22px;
+  margin: 5px 0 8px;
+  color: var(--red);
+  font-size: 12px;
+}
+
+.dialog-submit {
+  width: 100%;
+}
+
+.toast {
+  position: fixed;
+  z-index: 80;
+  right: 22px;
+  bottom: 22px;
+  max-width: min(390px, calc(100% - 44px));
+  padding: 11px 14px;
+  border: 1px solid #a9c8c4;
+  border-radius: 6px;
+  color: #174f4a;
+  background: #edf8f6;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.is-error {
+  border-color: #d4a3a3;
+  color: var(--red-dark);
+  background: var(--red-soft);
+}
+
+@media (max-width: 900px) {
+  .guide-start {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    padding: 16px 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar-section {
+    padding-bottom: 13px;
+  }
+
+  .binding-switch {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-nav {
+    display: flex;
+    overflow-x: auto;
+    padding: 12px 0 4px;
+  }
+
+  .category-link {
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    background: var(--surface-subtle);
+  }
+
+  .sidebar-summary {
+    display: none;
+  }
+
+  .main-content {
+    padding-top: 28px;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    align-items: flex-start;
+    padding: 10px 14px;
+  }
+
+  .brand-block {
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  .product-name {
+    width: 100%;
+    padding-left: 0;
+    border-left: 0;
+    font-size: 11px;
+  }
+
+  .guide-status {
+    align-self: center;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    gap: 7px;
+  }
+
+  .guide-return-button {
+    padding-inline: 9px;
+    white-space: nowrap;
+  }
+
+  .reviewer-button {
+    display: none;
+  }
+
+  .primary-button {
+    white-space: nowrap;
+  }
+
+  .guide-page {
+    width: calc(100% - 28px);
+    padding: 36px 0 58px;
+  }
+
+  .guide-hero {
+    padding-bottom: 34px;
+  }
+
+  .guide-hero h1 {
+    font-size: 28px;
+  }
+
+  .guide-intro {
+    font-size: 14px;
+  }
+
+  .first-principle {
+    padding: 17px 16px;
+  }
+
+  .first-principle p {
+    font-size: 15px;
+  }
+
+  .guide-section {
+    padding: 38px 0;
+  }
+
+  .guide-section-heading {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .guide-section-heading h2 {
+    font-size: 20px;
+  }
+
+  .criteria-list,
+  .category-rule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .criteria-list li {
+    min-height: 0;
+  }
+
+  .example-card {
+    padding: 18px 16px;
+  }
+
+  .guide-start {
+    margin-top: 38px;
+    padding: 21px 17px;
+  }
+
+  .main-content {
+    padding: 24px 14px 60px;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .view-total {
+    min-width: 58px;
+  }
+
+  .toolbar {
+    top: 67px;
+    grid-template-columns: 1fr auto;
+    margin-bottom: 26px;
+  }
+
+  .search-field {
+    grid-column: 1 / -1;
+  }
+
+  .scenario-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 16px;
+  }
+
+  .scenario-action {
+    justify-content: stretch;
+  }
+
+  .discard-button {
+    width: 100%;
+  }
+
+  .category-heading {
+    align-items: flex-start;
+  }
+
+  .category-stats {
+    max-width: 110px;
+  }
+
+  .quality-panel {
+    padding: 18px 15px;
+  }
+}
+
+@media print {
+  .topbar,
+  .sidebar,
+  .toolbar,
+  .scenario-action,
+  .name-dialog,
+  .toast {
+    display: none;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .app-shell {
+    display: block;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .scenario-row {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}
+
+
+.attribute-heading h3 small {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72em;
+  font-weight: 600;
+}
+
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <span class="brand">LIP-Rec</span>
+      <span class="product-name">Movie Scenario 审核</span>
+      <span class="version">Movie 最终复审 · 206 条</span>
+    </div>
+    <div class="guide-status" id="guideStatus">开始前必读</div>
+    <div class="header-actions" id="auditHeaderActions" hidden>
+      <button class="guide-return-button" id="guideButton" type="button">审核说明</button>
+      <button class="reviewer-button" id="reviewerButton" type="button" title="更换审计人">
+        <span class="reviewer-label">Reviewer</span>
+        <strong id="reviewerName">Not set</strong>
+      </button>
+      <button class="primary-button" id="exportButton" type="button">导出 JSON</button>
+    </div>
+  </header>
+
+  <main class="guide-page" id="guidePage">
+    <header class="guide-hero">
+      <p class="eyebrow">Human Review Guide</p>
+      <h1>Movie Scenario 最终复审</h1>
+      <p class="guide-intro">请在开始打分前完整阅读以下标准和示例。进入审核后，可以随时返回本页查看。</p>
+      <div class="first-principle">
+        <strong>Scenario 的定义与第一性原则</strong>
+        <p>Scenario 是以用户 <span class="placeholder-x">[X]</span> 为主体、发生在后续交流之前的一段真实观影或电影相关情境；第一性原则是只保留让事件成立、让目标电影属性成为核心、并让稳定偏好自然显露的最小充分事实，同时为后续对话留下展开空间。</p>
+      </div>
+    </header>
+
+    <section class="guide-section" aria-labelledby="scenarioCriteriaTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">01</p>
+        <div>
+          <h2 id="scenarioCriteriaTitle">单条 Scenario 审核重点</h2>
+          <p>逐条阅读正文，并结合属性作用域、电影类型和覆盖值进行判断。</p>
+        </div>
+      </div>
+      <ol class="criteria-list">
+        <li>
+          <strong>真实、自然</strong>
+          <span>应是现实中可能发生的生活事件，而不是画像、实验说明、值域模板或完整对话剧本；中文表达应自然。</span>
+        </li>
+        <li>
+          <strong>目标属性居中</strong>
+          <span>目标属性应直接影响事件中的动作、感受、判断或结果，不能只是顺带出现。</span>
+        </li>
+        <li>
+          <strong>偏好依据成立</strong>
+          <span>稳定偏好应从观影体验、选择习惯、现实取舍或熟人认知中自然显露，不能只靠“长期、一直、多次”等总结。</span>
+        </li>
+        <li>
+          <strong>属性值能够自然代入</strong>
+          <span>覆盖值代入 <span class="placeholder-y">[Y]</span> 后，语言、人物行为、物理结果和现实常识仍应成立。</span>
+        </li>
+        <li>
+          <strong>信息充分但保持开放</strong>
+          <span>应说明属性为什么重要，但不提前写完选择、处理及最终结果，给后续对话留下空间。</span>
+        </li>
+        <li>
+          <strong>属性作用域合理</strong>
+          <span>类型限定属性的情境应与对应电影类型自然相关；全局共享属性不应无故依赖某一种电影类型。</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="guide-section" aria-labelledby="categoryCriteriaTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">02</p>
+        <div>
+          <h2 id="categoryCriteriaTitle">电影类型如何评价</h2>
+          <p>类型评价关注整体是否存在系统性问题，不要求零丢弃。</p>
+        </div>
+      </div>
+      <div class="category-rule-grid">
+        <article class="category-rule">
+          <span class="quality-mark is-positive">满意</span>
+          <p>单条问题较为孤立；各属性组整体自然，值映射基本合理，生活事件和偏好证据具有多样性。</p>
+        </article>
+        <article class="category-rule">
+          <span class="quality-mark is-negative">不满意</span>
+          <p>同一种问题反复出现，影响完整属性组或多个属性；例如属性因果普遍错误、值域被强行覆盖、语言模板化，或大量 Scenario 只是更换人物和地点。</p>
+        </article>
+      </div>
+      <p class="category-note">少量单条 Scenario 被丢弃，不自动意味着整个电影类型不满意。选择“不满意”时，只需简要填写主要问题。</p>
+    </section>
+
+    <section class="guide-section" aria-labelledby="goodExamplesTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">03</p>
+        <div>
+          <h2 id="goodExamplesTitle">好的 Scenario 示例</h2>
+          <p>以下示例分别展示类型限定属性和全局共享属性如何通过真实情境体现稳定偏好。</p>
+        </div>
+      </div>
+      <div class="example-list">
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Subtype-scoped · Action / Action Realism</span>
+          </div>
+          <blockquote>救援训练展示一段动作写实程度为<span class="placeholder-y">[Y]</span>的模拟。人物会疲惫、失手，也必须使用可行步骤；<span class="placeholder-x">[X]</span>一直最信服这种身体后果不会消失的行动。</blockquote>
+          <p>动作的身体限制和可行步骤直接体现写实程度，偏好也由明确的判断依据支撑。</p>
+        </article>
+        <article class="example-card">
+          <div class="example-meta">
+            <span class="example-status">好例子</span>
+            <span>Global · Color Format</span>
+          </div>
+          <blockquote><span class="placeholder-x">[X]</span>在暗房课上冲洗一组采用<span class="placeholder-y">[Y]</span>色彩形式的影像。去掉颜色后，人物脸上的光线和街道纹理反而更清楚；<span class="placeholder-x">[X]</span>一直喜欢这种由明暗直接塑造情绪的画面。</blockquote>
+          <p>色彩形式通过具体视觉效果影响审美判断，并且这种偏好可以跨电影类型成立。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="guide-section" aria-labelledby="badExampleTitle">
+      <div class="guide-section-heading">
+        <p class="section-number">04</p>
+        <div>
+          <h2 id="badExampleTitle">不好的 Scenario 示例</h2>
+          <p>信息看似丰富，但目标属性没有形成真实因果。</p>
+        </div>
+      </div>
+      <article class="example-card is-bad">
+        <div class="example-meta">
+          <span class="example-status">反例</span>
+          <span>Global · Color Format</span>
+        </div>
+        <blockquote><span class="placeholder-x">[X]</span>周末看了一部画面色彩形式为<span class="placeholder-y">[Y]</span>的电影，因为海报很漂亮就认定自己一直最喜欢这种色彩。</blockquote>
+        <p>判断由海报而不是电影中的色彩形式驱动；“一直最喜欢”只是结论，没有体验、行为或取舍作为稳定偏好的证据。</p>
+      </article>
+    </section>
+
+    <section class="guide-start" aria-labelledby="startAuditTitle">
+      <div>
+        <p class="eyebrow">Before You Start</p>
+        <h2 id="startAuditTitle">阅读完成后进入打分界面</h2>
+        <p>进入后将先填写审核人姓名。页面会自动保存本机进度，并支持导出 JSON。</p>
+      </div>
+      <div class="guide-start-actions">
+        <label class="guide-acknowledgement">
+          <input id="guideAcknowledgement" type="checkbox">
+          <span>我已阅读并理解上述审核标准</span>
+        </label>
+        <button class="primary-button guide-start-button" id="startAuditButton" type="button" disabled>进入打分界面</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="app-shell" id="auditApp" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <p class="sidebar-label">属性作用域</p>
+        <div class="binding-switch" role="tablist" aria-label="Scenario 属性作用域">
+          <button class="binding-tab is-active" id="productBoundTab" type="button" role="tab" aria-selected="true" data-view="product_bound">
+            <span>类型限定</span>
+            <strong id="productBoundCount">0</strong>
+          </button>
+          <button class="binding-tab" id="nonProductTab" type="button" role="tab" aria-selected="false" data-view="non_product">
+            <span>全局共享</span>
+            <strong id="nonProductCount">0</strong>
+          </button>
+        </div>
+      </div>
+
+      <nav class="category-nav" id="categoryNav" aria-label="电影类型导航"></nav>
+
+      <div class="sidebar-summary">
+        <p class="sidebar-label">当前标记</p>
+        <div class="summary-line">
+          <span>已标记丢弃</span>
+          <strong id="discardedCount">0</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow" id="viewEyebrow">Subtype-scoped</p>
+          <h1 id="viewTitle">类型限定 Scenario</h1>
+          <p id="viewDescription">按电影类型和属性审阅。只标记应当丢弃的场景。</p>
+        </div>
+        <div class="view-total">
+          <strong id="visibleCount">0</strong>
+          <span>当前显示</span>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="筛选工具">
+        <label class="search-field">
+          <span>搜索</span>
+          <input id="searchInput" type="search" placeholder="搜索属性、覆盖值或 Scenario 正文">
+        </label>
+        <label class="filter-toggle">
+          <input id="discardedOnlyInput" type="checkbox">
+          <span>只看已标记丢弃</span>
+        </label>
+        <button class="quiet-button" id="clearFiltersButton" type="button">清除筛选</button>
+      </section>
+
+      <div id="auditContent" class="audit-content" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <dialog class="name-dialog" id="nameDialog">
+    <form method="dialog" id="nameForm" novalidate>
+      <p class="dialog-kicker">LIP-Rec · Human Audit</p>
+      <h2>输入审核人姓名</h2>
+      <p>名字会写入导出的 JSON 文件名和结果内容。输入相同名字可继续本机上次保存的进度。</p>
+      <label class="name-field">
+        <span>姓名 / Name</span>
+        <input id="nameInput" name="reviewer" type="text" autocomplete="name" placeholder="例如：Jietong Yao" maxlength="80" required>
+      </label>
+      <p class="field-error" id="nameError" role="alert"></p>
+      <button class="primary-button dialog-submit" type="submit">开始审核</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+window.SCENARIO_AUDIT_DATA = {"dataSchema":"scenario-human-audit-data-v1","sourceVersion":"movie-final-review-20260908-828bccd1b52c","sourcePath":"benchmark/dialogue_template/tmp/movie-binary-values-20260908/candidate/scenarios/scenarios.json","sourceSha256":"6218cb513df0db84a2b5c4cb68f77e71bf94db1e3856ed3c8a979db9557d3c0f","groupRegistryPath":"benchmark/dialogue_template/tmp/movie-binary-values-20260908/candidate/scenarios/group-registry.json","groupRegistrySha256":"4298acde6a99928d0d5b0ce96c75ea906eff2d64fa47f9c01ca9079a8f94c227","valueDomainPath":"benchmark/dialogue_template/tmp/movie-binary-values-20260908/candidate/pool/attribute_value_domains_v1.json","valueDomainSha256":"a6182e2a78661a8bcf10b927b26077da8ddfa4b8aff635a32c451633e5a042c2","poolManifestPath":"benchmark/dialogue_template/tmp/movie-binary-values-20260908/candidate/pool/manifest.json","sourcePoolItemCount":10028,"categoryOrder":["action","comedy","romance","crime","horror","suspense","animation","science_fiction","documentary"],"categoryLabels":{"action":"Action / 动作片","comedy":"Comedy / 喜剧片","romance":"Romance / 爱情片","crime":"Crime / 犯罪片","horror":"Horror / 恐怖片","suspense":"Suspense / 悬疑片","animation":"Animation / 动画片","science_fiction":"Science Fiction / 科幻片","documentary":"Documentary / 纪录片","shared":"Global / 全局共享"},"totalRecords":206,"records":[{"id":"MOVIE_ACTION_REALISM_M05","binding":"product_bound","category":"action","attribute":"action_realism","attributeZh":"动作写实程度","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Exaggerated"],"values":["Exaggerated（高度夸张动作）"],"historicalValues":[],"attributeDefinition":"动作能力和物理后果接近现实还是高度夸张。 二分边界：以动作是否达到旧高度夸张档为界；非高度夸张允许在写实基础上强化，不等于完全写实。","scenario":"动作影展请常客推荐一部午夜场影片，[X]选了写实程度为[Y]的一部。人物撞穿墙面仍能继续追逐，车辆跃过屋顶也不必服从现实物理；[X]手机里收藏的同类片段已经排了几页，动作越敢把不可能推到底，越合[X]胃口。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ACTION_TYPE_M01","binding":"product_bound","category":"action","attribute":"action_type","attributeZh":"动作类型","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Martial Arts","Hand-to-Hand Combat"],"values":["Martial Arts（武术格斗）","Hand-to-Hand Combat（徒手格斗）"],"historicalValues":[],"attributeDefinition":"影片最主要的动作场面类别；Martial Arts 仅表示明确的体系化武术，Hand-to-Hand Combat 表示非体系化近身徒手格斗。","scenario":"武术馆开放日结束后，休息区放起一部以[Y]为主要动作类型的电影。银幕上的距离、重心和招式衔接都看得清，[X]从包里取出一本写满动作片笔记的小册子，又画下一个转身的重心；片尾字幕亮起时，工作人员已经收完旁边的训练垫，[X]才合上册子。","batches":["zijun_revision"]},{"id":"MOVIE_ACTION_TYPE_M03","binding":"product_bound","category":"action","attribute":"action_type","attributeZh":"动作类型","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Sword Fighting"],"values":["Sword Fighting（刀剑战斗）"],"historicalValues":[],"attributeDefinition":"影片最主要的动作场面类别；Martial Arts 仅表示明确的体系化武术，Hand-to-Hand Combat 表示非体系化近身徒手格斗。","scenario":"历史兵器展的演示以[Y]为主要动作类型。武器长度迫使双方不断调整距离，[X]一路跟着脚步变化看到散场；谈到平时看的动作片，[X]说自己也总先注意刀剑怎样改变空间，而不只是招式有多快。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ACTION_TYPE_M04","binding":"product_bound","category":"action","attribute":"action_type","attributeZh":"动作类型","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Superhero Action"],"values":["Superhero Action（超级英雄动作）"],"historicalValues":[],"attributeDefinition":"影片最主要的动作场面类别；Martial Arts 仅表示明确的体系化武术，Hand-to-Hand Combat 表示非体系化近身徒手格斗。","scenario":"家庭漫画工作坊休息时播放的是一部以[Y]为主要动作类型的电影，孩子看到片名就拉[X]坐到前排。家里看过的同类电影中，[X]最常重提的都是超常能力怎样改变人物的责任；这次孩子也等着和[X]聊这一点。","batches":["zijun_revision"]},{"id":"MOVIE_ACTION_TYPE_R01","binding":"product_bound","category":"action","attribute":"action_type","attributeZh":"动作类型","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Military Combat"],"values":["Military Combat（军事战斗）"],"historicalValues":[],"attributeDefinition":"影片最主要的动作场面类别；Martial Arts 仅表示明确的体系化武术，Hand-to-Hand Combat 表示非体系化近身徒手格斗。","scenario":"工会电影夜放映一部以[Y]为主要动作类型的影片。片中小队接到命令后，仍要判断现场是否值得让队员冒险；经常参与劳资协商的[X]很熟悉职责与个体代价之间的拉扯，也说自己看这类动作片时总会追着指挥、服从和队友责任看，而不只是等交火。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ACTION_TYPE_R02","binding":"product_bound","category":"action","attribute":"action_type","attributeZh":"动作类型","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Gun Combat"],"values":["Gun Combat（枪战）"],"historicalValues":[],"attributeDefinition":"影片最主要的动作场面类别；Martial Arts 仅表示明确的体系化武术，Hand-to-Hand Combat 表示非体系化近身徒手格斗。","scenario":"研究小组做动作电影分镜报告，[X]主动认领以[Y]为主要动作类型的一段，并把交火距离、弹药变化和掩护转移整理成表格。组员熟悉[X]的观影笔记：只要枪械真正限制人物下一步，[X]就会反复拆看；把枪声当背景的片段则很快略过。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PROTAGONIST_PROFILE_M01","binding":"product_bound","category":"action","attribute":"protagonist_profile","attributeZh":"动作主角能力背景","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Ordinary Person"],"values":["Ordinary Person（普通人）"],"historicalValues":[],"attributeDefinition":"主角进入冲突前是普通人还是受过专业训练的行动者。","scenario":"写作课上，[X]把一场停电危机交给身份为[Y]的主角。人物没有特殊训练，只能凭熟悉的楼道和临场判断帮助邻居撤离；[X]写行动故事时总会把这种会害怕、也可能判断错的人留在中心，因为有限能力下的每个选择都更容易让自己代入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PROTAGONIST_PROFILE_R02","binding":"product_bound","category":"action","attribute":"protagonist_profile","attributeZh":"动作主角能力背景","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Military"],"values":["Military（军人）"],"historicalValues":[],"attributeDefinition":"主角进入冲突前是普通人还是受过专业训练的行动者。","scenario":"动作片读书会要求每人用一页简报介绍自己常看的主角类型，[X]写下身份为[Y]的人物，只留下命令、队友责任和临场判断三个要点。[X]的旧观影笔记里也总给这类角色单开一栏；真正吸引自己的，是职责和个人选择发生冲突时，他们会怎样行动。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_STAKES_SCOPE_M02","binding":"product_bound","category":"action","attribute":"stakes_scope","attributeZh":"危机影响范围","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Community"],"values":["Community（群体或社区）"],"historicalValues":[],"attributeDefinition":"核心冲突主要影响个人关系还是更广泛群体。","scenario":"社区影院为动作片夜征集意见，[X]给一部风险范围为[Y]的电影投了票。预告里受到威胁的是一片具体街区，居民也要共同应对；负责排片的人记得，[X]前几次留下讨论的也都是这类把危机落在共同生活上的影片。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_M03","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Effects-Heavy"],"values":["Effects-Heavy（历史覆盖值，待对齐）"],"historicalValues":["Effects-Heavy"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"游戏展的电影专区播放一段采用[Y]的动作场面，城市在追逐中不断折叠，人物也完成现实无法承受的跳跃。[X]认出制作团队后，马上记下新片日期；这支团队过去几部效果主导的动作电影，[X]都看过不止一次。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_M04","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Practical"],"values":["Practical（历史覆盖值，待对齐）"],"historicalValues":["Practical"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"老剧院复排一部动作电影中的跌落和攀爬，随后放映采用[Y]的原片。[X]坐近银幕，留意演员落地时真实的失衡和喘息；演后介绍几位特技演员时，[X]已经能说出他们此前合作过的片名，还留下来看现场示范。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_M05","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"manual","rawValues":["Mixed"],"values":["Mixed（历史覆盖值，待对齐）"],"historicalValues":["Mixed"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"短片工作坊讨论动作场面怎么拍，[X]带来几段自己常重看的电影作参考，其中的特技都采用[Y]：近身动作由演员完成，无法搭建的环境再用效果扩展。[X]希望新短片也保留这种既有身体重量、又能打开空间的做法。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_R01","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Practical"],"values":["Practical（历史覆盖值，待对齐）"],"historicalValues":["Practical"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"急救培训结束后，诊所同事聊起动作电影里的跌落场面。[X]翻出一段采用[Y]的镜头，指出演员落地后重心和呼吸都真实改变；手机收藏里还有不少由身体完成的特技片段，[X]休息时会反复看这些真实负荷怎样留在动作里。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_R02","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Effects-Heavy"],"values":["Effects-Heavy（历史覆盖值，待对齐）"],"historicalValues":["Effects-Heavy"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"英语课让学生用电影片段做短讲，[X]又选了一段采用[Y]的动作场面。画面让建筑随追逐变形，人物也能越过现实身体限制；这学期几次短讲里，[X]展示的都是这类由效果打开想象的动作片，准备台词时连幕后制作也一起查清了。","batches":["zijun_revision"]},{"id":"MOVIE_STUNT_STYLE_R05","binding":"product_bound","category":"action","attribute":"stunt_style","attributeZh":"动作特技风格","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Mixed"],"values":["Mixed（历史覆盖值，待对齐）"],"historicalValues":["Mixed"],"attributeDefinition":"真人动作场面的主要实现方式；全动画动作不适用此轴。","scenario":"科幻社做特技史回顾时，成员请[X]带一部最能代表自己口味的动作电影。[X]选的影片采用[Y]：演员完成近处动作，效果只扩展无法搭建的环境。社团片单里由[X]推荐的几部电影，也都保留了这种实拍与效果的衔接。","batches":["zijun_revision"]},{"id":"MOVIE_TACTICAL_DEPTH_R05","binding":"product_bound","category":"action","attribute":"tactical_depth","attributeZh":"战术规划程度","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Non-Strategy-Heavy"],"values":["Non-Strategy-Heavy（非重策略）"],"historicalValues":[],"attributeDefinition":"行动是否依赖明确计划、资源分配和协作策略。 二分边界：以策略规划是否达到重策略档为界；非重策略允许一定规划，并不等于无计划。","scenario":"一家人商量周末看什么动作电影，孩子把一部战术规划程度为[Y]的新片递给[X]。预告里人物遇到冲突便直接应对，没有长篇部署；孩子见过[X]把几部复杂布局的电影看到一半就关掉，知道这种利落的行动方式更合[X]口味。","batches":["zijun_revision"]},{"id":"MOVIE_TEAM_STRUCTURE_R01","binding":"product_bound","category":"action","attribute":"team_structure","attributeZh":"行动团队结构","attributeScope":"subtype","logicalTypes":["action"],"source":"real_dialogue_derived","rawValues":["Lone Protagonist"],"values":["Lone Protagonist（单人行动）"],"historicalValues":[],"attributeDefinition":"主要行动由单人还是协作团队完成。","scenario":"[X]听一部关于个人对话记录被违规保留的声音剧，故事采用[Y]的团队结构。危机始终只落在同一名行动者身上：他独自核对痕迹、判断该相信谁，也独自承担判断失误的后果。[X]平时听这类故事就偏爱把压力完整交给一个人的写法，一旦切去队友视角，紧张感反而会散掉。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_M01","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Children","Family","Teen","Adults"],"values":["Children（儿童）","Family（家庭）","Teen（青少年）","Adults（成人）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"社区动画夜按受众安排场次，志愿者见到[X]便递来面向[Y]的节目单。无论当晚是独自来看还是陪人参加，[X]都会认真看完这个受众区的作品；前几期活动里，[X]也常留下讨论这些动画怎样理解它们真正面对的观众。","batches":["zijun_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_M03","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Teen"],"values":["Teen（青少年）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"[X]在青年中心整理周末放映单，把一部明确面向[Y]的动画放进自己也会带回家重看的那一栏。片中同伴关系不由成年人替他们解释，角色能自己做决定并承担后果；同事知道[X]平时就偏爱这种把成长中的犹豫认真写给青少年看的作品，而不只是工作需要。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_M05","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Children"],"values":["Children（儿童）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"[X]帮幼儿园试播一组面向[Y]的动画短片。孩子散场后，[X]仍留下把其中一部从头看完。图像关系清楚，害怕之后有安全回落，也给小观众回应空间；[X]自己的儿童动画收藏一直按这个标准增加，喜欢作品用简单方式说完整情绪，而不是把年纪小当成可以敷衍。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_R01","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Adults"],"values":["Adults（成人）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"建筑学院开放日请[X]从私人片单里挑一部城市动画作参考，[X]带来的作品明确面向[Y]。它没有把城市只画成可走可玩的模型，而是保留住房、交通与规划之间难以轻松化解的冲突；从北京到康奈尔学习建筑期间，[X]收藏最多的也一直是这种愿意把复杂城市问题完整留给成年人看的动画。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_R02","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Adults"],"values":["Adults（成人）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"[X]试阅一组科普动画，在面向[Y]的一栏留下了信息最直接的几部。作品不先复述基础常识，也不把每个结论拆成教学口吻，而是让成年人从图像关系自行跟上；[X]自己的收藏里同类作品也最多，因为简洁而不替观众想完，一直是[X]偏爱的成人动画表达。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_R03","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Teen"],"values":["Teen（青少年）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"法语角色扮演社筹备动画夜，[X]带来自己常看的、主要面向[Y]的系列。片中的年轻角色自己决定加入哪一方，也要承担误判朋友的后果；社员早已熟悉[X]的口味，遇到认真处理同伴关系和成长选择的青少年动画，总会先问[X]看过没有。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_AUDIENCE_R04","binding":"product_bound","category":"animation","attribute":"animation_audience","attributeZh":"动画目标观众","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Family"],"values":["Family（家庭）"],"historicalValues":[],"attributeDefinition":"作品在叙事复杂度和内容尺度上主要面向的年龄群体。","scenario":"新闻教育馆策划家庭媒体素养周，[X]翻出自己常在家里重看的、面向[Y]的数据动画。孩子能从一个具体事件进入，成人也能看到来源与统计边界；[X]一向偏爱一家人看完还能各自提出问题的作品，而不是只照顾某一个年龄层。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_NARRATIVE_STYLE_M05","binding":"product_bound","category":"animation","attribute":"animation_narrative_style","attributeZh":"动画叙事机制","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Interwoven Narrative","Comic Narrative"],"values":["Interwoven Narrative（多线交织叙事）","Comic Narrative（喜剧推进叙事）"],"historicalValues":[],"attributeDefinition":"动画成片中推动故事进展的单一主导叙事机制；按故事主要如何推进来选择，不表示题材、情绪、世界观或制作技术。","scenario":"短片展以一场暴雨后的停电为题，[X]把送餐员、独居老人和抢修工人的经历组织成[Y]。三个人都误以为自己掌握了故障原因，行动不断撞在一起，笑料也一路推动他们拼出真相；翻看[X]过去的分镜本，这种人物线交错、幽默从信息差里长出的结构反复出现。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TECHNIQUE_M01","binding":"product_bound","category":"animation","attribute":"animation_technique","attributeZh":"动画制作技术","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Stop Motion"],"values":["Stop Motion（定格动画）"],"historicalValues":[],"attributeDefinition":"生成主体动画画面的主要制作技术，不表示立体放映。","scenario":"[X]报名周末动画工坊，把植物发芽做成短片，仍选了[Y]。泥土、根和纸叶每拍一帧只移动一点，最后连成一段略带手工颤动的生长过程；[X]带来的收纳盒里还装着以前短片留下的小模型，这种亲手碰过每一帧的感觉一直最让[X]着迷。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TECHNIQUE_R02","binding":"product_bound","category":"animation","attribute":"animation_technique","attributeZh":"动画制作技术","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Digital 2D"],"values":["Digital 2D（数字2D）"],"historicalValues":[],"attributeDefinition":"生成主体动画画面的主要制作技术，不表示立体放映。","scenario":"[X]为 Android 小游戏测试角色动作，继续用[Y]制作短循环。轮廓、颜色和关键姿势都能逐帧直接调整，在小屏幕上仍然读得清楚；项目文件夹里[X]过去几款游戏的角色也采用同样技法，因为这种干净的二维动作一直最符合[X]想做的游戏手感。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TECHNIQUE_R03","binding":"product_bound","category":"animation","attribute":"animation_technique","attributeZh":"动画制作技术","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Mixed Media"],"values":["Mixed Media（混合媒介）"],"historicalValues":[],"attributeDefinition":"生成主体动画画面的主要制作技术，不表示立体放映。","scenario":"[X]为公共议题展制作无旁白短片，选择[Y]，把旧收据、报纸纹理和手写标记叠进同一画面，而不借名人话语替作品表态。[X]过去做的小志和动画也常把真实材料放在一起碰撞；比起一种画面从头铺到底，这种材质之间产生的新含义一直更吸引他。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TECHNIQUE_R04","binding":"product_bound","category":"animation","attribute":"animation_technique","attributeZh":"动画制作技术","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Rotoscoping"],"values":["Rotoscoping（转描动画）"],"historicalValues":[],"attributeDefinition":"生成主体动画画面的主要制作技术，不表示立体放映。","scenario":"[X]制作不露脸的频道片头，采用[Y]描摹自己拍下的手势，让手臂和桌面物品替正脸出场。旧视频里也能看到同样略带迟疑的动作线条；[X]一直喜欢真人运动被重新画过后留下的节奏，它既保留身体的真实感，又形成了自己的视觉笔触。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TECHNIQUE_R05","binding":"product_bound","category":"animation","attribute":"animation_technique","attributeZh":"动画制作技术","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Hand-Drawn 2D"],"values":["Hand-Drawn 2D（手绘2D）"],"historicalValues":[],"attributeDefinition":"生成主体动画画面的主要制作技术，不表示立体放映。","scenario":"关系工作坊让参与者把一句难以直说的感受做成动态图，[X]选用[Y]，让人物想靠近又停下的动作留在不断修正的线条里。[X]平时的速写本也总用这种方式记录亲近关系中的犹疑；比起把表情做得完全光滑，手画线条留下的迟疑更接近[X]理解情绪的方式。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TRADITION_M05","binding":"product_bound","category":"animation","attribute":"animation_tradition","attributeZh":"动画文化传统","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Latin American Animation","South Asian Animation","Southeast Asian Animation"],"values":["Latin American Animation（拉丁美洲动画）","South Asian Animation（南亚动画）","Southeast Asian Animation（东南亚动画）"],"historicalValues":[],"attributeDefinition":"按主要制作体系、创作传统与视觉叙事惯例判断的单一文化传统。","scenario":"公共艺术馆邀请不同地区的动画师共同制作城市片段，[X]一走进[Y]工作室的展区，就认出城市声音怎样跟着人物动作进入画面。随身的观影本里还夹着往届同一传统回顾展的票根；[X]一直偏爱地域生活真正参与叙事的动画，而不是只在背景上贴几个地方符号。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TRADITION_R02","binding":"product_bound","category":"animation","attribute":"animation_tradition","attributeZh":"动画文化传统","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Japanese Anime"],"values":["Japanese Anime（日本动画）"],"historicalValues":[],"attributeDefinition":"按主要制作体系、创作传统与视觉叙事惯例判断的单一文化传统。","scenario":"[X]为自己的“云猫”昵称设计动态头像，自然回到自己最熟悉的[Y]角色处理。书架上的设定集和硬盘里的参考片段已经积了多年，[X]尤其喜欢角色只用一次眼神停顿和清楚轮廓就显出性格；头像没有照搬具体人物，画法却延续了[X]多年来喜欢的动画传统。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ANIMATION_TRADITION_R03","binding":"product_bound","category":"animation","attribute":"animation_tradition","attributeZh":"动画文化传统","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Western Animation"],"values":["Western Animation（历史覆盖值，待对齐）"],"historicalValues":["Western Animation"],"attributeDefinition":"按主要制作体系、创作传统与视觉叙事惯例判断的单一文化传统。","scenario":"Cedars-Sinai 的教育周征集健康动画，[X]从自己的收藏里挑出一部[Y]作品作参考。它把身体变化放进病人和家人的日常，而不是只展示医学示意图；同事发现[X]这些年推荐的动画也多来自同一传统，因为[X]一直喜欢知识和人物情绪留在同一个故事里。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CHARACTER_WORLD_M01","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Anthropomorphic"],"values":["Anthropomorphic（以拟人角色为主）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"[X]为自然中心设计动态导览墙，把故事世界定为[Y]。松鼠会抱怨游客留下的食物，老树会提醒幼苗避开踩踏，但它们仍按各自的栖息方式生活；[X]以往的自然故事也总让非人角色自己开口，因为从它们的视角理解环境，一直比由人类讲解更吸引[X]。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CHARACTER_WORLD_M02","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Anthropomorphic"],"values":["Anthropomorphic（以拟人角色为主）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"儿童戏偶工作坊请大家带一部喜欢的动画作参考，[X]带来的几部都属于[Y]世界。里面的动物或物件会像人一样争吵和和好，却仍保留各自的习性；孩子们挑中其中一部时，[X]已经能熟练讲出角色为什么这样行动。","batches":["zijun_revision"]},{"id":"MOVIE_CHARACTER_WORLD_R01","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Human-Centered"],"values":["Human-Centered（以人类为主）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"香港社区馆放映一部角色世界为[Y]的街区动画，电车乘客、楼上住户和店员撑起了整段故事。[X]坐下后很快认出自己常走的生活节奏；在[X]收藏的城市动画里，最常重看的也是这种只靠普通人关系让街区活起来的作品。","batches":["zijun_revision"]},{"id":"MOVIE_CHARACTER_WORLD_R02","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Creature-Centered"],"values":["Creature-Centered（以动物或生物为主）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"[X]为候鸟迁徙故事比较两版动画草图，留下了世界构成为[Y]的版本。鸟群依据风向、食物和族群关系作决定，没有人类向导替它们解释目的；[X]从小看生物故事就喜欢动物自己推动情节，人类一旦替它们发言，那种好奇反而会断掉。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CHARACTER_WORLD_R04","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Anthropomorphic"],"values":["Anthropomorphic（以拟人角色为主）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"老车聚会散场前放了一部角色世界为[Y]的动画，片中的车辆会闹脾气，也保留各自的发动机声和操控特点。[X]看得格外投入，还向车友提起家里几部同类动画；熟悉真实车辆以后，[X]反而更喜欢这些拟人角色没有丢掉原本的机械性格。","batches":["zijun_revision"]},{"id":"MOVIE_CHARACTER_WORLD_R05","binding":"product_bound","category":"animation","attribute":"character_world","attributeZh":"角色世界构成","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Mixed"],"values":["Mixed（混合角色世界）"],"historicalValues":[],"attributeDefinition":"故事角色体系主要由人类还是拟人化非人角色构成。","scenario":"[X]布置年度万圣节庭院时，仍把人形机关、动物装置和真人扮演者安排进一个[Y]世界。有人负责引路，动物装置会回应人的靠近，不同类型的角色一路互相配合；翻看过去几年的布置照片，[X]每次都喜欢让人类与异类伙伴真正发生关系，而不是各演各的。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_MUSICAL_INTEGRATION_M05","binding":"product_bound","category":"animation","attribute":"musical_integration","attributeZh":"歌舞融入程度","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Central"],"values":["Central（歌舞核心）"],"historicalValues":[],"attributeDefinition":"角色演唱和音乐段落是否直接承担叙事功能。 二分边界：以歌舞是否构成核心叙事机制为界；辅助性歌舞归非核心，不等于没有歌舞。","scenario":"声音工作坊给同一动画配了三个版本，[X]留下音乐呈[Y]的一个。人物按旋律改变步伐，冲突也在节奏断开的瞬间发生，拿掉音乐便看不懂故事为何转向；[X]收藏的音乐动画里一直都是这类作品，因为让一段旋律真正成为叙事骨架，比只铺气氛更让[X]兴奋。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_MUSICAL_INTEGRATION_R03","binding":"product_bound","category":"animation","attribute":"musical_integration","attributeZh":"歌舞融入程度","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Non-Central"],"values":["Non-Central（歌舞非核心）"],"historicalValues":[],"attributeDefinition":"角色演唱和音乐段落是否直接承担叙事功能。 二分边界：以歌舞是否构成核心叙事机制为界；辅助性歌舞归非核心，不等于没有歌舞。","scenario":"[X]为图书馆的俄英译著目录制作动画导览，让音乐只以[Y]的程度出现。书名、版本和索引在安静中展开，短旋律只标示章节切换；[X]自己的动画收藏里也有不少近乎无配乐的作品，因为纸张声、脚步声和停顿被完整听见时，反而最容易沉进去。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_DETAIL_LEVEL_M01","binding":"product_bound","category":"animation","attribute":"visual_detail_level","attributeZh":"画面细节密度","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Non-Highly-Detailed"],"values":["Non-Highly-Detailed（非高画面细节）"],"historicalValues":[],"attributeDefinition":"背景、材质和角色绘制的视觉信息密度。 二分边界：以画面细节是否达到高细节档为界；非高包含极简和常规细节，不将常规画面说成极简。","scenario":"[X]等车时在速写本上画一段站台动画，画面细节保持为[Y]。几条线交代站台，一个色块代表等车的人，时钟一动就能看出故事变化；翻过前面的通勤速写，街口、车厢和雨天也都被[X]画得这样干净，因为只留最关键的形状一直让[X]觉得轻松。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_DETAIL_LEVEL_M04","binding":"product_bound","category":"animation","attribute":"visual_detail_level","attributeZh":"画面细节密度","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Highly Detailed"],"values":["Highly Detailed（高画面细节）"],"historicalValues":[],"attributeDefinition":"背景、材质和角色绘制的视觉信息密度。 二分边界：以画面细节是否达到高细节档为界；非高包含极简和常规细节，不将常规画面说成极简。","scenario":"动画社展出一段细节程度为[Y]的夜市街景，[X]在大屏前停留了很久，又回头重看：店面旧招牌、玻璃反光和路人手势各自讲着小故事。社员已经习惯[X]在放映后追问背景画了什么；能不断放大并发现新信息的画面，一直比只交代主线的版本更留得住[X]。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_DETAIL_LEVEL_M05","binding":"product_bound","category":"animation","attribute":"visual_detail_level","attributeZh":"画面细节密度","attributeScope":"subtype","logicalTypes":["animation"],"source":"manual","rawValues":["Non-Highly-Detailed"],"values":["Non-Highly-Detailed（非高画面细节）"],"historicalValues":[],"attributeDefinition":"背景、材质和角色绘制的视觉信息密度。 二分边界：以画面细节是否达到高细节档为界；非高包含极简和常规细节，不将常规画面说成极简。","scenario":"[X]整理这些年给家里孩子做的睡前故事卡，新画面仍采用[Y]的细节程度。人物轮廓清楚，房间只留床、窗和一盏灯；孩子睡着后，[X]还独自删掉了一处多余装饰，因为这种少量形状留下的安静，本来就是[X]喜欢的画面。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_DETAIL_LEVEL_R01","binding":"product_bound","category":"animation","attribute":"visual_detail_level","attributeZh":"画面细节密度","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Non-Highly-Detailed"],"values":["Non-Highly-Detailed（非高画面细节）"],"historicalValues":[],"attributeDefinition":"背景、材质和角色绘制的视觉信息密度。 二分边界：以画面细节是否达到高细节档为界；非高包含极简和常规细节，不将常规画面说成极简。","scenario":"[X]为社区改写公共服务动画，把画面细节保持在[Y]。人物动作和关键物件用几块清楚形状交代，装饰性纹理全部退开；负责人才发现[X]自己的短片也一直这样画。[X]喜欢观众第一眼就知道该看哪里，这种简洁并不只用于公共信息。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_DETAIL_LEVEL_R05","binding":"product_bound","category":"animation","attribute":"visual_detail_level","attributeZh":"画面细节密度","attributeScope":"subtype","logicalTypes":["animation"],"source":"real_dialogue_derived","rawValues":["Highly Detailed"],"values":["Highly Detailed（高画面细节）"],"historicalValues":[],"attributeDefinition":"背景、材质和角色绘制的视觉信息密度。 二分边界：以画面细节是否达到高细节档为界；非高包含极简和常规细节，不将常规画面说成极简。","scenario":"[X]为《Chemistry: The Central Science》读书组试做分子反应动画，选择[Y]的细节程度。电子移动、分子几何和能量变化都能单独放大查看；[X]保存的科学动画也总是这一类，因为每次暂停还能发现一层有效信息的画面，最能满足[X]反复研究的习惯。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ABSURDITY_M05","binding":"product_bound","category":"comedy","attribute":"absurdity_level","attributeZh":"荒诞程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"manual","rawValues":["Absurd"],"values":["Absurd（荒诞）"],"historicalValues":[],"attributeDefinition":"喜剧世界是否遵循日常现实逻辑。 二分边界：以关键喜剧因果是否突破日常逻辑、依赖荒诞规则为界；现实逻辑内的夸张归为非荒诞。","scenario":"艺术节深夜单元放映一部荒诞程度为[Y]的喜剧，日常物件不断获得毫无道理的新功能。检票员已经连续几届在这类场次见到[X]，这次也直接为[X]指了座位；只要电影敢把怪规则贯彻到底，[X]就愿意专门留出时间。","batches":["zijun_revision"]},{"id":"MOVIE_ABSURDITY_R04","binding":"product_bound","category":"comedy","attribute":"absurdity_level","attributeZh":"荒诞程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Non-Absurd"],"values":["Non-Absurd（非荒诞）"],"historicalValues":[],"attributeDefinition":"喜剧世界是否遵循日常现实逻辑。 二分边界：以关键喜剧因果是否突破日常逻辑、依赖荒诞规则为界；现实逻辑内的夸张归为非荒诞。","scenario":"[X]和未婚伴侣为约会夜挑了一部荒诞程度为[Y]的关系喜剧。人物被日常误会绊住，却仍像身边人一样生活；[X]的观影记录里，标成想重看的关系喜剧大多也是这种贴近现实的分寸。","batches":["zijun_revision"]},{"id":"MOVIE_COMEDIC_FOCUS_M02","binding":"product_bound","category":"comedy","attribute":"comedic_focus","attributeZh":"喜剧焦点","attributeScope":"subtype","logicalTypes":["comedy"],"source":"manual","rawValues":["Situation-Based"],"values":["Situation-Based（情境）"],"historicalValues":[],"attributeDefinition":"笑料主要来自人物性格还是具体情境。","scenario":"旅店恢复供电后，大堂继续放映一部重心为[Y]的喜剧。一个小差错把所有人困进同一局面，越补救越失控；同行人没有催[X]上楼，因为旅途中只要碰到这种由处境不断生出笑点的电影，[X]总会留下看完。","batches":["zijun_revision"]},{"id":"MOVIE_COMEDIC_FOCUS_R03","binding":"product_bound","category":"comedy","attribute":"comedic_focus","attributeZh":"喜剧焦点","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Character-Based"],"values":["Character-Based（人物性格）"],"historicalValues":[],"attributeDefinition":"笑料主要来自人物性格还是具体情境。","scenario":"心理工作坊结束后，同事把一部重心为[Y]的喜剧预告发给[X]。人物越用专业话掩饰自己，性格越暴露；[X]一眼认出导演，此前几部同样从性格矛盾里生出笑点的电影，[X]都专门写过短评。","batches":["zijun_revision"]},{"id":"MOVIE_COMEDIC_FOCUS_R04","binding":"product_bound","category":"comedy","attribute":"comedic_focus","attributeZh":"喜剧焦点","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Dialogue-Based"],"values":["Dialogue-Based（对白）"],"historicalValues":[],"attributeDefinition":"笑料主要来自人物性格还是具体情境。","scenario":"[X]做完统计题后打开朋友发来的喜剧片段，影片重心为[Y]。人物一句接一句地回击，不靠动作或巧合救场；[X]听完便把它存进通勤播放列表，列表里反复播放的喜剧段落也大多靠这样的对白推进。","batches":["zijun_revision"]},{"id":"MOVIE_HUMOR_INTENSITY_M04","binding":"product_bound","category":"comedy","attribute":"humor_intensity","attributeZh":"喜剧强度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"manual","rawValues":["Non-Laugh-Focused"],"values":["Non-Laugh-Focused（非笑料主导）"],"historicalValues":[],"attributeDefinition":"幽默是轻微调剂还是持续主导观看体验。 二分边界：以笑料是否主导观看体验为界；非主导可以有明显笑点，不等于只有轻微点缀。","scenario":"[X]整理一段准备发给朋友的生活录音，讲到尴尬小事时只留了两处轻轻带过的玩笑，让幽默强度保持为[Y]。这正是[X]平时最舒服的幽默：能让叙述松一点，却不把每句话都变成包袱。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_HUMOR_STYLE_R01","binding":"product_bound","category":"comedy","attribute":"humor_style","attributeZh":"幽默类型","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Cringe"],"values":["Cringe（尴尬喜剧）"],"historicalValues":[],"attributeDefinition":"影片制造笑料时主要采用的幽默机制。","scenario":"社区新移民电影夜放映一部风格为[Y]的喜剧。人物在身份柜台自信地答错问题，旁人越提醒，场面越让人坐立不安；策展人记得[X]上次也专门留下来看这类尴尬喜剧，这次便提前把同一导演的新片告诉了[X]。","batches":["zijun_revision"]},{"id":"MOVIE_HUMOR_STYLE_R05","binding":"product_bound","category":"comedy","attribute":"humor_style","attributeZh":"幽默类型","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Dark Humor"],"values":["Dark Humor（黑色幽默）"],"historicalValues":[],"attributeDefinition":"影片制造笑料时主要采用的幽默机制。","scenario":"工程学院电影社放映一部风格为[Y]的校园喜剧，片中的实验失败造成严重后果，人物却仍从狼狈里说出笑话。[X]主动接下映后讨论，还带来两张同样在沉重处境里保留笑点的影碟与社友交换。","batches":["zijun_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_M01","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"manual","rawValues":["Non-High"],"values":["Non-High（非高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"[X]去看小剧场喜剧排练，台上表演的肢体喜剧程度为[Y]。演员站着聊天就让关系里的尴尬慢慢显出来，偶尔一个停顿或转身才补上动作笑点；[X]平时最爱看的也是这种克制表演，身体动作一密集，反而会遮住人物之间的味道。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_M04","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"manual","rawValues":["High"],"values":["High（高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"[X]和听力不便的长辈看社区默剧表演，肢体喜剧程度为[Y]。演员靠追赶、跌绊和道具错位接连制造笑点，两人几乎同时笑出声；散场后[X]又把下一场记进日历。从小到大，动作直接把笑话做出来的作品总能让[X]投入，台词少也不妨碍他看得尽兴。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_R01","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"模型社散场后放映一部肢体喜剧程度为[Y]的电影。人物藏错零件时只有手指停顿和几个小动作，没有摔成一团；这一段播完后，[X]又倒回去看了一遍，随后把它存进那个专收细微动作笑点的旧文件夹。","batches":["zijun_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_R02","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"复杂角色扮演结束后，[X]照例打开肢体喜剧程度为[Y]的电影放松。演员用空间、道具和身体制造一连串失误，几乎不用解释规则；一起玩游戏的朋友已经习惯[X]用这种动作密集的喜剧给脑子换挡。","batches":["zijun_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_R04","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"[X]参加一场喜剧剧本的敏感性读剧，演到群像争执时，演员把肢体喜剧程度控制在[Y]：只用一次慌乱换位点破尴尬，之后让人物靠语气和关系继续推进。[X]在评审意见里特意保留了这个节制，因为自己无论看什么题材，都更喜欢少而准的身体笑点；动作一再重复，即使不冒犯谁，也会让人物显得单薄。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PHYSICAL_COMEDY_R05","binding":"product_bound","category":"comedy","attribute":"physical_comedy_level","attributeZh":"肢体喜剧程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高肢体喜剧强度）"],"historicalValues":[],"attributeDefinition":"跌撞、动作和视觉笑料在喜剧中的占比。 二分边界：以肢体喜剧是否达到旧高强度档为界；非高包含低档和中档。","scenario":"[X]为无爱情主线的喜剧片单补片，留下了一部肢体喜剧程度为[Y]的作品。人物不靠暧昧关系制造笑料，而是让追赶、错位和失控的道具不断改变局面；这正合[X]一贯的口味，只要身体行动能自己把笑点推起来，少了感情线也不会觉得空。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SATIRE_R02","binding":"product_bound","category":"comedy","attribute":"satire_level","attributeZh":"讽刺程度","attributeScope":"subtype","logicalTypes":["comedy"],"source":"real_dialogue_derived","rawValues":["Central"],"values":["Central（讽刺核心）"],"historicalValues":[],"attributeDefinition":"影片借幽默批评社会、制度或文化的强度。 二分边界：以讽刺是否构成核心表达为界；非核心可以有次要讽刺内容，不等于没有讽刺。","scenario":"社会议题影展放映一部讽刺程度为[Y]的喜剧，整部电影都在拆穿对年龄和外表的成见。[X]带来的朋友第一次参加，工作人员却已经认得[X]；每次这类把批评放在中心的影片上映，[X]都会来。","batches":["zijun_revision"]},{"id":"MOVIE_CRIME_SCALE_M01","binding":"product_bound","category":"crime","attribute":"crime_scale","attributeZh":"犯罪组织规模","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Individual"],"values":["Individual（个人）"],"historicalValues":[],"attributeDefinition":"实施主要犯罪行为的参与者组织结构：个人、小团体或稳定的有组织犯罪网络。","scenario":"社区影院重映一部犯罪规模为[Y]的旧片，所有后果都来自一个人的选择和掩饰。[X]已经看过仍专程赶来；带来的场刊里还夹着前几场回顾展的笔记，页页都在追单个实施者怎样一步步越界。","batches":["zijun_revision"]},{"id":"MOVIE_CRIME_SCALE_M03","binding":"product_bound","category":"crime","attribute":"crime_scale","attributeZh":"犯罪组织规模","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Organized Network"],"values":["Organized Network（有组织犯罪网络）"],"historicalValues":[],"attributeDefinition":"实施主要犯罪行为的参与者组织结构：个人、小团体或稳定的有组织犯罪网络。","scenario":"供应链课程让参与者各带一部犯罪片来画关系图，[X]带来的影片规模为[Y]。非法流程分散在不同地区和层级，抓到一个执行者也无法让网络停下；同学发现[X]过去几次推荐的片子也都是这种结构，[X]喜欢的正是沿节点追出整张网的过程。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_SCALE_R02","binding":"product_bound","category":"crime","attribute":"crime_scale","attributeZh":"犯罪组织规模","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Small Group"],"values":["Small Group（小团体）"],"historicalValues":[],"attributeDefinition":"实施主要犯罪行为的参与者组织结构：个人、小团体或稳定的有组织犯罪网络。","scenario":"放学后坐 23 路回家时，[X]在车上继续看犯罪规模为[Y]的电影。片中只有几名熟人临时结盟，有限空间让每次合作和背叛都立刻改变关系；同学认出片名，因为[X]平时聊犯罪电影时反复推荐的正是这种小群体故事。","batches":["zijun_revision"]},{"id":"MOVIE_CRIME_TYPE_M01","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Fraud","Money Laundering","Corruption"],"values":["Fraud（诈骗）","Money Laundering（洗钱）","Corruption（腐败）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"金融犯罪影展请观众从案卷中选下一场主题，[X]把票投给以[Y]为核心的故事。人物不是靠一次追捕落网，而是资金每经过一家公司就换一个说法，直到利益关系露出破绽；[X]的犯罪片笔记长期都在追这些钱去了哪里，越要沿账户和权力往回拆，越合胃口。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_M02","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Drug Crime","Arms Trafficking","Human Trafficking","Organ Trafficking","Illegal Alcohol Production","Prostitution"],"values":["Drug Crime（毒品犯罪）","Arms Trafficking（武器交易）","Human Trafficking（人口贩运）","Organ Trafficking（器官交易）","Illegal Alcohol Production（非法酿酒）","Prostitution（卖淫活动）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"港口公共教育展按犯罪类型分区，[X]先走进以[Y]为核心的隐蔽交易展厅。货运单、临时住处、招募者和中间人一点点显出非法链条；[X]平时看犯罪故事就偏爱追这类跨环节交易，尤其在意违法物品或被剥削的人怎样被藏进正常生意。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_M03","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Murder","Assault","Manslaughter","Domestic Violence","Sexual Violence","Hit-and-Run","Animal Cruelty"],"values":["Murder（谋杀）","Assault（人身攻击）","Manslaughter（过失杀人）","Domestic Violence（家庭暴力）","Sexual Violence（性暴力）","Hit-and-Run（肇事逃逸）","Animal Cruelty（虐待动物）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"受害者权益课程请参与者带一部愿意反复讨论的罪案作品，[X]从自己按[Y]整理的专题片单里挑了一部。笔记没有停在施害过程，而是跟着受害者、照护者和家属面对此后的生活；多年来[X]不断往这个专题里增加作品，因为直接伤害怎样永久改变周围的人，一直是他选择这类罪案故事的原因。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_M04","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Heist","Theft","Prison Escape","Kidnapping"],"values":["Heist（劫案）","Theft（盗窃）","Prison Escape（越狱）","Kidnapping（绑架）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"旧建筑导览结束后，馆内放映以[Y]为核心的计划型犯罪片。人物必须摸清目标所在的位置、出入口、换岗和时间差，撤离时每项准备都可能反过来困住自己；[X]每逢这类专题都会来，也总爱在散场后复盘计划从哪里开始失手。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_M05","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["Organized Crime","Gang Violence","Terrorism","War Crimes"],"values":["Organized Crime（有组织犯罪）","Gang Violence（帮派暴力）","Terrorism（恐怖主义犯罪）","War Crimes（战争罪）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"公共安全与人权工作坊讨论以[Y]为核心的犯罪片。武装组织把命令分给不同层级，普通成员只掌握一小段行动，换掉一个头目也不能让暴力停止；[X]长期关注这类由组织持续实施的犯罪，因为等级、利益和服从怎样让伤害扩大，比抓住单个反派更吸引他。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_R01","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Blackmail"],"values":["Blackmail（勒索）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"供应商尽调课分析一宗以[Y]为核心的商业案件：合作方掌握了采购人的私人把柄，并把沉默写进续约条件。[X]一直偏爱这种发生在合同和邮件里的罪案，表面仍在谈长期合作，实际关系却已被威胁接管。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_R02","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Cybercrime"],"values":["Cybercrime（网络犯罪）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"内容策划课要求把一宗犯罪故事整理成清楚的因果图，[X]选了以[Y]为核心的案例。登录记录、受影响账户和恶意代码的传播路径必须逐层对上，才能看出攻击者怎样进入系统；[X]的罪案片单里一直留着这类题材，因为数字痕迹怎样还原一次看不见的入侵，最能让他追下去。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_R03","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Vigilantism","Illegal Racing","Vandalism"],"values":["Vigilantism（义警私刑）","Illegal Racing（非法赛车）","Vandalism（故意破坏）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"喜剧社挑犯罪喜剧主题时，[X]拿了一部以[Y]为核心的作品。几个普通人自封执法者，为追赶嫌疑人擅自在街上飙车，最后又撞坏公共设施；[X]平时就爱看这种自以为伸张正义、却一步步犯下更多错误的故事，荒唐笑料背后仍留着越界的代价。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_R04","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Serial Crime","Theft"],"values":["Serial Crime（连环犯罪）","Theft（盗窃）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"[X]连续几天发现分装好的饭菜少了一盒，和室友核对冰箱记录时，想起自己最常看的正是以[Y]为核心的犯罪故事。同一个人多次从熟悉空间拿走东西，旁人只能从不断累积的生活细节认出规律；这种重复发生、逐渐露出实施者的案件，一直比一次性的追逐更让[X]投入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CRIME_TYPE_R05","binding":"product_bound","category":"crime","attribute":"crime_type","attributeZh":"犯罪类型","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Illegal Human Experimentation","Criminal Cover-Up","Criminal Neglect"],"values":["Illegal Human Experimentation（非法人体实验）","Criminal Cover-Up（犯罪掩盖）","Criminal Neglect（刑事疏忽）"],"historicalValues":[],"attributeDefinition":"推动主线的主要犯罪行为类别；Prostitution 仅用于以卖淫或经营卖淫场所为中心犯罪活动的电影，不因一般性工作者身份自动赋值。","scenario":"[X]寻找同时符合 IBS 和 Whole30 要求的零食时，重新翻出以[Y]为核心的消费犯罪纪录片。片中企业未经同意让特殊饮食人群试吃产品，收到风险报告后又将它藏起，仍让产品进入市场；[X]平时就常看这类机构伤害案件，因为权力怎样同时制造风险、隐瞒风险并拒绝处理，一直最值得追问。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FORENSIC_M03","binding":"product_bound","category":"crime","attribute":"forensic_emphasis","attributeZh":"取证侧重","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["High"],"values":["High（高度侧重法证）"],"historicalValues":[],"attributeDefinition":"法医、物证和技术取证在叙事中的比重。 二分边界：以法证过程是否达到旧高度侧重档为界；非高仍可包含法证调查。","scenario":"实验室开放日还原一宗法证强调程度为[Y]的案件，采集、比对和排除逐步收窄嫌疑范围。[X]带着自己看法证片时常用的证据表，把每一步结论对应回原始痕迹；同行人知道，只要检验链条被完整展开，[X]就会看得比人物追逐还认真。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FORENSIC_R02","binding":"product_bound","category":"crime","attribute":"forensic_emphasis","attributeZh":"取证侧重","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高度侧重法证）"],"historicalValues":[],"attributeDefinition":"法医、物证和技术取证在叙事中的比重。 二分边界：以法证过程是否达到旧高度侧重档为界；非高仍可包含法证调查。","scenario":"澳大利亚社区中心的家庭电影夜放映一部法证强调程度为[Y]的犯罪片。案件主要从亲友的证词和彼此矛盾的记忆展开，技术只在结尾确认事实；一起参加过多次活动的邻居知道，[X]每回都更愿意聊人物为何把同一件事记成不同样子。","batches":["zijun_revision"]},{"id":"MOVIE_FORENSIC_R03","binding":"product_bound","category":"crime","attribute":"forensic_emphasis","attributeZh":"取证侧重","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高度侧重法证）"],"historicalValues":[],"attributeDefinition":"法医、物证和技术取证在叙事中的比重。 二分边界：以法证过程是否达到旧高度侧重档为界；非高仍可包含法证调查。","scenario":"[X]陪孩子看法证强调程度为[Y]的推理片，调查主要靠观察和交谈，没有长时间检验细节。孩子已经会跟着[X]猜人物下一句会问什么；这些少讲实验室过程的犯罪片，本来就是[X]自己的常看片单，后来才成了两人的共同选择。","batches":["zijun_revision"]},{"id":"MOVIE_INVESTIGATION_LEAD_M01","binding":"product_bound","category":"crime","attribute":"investigation_lead","attributeZh":"调查主导者","attributeScope":"subtype","logicalTypes":["crime"],"source":"manual","rawValues":["No Central Investigation"],"values":["No Central Investigation（无核心调查线）"],"historicalValues":[],"attributeDefinition":"中央调查线的主要推动者；没有中央调查线时明确标记。","scenario":"犯罪后果读剧把调查结构设为[Y]：事件发生后，没有固定人物负责拼出完整真相，故事只跟着受影响的人重新安排生活。[X]主动保留这种缺口；自己一向喜欢没有侦探替所有人收束答案的罪案，余波比破案更值得慢慢看。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_INVESTIGATION_LEAD_R02","binding":"product_bound","category":"crime","attribute":"investigation_lead","attributeZh":"调查主导者","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Police"],"values":["Police（警察）"],"historicalValues":[],"attributeDefinition":"中央调查线的主要推动者；没有中央调查线时明确标记。","scenario":"辅导课结束后，[X]回到宿舍，从书架上拿下那部调查主导者为[Y]的医院犯罪片。医护只负责解释伤情，走访、取证和追责都由办案人员推进；同一层还摆着几部结构相近的影片，[X]喜欢专业人士守住职责、调查由警察完成。","batches":["zijun_revision"]},{"id":"MOVIE_INVESTIGATION_LEAD_R03","binding":"product_bound","category":"crime","attribute":"investigation_lead","attributeZh":"调查主导者","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Private Investigator"],"values":["Private Investigator（私人侦探）"],"historicalValues":[],"attributeDefinition":"中央调查线的主要推动者；没有中央调查线时明确标记。","scenario":"[X]独自生活，很少有固定社交圈，周末却常去侦探小说店的案件夜。这次故事的调查主导者为[Y]，侦探靠个人信誉建立临时联系人，没人能替他判断谁可信；店员已经熟悉[X]的口味，总会把这类由私人侦探独自承担风险的新故事先留一份。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_LEGAL_PROCESS_R02","binding":"product_bound","category":"crime","attribute":"legal_process_emphasis","attributeZh":"司法过程侧重","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["Central"],"values":["Central（法律程序核心）"],"historicalValues":[],"attributeDefinition":"审判、诉讼和其他司法程序在叙事中的比重。 二分边界：以法律程序是否构成核心叙事为界；次要程序内容归非核心，而非几乎没有。","scenario":"双语影展散场后，[X]仍留在座位上回看刚放完的法律程序强调程度为[Y]的犯罪片。日英证词被逐句确认，翻译差异直接影响证据能否进入法庭；[X]带来的双语观影本里，前几部法庭片也密密记着程序怎样检验一句话。","batches":["zijun_revision"]},{"id":"MOVIE_UNDERWORLD_R03","binding":"product_bound","category":"crime","attribute":"underworld_emphasis","attributeZh":"地下世界侧重","attributeScope":"subtype","logicalTypes":["crime"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高度侧重地下犯罪世界）"],"historicalValues":[],"attributeDefinition":"帮派、黑帮与地下犯罪生态在叙事中的比重。 二分边界：以地下犯罪世界是否达到旧高度侧重档为界；非高不代表没有相关内容。","scenario":"社区厨房的平价晚餐结束后，[X]留下参加楼上的犯罪电影夜。影片的地下世界强调程度为[Y]，隐蔽市场的价格、等级和惩罚被完整呈现；主持人也把下月同题材的预告递给[X]，因为前几次讨论这种地下经济时，[X]总会留到散场。","batches":["zijun_revision"]},{"id":"MOVIE_DOCUMENTARY_MODE_M05","binding":"product_bound","category":"documentary","attribute":"documentary_mode","attributeZh":"纪录片模式","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Participatory"],"values":["Participatory（参与式）"],"historicalValues":[],"attributeDefinition":"纪录片主要采用的组织与呈现方式。","scenario":"河流水质项目请居民共同拍摄，[X]主张采用[Y]。镜头不只记录取样和协商，拍摄者也会进入现场，说明自己的到来怎样影响了居民与管理方的交流；[X]过去参与的社区纪录项目也总保留这种关系，因为让记录者承担自己在事件中的位置，一直比躲在镜头后面更可信。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_DOCUMENTARY_MODE_R03","binding":"product_bound","category":"documentary","attribute":"documentary_mode","attributeZh":"纪录片模式","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Observational"],"values":["Observational（观察式）"],"historicalValues":[],"attributeDefinition":"纪录片主要采用的组织与呈现方式。","scenario":"动画社聚会结束前放映一部模式为[Y]的同好纪录片。镜头只是跟着大家搭景、交换收藏和讨论角色，没有旁白替他们解释；社友把下次放映时间也发给[X]，因为这类让生活自己展开的纪录片总能让[X]安静看完整场。","batches":["zijun_revision"]},{"id":"MOVIE_DOCUMENTARY_MODE_R04","binding":"product_bound","category":"documentary","attribute":"documentary_mode","attributeZh":"纪录片模式","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Interview-Led"],"values":["Interview-Led（访谈主导）"],"historicalValues":[],"attributeDefinition":"纪录片主要采用的组织与呈现方式。","scenario":"成人教育中心放映一部模式为[Y]的自学者纪录片，几位学习者亲自讲述选择、困难和方法，提问只负责理清时间线。[X]在这个系列里很少缺席；比起统一口径的解说，[X]总愿意听不同的人把自己的经历讲完整。","batches":["zijun_revision"]},{"id":"MOVIE_DOCUMENTARY_MODE_R05","binding":"product_bound","category":"documentary","attribute":"documentary_mode","attributeZh":"纪录片模式","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Essay Film"],"values":["Essay Film（论文电影）"],"historicalValues":[],"attributeDefinition":"纪录片主要采用的组织与呈现方式。","scenario":"纪念馆的“荣誉”主题影展放映一部模式为[Y]的纪录片。影片避开战争场面，用日常承诺、个人记忆和画外思考慢慢形成观点；同行人特意约[X]来看，因为[X]常推荐的纪录片都允许作者思考，却不会急着用宏大事件替主题下结论。","batches":["zijun_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_M01","binding":"product_bound","category":"documentary","attribute":"documentary_subject","attributeZh":"纪录主题","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Nature","Environment"],"values":["Nature（自然）","Environment（环境）"],"historicalValues":[],"attributeDefinition":"纪录片持续观察或调查的主要现实领域。","scenario":"社区影像计划公布本季主题，[X]报名记录[Y]，从枯水期一直跟到雨季，观察河岸植物、野生动物、垃圾和居民用水怎样一起变化。[X]以前的田野本也记满湿地与城市边缘的生物；自然如何适应人留下的环境变化，一直是他最愿意长期跟拍的题材。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_M02","binding":"product_bound","category":"documentary","attribute":"documentary_subject","attributeZh":"纪录主题","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["History","Politics and Society","War and Conflict","Religion and Spirituality"],"values":["History（历史）","Politics and Society（政治与社会）","War and Conflict（战争与冲突）","Religion and Spirituality（宗教与精神信仰）"],"historicalValues":[],"attributeDefinition":"纪录片持续观察或调查的主要现实领域。","scenario":"地方档案馆招募志愿者整理一批围绕[Y]的资料，[X]主动认领了某个宗教社群在战争期间留下的信件、配给记录和口述录音。材料既写祈祷与节日，也写迁移、公共政策和家庭失散；[X]长期收藏的纪录片也常从普通人的信仰与日常进入动荡时代，因为宏大事件落到具体生活才真正看得清。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_M05","binding":"product_bound","category":"documentary","attribute":"documentary_subject","attributeZh":"纪录主题","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Disaster and Rescue"],"values":["Disaster and Rescue（灾难与救援）"],"historicalValues":[],"attributeDefinition":"纪录片持续观察或调查的主要现实领域。","scenario":"城市公共课以[Y]为主题，请受灾居民、救援人员和气象研究者共同还原一次洪水。[X]不仅留到讨论结束，还带来了自己保存多年的救援纪录片片单；他一直想看的不是单一英雄，而是预警、现场决定和灾后生活怎样接在一起。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_R03","binding":"product_bound","category":"documentary","attribute":"documentary_subject","attributeZh":"纪录主题","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Music","Biography"],"values":["Music（音乐）","Biography（人物传记）"],"historicalValues":[],"attributeDefinition":"纪录片持续观察或调查的主要现实领域。","scenario":"独立音乐节征集幕后记录，[X]报名跟随以[Y]为主题的一组。镜头从女歌手早年的录音和手写歌词，跟到如今排练电子乐与第一次面对新听众；[X]平时就收藏冷门音乐人的纪录片，因为一个人怎样在多年创作中找到自己的声音，比成名后的介绍更吸引他。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_R05","binding":"product_bound","category":"documentary","attribute":"documentary_subject","attributeZh":"纪录主题","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Science and Technology","Health and Medicine","Environment","Food and Culinary Culture"],"values":["Science and Technology（科学与技术）","Health and Medicine（健康与医学）","Environment（环境）","Food and Culinary Culture（饮食与烹饪文化）"],"historicalValues":[],"attributeDefinition":"纪录片持续观察或调查的主要现实领域。","scenario":"纪录片社团整理年度观影记录时，[X]把一叠主题为[Y]的影片卡片铺满桌面。这类紧跟现实变化的纪录片占了[X]片单的大半；整理时，[X]还会特别核对资料发生的时间，不愿把已经变化的事实当成现状。","batches":["zijun_revision"]},{"id":"MOVIE_DOCUMENTARY_SUBJECT_FOCUS_M04","binding":"product_bound","category":"documentary","attribute":"documentary_subject_focus","attributeZh":"纪录主体焦点","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Community or Bounded Group"],"values":["Community or Bounded Group（社群或特定群体）"],"historicalValues":[],"attributeDefinition":"纪录片核心观察单位的层级：单一个人、边界明确的社群或群体，或机构及社会系统。","scenario":"纪录工作坊拍一栋即将搬迁的老公寓，[X]把主体焦点放在[Y]。镜头跟着几户邻居收拾公共厨房、商量旧家具去处，也记录他们最后一次一起吃饭；[X]过去的作品常停在这种彼此认识的小群体里，因为关系怎样随着共同生活改变，比单独讲一个人或抽象介绍制度更有吸引力。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GEOGRAPHIC_SCOPE_M04","binding":"product_bound","category":"documentary","attribute":"geographic_scope","attributeZh":"地理范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Local"],"values":["Local（单一地区）"],"historicalValues":[],"attributeDefinition":"纪录主题覆盖的主要地理尺度。","scenario":"纪录课拍摄一条老商业街，[X]把地理范围定为[Y]。店主换代、租金变化和居民绕路都能在几百米内找到彼此的原因；翻看[X]以前的拍摄计划，菜市场、河岸和旧车站也都只跟一个地方。[X]一直喜欢在走得完的范围里把关系看深，而不是急着把地图铺大。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GEOGRAPHIC_SCOPE_R01","binding":"product_bound","category":"documentary","attribute":"geographic_scope","attributeZh":"地理范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["National"],"values":["National（国家范围）"],"historicalValues":[],"attributeDefinition":"纪录主题覆盖的主要地理尺度。","scenario":"[X]把下消化道出血的流行病学论文做成纪录短片，资料范围设为[Y]。不同地区的患者经历被放在同一医疗制度和统计口径下比较；[X]平时收藏的公共健康纪录片也多采用全国尺度，因为他喜欢看相隔很远的人怎样被同一套资源分配和政策连接。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GEOGRAPHIC_SCOPE_R03","binding":"product_bound","category":"documentary","attribute":"geographic_scope","attributeZh":"地理范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Global"],"values":["Global（跨国或全球）"],"historicalValues":[],"attributeDefinition":"纪录主题覆盖的主要地理尺度。","scenario":"[X]整理一项能源纪录计划，把地理范围定为[Y]，再将资料压成几条清楚线索：矿产来自哪里，零件在哪制造，最终由哪些城市使用。[X]过去推荐的能源纪录片也总沿着跨国供应链走，因为一个地方的选择怎样在另一端留下代价，一直是他最想看清的关系。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GEOGRAPHIC_SCOPE_R04","binding":"product_bound","category":"documentary","attribute":"geographic_scope","attributeZh":"地理范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Local"],"values":["Local（单一地区）"],"historicalValues":[],"attributeDefinition":"纪录主题覆盖的主要地理尺度。","scenario":"灾难纪念馆征集影像，[X]把地理范围定为[Y]，只跟随受灾街区的几户家庭、消防站和临时安置点。私人片单里[X]最常重看的悲剧纪录片也多停在一个地方；他喜欢记住具体街道和面孔，伤痛才不会被一张过大的地图冲淡。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUBJECT_TIMEFRAME_M04","binding":"product_bound","category":"documentary","attribute":"subject_timeframe","attributeZh":"主题时间范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"manual","rawValues":["Both"],"values":["Both（历史与当代并重）"],"historicalValues":[],"attributeDefinition":"纪录对象主要属于当代、历史或跨越两者。","scenario":"纪录工作坊拍一座重新开放的旧电影院，[X]把主题时间设为[Y]。现在的观众进场时，画面会接回几十年前同一排座位上的照片和录音，让空间的变化在两段生活之间显出来；[X]过去拍老店和车站也总这样连接当下与档案，因为看见过去怎样仍留在今天，一直最让他着迷。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUBJECT_TIMEFRAME_R05","binding":"product_bound","category":"documentary","attribute":"subject_timeframe","attributeZh":"主题时间范围","attributeScope":"subtype","logicalTypes":["documentary"],"source":"real_dialogue_derived","rawValues":["Contemporary"],"values":["Contemporary（当代记录）"],"historicalValues":[],"attributeDefinition":"纪录对象主要属于当代、历史或跨越两者。","scenario":"科技公司请[X]记录一项仍在推进的产品决策，主题时间为[Y]。团队当天怎样读用户数据、市场反馈如何改变下一次迭代，都在结果尚未确定时被拍下来；[X]长期关注的科技纪录片也多跟着正在发生的变化走，因为人物还不知道答案时作出的判断最吸引他。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_TRUE_EVENTS_R04","binding":"non_product","category":"shared","attribute":"based_on_true_events","attributeZh":"基于真实事件","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Yes"],"values":["Yes（是）"],"historicalValues":[],"attributeDefinition":"电影是否明确以真实人物或事件为叙事基础。","scenario":"[X]回到曾参与建设的社区花园，项目组正把那段经历改编成以[Y]方式处理的影像。[X]带来当年的会议记录，也请片中几位老人逐段确认；个人片单里[X]长期收藏的也是这类能回到当事人与资料的作品，因为现实留下的限制，比为了好看补出的转折更有分量。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_COLOR_FORMAT_R04","binding":"non_product","category":"shared","attribute":"color_format","attributeZh":"画面色彩形式","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Black and White"],"values":["Black and White（黑白）"],"historicalValues":[],"attributeDefinition":"电影主体使用彩色、黑白或二者混合的形式。","scenario":"[X]把一份字段严格的活动数据整理成宣传分镜，影像仍采用[Y]色彩形式。不同信息靠轮廓、留白和灰阶分开，画面不必再为每个类别分配颜色；同事翻过[X]过去的活动方案，也大多保持这种黑白处理，因为信息和节奏会更集中。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_INTENSITY_M03","binding":"non_product","category":"shared","attribute":"content_intensity","attributeZh":"整体内容刺激强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["High"],"values":["High（高强度）"],"historicalValues":[],"attributeDefinition":"冲突、危险、压迫和成人内容共同形成的整体刺激程度，不替代具体安全属性。 二分边界：以内容冲击是否达到旧高强度档为界；非高强度允许有限冲突与刺激。","scenario":"影展公布午夜场后，[X]特意把第二天早晨空出来，订下内容强度为[Y]的电影。声音、剪辑和冲突几乎不给人喘息；过去几部同样让[X]散场后缓很久的影片仍被列在年度最爱里，这种全身投入正是[X]主动寻找的观影体验。","batches":["zijun_revision"]},{"id":"MOVIE_CONTENT_INTENSITY_R03","binding":"non_product","category":"shared","attribute":"content_intensity","attributeZh":"整体内容刺激强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高强度）"],"historicalValues":[],"attributeDefinition":"冲突、危险、压迫和成人内容共同形成的整体刺激程度，不替代具体安全属性。 二分边界：以内容冲击是否达到旧高强度档为界；非高强度允许有限冲突与刺激。","scenario":"[X]又来到常去的小剧场，这次演出的内容强度为[Y]，冲突几乎不给观众喘息，情绪一路推到终场。售票员已经习惯把同类新节目先告诉[X]；每次散场，他都会留下讨论人物怎样承受极限压力，因为这种全程绷紧的体验一直最能让他投入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_M02","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Gore"],"values":["Gore（血腥）"],"historicalValues":[],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"动作演出购票页标明内容提示为[Y]，[X]便换到同场另一部不展示伤口细节的作品。朋友知道[X]看见长时间、近距离的血腥画面后很难回到故事，因此无论独自还是结伴，都会提前避开这类内容；有了提示，[X]可以在入场前就换掉，不必看到一半再离开。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_M03","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Sexual Content"],"values":["Sexual Content（性内容）"],"historicalValues":[],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"[X]和伴侣准备参加夜间读剧，节目单提示内容为[Y]。[X]看完便提议改选下一场；伴侣早已知道，他一向不愿把露骨亲密场面当作娱乐，即使独自看也会主动跳过。两人很快选好另一部，仍能按原计划一起度过晚上。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_M04","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Self-Harm or Suicide"],"values":["Self-Harm or Suicide（自残或自杀）"],"historicalValues":[],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"康复主题展注明内容提示为[Y]，[X]在入口停下，选择去看另一组作品。工作人员认得[X]，也知道他多次都会避开直接呈现自我伤害过程的内容，因为这些画面离场后仍会困扰很久；即使展厅设有随时离开的出口，[X]也不会勉强自己进去。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_R01","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Disturbing Images"],"values":["Disturbing Images（历史覆盖值，待对齐）"],"historicalValues":["Disturbing Images"],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"[X]常独自参加夜间装置展，这次看到内容提示为[Y]后，直接去了只保留声音的相邻展厅。偶尔和朋友结伴时，[X]也会先查同类提示；令人不适的图像会在脑中停留很久，有没有同伴都不会改变这条边界。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_R04","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Domestic Abuse"],"values":["Domestic Abuse（家庭暴力）"],"historicalValues":[],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"[X]和配偶准备参加故事夜，看到内容提示为[Y]后，[X]提出换一场。配偶熟悉这条边界：无论两人一起还是[X]自己选片，只要作品把家庭伤害作为持续情节，[X]都会避开，不愿让亲密关系中的控制和恐惧成为晚间消遣。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_CONTENT_WARNING_R05","binding":"non_product","category":"shared","attribute":"content_warning","attributeZh":"内容警示","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Strong Language","Substance Use"],"values":["Strong Language（强烈语言）","Substance Use（物质使用）"],"historicalValues":[],"attributeDefinition":"对观看决定具有实质影响、彼此可区分的具体敏感内容类型。","scenario":"同事约下班后去看电影，[X]看到内容提示为[Y]，便在群里说明自己不参加这场，并提议下次再一起。同事们没有追问；几次集体观影中，只要影片明确含有这类内容，[X]都会提前退出，不会到了现场再勉强留下。","batches":["zijun_revision"]},{"id":"MOVIE_EMOTIONAL_INTENSITY_M03","binding":"non_product","category":"shared","attribute":"emotional_intensity","attributeZh":"情绪强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Heavy"],"values":["Heavy（沉重情绪投入）"],"historicalValues":[],"attributeDefinition":"电影要求观众承受或投入的整体情绪重量。 二分边界：以情绪投入是否达到沉重档为界；非沉重不等于没有情绪触动。","scenario":"[X]提前不安排别的事，独自在家重看那部情绪强度为[Y]的电影。人物经历持续压下来，片尾过了很久，[X]仍坐在原处；书架上几张被反复取出的影碟也都有这种重量，[X]愿意为它们留出完整的消化时间。","batches":["zijun_revision"]},{"id":"MOVIE_EMOTIONAL_INTENSITY_R01","binding":"non_product","category":"shared","attribute":"emotional_intensity","attributeZh":"情绪强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Heavy"],"values":["Heavy（沉重情绪投入）"],"historicalValues":[],"attributeDefinition":"电影要求观众承受或投入的整体情绪重量。 二分边界：以情绪投入是否达到沉重档为界；非沉重不等于没有情绪触动。","scenario":"角色工作坊结束后，[X]和同伴留下观看情绪强度为[Y]的家庭电影。片中的孩子有沟通障碍，照护中的疲惫和爱都没有被轻轻带过；同伴见过[X]推荐的其他家庭片，也总是这样让人物认真面对相处的难处。","batches":["zijun_revision"]},{"id":"MOVIE_EMOTIONAL_INTENSITY_R03","binding":"non_product","category":"shared","attribute":"emotional_intensity","attributeZh":"情绪强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Non-Heavy"],"values":["Non-Heavy（非沉重情绪投入）"],"historicalValues":[],"attributeDefinition":"电影要求观众承受或投入的整体情绪重量。 二分边界：以情绪投入是否达到沉重档为界；非沉重不等于没有情绪触动。","scenario":"宣传编辑会把同一段人物介绍改成几种版本，[X]留下情绪强度为[Y]的一版。喜悦和失落只轻轻碰一下便继续向前；同事翻看[X]过去的短片，也常见这种不要求观众大哭大笑的处理。[X]一直喜欢情绪准确出现，却不给人留下沉重负担。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_EMOTIONAL_INTENSITY_R04","binding":"non_product","category":"shared","attribute":"emotional_intensity","attributeZh":"情绪强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Heavy"],"values":["Heavy（沉重情绪投入）"],"historicalValues":[],"attributeDefinition":"电影要求观众承受或投入的整体情绪重量。 二分边界：以情绪投入是否达到沉重档为界；非沉重不等于没有情绪触动。","scenario":"[X]抱着一本已经翻旧的罗马尼亚语诗集去看演出，作品情绪强度为[Y]。悲伤从第一段持续到散场，几乎没有轻松的出口；书中夹着[X]这些年听同类演出的票根，因为愿意让一种情绪完整压下来、慢慢承受它，一直是他读诗和看故事时主动寻找的体验。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ENDING_CLOSURE_M01","binding":"non_product","category":"shared","attribute":"ending_closure","attributeZh":"结局封闭程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Fully Closed"],"values":["Fully Closed（完全收束）"],"historicalValues":[],"attributeDefinition":"电影是否明确解决主要问题，或有意保留未解释空间。 二分边界：以旧叙事收束轴上是否完全收束为界；部分开放与开放都归未完全收束，不声称所有主要问题均未决。","scenario":"解谜剧结束时，所有线索都有了解释，人物后来去了哪里也交代清楚，故事收束程度为[Y]。[X]的朋友已经习惯等他看到最后一行再起身；只要还有关键人物没着落，[X]回家后也会惦记，像这样把话说完才最让他放松。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ENDING_CLOSURE_R01","binding":"non_product","category":"shared","attribute":"ending_closure","attributeZh":"结局封闭程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Fully Closed"],"values":["Fully Closed（完全收束）"],"historicalValues":[],"attributeDefinition":"电影是否明确解决主要问题，或有意保留未解释空间。 二分边界：以旧叙事收束轴上是否完全收束为界；部分开放与开放都归未完全收束，不声称所有主要问题均未决。","scenario":"游戏团队的电影夜结束时，影片收束程度为[Y]：人物的每次选择都有后果，关键线索和去向也全部落定。[X]已经开始收拾桌面，其他人却还在等彩蛋；同事笑说，[X]常推荐的电影到了片尾都不会把关键问题悬着。","batches":["zijun_revision"]},{"id":"MOVIE_ENDING_CLOSURE_R05","binding":"non_product","category":"shared","attribute":"ending_closure","attributeZh":"结局封闭程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Fully Closed"],"values":["Fully Closed（完全收束）"],"historicalValues":[],"attributeDefinition":"电影是否明确解决主要问题，或有意保留未解释空间。 二分边界：以旧叙事收束轴上是否完全收束为界；部分开放与开放都归未完全收束，不声称所有主要问题均未决。","scenario":"[X]和正在认真交往的人看完一部收束程度为[Y]的爱情电影。片中的两个人不仅表达心意，也明确决定接下来怎样相处；对方挑中这部片，是因为[X]谈爱情电影时总说，关系不能停在一句告白，结尾要让承诺真正落地。","batches":["zijun_revision"]},{"id":"MOVIE_FRANCHISE_STATUS_M01","binding":"non_product","category":"shared","attribute":"franchise_status","attributeZh":"系列属性","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Standalone"],"values":["Standalone（独立作品）"],"historicalValues":[],"attributeDefinition":"电影是独立作品还是已命名系列或共享宇宙的一部分。","scenario":"[X]旅行途中经过一家小影院，临时买票看了一部状态为[Y]的电影。人物、冲突和结局都在当晚完整交代；[X]收着一叠从不同城市带回的类似票根，因为无需接续旧关系、一次就能走完陌生世界的作品，一直最适合他随时走进影院的习惯。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FRANCHISE_STATUS_R02","binding":"non_product","category":"shared","attribute":"franchise_status","attributeZh":"系列属性","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Standalone"],"values":["Standalone（独立作品）"],"historicalValues":[],"attributeDefinition":"电影是独立作品还是已命名系列或共享宇宙的一部分。","scenario":"英语练习小组请成员带一部自己熟悉的电影做复述，[X]从私人收藏里选了状态为[Y]的一部。所有人物关系都在本篇开始并结束，组员可以随时纠正表达；更重要的是，[X]在学英语之前就常买这种独立电影，因为每次认识一组新人物，比维护漫长系列记忆更有吸引力。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FRANCHISE_STATUS_R04","binding":"non_product","category":"shared","attribute":"franchise_status","attributeZh":"系列属性","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Franchise Entry"],"values":["Franchise Entry（系列作品）"],"historicalValues":[],"attributeDefinition":"电影是独立作品还是已命名系列或共享宇宙的一部分。","scenario":"[X]为了练习外语，重看状态为[Y]的系列新作。即使换了语言，熟悉人物之间的旧默契仍能被认出来；书架上[X]已经把这个系列从第一部收到最新一部，每次新篇上映都会去看。语言练习只是让他换一种方式回到长期追随的世界。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GORE_LEVEL_M01","binding":"non_product","category":"shared","attribute":"gore_level","attributeZh":"血腥程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Non-Graphic"],"values":["Non-Graphic（非强烈直观血腥）"],"historicalValues":[],"attributeDefinition":"画面中可见血液、伤口、肢解或人体损伤的明确程度。 二分边界：以是否强烈直观地呈现血液、伤口或身体破坏为界；非强烈直观并不等于无血腥。","scenario":"[X]整理周末电影清单时，把一部血腥程度为[Y]的惊悚片排在前面。片中冲突有明确后果，却不展示身体损伤；[X]常重看的几部惊悚片也一样，会认真讲人物受伤以后怎么生活，却不会把镜头停在伤口上。","batches":["zijun_revision"]},{"id":"MOVIE_GORE_LEVEL_M02","binding":"non_product","category":"shared","attribute":"gore_level","attributeZh":"血腥程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Non-Graphic"],"values":["Non-Graphic（非强烈直观血腥）"],"historicalValues":[],"attributeDefinition":"画面中可见血液、伤口、肢解或人体损伤的明确程度。 二分边界：以是否强烈直观地呈现血液、伤口或身体破坏为界；非强烈直观并不等于无血腥。","scenario":"影像社做伤害题材放映，[X]从片单里挑了血腥程度为[Y]的作品。画面短暂让人看见受伤，随即回到人物怎样处理后果；[X]自己的片单也大多停在这个程度，因为知道发生了什么就已足够，不必让伤口细节长时间占住视线。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GORE_LEVEL_M04","binding":"non_product","category":"shared","attribute":"gore_level","attributeZh":"血腥程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Graphic"],"values":["Graphic（强烈直观血腥）"],"historicalValues":[],"attributeDefinition":"画面中可见血液、伤口、肢解或人体损伤的明确程度。 二分边界：以是否强烈直观地呈现血液、伤口或身体破坏为界；非强烈直观并不等于无血腥。","scenario":"[X]带着一部反复重看的恐怖片参加特效化妆开放日，片段的血腥程度为[Y]。伤口变化一直留在镜头里，没有在最直观的部分切走；课程结束后，[X]又报名了同片的午夜放映，因为这种不回避身体后果的强烈画面，本来就是他看恐怖片时主动寻找的体验。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GORE_LEVEL_R04","binding":"non_product","category":"shared","attribute":"gore_level","attributeZh":"血腥程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Non-Graphic"],"values":["Non-Graphic（非强烈直观血腥）"],"historicalValues":[],"attributeDefinition":"画面中可见血液、伤口、肢解或人体损伤的明确程度。 二分边界：以是否强烈直观地呈现血液、伤口或身体破坏为界；非强烈直观并不等于无血腥。","scenario":"[X]参加外语电影小组的惊悚片讨论，从自己熟悉的片单里选了血腥程度为[Y]的一部。伤害只用短暂画面交代，随后回到人物反应；这份片单在[X]开始练外语前就已经积了很多同类作品，因为他一直喜欢后果被承认、伤口却不被反复放大的处理。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_GORE_LEVEL_R05","binding":"non_product","category":"shared","attribute":"gore_level","attributeZh":"血腥程度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Graphic"],"values":["Graphic（强烈直观血腥）"],"historicalValues":[],"attributeDefinition":"画面中可见血液、伤口、肢解或人体损伤的明确程度。 二分边界：以是否强烈直观地呈现血液、伤口或身体破坏为界；非强烈直观并不等于无血腥。","scenario":"[X]参加午夜恐怖片展，三场结束后把血腥程度为[Y]的那部加入收藏。伤口和身体变化持续留在画面里，也没有在最直观的地方切走；[X]多年来重看的大多是这种作品，因为危险不被剪接遮住时，才最能感到人物付出的代价。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_LEAD_CAST_R02","binding":"non_product","category":"shared","attribute":"lead_cast","attributeZh":"主要演员","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["*"],"values":["*（开放实体域）"],"historicalValues":[],"attributeDefinition":"电影正式演职员表中排序最靠前且承担主要角色的演员。","scenario":"[X]参加奇幻角色设计分享，[Y]用游戏里高魔法角色的取舍说明怎样为人物建立力量边界。[X]带来的节目册上已经记着[Y]过去几个角色：他们能力各不相同，却都让优势伴随真实限制；正是这种一贯的角色理解，让[X]早已开始追随[Y]，也会继续留意下一部作品。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_NARRATIVE_FOCUS_R05","binding":"non_product","category":"shared","attribute":"narrative_focus","attributeZh":"叙事重心","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Dialogue-Driven"],"values":["Dialogue-Driven（对白驱动）"],"historicalValues":[],"attributeDefinition":"影片主要依靠人物、情节、对话或群像中的哪些元素推进。","scenario":"[X]陪幼儿园孩子参加偶戏，作品叙事重心为[Y]。两个角色通过一来一回的问答改变彼此判断，几乎没有外部动作；回家后孩子去玩了，[X]仍翻开自己的对白剧本继续读。那一排剧本早在孩子出生前就开始积累，因为人物把关系说着说着变掉，一直是[X]最喜欢的推进方式。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PACE_R05","binding":"non_product","category":"shared","attribute":"pace","attributeZh":"叙事节奏","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Non-Fast"],"values":["Non-Fast（非快速）"],"historicalValues":[],"attributeDefinition":"剧情推进和信息变化的总体速度。 二分边界：以是否达到快速推进为界；非快速包括慢速和中速，并不表示必然缓慢。","scenario":"网络安全读书会把证书验证写成一段节奏为[Y]的互动故事，每发现一层连接问题，人物都会停下来核对再继续。[X]带来的个人故事夹里也多是这种缓慢推进的作品；他喜欢判断有时间在心里落稳，再由下一条信息改变方向，而不是被情节催着向前。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PRESENTATION_DIMENSION_R04","binding":"non_product","category":"shared","attribute":"presentation_dimension","attributeZh":"影像维度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["2D"],"values":["2D（2D）"],"historicalValues":[],"attributeDefinition":"电影正式发行过的平面或立体观看版本，不表示动画制作技术。","scenario":"[X]为孩子测试生日影像，播放方式采用[Y]。孩子跑去拆礼物后，[X]仍坐在屏幕前看完，觉得人物位置和构图在平面里更完整；家里的电影收藏也一直以这种版本居多，生日活动只是又一次顺手选回[X]自己的观看习惯。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_RELEASE_ERA_R02","binding":"non_product","category":"shared","attribute":"release_era","attributeZh":"上映年代","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["2020s"],"values":["2020s（2020年代）"],"historicalValues":[],"attributeDefinition":"电影首次正式上映所处的年代区间。","scenario":"游戏社筹备电影夜，[X]带来的片单几乎都上映于[Y]。这些新片常把实时影像、复杂物理和严苛行动规则放进同一场面；社员知道[X]每年都会追当季技术型新作，因为观看仍在变化中的电影工具怎样接受叙事挑战，一直是他的固定兴趣。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_RUNTIME_CLASS_R04","binding":"non_product","category":"shared","attribute":"runtime_class","attributeZh":"片长等级","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Short"],"values":["Short（短片长）"],"historicalValues":[],"attributeDefinition":"以统一分钟区间归一化的电影时长等级。","scenario":"社区素食晚餐后放映一部片长属于[Y]的电影，故事在大家收完餐桌前完整结束。其他人陆续离开时，[X]又向主办方要了下个月的短片单；个人观影记录里这类片长也一直最多，因为一个念头在最有力的位置及时收住，比把情绪拖成长篇更合他的口味。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SETTING_ENV_R04","binding":"non_product","category":"shared","attribute":"setting_environment","attributeZh":"故事环境","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Ocean","Confined Setting"],"values":["Ocean（海洋）","Confined Setting（封闭空间）"],"historicalValues":[],"attributeDefinition":"大部分故事发生的主要空间环境；Road or Journey 仅用于道路、交通线路或持续迁移过程本身构成主体空间的电影，不表示一般意义上的人物旅程。","scenario":"[X]参加救生装备展示，一段倾覆船舱救援故事设于[Y]环境。外部潮汐不断改变船体位置，内部狭窄通道、有限空气和唯一出口又限制每一步；[X]长期收藏的生存故事也常把人物放进这种海水与封闭边界共同施压的处境，因为装备和路线必须真的决定能否活着离开。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SOURCE_MATERIAL_M04","binding":"non_product","category":"shared","attribute":"source_material","attributeZh":"改编来源","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Folklore or Mythology","Religious Text"],"values":["Folklore or Mythology（民间故事或神话改编）","Religious Text（宗教文本改编）"],"historicalValues":[],"attributeDefinition":"电影故事最直接的创作来源；优先采用明确的改编证据，仅当 MovieLens、Wikidata/TMDB 与 Wikipedia 正文及分类均无改编信号时，才判为原创剧本；纪录片在同等排除条件下判为纪实材料。","scenario":"文化馆征集影像项目，[X]选中一份以[Y]为创作来源的提案。桌上既有代代讲述的版本，也有旧抄本和不同时期的注解，主创准备让这些声音共同进入电影；[X]的观影本里长期记着这类古老叙事改编，因为故事经过口述、诵读和解释仍继续生长，比只留一个标准答案更让他投入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SOURCE_MATERIAL_R01","binding":"non_product","category":"shared","attribute":"source_material","attributeZh":"改编来源","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Real-Life Account"],"values":["Real-Life Account（纪实材料改编）"],"historicalValues":[],"attributeDefinition":"电影故事最直接的创作来源；优先采用明确的改编证据，仅当 MovieLens、Wikidata/TMDB 与 Wikipedia 正文及分类均无改编信号时，才判为原创剧本；纪录片在同等排除条件下判为纪实材料。","scenario":"跑出一千米三分零六秒的个人纪录后，[X]受邀把训练经历交给短片团队，项目以[Y]为创作来源。主创保留了[X]实际遇到的平台期和训练取舍，没有补上不存在的传奇转折；[X]平时也总先看由当事人亲自讲述的电影，因为声音里那些不整齐的细节最值得相信。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SOURCE_MATERIAL_R02","binding":"non_product","category":"shared","attribute":"source_material","attributeZh":"改编来源","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Short Story","Poem","Radio Work","Song or Music"],"values":["Short Story（短篇故事改编）","Poem（诗歌改编）","Radio Work（广播作品改编）","Song or Music（歌曲或音乐作品改编）"],"historicalValues":[],"attributeDefinition":"电影故事最直接的创作来源；优先采用明确的改编证据，仅当 MovieLens、Wikidata/TMDB 与 Wikipedia 正文及分类均无改编信号时，才判为原创剧本；纪录片在同等排除条件下判为纪实材料。","scenario":"[X]替短片创作社筛选改编提案，停在一份以[Y]为创作来源的方案前。原作篇幅凝练，却已经有鲜明声音、节奏和可继续展开的留白；同事知道[X]长期收集这类改编，因为电影从有限文字或声音里找到新的画面，而不是把原作逐句搬过去，一直最合他的口味。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SOURCE_MATERIAL_R04","binding":"non_product","category":"shared","attribute":"source_material","attributeZh":"改编来源","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Television Work","Video Game","Film"],"values":["Television Work（电视作品改编）","Video Game（电子游戏改编）","Film（电影改编）"],"historicalValues":[],"attributeDefinition":"电影故事最直接的创作来源；优先采用明确的改编证据，仅当 MovieLens、Wikidata/TMDB 与 Wikipedia 正文及分类均无改编信号时，才判为原创剧本；纪录片在同等排除条件下判为纪实材料。","scenario":"跨媒体电影回顾展开幕时，[X]直接去了以[Y]为创作来源的单元。原作里人物的决定会持续改变阵营与联盟，银幕改编还要重新组织这些后果；[X]手机里的历届观展行程都把这类单元排在第一站。","batches":["zijun_revision"]},{"id":"MOVIE_TONE_M02","binding":"non_product","category":"shared","attribute":"tone","attributeZh":"整体基调","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Warm"],"values":["Warm（温暖）"],"historicalValues":[],"attributeDefinition":"电影在大部分观看过程中持续呈现的情绪与气质。","scenario":"[X]参加每月一次的邻里口述夜，这次故事仍保持[Y]基调：楼上老人忘带钥匙、邻居替他留饭，生活没有大转折，照顾却一点点积起来。主持人总把这类故事留给[X]开场，因为他每次都愿意接着分享相似记忆；这种不声张的亲近感一直最能让[X]放松。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_TONE_R04","binding":"non_product","category":"shared","attribute":"tone","attributeZh":"整体基调","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Satirical"],"values":["Satirical（讽刺）"],"historicalValues":[],"attributeDefinition":"电影在大部分观看过程中持续呈现的情绪与气质。","scenario":"短视频工作坊让[X]展示一段保持[Y]基调的脚本。开头郑重赞美一条流行规则，结尾又让同一句话回环出现，规则本身因此显得荒谬；翻看[X]过去的短片，类似写法反复出现，因为笑意有清楚批评对象时，才最合他的创作口味。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIDEO_QUALITY_M03","binding":"non_product","category":"shared","attribute":"video_quality","attributeZh":"可用画质","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["4K"],"values":["4K（4K超高清）"],"historicalValues":[],"attributeDefinition":"当前美国线上 offer 中可验证的最高画质。","scenario":"修复展把一段画质为[Y]的历史影像投到大银幕，布料纹理和远处字牌都能看见。工作人员已经习惯替[X]保留高画质场次的前排座位；家里的修复片收藏也都选这一档，因为旧画面里原本留下的细节，值得尽可能完整地看见。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIDEO_QUALITY_R01","binding":"non_product","category":"shared","attribute":"video_quality","attributeZh":"可用画质","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["HD"],"values":["HD（高清）"],"historicalValues":[],"attributeDefinition":"当前美国线上 offer 中可验证的最高画质。","scenario":"程序员社周末要在没有网络的会议室放映科技人物纪录片，[X]从自己的离线片库取出画质为[Y]的版本。人物神情和字幕都足够清楚，整部片也能稳定保存在本地；[X]在家看电影时同样长期选择这一档，因为清晰度和文件体量都正好，不必临时依赖网络。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIDEO_QUALITY_R04","binding":"non_product","category":"shared","attribute":"video_quality","attributeZh":"可用画质","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["4K"],"values":["4K（4K超高清）"],"historicalValues":[],"attributeDefinition":"当前美国线上 offer 中可验证的最高画质。","scenario":"[X]从美食旅行回来，在家整理街边摊照片，同时播放画质为[Y]的饮食纪录片。汤面升起的蒸汽、烤物表面的火候和摊主手上的动作都清楚可见；[X]保存的食物影像一直优先选这一档，因为细节足够完整，才像重新站回摊位前。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIOLENCE_LEVEL_M02","binding":"non_product","category":"shared","attribute":"violence_level","attributeZh":"暴力强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Non-High"],"values":["Non-High（非高暴力强度）"],"historicalValues":[],"attributeDefinition":"身体冲突、伤害威胁和暴力行为的整体强度，与血腥程度独立。 二分边界：以暴力是否达到旧高强度档为界；非高允许无、少量或中等暴力，不代表适合儿童。","scenario":"[X]陪孩子看暴力程度为[Y]的亲子剧，少量追赶很快结束，人物主要靠谈话解决分歧。孩子中途跑去玩后，[X]仍独自看完；家里那排早于孩子出生的故事片也大多如此，因为冲突可以紧张，却不必靠持续身体攻击推进。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIOLENCE_LEVEL_M04","binding":"non_product","category":"shared","attribute":"violence_level","attributeZh":"暴力强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["High"],"values":["High（高暴力强度）"],"historicalValues":[],"attributeDefinition":"身体冲突、伤害威胁和暴力行为的整体强度，与血腥程度独立。 二分边界：以暴力是否达到旧高强度档为界；非高允许无、少量或中等暴力，不代表适合儿童。","scenario":"动作影展开票时，同行人照例把暴力程度为[Y]的午夜场也订给[X]。影片中的威胁和对抗持续推动行动，每次伤害都会改变人物处境；[X]愿意承受这样的高压，只要暴力不是没有后果的热闹。","batches":["zijun_revision"]},{"id":"MOVIE_VIOLENCE_LEVEL_R03","binding":"non_product","category":"shared","attribute":"violence_level","attributeZh":"暴力强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高暴力强度）"],"historicalValues":[],"attributeDefinition":"身体冲突、伤害威胁和暴力行为的整体强度，与血腥程度独立。 二分边界：以暴力是否达到旧高强度档为界；非高允许无、少量或中等暴力，不代表适合儿童。","scenario":"做游戏系统设计的[X]测试一段暴力程度为[Y]的行动模拟，对抗连续发生，每次伤害都会改变资源、路线和阵营关系。[X]自己的原型和动作片收藏也长期偏向这种高强度冲突，因为战斗不断重写整个系统时，最能让他保持投入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VIOLENCE_LEVEL_R04","binding":"non_product","category":"shared","attribute":"violence_level","attributeZh":"暴力强度","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高暴力强度）"],"historicalValues":[],"attributeDefinition":"身体冲突、伤害威胁和暴力行为的整体强度，与血腥程度独立。 二分边界：以暴力是否达到旧高强度档为界；非高允许无、少量或中等暴力，不代表适合儿童。","scenario":"英语水平为 A1 的[X]给练习小组带来一部自己熟悉的视觉故事，作品暴力程度为[Y]。人物靠动作、表情和谈话化解分歧，全程没有身体攻击；[X]在学英语以前就反复看这类非暴力作品，因为观察关系慢慢松开，比等待冲突升级更合他的口味。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_VISUAL_STYLE_M04","binding":"non_product","category":"shared","attribute":"visual_style","attributeZh":"视觉风格","attributeScope":"global","logicalTypes":["action","animation","comedy","crime","documentary","horror","romance","science_fiction","suspense"],"source":"manual","rawValues":["Colorful"],"values":["Colorful（鲜艳多彩）"],"historicalValues":[],"attributeDefinition":"摄影、美术和后期共同形成的主要视觉表达方式。","scenario":"社区节庆请[X]从自己的作品里挑一段投影，入选的影像呈[Y]视觉风格。高饱和色块会随人物情绪改变，远处观众也能一眼看出画面转折；摊开的作品集里，[X]无论画室内还是街景都常用这种大胆颜色，因为色彩直接参与表达一直是他的个人风格。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FEAR_INTENSITY_M01","binding":"product_bound","category":"horror","attribute":"fear_intensity","attributeZh":"恐怖强度","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Non-High"],"values":["Non-High（非高恐惧强度）"],"historicalValues":[],"attributeDefinition":"影片预期带来的主观恐惧强度。 二分边界：以恐惧强度是否达到高档为界；极高归高，非高包含轻度和中度，不等于温和无惊吓。","scenario":"[X]在家布置万圣节故事夜，翻出自己每年都会重看的几部轻恐怖短片，把活动强度定为[Y]。影子和敲门声会让人短暂紧张，下一刻又被熟悉的生活细节化开；孩子入睡后[X]仍独自看完最后一部，因为这种心里一紧、很快松开的恐惧本来就是自己的口味。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FEAR_INTENSITY_M04","binding":"product_bound","category":"horror","attribute":"fear_intensity","attributeZh":"恐怖强度","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["High"],"values":["High（高恐惧强度）"],"historicalValues":[],"attributeDefinition":"影片预期带来的主观恐惧强度。 二分边界：以恐惧强度是否达到高档为界；极高归高，非高包含轻度和中度，不等于温和无惊吓。","scenario":"恐怖影展公布压轴场时，[X]照旧把第二天早晨留空，再订下恐惧强度为[Y]的电影。影片几乎不给安全感，散场后很久仍难以放松；和[X]一起参加过几届影展的朋友知道，这种接近承受极限的恐惧正是[X]每年都会留给自己的体验。","batches":["zijun_revision"]},{"id":"MOVIE_FEAR_INTENSITY_R02","binding":"product_bound","category":"horror","attribute":"fear_intensity","attributeZh":"恐怖强度","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高恐惧强度）"],"historicalValues":[],"attributeDefinition":"影片预期带来的主观恐惧强度。 二分边界：以恐惧强度是否达到高档为界；极高归高，非高包含轻度和中度，不等于温和无惊吓。","scenario":"[X]为只通过 Stripe 收款的线上影展更新片单，加入了一部围绕盗刷提醒展开的恐怖短片。影片的恐惧强度为[Y]，零星异响和一闪而过的影子只让人轻轻紧张；[X]过去收录的也几乎都是这类轻恐怖，喜欢它们在普通晚上带来一点凉意，看完仍能照常休息。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_FEAR_INTENSITY_R04","binding":"product_bound","category":"horror","attribute":"fear_intensity","attributeZh":"恐怖强度","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高恐惧强度）"],"historicalValues":[],"attributeDefinition":"影片预期带来的主观恐惧强度。 二分边界：以恐惧强度是否达到高档为界；极高归高，非高包含轻度和中度，不等于温和无惊吓。","scenario":"[X]只有自己状态不错、第二天无需早起时，才会约朋友一起观看恐惧强度为[Y]的电影。威胁持续逼近，几乎不留安全感；[X]并不避开这种体验，反而在准备充分时一次次主动选择这个极端强度。","batches":["zijun_revision"]},{"id":"MOVIE_HORROR_TYPE_R01","binding":"product_bound","category":"horror","attribute":"horror_type","attributeZh":"恐怖类型","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Psychological Horror"],"values":["Psychological Horror（心理恐怖）"],"historicalValues":[],"attributeDefinition":"影片制造恐惧时依赖的核心恐怖传统。","scenario":"深夜电影社放映一部以[Y]为主要类型的慢速恐怖片。人物一点点开始怀疑自己的记忆，早先细节也逐渐改变含义；社友散场后等着听[X]的判断，因为[X]平时带来的恐怖片也总会慢慢写出人物心里的裂缝。","batches":["zijun_revision"]},{"id":"MOVIE_HORROR_TYPE_R05","binding":"product_bound","category":"horror","attribute":"horror_type","attributeZh":"恐怖类型","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Gothic Horror"],"values":["Gothic Horror（哥特恐怖）"],"historicalValues":[],"attributeDefinition":"影片制造恐惧时依赖的核心恐怖传统。","scenario":"档案馆举办古宅电影季，[X]拿着整套场次的通票来观看以[Y]为主要类型的影片。封闭家族、隐藏信件和衰败建筑共同守着秘密；负责检票的人已经记住[X]，这类让陈年秘密一直困住眼前人物的恐怖片，[X]几乎每场都来。","batches":["zijun_revision"]},{"id":"MOVIE_PSYCH_PRESSURE_M01","binding":"product_bound","category":"horror","attribute":"psychological_pressure","attributeZh":"心理压迫程度","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Non-High"],"values":["Non-High（非高心理压迫）"],"historicalValues":[],"attributeDefinition":"影片对精神失控、怀疑和持续焦虑的强调程度。 二分边界：以心理压迫是否达到旧高档为界；非高仍可包含一定压迫感。","scenario":"[X]给家人讲睡前鬼故事，把心理压力控制在[Y]。角色听见怪声后很快找到能商量的人，恐惧不会在心里困住很久；讲完大家散去，[X]仍把这篇收进自己的常用故事夹，因为无论给谁讲，[X]都偏爱紧张很快回到日常的写法。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PSYCH_PRESSURE_R02","binding":"product_bound","category":"horror","attribute":"psychological_pressure","attributeZh":"心理压迫程度","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Non-High"],"values":["Non-High（非高心理压迫）"],"historicalValues":[],"attributeDefinition":"影片对精神失控、怀疑和持续焦虑的强调程度。 二分边界：以心理压迫是否达到旧高档为界；非高仍可包含一定压迫感。","scenario":"英语学习小组请成员带一段自己熟悉的故事，[X]从私人片单里选了心理压力为[Y]的一部。紧张只在误会和短暂不安中出现，很快回到人物日常；这份片单在[X]学英语前就积了很多同类作品，因为自己休息时也不喜欢被恐惧长时间困住。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_PSYCH_PRESSURE_R03","binding":"product_bound","category":"horror","attribute":"psychological_pressure","attributeZh":"心理压迫程度","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高心理压迫）"],"historicalValues":[],"attributeDefinition":"影片对精神失控、怀疑和持续焦虑的强调程度。 二分边界：以心理压迫是否达到旧高档为界；非高仍可包含一定压迫感。","scenario":"旧友寄给[X]一张心理压力为[Y]的恐怖电影票。片中人物不断听见自己的名字，却无法确认是谁在呼唤；旧友特意挑了这一场，因为[X]每年整理的恐怖片单里，总少不了这种把熟悉身份慢慢变成威胁的高压故事。","batches":["zijun_revision"]},{"id":"MOVIE_PSYCH_PRESSURE_R05","binding":"product_bound","category":"horror","attribute":"psychological_pressure","attributeZh":"心理压迫程度","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["High"],"values":["High（高心理压迫）"],"historicalValues":[],"attributeDefinition":"影片对精神失控、怀疑和持续焦虑的强调程度。 二分边界：以心理压迫是否达到旧高档为界；非高仍可包含一定压迫感。","scenario":"[X]和未婚伴侣在常去的酒吧参加电影夜，银幕上的故事心理压力为[Y]，原本亲切的场所一点点变得不安全。伴侣选这部片时就想到[X]；两人看过的恐怖电影里，[X]最常重提的正是那些把熟悉的人和地方慢慢变得可怕的故事。","batches":["zijun_revision"]},{"id":"MOVIE_SCARE_STYLE_M02","binding":"product_bound","category":"horror","attribute":"scare_style","attributeZh":"惊吓方式","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Jump Scares"],"values":["Jump Scares（突发惊吓）"],"historicalValues":[],"attributeDefinition":"影片主要通过突然刺激还是持续压迫制造恐惧。","scenario":"[X]在游乐园夜场排队时，听见前一组被安静角落突然冲出的演员吓得大叫，反而更期待主要靠[Y]制造恐惧的路线。[X]每次来都会先走这一区，也常把电影里来得快、落点准的突然惊吓片段收藏起来；比起让不安拖很久，[X]更喜欢被瞬间打断呼吸，再马上笑出来。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCARE_STYLE_M04","binding":"product_bound","category":"horror","attribute":"scare_style","attributeZh":"惊吓方式","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Atmospheric Dread"],"values":["Atmospheric Dread（氛围压迫）"],"historicalValues":[],"attributeDefinition":"影片主要通过突然刺激还是持续压迫制造恐惧。","scenario":"[X]在家关掉客厅灯，重看那部主要靠[Y]制造恐惧的电影。威胁从不突然现身，房间和声音只是一点点变得不对劲；同住的人已经习惯[X]反复看这几部不急着亮出怪物、只让不安慢慢加深的片子。","batches":["zijun_revision"]},{"id":"MOVIE_SCARE_STYLE_R03","binding":"product_bound","category":"horror","attribute":"scare_style","attributeZh":"惊吓方式","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Jump Scares"],"values":["Jump Scares（突发惊吓）"],"historicalValues":[],"attributeDefinition":"影片主要通过突然刺激还是持续压迫制造恐惧。","scenario":"[X]开车去汽车影院，赶上一场主要靠[Y]制造恐惧的公路片。后视镜里的人影突然贴近车窗时，[X]猛地一缩，随即笑着继续盯住银幕；同行人已经把同一导演的下一场记进日历，因为[X]每次都很享受这种来得快、落点准的惊吓。","batches":["zijun_revision"]},{"id":"MOVIE_SCARE_STYLE_R05","binding":"product_bound","category":"horror","attribute":"scare_style","attributeZh":"惊吓方式","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Jump Scares"],"values":["Jump Scares（突发惊吓）"],"historicalValues":[],"attributeDefinition":"影片主要通过突然刺激还是持续压迫制造恐惧。","scenario":"[X]按票面时间赶到恐怖片夜场，影片主要靠[Y]制造恐惧，每次灯光变化都会在规则刚建立时突然打断预期。散场后，[X]在观影日志里记下几个突然变灯的时间点；前几部获得高分的恐怖片，也都是这样毫无预告地把惊吓落下来。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_RESOLUTION_M03","binding":"product_bound","category":"horror","attribute":"threat_resolution","attributeZh":"恐怖威胁结局","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Not Fully Resolved"],"values":["Not Fully Resolved（威胁未完全解决）"],"historicalValues":[],"attributeDefinition":"结局时主要威胁是否被明确消除。 二分边界：以威胁是否完全解决为界；部分解决和仍持续归未完全解决，不推断所有威胁源都完整存续。","scenario":"恐怖片小组散场时，影片中的威胁结局为[Y]，片尾同一声音又在安全地点响起。[X]把它记进自己常用的推荐清单；清单里不少被[X]反复讨论的电影，也都在字幕升起后留下了仍未停止的危险。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_RESOLUTION_R05","binding":"product_bound","category":"horror","attribute":"threat_resolution","attributeZh":"恐怖威胁结局","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Not Fully Resolved"],"values":["Not Fully Resolved（威胁未完全解决）"],"historicalValues":[],"attributeDefinition":"结局时主要威胁是否被明确消除。 二分边界：以威胁是否完全解决为界；部分解决和仍持续归未完全解决，不推断所有威胁源都完整存续。","scenario":"影院优惠券正好覆盖恐怖片连映，[X]便约朋友来看威胁结局为[Y]的第一部。片尾最后一个机制仍在循环，任何人都没有真正退出；[X]随身的观影表里，获得高分的几部恐怖片也都把危险延伸到了字幕之后。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_M01","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Human"],"values":["Human（人类）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"犯罪心理电影周放映一部威胁来源为[Y]的恐怖片，没有超常力量，普通人的选择已经足够可怕。[X]又来参加映后谈；主持人已经连续几年在这类让危险仿佛会发生在身边的场次见到[X]。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_M02","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Supernatural"],"values":["Supernatural（超自然力量）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"[X]住进旧宅民宿后，在雨夜重看那部威胁来源为[Y]的恐怖片。银幕里的异常不受物理规则限制，也始终没有具体怪物现身；同伴认得这部电影，因为[X]常看的几部恐怖片都喜欢让看不见的力量慢慢侵入日常空间。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_M04","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Psychological"],"values":["Psychological（心理或精神）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"影院的心理恐怖回顾展放映一部威胁来源为[Y]的电影，危险是否存在取决于人物还能不能相信自己的感知。[X]带来的观影笔记里已经记着同类影片；每次看完这种片，[X]都愿意花时间重新判断哪些细节真实。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_M05","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"manual","rawValues":["Disease or Contagion"],"values":["Disease or Contagion（疾病或传染）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"[X]参加公共卫生演练，看到每个人的选择都会改变传播路线，便想起自己常看的威胁来源为[Y]的恐怖故事。比起等一个怪物现身，[X]一直更容易被看不见的扩散吸引：一次聚集、隐瞒或延误就会把危险带给下一群人，普通决定因此都有后果。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_THREAT_SOURCE_R02","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Human"],"values":["Human（人类）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"每日骑踏板车通勤的[X]赶上社区露天电影，影片的威胁来源为[Y]，危险来自沿固定路线持续跟踪的人。散场后，[X]在社群里发出推荐，特别提到影片没有借鬼怪分散压力；账号里此前分享的几部恐怖片，也都让普通人把危险逼近现实生活。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_R04","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Human"],"values":["Human（人类）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"连续剧同好会交换跨类型片单时，[X]推荐了一部威胁来源为[Y]的家庭恐怖电影。伤害来自熟悉人物的长期操控，关系越亲近，危险越难被识别；[X]过去分享的几部同类影片旁，也都写着对日常关系如何变得可怕的长评。","batches":["zijun_revision"]},{"id":"MOVIE_THREAT_SOURCE_R05","binding":"product_bound","category":"horror","attribute":"threat_source","attributeZh":"恐怖威胁来源","attributeScope":"subtype","logicalTypes":["horror"],"source":"real_dialogue_derived","rawValues":["Unidentified or Ambiguous Threat"],"values":["Unidentified or Ambiguous Threat（身份未明或含混的威胁）"],"historicalValues":[],"attributeDefinition":"持续制造危险的主要实体或力量。","scenario":"周末夜，[X]关掉社交媒体，和室友观看威胁来源为[Y]的恐怖片。异常始终没有被命名，只能从反复出现的动静确认它正在靠近；电影结束后，[X]又从影碟架上抽出两部同样不揭示来源的作品，想接着比较各种可能。","batches":["zijun_revision"]},{"id":"MOVIE_REL_CONFIG_M04","binding":"product_bound","category":"romance","attribute":"relationship_configuration","attributeZh":"感情关系结构","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["Single Couple"],"values":["Single Couple（单一伴侣关系）"],"historicalValues":[],"attributeDefinition":"主要感情线的关系组织结构。","scenario":"[X]在周末电影夜重看关系结构为[Y]的爱情片。故事始终跟着同一对人靠近和退开，没有第三个人制造悬念；播放页面上，[X]已经给同样只靠两个人把关系讲深的几部电影留下了高分。","batches":["zijun_revision"]},{"id":"MOVIE_REL_CONFIG_R01","binding":"product_bound","category":"romance","attribute":"relationship_configuration","attributeZh":"感情关系结构","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Multiple Relationships"],"values":["Multiple Relationships（历史覆盖值，待对齐）"],"historicalValues":["Multiple Relationships"],"attributeDefinition":"主要感情线的关系组织结构。","scenario":"双语影展放映一部关系结构为[Y]的爱情电影，几段使用不同语言的关系各自成立，又从不同角度回应同一主题。[X]买的是整个单元的套票；往年同类群像片上映时，[X]也总会留下参加映后讨论。","batches":["zijun_revision"]},{"id":"MOVIE_REL_CONFLICT_M02","binding":"product_bound","category":"romance","attribute":"relationship_conflict","attributeZh":"感情冲突来源","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["Family or Social Pressure"],"values":["Family or Social Pressure（家庭或社会压力）"],"historicalValues":[],"attributeDefinition":"阻碍主要关系发展的核心因素类别。","scenario":"家庭聚餐结束后，[X]和表姐看关系冲突为[Y]的爱情电影。片中两个人彼此确定，亲友与社会规范却不断要求他们退让；表姐记得[X]以前推荐的几部爱情片也都让感情面对具体的家庭代价，而不是只靠两个人争吵。","batches":["zijun_revision"]},{"id":"MOVIE_REL_CONFLICT_M04","binding":"product_bound","category":"romance","attribute":"relationship_conflict","attributeZh":"感情冲突来源","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["Secrets or Deception"],"values":["Secrets or Deception（秘密或欺骗）"],"historicalValues":[],"attributeDefinition":"阻碍主要关系发展的核心因素类别。","scenario":"影片资料馆举办秘密主题的爱情片夜，[X]带来一部关系冲突为[Y]的电影。一件隐瞒多年的事改变双方对过去的理解；影友们已经熟悉[X]的推荐标准，只有秘密真正损害信任、迫使人物重新判断关系，[X]才觉得冲突成立。","batches":["zijun_revision"]},{"id":"MOVIE_REL_CONFLICT_R04","binding":"product_bound","category":"romance","attribute":"relationship_conflict","attributeZh":"感情冲突来源","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Rival Relationship"],"values":["Rival Relationship（竞争关系）"],"historicalValues":[],"attributeDefinition":"阻碍主要关系发展的核心因素类别。","scenario":"动画系列同好会讨论一部关系冲突为[Y]的爱情电影，第三人与主角有独立的感情和未来，每次选择都会改变三方关系。[X]把这部片加入自己的推荐帖；熟悉帖子的社友知道，[X]只会推荐那些不把竞争者写成临时障碍的三角关系。","batches":["zijun_revision"]},{"id":"MOVIE_REL_OUTCOME_M01","binding":"product_bound","category":"romance","attribute":"relationship_outcome","attributeZh":"感情结局","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["Together"],"values":["Together（在一起）"],"historicalValues":[],"attributeDefinition":"主要爱情关系在结局时的状态。","scenario":"[X]和伴侣在纪念日重看关系结局为[Y]的爱情电影，片中两个人经历冲突后仍决定共同生活。这部片一直留在两人的纪念日清单里；每次看到人物开始安排往后的日子，[X]才真正放松下来。","batches":["zijun_revision"]},{"id":"MOVIE_REL_OUTCOME_M03","binding":"product_bound","category":"romance","attribute":"relationship_outcome","attributeZh":"感情结局","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["One Partner Dies"],"values":["One Partner Dies（一方死亡）"],"historicalValues":[],"attributeDefinition":"主要爱情关系在结局时的状态。","scenario":"[X]在剧场整理纪念演出的候选剧目，读到一篇关系结局为[Y]的故事：一人离世后，留下的人仍按两人曾经的约定生活。[X]把它放进自己专门收藏的悲剧爱情剧本一栏；比起让关系在最后轻轻散开，[X]一直更愿意看死亡怎样使一段感情继续影响活着的人。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_REL_OUTCOME_R01","binding":"product_bound","category":"romance","attribute":"relationship_outcome","attributeZh":"感情结局","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Together"],"values":["Together（在一起）"],"historicalValues":[],"attributeDefinition":"主要爱情关系在结局时的状态。","scenario":"质量管理团队完成一次大项目后办电影夜，同事带来[X]此前推荐的爱情片，关系结局为[Y]。片中的两个人不只确认相爱，也明确怎样协调工作和共同生活；团队里的人都知道，[X]谈爱情电影时最看重承诺有没有变成具体安排。","batches":["zijun_revision"]},{"id":"MOVIE_REL_OUTCOME_R04","binding":"product_bound","category":"romance","attribute":"relationship_outcome","attributeZh":"感情结局","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Ambiguous"],"values":["Ambiguous（未明确）"],"historicalValues":[],"attributeDefinition":"主要爱情关系在结局时的状态。","scenario":"[X]曾因状态低落隔很久才回复亲近的人，因此在读书会听到一篇关系结局为[Y]的故事时，格外理解结尾的沉默：两人没有分手，也没有马上和好，只留下以后再谈的可能。[X]的爱情片单里一直有不少这样的结局；比起替人物仓促定论，[X]更喜欢故事承认有些关系需要带着未决继续生活。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_REL_TROPE_M05","binding":"product_bound","category":"romance","attribute":"relationship_trope","attributeZh":"感情关系模式","attributeScope":"subtype","logicalTypes":["romance"],"source":"manual","rawValues":["Long-Distance Love"],"values":["Long-Distance Love（异地恋）"],"historicalValues":[],"attributeDefinition":"推动主要爱情关系形成或变化的可识别关系模式。","scenario":"异地通信展的电影单元放映一部沿[Y]关系路径展开的爱情片，有限见面和持续联系共同维持感情。[X]带来的旧场刊里，几部跨城市、跨国生活的爱情片所在页都被翻得起皱；比起把距离当作短暂误会，[X]更愿意看人物怎样把它过成每天都要面对的生活条件。","batches":["zijun_revision"]},{"id":"MOVIE_REL_TROPE_R01","binding":"product_bound","category":"romance","attribute":"relationship_trope","attributeZh":"感情关系模式","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Opposites Attract"],"values":["Opposites Attract（互补相吸）"],"historicalValues":[],"attributeDefinition":"推动主要爱情关系形成或变化的可识别关系模式。","scenario":"[X]在幼犬训练课认识一对共同养狗的伴侣：一个做事严格，一个更有耐心，两人常为训练方法争论，却也会接住对方顾不到的地方。回家后[X]想起自己最爱看的[Y]关系路径，发现吸引自己的从来不是简单吵闹，而是性格相反的人在共同生活里逐渐看见彼此缺少的部分。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_REL_TROPE_R04","binding":"product_bound","category":"romance","attribute":"relationship_trope","attributeZh":"感情关系模式","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Forbidden Love"],"values":["Forbidden Love（禁忌之恋）"],"historicalValues":[],"attributeDefinition":"推动主要爱情关系形成或变化的可识别关系模式。","scenario":"[X]开着自己的 Saab 9-5 参加老车露天电影夜，放映的故事以[Y]关系路径展开：相爱的人因家庭身份无法公开见面，只能借一次次夜间驾车留下相处时间。[X]选片时就专门投了这一部；自己一直容易被这种明知要付出现实代价、仍要决定是否靠近的感情吸引。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_REL_TROPE_R05","binding":"product_bound","category":"romance","attribute":"relationship_trope","attributeZh":"感情关系模式","attributeScope":"subtype","logicalTypes":["romance"],"source":"real_dialogue_derived","rawValues":["Love at First Sight","Unrequited Love"],"values":["Love at First Sight（一见钟情）","Unrequited Love（单恋）"],"historicalValues":[],"attributeDefinition":"推动主要爱情关系形成或变化的可识别关系模式。","scenario":"[X]学电吉他时选了一首写单恋的歌，练习课让每个人说明想把歌曲改成怎样的故事。[X]把它继续写成[Y]的关系路径：一个人初次见面便动了心，也很早说清感受，另一个人却始终没有给出同样的回应。[X]常听常看的感情故事也多停在这种爱意来得突然、又长期落空的张力里。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_EXTRATERRESTRIAL_PRESENCE_M01","binding":"product_bound","category":"science_fiction","attribute":"extraterrestrial_presence","attributeZh":"外星生命参与度","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["No Extraterrestrial Presence"],"values":["No Extraterrestrial Presence（无外星生命参与）"],"historicalValues":[],"attributeDefinition":"外星生命是否实际参与主要故事，而不是只作为未出现的背景设定。 二分边界：以外星生命是否实际参与故事为界，不区分参与分量；太空环境本身不构成参与。","scenario":"天文馆电影夜放映一部外星生命为[Y]的火星基地电影，所有风险都来自环境、设备和人类协作，没有额外文明介入。[X]把票根夹进自己的太空片手册；里面获得最高评价的几部影片，也都只靠人的工程处境撑起故事。","batches":["zijun_revision"]},{"id":"MOVIE_EXTRATERRESTRIAL_PRESENCE_M04","binding":"product_bound","category":"science_fiction","attribute":"extraterrestrial_presence","attributeZh":"外星生命参与度","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Extraterrestrial Presence"],"values":["Extraterrestrial Presence（有外星生命参与）"],"historicalValues":[],"attributeDefinition":"外星生命是否实际参与主要故事，而不是只作为未出现的背景设定。 二分边界：以外星生命是否实际参与故事为界，不区分参与分量；太空环境本身不构成参与。","scenario":"科幻社讨论一篇救援剧本时，[X]坚持保留外星生命呈[Y]的版本。救援者必须理解陌生生命如何感知危险，双方能否建立沟通决定所有人的去留；[X]过去推荐的初接触故事也总让外星角色站在冲突中心，因为真正面对另一种智能，比只远远看见它更有吸引力。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_EXTRATERRESTRIAL_PRESENCE_R01","binding":"product_bound","category":"science_fiction","attribute":"extraterrestrial_presence","attributeZh":"外星生命参与度","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Extraterrestrial Presence"],"values":["Extraterrestrial Presence（有外星生命参与）"],"historicalValues":[],"attributeDefinition":"外星生命是否实际参与主要故事，而不是只作为未出现的背景设定。 二分边界：以外星生命是否实际参与故事为界，不区分参与分量；太空环境本身不构成参与。","scenario":"计算机专业毕业的[X]参加深空通信程序测试，设定中的外星生命呈[Y]。陌生回应会主动改变协议，程序每次修正也会引来对方新的反应，沟通本身就是整个故事的冲突；[X]书架上的科幻作品大多也是这类初接触题材，因为技术真正变成与另一种智能谈判的工具时，最能让[X]投入。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_EXTRATERRESTRIAL_PRESENCE_R04","binding":"product_bound","category":"science_fiction","attribute":"extraterrestrial_presence","attributeZh":"外星生命参与度","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["No Extraterrestrial Presence"],"values":["No Extraterrestrial Presence（无外星生命参与）"],"historicalValues":[],"attributeDefinition":"外星生命是否实际参与主要故事，而不是只作为未出现的背景设定。 二分边界：以外星生命是否实际参与故事为界，不区分参与分量；太空环境本身不构成参与。","scenario":"暑假与孩子相处的电影夜里，[X]放映一部外星生命为[Y]的太空殖民电影，真正的矛盾来自人类家庭怎样分配照护时间。孩子们认得这种片子；[X]常看的太空电影很少加入外星文明，更愿意让环境、制度和人的关系自己承担冲突。","batches":["zijun_revision"]},{"id":"MOVIE_SCIENCE_FICTION_EFFECTS_STYLE_M04","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_effects_style","attributeZh":"科幻特效实现方式","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Practical Effects"],"values":["Practical Effects（物理特效）"],"historicalValues":[],"attributeDefinition":"科幻视觉元素的主要实现方式；Mixed 是同时显著使用物理特效与数字视觉特效的互斥桶，不得再与 Practical Effects 或 Digital VFX 共同出现。","scenario":"特效公开课把同一只异星生物做成几种版本，[X]留下了采用[Y]的那只。演员能真实推开它的爪子，皮肤经过灯下时也会留下阴影；[X]看科幻片时一直更容易相信能与人和空间直接接触的实体效果，细小的不完美反而让生物像真的来到现场。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_EFFECTS_STYLE_R01","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_effects_style","attributeZh":"科幻特效实现方式","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Mixed"],"values":["Mixed（物理与数字混合）"],"historicalValues":[],"attributeDefinition":"科幻视觉元素的主要实现方式；Mixed 是同时显著使用物理特效与数字视觉特效的互斥桶，不得再与 Practical Effects 或 Digital VFX 共同出现。","scenario":"从里斯本搬往瓦伦西亚前，[X]参加城市模型展，展览用[Y]表现两地之间的未来交通。实体街区保留熟悉尺度，数字路线从建筑间延伸到墙外；[X]的展览笔记里过去也常留下这种虚实结合的作品，因为手边有可触摸的现实起点，未来空间再远也更容易相信。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_EFFECTS_STYLE_R04","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_effects_style","attributeZh":"科幻特效实现方式","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Mixed"],"values":["Mixed（物理与数字混合）"],"historicalValues":[],"attributeDefinition":"科幻视觉元素的主要实现方式；Mixed 是同时显著使用物理特效与数字视觉特效的互斥桶，不得再与 Practical Effects 或 Digital VFX 共同出现。","scenario":"[X]被老师请来带学校科学节的特效组，重现一次实验失控时仍选用[Y]。演员先真实操作桌上的装置，无法在现场完成的能量变化再由数字影像向外扩散；[X]以前拍的科幻短片也总保留这两层，因为既能碰到现实物体、又能看见不可能的变化，一直是[X]最喜欢的特效质感。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_EFFECTS_STYLE_R05","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_effects_style","attributeZh":"科幻特效实现方式","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Digital VFX"],"values":["Digital VFX（数字视觉特效）"],"historicalValues":[],"attributeDefinition":"科幻视觉元素的主要实现方式；Mixed 是同时显著使用物理特效与数字视觉特效的互斥桶，不得再与 Practical Effects 或 Digital VFX 共同出现。","scenario":"[X]为技术展整理最喜欢的科幻特效片段，入选的大多采用[Y]：数字画面能剖开太空装置、展示轨道，再把系统重新组合起来。[X]平时做简明技术说明时也常借这些片段作参考，因为看不见的工程过程被直接变成画面，正是[X]长期欣赏数字特效的地方。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_THEME_M01","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_theme","attributeZh":"科幻主题","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Artificial Intelligence"],"values":["Artificial Intelligence（人工智能）"],"historicalValues":[],"attributeDefinition":"影片主要探索的科学或技术想象议题。","scenario":"科技伦理馆让参观者选择一项未来议题继续体验，[X]径直走进以[Y]为核心的区域。系统替人筛选工作、照护家属，也开始决定谁能得到机会；[X]的科幻读书笔记里一直有单独一栏记录这类故事，因为机器判断怎样慢慢进入普通人的责任和自由，最能让[X]停下来讨论。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_THEME_M02","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_theme","attributeZh":"科幻主题","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Space Exploration","Extraterrestrial Life"],"values":["Space Exploration（太空探索）","Extraterrestrial Life（外星生命）"],"historicalValues":[],"attributeDefinition":"影片主要探索的科学或技术想象议题。","scenario":"天文台夜场让观众选择未来任务，[X]报名的那组围绕[Y]展开。队员要跨越漫长距离寻找未知生命，通信延迟、有限补给和陌生信号都会改变决定；工作人员认得[X]，因为过去几次深空活动他也都选了探索组。[X]一直喜欢航行本身有代价，也喜欢宇宙里真的存在等待理解的另一种生命。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_THEME_R02","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_theme","attributeZh":"科幻主题","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Parallel Worlds"],"values":["Parallel Worlds（平行世界）"],"historicalValues":[],"attributeDefinition":"影片主要探索的科学或技术想象议题。","scenario":"语言实验室把同一句告别改成几个版本，并请参与者把它们写进科幻故事。[X]自然选择以[Y]为主题：每个世界只换一个说法，人物此后的关系却走向不同结果。[X]的科幻片单里一直有很多这类作品，因为比较同一选择在几条现实中怎样发散，比得到唯一答案更让他着迷。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENCE_FICTION_THEME_R03","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_theme","attributeZh":"科幻主题","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Robotics","Artificial Intelligence"],"values":["Robotics（机器人）","Artificial Intelligence（人工智能）"],"historicalValues":[],"attributeDefinition":"影片主要探索的科学或技术想象议题。","scenario":"汉字课结束后，老师放映一部围绕[Y]展开的科幻短片，机械臂正一笔一画学习书写。其他同学讨论字写得像不像，[X]却把片名收进自己的机器人电影清单；那份清单一直在追同一个问题：机器是在复制动作，还是逐渐理解了结构。","batches":["zijun_revision"]},{"id":"MOVIE_SCIENCE_FICTION_THEME_R05","binding":"product_bound","category":"science_fiction","attribute":"science_fiction_theme","attributeZh":"科幻主题","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Genetic Engineering","Scientific Experiment","Nuclear Technology","Giant Creature"],"values":["Genetic Engineering（基因工程）","Scientific Experiment（科学实验）","Nuclear Technology（核技术）","Giant Creature（巨型生物）"],"historicalValues":[],"attributeDefinition":"影片主要探索的科学或技术想象议题。","scenario":"[X]参加 Photoshop 数字绘画挑战，为以[Y]为主题的世界画一张关键场景。研究所原本通过基因实验培育能处理核废料的生物，失控后它已大到改变街道、桥梁和人群的尺度；[X]以前的作品集也反复描绘这类科学尝试越过边界、把后果带进整座城市的故事。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SCIENTIFIC_GROUNDING_M04","binding":"product_bound","category":"science_fiction","attribute":"scientific_grounding","attributeZh":"科学设定硬度","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Hard Science Fiction"],"values":["Hard Science Fiction（硬科幻）"],"historicalValues":[],"attributeDefinition":"核心设定受现实科学约束和解释的程度。 二分边界：以是否达到硬科幻的科学约束要求为界；软硬结合与科学奇幻均为非硬科幻，不把混合设定说成完全无科学依据。","scenario":"天文社讨论一段穿越设想，作品的科学依据程度为[Y]。[X]把时间、能量和因果条件逐项写在白板上，愿意跟着现有物理一直推到结论；社员也常把这类稿子先交给[X]，因为他看的科幻长期偏硬，规则越经得起追问，越有继续想下去的乐趣。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_WORLD_SCOPE_M04","binding":"product_bound","category":"science_fiction","attribute":"world_scope","attributeZh":"科幻世界范围","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"manual","rawValues":["Interstellar"],"values":["Interstellar（星际范围）"],"historicalValues":[],"attributeDefinition":"故事主要活动范围处于单一地球环境还是跨星际空间。","scenario":"科幻写作课让学员自由决定故事范围，[X]仍把冲突放进[Y]。消息要跨越多年才能抵达，人物作出的决定可能由下一代承担；[X]过去的长篇设定也总越过单一恒星系，因为距离大到足以改变关系和责任时，故事才真正有宇宙感。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_WORLD_SCOPE_R02","binding":"product_bound","category":"science_fiction","attribute":"world_scope","attributeZh":"科幻世界范围","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Solar System","Interstellar"],"values":["Solar System（太阳系范围）","Interstellar（星际范围）"],"historicalValues":[],"attributeDefinition":"故事主要活动范围处于单一地球环境还是跨星际空间。","scenario":"常去的炸鱼薯条店办科幻电影夜，放映的故事设在[Y]，离地后的补给距离和种植条件连一顿熟悉的饭都能改变。店主把下一场海报也留给[X]；[X]经常推荐这种让宇宙尺度真正进入普通生活的太空电影。","batches":["zijun_revision"]},{"id":"MOVIE_WORLD_SCOPE_R03","binding":"product_bound","category":"science_fiction","attribute":"world_scope","attributeZh":"科幻世界范围","attributeScope":"subtype","logicalTypes":["science_fiction"],"source":"real_dialogue_derived","rawValues":["Solar System"],"values":["Solar System（太阳系范围）"],"historicalValues":[],"attributeDefinition":"故事主要活动范围处于单一地球环境还是跨星际空间。","scenario":"[X]参加世界设定工作坊，仍将故事范围定在[Y]。行星、卫星与空间站构成有限节点，距离足以让旅行有代价，又共享同一颗太阳作为参照；[X]以前的设定本也反复停在这个尺度，因为比困在地球更开阔，又不像星际故事那样轻易失去人物之间的联系。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ADVERSARY_IDENTITY_STATUS_R01","binding":"product_bound","category":"suspense","attribute":"adversary_identity_status","attributeZh":"对手身份状态","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Not Fully Known"],"values":["Not Fully Known（对手身份未完全明确）"],"historicalValues":[],"attributeDefinition":"主要威胁者在故事前期已明确，还是其身份本身构成需要揭开的核心未知。 二分边界：以主要悬疑发展期对手身份是否完全明确为界；部分隐藏与身份未知归未完全明确，不声称观众毫无线索，也不把已知身份但动机不明当作身份隐藏。","scenario":"自制低热量饮品交换会安排一轮标签谜题，几杯样品被故意调换，故事中的对手身份为[Y]。参与者只能从口味、杯子位置和出入时间推断是谁动了手；[X]主动接下记录线索的角色，朋友也知道[X]平时最爱身份一直藏到证据闭合才揭开的故事，过早亮出对手会少掉一半乐趣。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_ADVERSARY_IDENTITY_STATUS_R04","binding":"product_bound","category":"suspense","attribute":"adversary_identity_status","attributeZh":"对手身份状态","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Not Fully Known"],"values":["Not Fully Known（对手身份未完全明确）"],"historicalValues":[],"attributeDefinition":"主要威胁者在故事前期已明确，还是其身份本身构成需要揭开的核心未知。 二分边界：以主要悬疑发展期对手身份是否完全明确为界；部分隐藏与身份未知归未完全明确，不声称观众毫无线索，也不把已知身份但动机不明当作身份隐藏。","scenario":"高难度推理游戏小组的电影夜放映一部对手身份为[Y]的悬疑片，直到后段仍没人知道对手是谁，但每次误导都能从早先镜头中找到依据。影片是[X]推荐的；[X]带来的另外几部悬疑片也把身份藏得很深，却从不临时改掉规则。","batches":["zijun_revision"]},{"id":"MOVIE_MYSTERY_STRUCTURE_R02","binding":"product_bound","category":"suspense","attribute":"mystery_structure","attributeZh":"谜题结构","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Identity Mystery"],"values":["Identity Mystery（历史覆盖值，待对齐）"],"historicalValues":["Identity Mystery"],"attributeDefinition":"观众需要追踪的主要未知问题和调查结构。","scenario":"[X]为游戏桌买到预算内的白色冷风机，拆箱时却发现机身序列号与订单不一致。售后核对型号、仓库记录和付款信息的过程，让[X]想起自己常玩的结构为[Y]的悬疑游戏；[X]一直喜欢所有线索最终回答“眼前对象究竟是谁”的谜题，答案能够具体核验，也不会被无限扩成阴谋。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_MYSTERY_STRUCTURE_R03","binding":"product_bound","category":"suspense","attribute":"mystery_structure","attributeZh":"谜题结构","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Puzzle Mystery"],"values":["Puzzle Mystery（历史覆盖值，待对齐）"],"historicalValues":["Puzzle Mystery"],"attributeDefinition":"观众需要追踪的主要未知问题和调查结构。","scenario":"[X]参加声音叙事实验，现场故事采用[Y]结构：门响、脚步和突然中断的留言依次出现，没有旁白替它们解释。[X]很快翻开随身的线索本；同一册前面记着许多类似节目，因为[X]一向喜欢自己把分散信息拼成完整事件，解释一插进来反而会泄掉悬念。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUSPENSE_TYPE_M02","binding":"product_bound","category":"suspense","attribute":"suspense_type","attributeZh":"悬疑惊悚类型","attributeScope":"subtype","logicalTypes":["suspense"],"source":"manual","rawValues":["Espionage","Conspiracy"],"values":["Espionage（谍战）","Conspiracy（阴谋惊悚）"],"historicalValues":[],"attributeDefinition":"影片建立悬念时采用的主要题材语境。","scenario":"模拟联合国大会的夜间活动是一场以[Y]为核心的悬疑推演。一份机密文件在休会时失踪，几个代表团表面互相指责，私下却共同传递情报、操纵谈判结果。[X]报名时就选了这一组；平时看悬疑片也总先找公开立场下藏着的情报战和秘密联盟。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUSPENSE_TYPE_R01","binding":"product_bound","category":"suspense","attribute":"suspense_type","attributeZh":"悬疑惊悚类型","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Crime Investigation"],"values":["Crime Investigation（犯罪调查）"],"historicalValues":[],"attributeDefinition":"影片建立悬念时采用的主要题材语境。","scenario":"[X]代表家居品牌参加供应链演练，一批货物在跨境途中失去记录，活动以[Y]为核心展开。合同、代理人和海关记录逐层缩小可疑环节；[X]过去做案例分享时也总挑这类调查故事，因为看似正常的商业流程如何被证据一点点拆开，比秘密特工或宏大阴谋更吸引他。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUSPENSE_TYPE_R02","binding":"product_bound","category":"suspense","attribute":"suspense_type","attributeZh":"悬疑惊悚类型","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Political"],"values":["Political（政治惊悚）"],"historicalValues":[],"attributeDefinition":"影片建立悬念时采用的主要题材语境。","scenario":"预算听证结束后，[X]和一位在公共部门工作的同事去看以[Y]为核心的悬疑片。片中审批时间和公开数字逐步暴露权力交易；这位同事知道[X]每逢政治悬疑新片都会约他，因为[X]最爱看的就是制度表面正常、细节却让权力关系露出来的过程。","batches":["yao_and_semantic_revision"]},{"id":"MOVIE_SUSPENSE_TYPE_R03","binding":"product_bound","category":"suspense","attribute":"suspense_type","attributeZh":"悬疑惊悚类型","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Psychological","Domestic"],"values":["Psychological（心理悬疑）","Domestic（家庭悬疑）"],"historicalValues":[],"attributeDefinition":"影片建立悬念时采用的主要题材语境。","scenario":"整理完个人档案后，[X]赶上档案馆的电影夜，影片以[Y]为核心：一份旧登记表写着另一个出生信息，线索逐渐牵出家人避而不谈的往事。[X]随身的观影本里，已经记着好几部同样让身份、记忆和熟悉关系一起变得不确定的悬疑电影。","batches":["zijun_revision"]},{"id":"MOVIE_SUSPENSE_TYPE_R05","binding":"product_bound","category":"suspense","attribute":"suspense_type","attributeZh":"悬疑惊悚类型","attributeScope":"subtype","logicalTypes":["suspense"],"source":"real_dialogue_derived","rawValues":["Political"],"values":["Political（政治惊悚）"],"historicalValues":[],"attributeDefinition":"影片建立悬念时采用的主要题材语境。","scenario":"社区剧场试映由[X]推荐的一部以[Y]为核心的政治悬疑片。人物在公开立场和私下交易之间周旋，制度压力随着每次选择变重，影片没有用夸张语气替观众解释线索；放映后，[X]又交给选片人一页同类片单，都是这样让权力关系自己产生紧张感。","batches":["zijun_revision"]}],"reviewPackagePath":"human-audit/review-packages/movie-final-scenario-review-20260908.json","reviewPackageSha256":"828bccd1b52c6b523a38617412cfbf48b712bfc7331b8ddc4b4ee9c2ad710cc9","batchSummary":{"original_first":88,"original_second":147,"retained_first":76,"retained_second":130,"excluded":29,"total":206}};
+  </script>
+  <script>
+(() => {
+  "use strict";
+
+  const data = window.SCENARIO_AUDIT_DATA;
+  if (!data || !Array.isArray(data.records)) {
+    document.body.innerHTML = "<p style='padding:24px'>Scenario audit data failed to load.</p>";
+    return;
+  }
+
+  const elements = {
+    auditApp: document.getElementById("auditApp"),
+    auditContent: document.getElementById("auditContent"),
+    auditHeaderActions: document.getElementById("auditHeaderActions"),
+    categoryNav: document.getElementById("categoryNav"),
+    clearFiltersButton: document.getElementById("clearFiltersButton"),
+    discardedCount: document.getElementById("discardedCount"),
+    discardedOnlyInput: document.getElementById("discardedOnlyInput"),
+    exportButton: document.getElementById("exportButton"),
+    guideAcknowledgement: document.getElementById("guideAcknowledgement"),
+    guideButton: document.getElementById("guideButton"),
+    guidePage: document.getElementById("guidePage"),
+    guideStatus: document.getElementById("guideStatus"),
+    nameDialog: document.getElementById("nameDialog"),
+    nameError: document.getElementById("nameError"),
+    nameForm: document.getElementById("nameForm"),
+    nameInput: document.getElementById("nameInput"),
+    nonProductCount: document.getElementById("nonProductCount"),
+    nonProductTab: document.getElementById("nonProductTab"),
+    productBoundCount: document.getElementById("productBoundCount"),
+    productBoundTab: document.getElementById("productBoundTab"),
+    reviewerButton: document.getElementById("reviewerButton"),
+    reviewerName: document.getElementById("reviewerName"),
+    searchInput: document.getElementById("searchInput"),
+    startAuditButton: document.getElementById("startAuditButton"),
+    toast: document.getElementById("toast"),
+    viewDescription: document.getElementById("viewDescription"),
+    viewEyebrow: document.getElementById("viewEyebrow"),
+    viewTitle: document.getElementById("viewTitle"),
+    visibleCount: document.getElementById("visibleCount"),
+  };
+
+  const recordById = new Map(data.records.map((record) => [record.id, record]));
+  const productRecords = data.records.filter((record) => record.binding === "product_bound");
+  const nonProductRecords = data.records.filter((record) => record.binding === "non_product");
+  const previewValueLimit = 12;
+
+  let activeView = "product_bound";
+  let reviewer = "";
+  let auditState = emptyState();
+  let toastTimer = null;
+
+  function emptyState() {
+    const quality = {};
+    for (const category of data.categoryOrder) {
+      quality[qualityKey("product_bound", category)] = {
+        satisfaction: null,
+        reason: "",
+      };
+    }
+    quality[qualityKey("non_product", "shared")] = {
+      satisfaction: null,
+      reason: "",
+    };
+    return {
+      discarded: new Set(),
+      quality,
+      updatedAt: null,
+    };
+  }
+
+  function qualityKey(binding, category) {
+    return `${binding}:${category}`;
+  }
+
+  function storageKey(name) {
+    return `lip-rec-movie-final-scenario-review:${data.sourceVersion}:${encodeURIComponent(name.trim())}`;
+  }
+
+  function storedProgress(name) {
+    const currentKey = storageKey(name);
+    const current = localStorage.getItem(currentKey);
+    if (current !== null) return current;
+
+    const legacyPrefix = ["persona", "mir"].join("");
+    const legacy = localStorage.getItem(legacyPrefix + currentKey.slice("lip-rec".length));
+    if (legacy !== null) localStorage.setItem(currentKey, legacy);
+    return legacy;
+  }
+
+  function slugify(value) {
+    return value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "reviewer";
+  }
+
+  function loadState(name) {
+    const nextState = emptyState();
+    try {
+      const stored = JSON.parse(storedProgress(name) || "null");
+      if (!stored) return nextState;
+      nextState.discarded = new Set(
+        Array.isArray(stored.discarded)
+          ? stored.discarded.filter((id) => recordById.has(id))
+          : []
+      );
+      for (const key of Object.keys(nextState.quality)) {
+        const saved = stored.quality?.[key];
+        if (!saved) continue;
+        nextState.quality[key] = {
+          satisfaction: saved.satisfaction === true
+            ? true
+            : saved.satisfaction === false
+              ? false
+              : null,
+          reason: typeof saved.reason === "string" ? saved.reason : "",
+        };
+      }
+      nextState.updatedAt = stored.updatedAt || null;
+    } catch (error) {
+      showToast("本地进度读取失败，已开启新的审计记录。", true);
+    }
+    return nextState;
+  }
+
+  function saveState() {
+    if (!reviewer) return;
+    auditState.updatedAt = new Date().toISOString();
+    const serializable = {
+      discarded: [...auditState.discarded],
+      quality: auditState.quality,
+      updatedAt: auditState.updatedAt,
+    };
+    try {
+      localStorage.setItem(storageKey(reviewer), JSON.stringify(serializable));
+    } catch (error) {
+      showToast("浏览器无法保存本地进度，请及时导出 JSON。", true);
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatScenario(value) {
+    return escapeHtml(value)
+      .replace(/\[X\]/g, '<span class="placeholder-x">[X]</span>')
+      .replace(/\[Y\]/g, '<span class="placeholder-y">[Y]</span>');
+  }
+
+  function formatAttribute(attribute) {
+    return attribute.replace(/_/g, " ");
+  }
+
+  function displayCategory(category) {
+    return data.categoryLabels[category] || category;
+  }
+
+  function showGuide() {
+    if (elements.nameDialog.open) elements.nameDialog.close();
+    elements.guidePage.hidden = false;
+    elements.auditApp.hidden = true;
+    elements.guideStatus.hidden = false;
+    elements.auditHeaderActions.hidden = true;
+    document.title = "LIP-Rec Movie Scenario 审核说明";
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function enterAudit() {
+    if (!elements.guideAcknowledgement.checked) return;
+    elements.guidePage.hidden = true;
+    elements.auditApp.hidden = false;
+    elements.guideStatus.hidden = true;
+    elements.auditHeaderActions.hidden = false;
+    document.title = "LIP-Rec Movie Scenario 审核";
+    render();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    if (!reviewer) window.setTimeout(showNameDialog, 0);
+  }
+
+  function recordsForActiveView() {
+    return activeView === "product_bound" ? productRecords : nonProductRecords;
+  }
+
+  function filteredRecords() {
+    const query = elements.searchInput.value.trim().toLowerCase();
+    const discardedOnly = elements.discardedOnlyInput.checked;
+    return recordsForActiveView().filter((record) => {
+      if (discardedOnly && !auditState.discarded.has(record.id)) return false;
+      if (!query) return true;
+      return record.attribute.toLowerCase().includes(query)
+        || record.attributeZh.toLowerCase().includes(query)
+        || record.source.toLowerCase().includes(query)
+        || record.scenario.toLowerCase().includes(query)
+        || record.values.some((value) => value.toLowerCase().includes(query));
+    });
+  }
+
+  function groupBy(records, keySelector) {
+    const grouped = new Map();
+    for (const record of records) {
+      const key = keySelector(record);
+      if (!grouped.has(key)) grouped.set(key, []);
+      grouped.get(key).push(record);
+    }
+    return grouped;
+  }
+
+  function render() {
+    updateViewHeader();
+    renderCategoryNav();
+
+    const records = filteredRecords();
+    elements.visibleCount.textContent = records.length.toLocaleString("en-US");
+
+    if (!records.length) {
+      elements.auditContent.innerHTML = `
+        <div class="empty-state">
+          当前筛选条件下没有 Scenario。可清除搜索或关闭“只看已标记丢弃”。
+        </div>`;
+      return;
+    }
+
+    if (activeView === "product_bound") {
+      const byCategory = groupBy(records, (record) => record.category);
+      elements.auditContent.innerHTML = data.categoryOrder
+        .filter((category) => byCategory.has(category))
+        .map((category) => renderCategorySection(category, byCategory.get(category)))
+        .join("");
+    } else {
+      elements.auditContent.innerHTML = renderCategorySection("shared", records);
+    }
+  }
+
+  function updateViewHeader() {
+    const productActive = activeView === "product_bound";
+    elements.productBoundTab.classList.toggle("is-active", productActive);
+    elements.nonProductTab.classList.toggle("is-active", !productActive);
+    elements.productBoundTab.setAttribute("aria-selected", String(productActive));
+    elements.nonProductTab.setAttribute("aria-selected", String(!productActive));
+    elements.productBoundCount.textContent = productRecords.length.toLocaleString("en-US");
+    elements.nonProductCount.textContent = nonProductRecords.length.toLocaleString("en-US");
+    elements.discardedCount.textContent = auditState.discarded.size.toLocaleString("en-US");
+
+    if (productActive) {
+      elements.viewEyebrow.textContent = "Subtype-scoped";
+      elements.viewTitle.textContent = "类型限定 Scenario";
+      elements.viewDescription.textContent = "按九个电影类型和属性从上到下审阅。只标记应当丢弃的场景。";
+    } else {
+      elements.viewEyebrow.textContent = "Global";
+      elements.viewTitle.textContent = "全局共享 Scenario";
+      elements.viewDescription.textContent = "跨电影类型共享的属性集中展示。只标记应当丢弃的场景。";
+    }
+  }
+
+  function renderCategoryNav() {
+    const categories = activeView === "product_bound" ? data.categoryOrder : ["shared"];
+    elements.categoryNav.innerHTML = categories.map((category) => {
+      const discarded = data.records.filter((record) => {
+        return record.category === category && auditState.discarded.has(record.id);
+      }).length;
+      return `
+        <a class="category-link" href="#category-${escapeHtml(category)}">
+          <span>${escapeHtml(displayCategory(category))}</span>
+          <span>${discarded ? `丢弃 ${discarded}` : ""}</span>
+        </a>`;
+    }).join("");
+  }
+
+  function renderCategorySection(category, records) {
+    const byAttribute = groupBy(records, (record) => record.attribute);
+    const totalForCategory = data.records.filter((record) => record.category === category).length;
+    const discardedForCategory = data.records.filter((record) => {
+      return record.category === category && auditState.discarded.has(record.id);
+    }).length;
+    const binding = category === "shared" ? "non_product" : "product_bound";
+
+    return `
+      <section class="category-section" id="category-${escapeHtml(category)}">
+        <div class="category-heading">
+          <div>
+            <h2>${escapeHtml(displayCategory(category))}</h2>
+            <p>${category === "shared" ? "跨全部电影类型共享" : "限定于该电影类型"}</p>
+          </div>
+          <div class="category-stats">
+            当前显示 ${records.length} / ${totalForCategory}<br>
+            <strong data-category-discard-count="${escapeHtml(category)}">已丢弃 ${discardedForCategory}</strong>
+          </div>
+        </div>
+        ${[...byAttribute.entries()].map(([attribute, attributeRecords]) => {
+          return renderAttributeSection(attribute, attributeRecords);
+        }).join("")}
+        ${renderQualityPanel(binding, category)}
+      </section>`;
+  }
+
+  function renderAttributeSection(attribute, records) {
+    return `
+      <section class="attribute-section">
+        <div class="attribute-heading">
+          <h3>${escapeHtml(records[0]?.attributeZh || formatAttribute(attribute))}<small>${escapeHtml(attribute)}</small></h3><p style="max-width:80ch;white-space:normal">${escapeHtml(records[0]?.attributeDefinition || "")}</p>
+          <span>${records.length} scenarios</span>
+        </div>
+        <div class="scenario-list">
+          ${records.map(renderScenarioRow).join("")}
+        </div>
+      </section>`;
+  }
+
+  function renderScenarioRow(record) {
+    const discarded = auditState.discarded.has(record.id);
+    const bindingText = record.binding === "product_bound" ? "类型限定" : "全局共享";
+    const categoryMeta = record.binding === "product_bound"
+      ? `<span class="category-label">${escapeHtml(displayCategory(record.category))}</span>`
+      : "";
+    return `
+      <article class="scenario-row${discarded ? " is-discarded" : ""}" data-scenario-id="${escapeHtml(record.id)}">
+        <div>
+          <div class="scenario-meta">
+            <span class="binding-label">${bindingText}</span>
+            ${categoryMeta}
+            <span>属性：${escapeHtml(record.attributeZh)} / ${escapeHtml(record.attribute)}</span>
+            <span>来源：${record.source === "manual" ? "人工撰写" : "真实对话派生"}</span>
+          </div>
+          <p class="scenario-text">${formatScenario(record.scenario)}</p>
+          <div class="values-wrap" data-values-for="${escapeHtml(record.id)}">
+            ${renderValues(record, false)}
+          </div>
+        </div>
+        <div class="scenario-action">
+          <button class="discard-button${discarded ? " is-active" : ""}" type="button" data-action="toggle-discard" data-id="${escapeHtml(record.id)}" aria-pressed="${discarded}">
+            ${discarded ? "已标记丢弃" : "标记丢弃"}
+          </button>
+        </div>
+      </article>`;
+  }
+
+  function renderValues(record, expanded) {
+    const shown = expanded ? record.values : record.values.slice(0, previewValueLimit);
+    const remaining = record.values.length - shown.length;
+    return `
+      <div class="coverage-label">覆盖的属性值 · ${record.values.length.toLocaleString("en-US")}</div>
+      <div class="value-list">
+        ${shown.map((value) => `<span class="value-chip">${escapeHtml(value)}</span>`).join("")}
+        ${remaining > 0 ? `
+          <button class="expand-values-button" type="button" data-action="expand-values" data-id="${escapeHtml(record.id)}">
+            展开其余 ${remaining.toLocaleString("en-US")}
+          </button>` : expanded && record.values.length > previewValueLimit ? `
+          <button class="expand-values-button" type="button" data-action="collapse-values" data-id="${escapeHtml(record.id)}">
+            收起
+          </button>` : ""}
+      </div>`;
+  }
+
+  function renderQualityPanel(binding, category) {
+    const key = qualityKey(binding, category);
+    const quality = auditState.quality[key] || { satisfaction: null, reason: "" };
+    const title = binding === "product_bound"
+      ? `${displayCategory(category)} 整体质量是否满意？`
+      : "全局共享 Scenario 的整体质量是否满意？";
+    const name = `quality-${binding}-${category}`;
+    return `
+      <section class="quality-panel" data-quality-panel="${escapeHtml(key)}">
+        <h3>${escapeHtml(title)}</h3>
+        <p>这是电影类型层面的整体判断，不代替单条 Scenario 的丢弃标记。</p>
+        <div class="quality-options">
+          <label class="quality-option">
+            <input type="radio" name="${escapeHtml(name)}" value="satisfied" data-quality-key="${escapeHtml(key)}" ${quality.satisfaction === true ? "checked" : ""}>
+            <span>满意</span>
+          </label>
+          <label class="quality-option is-negative">
+            <input type="radio" name="${escapeHtml(name)}" value="dissatisfied" data-quality-key="${escapeHtml(key)}" ${quality.satisfaction === false ? "checked" : ""}>
+            <span>不满意</span>
+          </label>
+        </div>
+        <label class="reason-field${quality.satisfaction === false ? " is-visible" : ""}">
+          <span>不满意原因（必填）</span>
+          <textarea class="quality-reason" data-quality-reason="${escapeHtml(key)}" placeholder="请简要说明该部分 Scenario 的主要质量问题">${escapeHtml(quality.reason)}</textarea>
+        </label>
+      </section>`;
+  }
+
+  function toggleDiscard(id, button) {
+    if (!recordById.has(id)) return;
+    if (auditState.discarded.has(id)) auditState.discarded.delete(id);
+    else auditState.discarded.add(id);
+    saveState();
+
+    if (elements.discardedOnlyInput.checked) {
+      render();
+      return;
+    }
+
+    const discarded = auditState.discarded.has(id);
+    const row = button.closest(".scenario-row");
+    row?.classList.toggle("is-discarded", discarded);
+    button.classList.toggle("is-active", discarded);
+    button.setAttribute("aria-pressed", String(discarded));
+    button.textContent = discarded ? "已标记丢弃" : "标记丢弃";
+    updateViewHeader();
+    renderCategoryNav();
+    updateCategoryDiscardCounts();
+  }
+
+  function updateCategoryDiscardCounts() {
+    document.querySelectorAll("[data-category-discard-count]").forEach((node) => {
+      const category = node.dataset.categoryDiscardCount;
+      const count = data.records.filter((record) => {
+        return record.category === category && auditState.discarded.has(record.id);
+      }).length;
+      node.textContent = `已丢弃 ${count}`;
+    });
+  }
+
+  function updateQuality(input) {
+    const key = input.dataset.qualityKey;
+    if (!auditState.quality[key]) return;
+    auditState.quality[key].satisfaction = input.value === "satisfied";
+    const panel = input.closest(".quality-panel");
+    panel?.classList.remove("has-error");
+    panel?.querySelector(".reason-field")?.classList.toggle(
+      "is-visible",
+      auditState.quality[key].satisfaction === false
+    );
+    saveState();
+  }
+
+  function updateReason(textarea) {
+    const key = textarea.dataset.qualityReason;
+    if (!auditState.quality[key]) return;
+    auditState.quality[key].reason = textarea.value;
+    textarea.closest(".quality-panel")?.classList.remove("has-error");
+    saveState();
+  }
+
+  function validateReviewer(value) {
+    const trimmed = value.trim().replace(/\s+/g, " ");
+    if (!trimmed) return { valid: false, message: "请输入审核人姓名。" };
+    if (trimmed.length > 80) {
+      return { valid: false, message: "姓名不能超过 80 个字符。" };
+    }
+    return { valid: true, value: trimmed };
+  }
+
+  function setReviewer(name) {
+    reviewer = name;
+    auditState = loadState(name);
+    elements.reviewerName.textContent = name;
+    render();
+    elements.nameDialog.close();
+    showToast(auditState.updatedAt ? `已载入 ${name} 的本地进度。` : `已为 ${name} 开始新的审计。`);
+  }
+
+  function showNameDialog() {
+    elements.nameInput.value = reviewer;
+    elements.nameError.textContent = "";
+    if (!elements.nameDialog.open) elements.nameDialog.showModal();
+    window.setTimeout(() => elements.nameInput.focus(), 50);
+  }
+
+  function firstInvalidQuality() {
+    return Object.entries(auditState.quality).find(([, quality]) => {
+      return quality.satisfaction === false && !quality.reason.trim();
+    });
+  }
+
+  function exportAudit() {
+    if (!reviewer) {
+      showNameDialog();
+      return;
+    }
+
+    const invalid = firstInvalidQuality();
+    if (invalid) {
+      const [key] = invalid;
+      activeView = key.startsWith("non_product") ? "non_product" : "product_bound";
+      elements.searchInput.value = "";
+      elements.discardedOnlyInput.checked = false;
+      render();
+      window.setTimeout(() => {
+        const panel = document.querySelector(`[data-quality-panel="${CSS.escape(key)}"]`);
+        panel?.classList.add("has-error");
+        panel?.scrollIntoView({ behavior: "smooth", block: "center" });
+        panel?.querySelector("textarea")?.focus({ preventScroll: true });
+      }, 0);
+      showToast("已选择“不满意”的部分必须填写原因。", true);
+      return;
+    }
+
+    const discardedRecords = data.records
+      .filter((record) => auditState.discarded.has(record.id))
+      .map((record) => ({
+        scenario_id: record.id,
+        revision_batches: record.batches,
+        attribute_scope: record.attributeScope,
+        logical_types: record.logicalTypes,
+        attribute: record.attribute,
+        attribute_zh: record.attributeZh,
+        scenario_source: record.source,
+        covered_attribute_values: record.rawValues,
+        scenario: record.scenario,
+      }));
+
+    const scopeQuality = { subtype: {}, global: null };
+    for (const category of data.categoryOrder) {
+      const quality = auditState.quality[qualityKey("product_bound", category)];
+      scopeQuality.subtype[category] = exportQuality(quality);
+    }
+    scopeQuality.global = exportQuality(
+      auditState.quality[qualityKey("non_product", "shared")]
+    );
+
+    const result = {
+      audit_schema: "lip-rec-movie-final-scenario-review-v1",
+      review_package_path: data.reviewPackagePath,
+      review_package_sha256: data.reviewPackageSha256,
+      batch_summary: data.batchSummary,
+      source_version: data.sourceVersion,
+      source_path: data.sourcePath,
+      source_sha256: data.sourceSha256,
+      group_registry_path: data.groupRegistryPath,
+      group_registry_sha256: data.groupRegistrySha256,
+      value_domain_path: data.valueDomainPath,
+      value_domain_sha256: data.valueDomainSha256,
+      pool_manifest_path: data.poolManifestPath,
+      source_pool_items: data.sourcePoolItemCount,
+      reviewer,
+      exported_at: new Date().toISOString(),
+      decision_model: {
+        scenario_level: "discard_only",
+        unmarked_scenario_meaning: "No discard issue was marked; this is not a positive quality judgment.",
+        scope_level: "satisfied_or_dissatisfied_with_required_reason_for_dissatisfied",
+      },
+      summary: {
+        source_scenarios: data.totalRecords,
+        discarded_scenarios: discardedRecords.length,
+        subtype_scoped_discarded: discardedRecords.filter((record) => record.attribute_scope === "subtype").length,
+        global_discarded: discardedRecords.filter((record) => record.attribute_scope === "global").length,
+      },
+      scope_quality: scopeQuality,
+      discarded_scenarios: discardedRecords,
+    };
+
+    const now = new Date();
+    const date = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0"),
+    ].join("");
+    const time = [
+      String(now.getHours()).padStart(2, "0"),
+      String(now.getMinutes()).padStart(2, "0"),
+    ].join("");
+    const filename = `lip-rec-movie-final-scenario-review-${slugify(reviewer)}-${date}-${time}.json`;
+    const blob = new Blob([`${JSON.stringify(result, null, 2)}\n`], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+    saveState();
+    showToast(`已导出 ${filename}`);
+  }
+
+  function exportQuality(quality) {
+    return {
+      satisfied: quality.satisfaction,
+      reason: quality.satisfaction === false ? quality.reason.trim() : "",
+    };
+  }
+
+  function showToast(message, isError = false) {
+    window.clearTimeout(toastTimer);
+    elements.toast.textContent = message;
+    elements.toast.classList.toggle("is-error", isError);
+    elements.toast.classList.add("is-visible");
+    toastTimer = window.setTimeout(() => {
+      elements.toast.classList.remove("is-visible");
+    }, 3200);
+  }
+
+  elements.nameForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const validation = validateReviewer(elements.nameInput.value);
+    if (!validation.valid) {
+      elements.nameError.textContent = validation.message;
+      elements.nameInput.focus();
+      return;
+    }
+    setReviewer(validation.value);
+  });
+
+  elements.nameInput.addEventListener("input", () => {
+    elements.nameError.textContent = "";
+  });
+
+  elements.nameDialog.addEventListener("cancel", (event) => {
+    if (!reviewer) event.preventDefault();
+  });
+
+  elements.reviewerButton.addEventListener("click", showNameDialog);
+  elements.exportButton.addEventListener("click", exportAudit);
+  elements.guideButton.addEventListener("click", showGuide);
+  elements.guideAcknowledgement.addEventListener("change", () => {
+    elements.startAuditButton.disabled = !elements.guideAcknowledgement.checked;
+  });
+  elements.startAuditButton.addEventListener("click", enterAudit);
+
+  document.querySelectorAll("[data-view]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeView = button.dataset.view;
+      elements.searchInput.value = "";
+      elements.discardedOnlyInput.checked = false;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  let searchTimer = null;
+  elements.searchInput.addEventListener("input", () => {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(render, 120);
+  });
+  elements.discardedOnlyInput.addEventListener("change", render);
+  elements.clearFiltersButton.addEventListener("click", () => {
+    elements.searchInput.value = "";
+    elements.discardedOnlyInput.checked = false;
+    render();
+  });
+
+  elements.auditContent.addEventListener("click", (event) => {
+    const actionButton = event.target.closest("[data-action]");
+    if (!actionButton) return;
+    const id = actionButton.dataset.id;
+    if (actionButton.dataset.action === "toggle-discard") {
+      toggleDiscard(id, actionButton);
+      return;
+    }
+    const record = recordById.get(id);
+    const wrapper = actionButton.closest(".values-wrap");
+    if (!record || !wrapper) return;
+    wrapper.innerHTML = renderValues(record, actionButton.dataset.action === "expand-values");
+  });
+
+  elements.auditContent.addEventListener("change", (event) => {
+    if (event.target.matches("[data-quality-key]")) updateQuality(event.target);
+  });
+
+  elements.auditContent.addEventListener("input", (event) => {
+    if (event.target.matches("[data-quality-reason]")) updateReason(event.target);
+  });
+
+  elements.productBoundCount.textContent = productRecords.length.toLocaleString("en-US");
+  elements.nonProductCount.textContent = nonProductRecords.length.toLocaleString("en-US");
+  render();
+  showGuide();
+  showNameDialog();
+})();
+
+  </script>
+</body>
+</html>
