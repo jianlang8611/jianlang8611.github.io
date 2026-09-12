@@ -307,7 +307,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou‚
 # üìù Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: NeurIPS 2026 Reviewer, ICML 2026 (Emergency) Reviewer, KDD 2026, 2027 Reviewer, WWW 2027 Reviewer, AAAI 2026 Reviewer
+- **Conference Review**: NeurIPS 2026 Reviewer, ICML 2026 (Emergency) Reviewer, KDD 2026, 2027 Reviewer, WWW 2027 Reviewer, AAAI 2026, 2027 Reviewer
 
 <!-- ## Journal Review -->
 - **Journal Review**: IJCV Reviewer, TPAMI Reviewer, TCSVT Reviewer, KBS Reviewer, ESWA Reviewer
