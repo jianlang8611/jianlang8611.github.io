@@ -49,7 +49,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality Missing Prompt Tuning](https://arxiv.org/abs/2605.24816)
 
-**Jian Lang**, Rongpei Hong, Ting Zhong, Fan Zhou†
+**Jian Lang**, Rongpei Hong, Ting Zhong†, Fan Zhou
 
 **ICML 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2605.24816) \| [**Project**](https://jianlang.org/projects/aoept) \| [**Github**](https://github.com/Jian-Lang/AOEPT) 
 
@@ -307,7 +307,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 # 📝 Peer Review
 
 <!-- ## Conference Review -->
-- **Conference Review**: NeurIPS 2026 Reviewer, KDD 2026 Reviewer, ICML 2026 (Emergency) Reviewer, AAAI 2026 Reviewer
+- **Conference Review**: NeurIPS 2026 Reviewer, ICML 2026 (Emergency) Reviewer, KDD 2026, 2027 Reviewer, WWW 2027 Reviewer, AAAI 2026 Reviewer
 
 <!-- ## Journal Review -->
 - **Journal Review**: IJCV Reviewer, TPAMI Reviewer, TCSVT Reviewer, KBS Reviewer, ESWA Reviewer
