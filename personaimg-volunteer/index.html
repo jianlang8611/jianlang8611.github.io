@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PersonaIMG · Volunteer study</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar"><div class="brand"><span class="brand-mark">P</span><span>PersonaIMG <em>volunteer study</em></span></div><div class="status" id="saveStatus">Ready</div></header>
+<main class="shell">
+  <section id="intro" class="hero view">
+    <div class="eyebrow">ICLR 2027 · human evaluation</div>
+    <h1>Help us check whether imagined preferences feel human.</h1>
+    <p class="lede">You will read a small set of everyday assistant conversations and help us assess the quality of the interaction history. Your answers are used only as aggregate research measurements.</p>
+    <div class="metric-grid">
+      <article><span class="metric-no">01</span><h3>Conversational Consistency</h3><p>Does the session stay logically and contextually consistent from turn to turn?</p><span class="pill">binary · 0 / 1</span></article>
+      <article><span class="metric-no">02</span><h3>Interaction Realism</h3><p>Does this resemble an everyday human–MLLM interaction?</p><span class="pill">binary · 0 / 1</span></article>
+      <article><span class="metric-no">03</span><h3>Imagination Fidelity</h3><p>What visual preference does the session convey? Give your best free-text guess.</p><span class="pill purple">free text</span></article>
+      <article><span class="metric-no">04</span><h3>Revelation Naturalness</h3><p>Does the preference emerge organically rather than being inserted or announced?</p><span class="pill">binary · 0 / 1</span></article>
+    </div>
+    <div class="consent-card"><div><strong>Before you begin</strong><p>This is voluntary research annotation for an ICLR 2027 submission. You may stop at any time. Please evaluate only the material shown here, do not try to identify real people, and do not enter personal information. We save your answers as a downloadable file in your browser; there is no server-side submission in this static page.</p></div><label class="check"><input id="consent" type="checkbox"> I understand the task and agree to take part.</label></div>
+    <div class="start-row start-form"><div class="field-row"><label>Your name<input id="annotatorName" type="text" placeholder="e.g. Alex Chen" autocomplete="name"></label><label>Assigned volunteer<select id="volunteer"><option value="V1">Volunteer 1</option><option value="V2">Volunteer 2</option><option value="V3">Volunteer 3</option><option value="V4">Volunteer 4</option></select></label><label>Hugging Face access token<input id="hfToken" type="password" placeholder="hf_…" autocomplete="off"></label></div><button id="start" class="primary" disabled>Start annotation <span>→</span></button></div>
+  </section>
+
+  <section id="study" class="view hidden">
+    <div class="study-head"><div><div class="eyebrow" id="phaseEyebrow">PHASE 1 · INTERACTION QUALITY</div><h2 id="phaseTitle">Read the interaction histories</h2><p id="phaseHelp"></p></div><div class="progress-wrap"><span id="progressLabel">1 / 2</span><div class="progress"><i id="progressBar"></i></div></div></div>
+    <div id="taskCard"></div>
+    <div class="nav-row"><button id="back" class="ghost">← Back</button><button id="next" class="primary">Save & continue <span>→</span></button></div>
+  </section>
+
+  <section id="done" class="view hidden"><div class="done-card"><div class="done-icon">✓</div><div class="eyebrow">ANNOTATION COMPLETE</div><h2>Thank you for your careful reading.</h2><p>Your responses are stored locally in this browser. Download the JSON file and send it to the study coordinator through the agreed channel.</p><div class="download-row"><button id="download" class="primary">Download responses <span>↓</span></button><button id="restart" class="ghost">Review again</button></div><p class="small">The downloaded file contains your ratings and free-text guesses, but no access token.</p></div></section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
