@@ -21,6 +21,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.09*: &nbsp;🎉🎉 1 Paper is accetped by NeurIPS 2026! Congrats to my partner Rongpei.
 - *2026.06*: &nbsp;🎉🎉 Get SIGKDD-supported KDD 2026 Student Travel Award!
 - *2026.05*: &nbsp;💦💦 3 Paper are submitted to NeurIPS 2026. Hope a wonderful result.
 - *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
@@ -160,7 +161,21 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 <div style="margin-top: 32px;"></div>
 
-### 🧏 MLLM Personalized Understanding
+### 🧏 Long-Context MLLM Personalized Understanding
+
+<div class='paper-box'>
+<div class='paper-box-text' markdown="1" style="width: 100%; max-width: 100%; padding-left: 0;">
+
+[TAMEing the Open-World Personalization: Towards Open-Set Personalized MLLM Assistant]()
+
+Rongpei Hong, **Jian Lang**, Ting Zhong, Fan Zhou
+
+**NeurIPS 2026** \| **CCF A** \| [**PDF**]() \| [**Github**]()
+
+- TAME-O, an extension of TAME that enables open-set personalization for MLLM assistants in open-world environments.
+
+</div>
+</div>
 
 <div class='paper-box'><div class='paper-box-image'><div class="badge">KDD 2026</div><img src='images/tame.jpg' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
@@ -270,10 +285,10 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 # 🧰 Projects & Resources
 
-<div class='paper-box'><div class='paper-box-image'><div class="badge">Open Project</div><img src='html/research-paper-claw/assets/site/cover-logo.png' alt="Personalized Research Paper Claw" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><div class="badge">Open Project</div><img src='images/research-paper-claw-cover.png' alt="Personalized Research Paper Claw" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-[Personalized Research Paper Claw](https://github.com/Jian-Lang/personalized-research-paper-claw) \| **Research Tool** \| [**Demo**](/html/research-paper-claw/) \| [**Github**](https://github.com/Jian-Lang/personalized-research-paper-claw) \| [![](https://img.shields.io/github/stars/Jian-Lang/personalized-research-paper-claw?style=social&label=Stars)](https://github.com/Jian-Lang/personalized-research-paper-claw)
+[Personalized Research Paper Claw](https://github.com/Jian-Lang/personalized-research-paper-claw) \| **Research Tool** \| [**Github**](https://github.com/Jian-Lang/personalized-research-paper-claw) \| [![](https://img.shields.io/github/stars/Jian-Lang/personalized-research-paper-claw?style=social&label=Stars)](https://github.com/Jian-Lang/personalized-research-paper-claw)
 
 - An open-source research companion for **personalized top-conference recommendations**, **human-guided paper notes**, and **shareable Research Galleries**.
 - Builds a long-term Markdown knowledge base and exports domain-level understanding as standalone HTML for group meetings and collaboration.
@@ -292,6 +307,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 # 🎖 Honors and Awards
 - *2026.06* KDD 2026 Student Travel Award
+- *2026.06* Outstanding Communist Party Member, University of Electronic Science and Technology of China
 - *2025.10* National Scholarship (Top 1%)
 - *2025.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
 - *2024.10* National Scholarship (Top 1%)
