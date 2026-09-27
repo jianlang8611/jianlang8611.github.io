@@ -23,7 +23,6 @@ Feel free to contact me if you have any questions about my research or potential
 # 🔥 News
 - *2026.09*: &nbsp;🎉🎉 1 Paper is accepted by NeurIPS 2026! Congrats to my golden partner Rongpei.
 - *2026.06*: &nbsp;🎉🎉 Get SIGKDD-supported KDD 2026 Student Travel Award!
-- *2026.05*: &nbsp;💦💦 3 Paper are submitted to NeurIPS 2026. Hope a wonderful result.
 - *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
 - *2026.04*: &nbsp;💦💦 We release the <strong>first comprehensive repository</strong> of resources on <strong>modality-missing learning</strong> at [awesome-modality-missing-learning
 ](https://github.com/Jian-Lang/awesome-modality-missing-learning).
@@ -307,7 +306,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou�
 
 # 🎖 Honors and Awards
 - *2026.06* KDD 2026 Student Travel Award
-- *2026.06* Outstanding Communist Party Member, University of Electronic Science and Technology of China
+- *2026.06* Outstanding Communist Party Member, UESTC
 - *2025.10* National Scholarship (Top 1%)
 - *2025.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
 - *2024.10* National Scholarship (Top 1%)
