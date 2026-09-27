@@ -21,7 +21,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
-- *2026.09*: &nbsp;🎉🎉 1 Paper is accetped by NeurIPS 2026! Congrats to my partner Rongpei.
+- *2026.09*: &nbsp;🎉🎉 1 Paper is accepted by NeurIPS 2026! Congrats to my golden partner Rongpei.
 - *2026.06*: &nbsp;🎉🎉 Get SIGKDD-supported KDD 2026 Student Travel Award!
 - *2026.05*: &nbsp;💦💦 3 Paper are submitted to NeurIPS 2026. Hope a wonderful result.
 - *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
@@ -163,8 +163,8 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 ### 🧏 Long-Context MLLM Personalized Understanding
 
-<div class='paper-box'>
-<div class='paper-box-text' markdown="1" style="width: 100%; max-width: 100%; padding-left: 0;">
+<div class='paper-box'><div class='paper-box-image'><div class="badge">NeurIPS 2026</div><img src='images/tame-o.jpg' alt="TAME-O overview" width="100%"></div>
+<div class='paper-box-text' markdown="1">
 
 [TAMEing the Open-World Personalization: Towards Open-Set Personalized MLLM Assistant]()
 
