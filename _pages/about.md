@@ -36,7 +36,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 <span class='anchor' id='-publications'></span>
 
-# 📝 Selected Publications (\*=Equal Contribution, †=Conresponding Author)
+# 📝 Selected Publications (\*=Equal Contribution, †=Corresponding Author)
 
 ## 🛡 Robust Multimodal Learning
 
@@ -64,7 +64,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https://dl.acm.org/doi/10.1145/3711896.3737101)
 
-**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Fan Zhou†
+**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Yong Wang, Fan Zhou†
 
 **KDD 2025** \| **CCF A** \| [**PDF**](/papers/REDEEM.pdf) \| [**Github**](https://github.com/Jian-Lang/REDEEM) 
 
@@ -113,7 +113,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https://www.arxiv.org/abs/2602.00132)
 
-Jiao Li, **Jian Lang**, Xikai Tang†, Ting Zhong, Fan Zhou
+Jiao Li, **Jian Lang**, Xikai Tang, Wenzheng Shu, Ting Zhong†, Qiang Gao, Yong Wang, Leiting Chen, Fan Zhou
 
 **AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) \| <span style="color:red;"><strong>Oral</strong></span>
 
@@ -227,7 +227,7 @@ Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 
 [Biting Off More Than You Can Detect: Retrieval-Augmented Multimodal Experts for Short Video Hate Detection](https://dl.acm.org/doi/10.1145/3696410.3714560)
 
-**Jian Lang**, Rongpei Hong, Jin Xu, Xovee Xu, Yili Li, Fan Zhou†
+**Jian Lang**, Rongpei Hong, Jin Xu, Yili Li, Xovee Xu, Fan Zhou†
 
 
 **WWW 2025** \| **CCF A** \| [**PDF**](/papers/MoRE.pdf) \| [**Github**](https://github.com/Jian-Lang/MoRE) 
@@ -269,7 +269,7 @@ Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting 
 
 [Predicting Micro-video Popularity via Multi-modal Retrieval Augmentation](https://dl.acm.org/doi/10.1145/3626772.3657929)
 
-Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng, Kunpeng Zhang, Fan Zhou†
+Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng†, Kunpeng Zhang, Fan Zhou
 
 **SIGIR 2024 Short** \| [**PDF**](/papers/MMRA.pdf) \|  [**Github**](https://github.com/ICDM-UESTC/MMRA) \|
 [![](https://img.shields.io/github/stars/ICDM-UESTC/MMRA?style=social&label=MMRA%20Stars)](https://github.com/ICDM-UESTC/MMRA)
