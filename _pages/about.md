@@ -49,7 +49,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [AOEPT: Breaking the Implicit Modality-Reduction Bottleneck in Modality Missing Prompt Tuning](https://arxiv.org/abs/2605.24816)
 
-**Jian Lang**, Rongpei Hong, Ting Zhong†, Fan Zhou
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Ting Zhong†, Fan Zhou
 
 **ICML 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2605.24816) \| [**Project**](https://jianlang.org/projects/aoept) \| [**Github**](https://github.com/Jian-Lang/AOEPT) 
 
@@ -64,7 +64,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [REDEEMing Modality Information Loss: Retrieval-Guided Conditional Generation for Severely Modality Missing Learning](https://dl.acm.org/doi/10.1145/3711896.3737101)
 
-**Jian Lang**, Rongpei Hong, Zhangtao Cheng, Ting Zhong, Yong Wang, Fan Zhou†
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Zhangtao Cheng, Ting Zhong, Yong Wang, Fan Zhou†
 
 **KDD 2025** \| **CCF A** \| [**PDF**](/papers/REDEEM.pdf) \| [**Github**](https://github.com/Jian-Lang/REDEEM) 
 
@@ -98,7 +98,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [Nip Rumors in the Bud: Retrieval-Guided Topic-Level Adaptation for Test-Time Fake News Video Detection](https://arxiv.org/abs/2601.11981)
 
-**Jian Lang**, Rongpei Hong, Ting Zhong, Yong Wang, Fan Zhou†
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Ting Zhong, Yong Wang, Fan Zhou†
 
 **KDD 2026** \| **CCF A** \| [**PDF**](https://arxiv.org/pdf/2601.11981) \| [**Github**](https://github.com/Jian-Lang/RADAR) 
 
@@ -131,7 +131,7 @@ Jiao Li, **Jian Lang**, Xikai Tang, Wenzheng Shu, Ting Zhong†, Qiang Gao, Yong
 
 [From Shallow Humor to Metaphor: Towards Label-Free Harmful Meme Detection via LMM Agent Self-Improvement](https://www.arxiv.org/abs/2512.21598) 
 
-**Jian Lang**, Rongpei Hong, Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Ting Zhong, Leiting Chen, Qiang Gao, Fan Zhou†
 
 
 **KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2512.21598) \| [**Github**](https://github.com/Jian-Lang/ALARM) \| <span style="color:red;"><strong>Oral</strong></span>
@@ -145,7 +145,7 @@ Jiao Li, **Jian Lang**, Xikai Tang, Wenzheng Shu, Ting Zhong†, Qiang Gao, Yong
 <div class='paper-box-text' markdown="1">
 [Borrowing Eyes for the Blind Spot: Overcoming Data Scarcity in Malicious Video Detection via Cross-Domain Retrieval Augmentation](https://openaccess.thecvf.com/content/ICCV2025/html/Hong_Borrowing_Eyes_for_the_Blind_Spot_Overcoming_Data_Scarcity_in_ICCV_2025_paper.html)
 
-Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
+[Rongpei Hong](https://rongpei.org)\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 **ICCV 2025** \| **CCF A** \| [**PDF**](/papers/CRAVE.pdf) \| [**Github**](https://github.com/ronpay/CRAVE)
 
@@ -167,7 +167,7 @@ Rongpei Hong\*, **Jian Lang**\*, Ting Zhong, Fan Zhou†
 
 [TAMEing the Open-World Personalization: Towards Open-Set Personalized MLLM Assistant]()
 
-Rongpei Hong, **Jian Lang**, Ting Zhong, Fan Zhou
+[Rongpei Hong](https://rongpei.org), **Jian Lang**, Ting Zhong, Fan Zhou
 
 **NeurIPS 2026** \| **CCF A** \| [**PDF**]() \| [**Github**]()
 
@@ -181,7 +181,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong, Fan Zhou
 
 [TAMEing Long Contexts in Personalization: Towards Training-Free and State-Aware MLLM Personalized Assistant](https://www.arxiv.org/abs/2512.21616)
 
-Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
+[Rongpei Hong](https://rongpei.org), **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
 **KDD 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/pdf/2512.21616) \| [**Github**](https://github.com/ronpay/TAME) 
 
@@ -198,7 +198,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
 [LEAF: Towards Lightweight Explainable Hateful Video Detection via Self-Grounding CoT Guided Stage-Wise Distillation]()
 
-**Jian Lang**, Rongpei Hong, Meihui Zhong, Kaiju Li, Ting Zhong, Qiang Gao, Fan Zhou† 
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Meihui Zhong, Kaiju Li, Ting Zhong, Qiang Gao, Fan Zhou† 
 
 **ACL 2026 Findings** \| [**PDF**](/papers/LEAF.pdf) \| [**Github**](https://github.com/Jian-Lang/LEAF) 
 
@@ -212,7 +212,7 @@ Rongpei Hong, **Jian Lang**, Ting Zhong†, Yong Wang, Fan Zhou
 
 [MATCH: Multi-Agentic Evidence Grounding for Explainable Hate Video Detection](/papers/MATCH.html)
 
-Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
+Kaiju Li, [Rongpei Hong](https://rongpei.org), **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 
 
 **TCSVT 2026** \| **CAS Q1 Top** \| [**PDF**](/papers/MATCH.html)
@@ -227,7 +227,7 @@ Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 
 [Biting Off More Than You Can Detect: Retrieval-Augmented Multimodal Experts for Short Video Hate Detection](https://dl.acm.org/doi/10.1145/3696410.3714560)
 
-**Jian Lang**, Rongpei Hong, Jin Xu, Yili Li, Xovee Xu, Fan Zhou†
+**Jian Lang**, [Rongpei Hong](https://rongpei.org), Jin Xu, Yili Li, Xovee Xu, Fan Zhou†
 
 
 **WWW 2025** \| **CCF A** \| [**PDF**](/papers/MoRE.pdf) \| [**Github**](https://github.com/Jian-Lang/MoRE) 
@@ -242,7 +242,7 @@ Kaiju Li, Rongpei Hong, **Jian Lang**, Jin Wu†, Fan Zhou†, Jingkuan Song
 
 [Following Clues, Approaching the Truth: Explainable Micro-Video Rumor Detection via Chain-of-Thought Reasoning](https://dl.acm.org/doi/10.1145/3696410.3714559)
 
-Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
+[Rongpei Hong](https://rongpei.org), **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
 **WWW 2025** \| **CCF A** \| [**PDF**](/papers/ExMRD.pdf) \| [**Github**](https://github.com/ronpay/ExMRD) 
 
@@ -255,7 +255,7 @@ Rongpei Hong, **Jian Lang**, Jin Xu, Zhangtao Cheng, Ting Zhong†, Fan Zhou
 
 [REAL: Retrieval-Augmented Prototype Alignment for Improved Fake News Video Detection](https://doi.org/10.1109/ICME59968.2025.11209008)
 
-Yili Li, **Jian Lang**, Rongpei Hong, Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
+Yili Li, **Jian Lang**, [Rongpei Hong](https://rongpei.org), Qing Chen, Zhangtao Cheng, Jia Chen, Ting Zhong, Fan Zhou†
 
 **ICME 2025** \| **CCF B** \| [**PDF**](/papers/REAL.pdf) \| [**Github**](https://github.com/Jian-Lang/REAL) \| [![](https://img.shields.io/github/stars/Jian-Lang/REAL?style=social&label=REAL%20Stars)](https://github.com/Jian-Lang/REAL)
 
