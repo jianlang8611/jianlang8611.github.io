@@ -305,12 +305,12 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng†, Kunpeng Zhang, Fan Zh
 </div>
 
 # 🎖 Honors and Awards
-- *2026.06* **KDD 2026 Student Travel Award**, ACM SIGKDD
-- *2026.06* **Outstanding Communist Party Member**, UESTC
-- *2024–2025* **China National Scholarship ×2** (2024, 2025, combined master's–PhD) (Top 1%), Ministry of Education of the People's Republic of China
-- *2024–2025* **First-Class Academic Scholarship ×2** (2024, 2025, combined master's–PhD program) (Ranked 1st), UESTC
-- *2025.05* **Academic Budding Talent**, UESTC
-- *2023.12* **Artificial Intelligence Algorithm Challenge Runner-up (2nd)**, People's Daily Online
+- *2026.06* **KDD 2026 Student Travel Award**, [ACM SIGKDD](https://www.kdd.org/)
+- *2026.06* **Outstanding Communist Party Member**, [UESTC](https://en.uestc.edu.cn/)
+- *2024–2025* **China National Scholarship ×2** (2024, 2025, combined master's–PhD), [Ministry of Education of the People's Republic of China](http://en.moe.gov.cn/)
+- *2024–2025* **First-Class Academic Scholarship ×2** (2024, 2025, combined master's–PhD program), [UESTC](https://en.uestc.edu.cn/)
+- *2025.05* **Academic Budding Talent**, [UESTC](https://en.uestc.edu.cn/)
+- *2023.12* **Artificial Intelligence Algorithm Challenge Runner-up**, [People's Daily Online](http://en.people.cn/)
 
 
 # 📖 Educations
