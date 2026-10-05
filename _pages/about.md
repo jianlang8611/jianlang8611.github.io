@@ -307,9 +307,8 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng†, Kunpeng Zhang, Fan Zh
 # 🎖 Honors and Awards
 - *2026.06* KDD 2026 Student Travel Award
 - *2026.06* Outstanding Communist Party Member, UESTC
-- *2025.10* National Scholarship (Top 1%)
+- *2024–2025* National Scholarship (2024, 2025), during the combined master’s–PhD program (Top 1%)
 - *2025.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
-- *2024.10* National Scholarship (Top 1%)
 - *2024.10* Master's Student Academic Scholarship (1st Division, Ranked 1st)
 - *2023.12* Artificial Intelligence Algorithm Challenge Runner-up (2nd), hosted by People's Daily Online
 
