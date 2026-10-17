@@ -1,0 +1,1844 @@
+{
+  "schema_version": "1.0",
+  "status": "partial_cohort_drafts_pending_review",
+  "personas": [
+    {
+      "persona_id": "persona_001",
+      "name": "Khoa Bui",
+      "status": "draft_for_user_review",
+      "basic_profile_ref": "personas/basic_persona_profile.json#/personas/0",
+      "construction_order": "match_source_tasks_then_construct_needed_edit_knowledge",
+      "summary_zh": "农业保育规划师，与妻子和一只狗生活，平日修老Chevy、调音响，也喜欢喜剧、排舞和记录甜瓜品种。基础信息仅作弱约束；本轮额外知识按10条匹配任务补充。",
+      "knowledge_status": "constructed_draft; daily interaction histories not generated",
+      "personalized_entities": {
+        "E_BIKE": {
+          "category": "Bicycle",
+          "name": "errand bike",
+          "aliases": [
+            "my errand bike"
+          ],
+          "relationship": "owned bicycle for short errands; constructed after task matching",
+          "visual_identity_facts": [
+            "black step-through frame",
+            "brown front basket",
+            "rear luggage rack and silver fenders"
+          ],
+          "source_task": "T02",
+          "bbox": [
+            0.03,
+            0.12,
+            0.99,
+            0.99
+          ],
+          "supporting_tasks": [
+            "T01",
+            "T02"
+          ],
+          "note": "Current black appearance identifies the existing bike; red is a category preference for the independent color-preview task.",
+          "visual_reference": "references/persona_001/E_BIKE.jpg",
+          "reference_sha256": "bbe717a0e863b8b8701c94cbbfe853f930795d0ec2b50092fe1b384f8d89f643"
+        },
+        "E_KARA": {
+          "category": "Person",
+          "name": "Kara Beeson",
+          "aliases": [
+            "Kara",
+            "my friend Kara"
+          ],
+          "relationship": "friend",
+          "visual_identity_facts": [
+            "brunette woman with hair tied back",
+            "woman seated on the right in T03",
+            "black sleeveless top"
+          ],
+          "source_task": "T03",
+          "bbox": [
+            0.5,
+            0.06,
+            0.93,
+            0.85
+          ],
+          "supporting_tasks": [
+            "T03"
+          ],
+          "source_connection_ref": "basic_profile.additional.social_connections/7",
+          "note": "Name and connection come from the v3 basic profile; the visual association is constructed for this benchmark draft.",
+          "visual_reference": "references/persona_001/E_KARA.jpg",
+          "reference_sha256": "ce182fd5876ed66ef307c15772a2b823e0336e9febde808e833f6c37f515fb69"
+        },
+        "E_CHAIR": {
+          "category": "Armchair",
+          "name": "old reading chair",
+          "aliases": [
+            "my old reading chair"
+          ],
+          "relationship": "owned reading chair",
+          "visual_identity_facts": [
+            "pale green upholstery",
+            "tall tufted back",
+            "dark carved wood frame and curved armrests"
+          ],
+          "source_task": "T04",
+          "bbox": [
+            0.18,
+            0.07,
+            0.99,
+            0.99
+          ],
+          "supporting_tasks": [
+            "T04"
+          ],
+          "visual_reference": "references/persona_001/E_CHAIR.jpg",
+          "reference_sha256": "e7907ed4c5a1291673d1bf075c3d3bde3e0389dd03a84ed88a95c43be387aaf2"
+        },
+        "E_CUP": {
+          "category": "TravelCup",
+          "name": "travel cup",
+          "aliases": [
+            "my travel cup"
+          ],
+          "relationship": "owned by Khoa",
+          "visual_identity_facts": [
+            "pale cream body",
+            "silver upper rim",
+            "small round mark on body"
+          ],
+          "source_task": "T06",
+          "bbox": [
+            0.47,
+            0.31,
+            0.88,
+            0.57
+          ],
+          "supporting_tasks": [
+            "T06"
+          ],
+          "note": "The person holding the cup is ordinary scene context; she is not identified as Khoa.",
+          "visual_reference": "references/persona_001/E_CUP.jpg",
+          "reference_sha256": "afbfc53727ceb7875f356f08617cb9e2e9521be16387f04e7ad24e9e70cec2fd"
+        },
+        "E_KHAI": {
+          "category": "Person",
+          "name": "Khai Tran",
+          "aliases": [
+            "Khai",
+            "my friend Khai"
+          ],
+          "relationship": "friend",
+          "visual_identity_facts": [
+            "short dark hair",
+            "round face",
+            "dark blue shirt in close selfie"
+          ],
+          "source_task": "T07",
+          "bbox": [
+            0.08,
+            0.13,
+            0.97,
+            0.99
+          ],
+          "supporting_tasks": [
+            "T07"
+          ],
+          "source_connection_ref": "basic_profile.additional.social_connections/5",
+          "note": "Name and connection come from the v3 basic profile; the visual association is constructed for this benchmark draft.",
+          "visual_reference": "references/persona_001/E_KHAI.jpg",
+          "reference_sha256": "a410709597ad74ba64d58ea210d0a0fbab68131c099788224e5e154fd70e4e14"
+        }
+      },
+      "general_entity_preferences": {
+        "A_BIKE_FRAME_COLOR": {
+          "entity_category": "Bicycle",
+          "dimension": "frame_color",
+          "value": "red",
+          "context": "errand bicycle frame color",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T02"
+          ]
+        },
+        "A_BOOKCASE_MATERIAL": {
+          "entity_category": "Bookshelf",
+          "dimension": "material",
+          "value": "wood",
+          "context": "choosing shelves for books",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "A_FLOWER_VARIETY": {
+          "entity_category": "Flower",
+          "dimension": "variety",
+          "value": "tulip",
+          "context": "cut flowers for a room",
+          "stance": "favorite",
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "A_CUP_MATERIAL": {
+          "entity_category": "TravelCup",
+          "dimension": "body_material",
+          "value": "ceramic",
+          "context": "choosing the material of a travel cup",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "A_FACE_TONE": {
+          "entity_category": "PortraitFace",
+          "dimension": "skin_tone_evenness",
+          "value": "subtly_even",
+          "context": "everyday close portrait appearance",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T07"
+          ],
+          "candidate_daily_context": "choosing a portrait to share, commenting on uneven-looking illumination across a face"
+        },
+        "A_FACE_SHADOW": {
+          "entity_category": "PortraitFace",
+          "dimension": "under_eye_shadow",
+          "value": "gently_softened",
+          "context": "everyday close portrait appearance",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T07"
+          ],
+          "candidate_daily_context": "comparing close portraits taken in different light, preferring softer shadows around the eyes"
+        },
+        "A_FACE_TEXTURE": {
+          "entity_category": "PortraitFace",
+          "dimension": "skin_texture",
+          "value": "retain_natural_texture",
+          "context": "everyday close portrait appearance",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T07"
+          ],
+          "candidate_daily_context": "talking about why overly smooth profile pictures look artificial"
+        },
+        "A_COFFEE_BACKDROP_AVOID": {
+          "entity_category": "CoffeePhotoBackdrop",
+          "dimension": "surface_type",
+          "value": "whitewashed_wood_planks",
+          "context": "top-down coffee photography only",
+          "stance": "avoid",
+          "supporting_tasks": [
+            "T09"
+          ]
+        },
+        "A_COFFEE_BACKDROP_PICK": {
+          "entity_category": "CoffeePhotoBackdrop",
+          "dimension": "surface_type",
+          "value": "marble_countertop",
+          "context": "top-down coffee photography only",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T09"
+          ]
+        }
+      },
+      "global_preferences": {
+        "G_PORTRAIT_BACKGROUND_LIGHT": {
+          "dimension": "background_brightness",
+          "value": {
+            "strength": "slight_lift_of_darker_background_midtones",
+            "appearance": "soft_natural_daylight",
+            "highlights": "retain_window_detail"
+          },
+          "context": "background of indoor snapshots of friends",
+          "supporting_tasks": [
+            "T03"
+          ],
+          "candidate_daily_context": "comparing indoor snapshots when choosing pictures for an album; no numeric exposure or editing algorithm implied"
+        },
+        "G_LANDSCAPE_STYLE": {
+          "dimension": "rendering_style",
+          "value": "loose_flowing_watercolor_wash",
+          "context": "landscape illustrations saved for their painting style",
+          "supporting_tasks": [
+            "T08"
+          ],
+          "candidate_daily_context": "saving and discussing landscape paintings, rather than repeated editing requests"
+        }
+      },
+      "position_preferences": {
+        "S_DOCK_PARK": {
+          "owner": {
+            "entity_id": "E_BIKE"
+          },
+          "semantic_key": "where I leave my errand bike when stopping to rest on a dock",
+          "context": "wooden dock with a usable post along its left edge",
+          "destination": {
+            "relation": "leaning_against",
+            "anchor": "nearest left dock post",
+            "support": "wooden dock planks, inside the left edge"
+          },
+          "groundings": {
+            "T01": {
+              "anchor_bbox": [
+                0.03,
+                0.48,
+                0.1,
+                0.73
+              ],
+              "destination_region": [
+                0.08,
+                0.45,
+                0.5,
+                0.91
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I usually leave it on the dock",
+            "my usual dock parking spot"
+          ],
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "S_SANDWICH_KNIFE": {
+          "owner": {
+            "entity_category": "Knife"
+          },
+          "semantic_key": "where I put a knife to keep my side clear while eating a sandwich",
+          "context": "sandwich on wrapping paper at a picnic table",
+          "destination": {
+            "relation": "behind",
+            "anchor": "sandwich",
+            "support": "white wrapping paper on the far side of the sandwich"
+          },
+          "groundings": {
+            "T05": {
+              "anchor_bbox": [
+                0.04,
+                0.15,
+                1.0,
+                0.61
+              ],
+              "destination_region": [
+                0.24,
+                0.01,
+                0.99,
+                0.23
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I usually leave one while eating a sandwich",
+            "out of my way on the far side of lunch"
+          ],
+          "supporting_tasks": [
+            "T05"
+          ]
+        }
+      },
+      "contextual_facts": {
+        "F_BIRTHDAY_FLOWERS": {
+          "category": "Flower",
+          "fact": "The cut flowers in the small vase beside the old reading chair are the bouquet Khoa received for his birthday.",
+          "grounding": {
+            "task_id": "T04",
+            "bbox": [
+              0,
+              0.35,
+              0.11,
+              0.49
+            ],
+            "description": "flowers in the vase on the left side table"
+          },
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "F_BORROWED_KNIFE": {
+          "category": "Knife",
+          "fact": "For this picnic Khoa borrowed the green-handled serrated knife that is on the wrapper beside the sandwich.",
+          "grounding": {
+            "task_id": "T05",
+            "bbox": [
+              0.27,
+              0.6,
+              1.0,
+              0.82
+            ],
+            "description": "green-handled knife in the foreground"
+          },
+          "supporting_tasks": [
+            "T05"
+          ]
+        },
+        "F_DONE_REMINDERS": {
+          "category": "StickyNote",
+          "fact": "The two upright yellow notes leaning against the bottom of the monitor are reminders for last week's farm follow-up calls. Those calls are finished.",
+          "grounding": {
+            "task_id": "T10",
+            "regions": [
+              [
+                0.24,
+                0.23,
+                0.47,
+                0.48
+              ],
+              [
+                0.51,
+                0.27,
+                0.61,
+                0.46
+              ]
+            ],
+            "description": "two upright monitor notes"
+          },
+          "supporting_tasks": [
+            "T10"
+          ]
+        },
+        "F_PENDING_REMINDERS": {
+          "category": "StickyNote",
+          "fact": "The notes lying flat on the desk are for upcoming landowner planning meetings; these tasks are still pending.",
+          "grounding": {
+            "task_id": "T10",
+            "bbox": [
+              0.18,
+              0.48,
+              0.77,
+              0.73
+            ],
+            "description": "flat desk notes"
+          },
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "aggregated_expression_review": {
+        "task_id": "T07",
+        "eligible_reason": "A close face and a source beautification request naturally support a brief face-only request.",
+        "expansion_refs": [
+          "A_FACE_TONE",
+          "A_FACE_SHADOW",
+          "A_FACE_TEXTURE"
+        ],
+        "scope": "face appearance only; facial geometry, expression, age and hair remain unchanged",
+        "fragment_support": "Plan separate everyday contexts for the preference fragments; no histories or evidence turns exist yet."
+      },
+      "coherence_review": {
+        "owned_bikes": 1,
+        "owned_pets": 1,
+        "pets_added_by_edit_tasks": 0,
+        "named_friends": [
+          "Kara",
+          "Khai"
+        ],
+        "image_people_are_not_automatically_user": true,
+        "no_new_residence_or_profession_invented": true,
+        "independent_source_tasks": true,
+        "notes": [
+          "Furniture photo is a rearrangement preview, not evidence of owning its whole room.",
+          "Wood is preferred for bookshelves but avoided only as whitewashed planks in coffee-photo backgrounds.",
+          "Global watercolor preference is restricted to landscape illustrations."
+        ],
+        "existing_basic_facts": "The source biography already includes a wife, one dog and an old Chevy truck. This task group adds no pet and does not identify the bicycle as that truck."
+      },
+      "basic_source": {
+        "dataset": "bowen-upenn/PersonaMem-v3",
+        "revision": "7b00a090b35b7293e6efeeb19494207f32b5a9ee",
+        "source_persona_id": "20",
+        "path": "backend/20/profile.json",
+        "raw_sha256": "9015ec4e3dbc1b7f6a7da2de45309f5d7a5c4b7007d15b4a90c647bb32ba95e7"
+      }
+    },
+    {
+      "persona_id": "persona_002",
+      "name": "Azusa Bessho",
+      "status": "draft_for_user_review",
+      "basic_profile_ref": "personas/basic_persona_profile.json#/personas/1",
+      "basic_source": {
+        "dataset": "bowen-upenn/PersonaMem-v3",
+        "revision": "7b00a090b35b7293e6efeeb19494207f32b5a9ee",
+        "source_persona_id": "80",
+        "path": "backend/80/profile.json",
+        "raw_sha256": "94a543a598d7210a25f3fad860488d9e2e3253d3419b3e3029ccacb181fb4a97"
+      },
+      "summary_zh": "Azusa Bessho从事轨道工程公众沟通，已有家庭、周末出游和市政图纸收藏背景。任务围绕普通家居、餐食、聚会与轨道题材轻量匹配；具体颜色、图案、清理强度等在选图后补充。",
+      "construction_order": "match_source_tasks_then_construct_needed_edit_knowledge",
+      "knowledge_status": "constructed_draft; daily interaction histories not generated",
+      "personalized_entities": {
+        "E_BRUSH_CUP": {
+          "category": "ToothbrushCup",
+          "name": "our toothbrush glass",
+          "aliases": [
+            "our toothbrush glass"
+          ],
+          "relationship": "shared family toothbrush cup",
+          "source_task": "T02",
+          "bbox": [
+            0.61,
+            0.24,
+            0.91,
+            0.66
+          ],
+          "visual_identity_facts": [
+            "clear tumbler holding toothbrushes beside the right-hand faucet"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T02"
+          ],
+          "visual_reference": "references/persona_002/E_BRUSH_CUP.jpg",
+          "reference_sha256": "2b303aaf9dc9473d80e84fc54c919dd3a233c7d8597f5f862479fa583e5159e8"
+        },
+        "E_ZOE": {
+          "category": "Person",
+          "name": "Zoe Baba",
+          "aliases": [
+            "Zoe Baba"
+          ],
+          "relationship": "existing close friend in V3",
+          "source_task": "T04",
+          "bbox": [
+            0.64,
+            0.09,
+            1,
+            1
+          ],
+          "visual_identity_facts": [
+            "woman on the right in the party photo",
+            "long dark hair",
+            "red strapless dress in the source"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "source_connection_ref": "basic_profile.additional.social_connections/0",
+          "supporting_tasks": [
+            "T04"
+          ],
+          "visual_reference": "references/persona_002/E_ZOE.jpg",
+          "reference_sha256": "8244b06093639408e912a42b0937720a3602917ab56df87dcf815d93ebd78a56"
+        }
+      },
+      "general_entity_preferences": {
+        "A_SOAP_BODY": {
+          "entity_category": "SoapDispenser",
+          "dimension": "body_material",
+          "value": "matte_ceramic",
+          "context": "small refillable pump dispensers by a family sink",
+          "stance": "normally_buy",
+          "candidate_daily_context": "Discussing refillable bathroom accessories.",
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "A_HOTPOT": {
+          "entity_category": "Hotpot",
+          "dimension": "recipe",
+          "value": "spicy_vegetable_hotpot",
+          "context": "weeknight hotpots",
+          "stance": "normally_choose",
+          "candidate_daily_context": "Planning an ordinary spicy dinner.",
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "A_PARTY_DRESS_COLOR": {
+          "entity_category": "Dress",
+          "dimension": "color",
+          "value": "blue",
+          "context": "solid-color party dresses",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "A_CHILD_ROOM": {
+          "entity_category": "BedroomBackdrop",
+          "dimension": "decor",
+          "value": "children_room_with_colorful_wall_mural_and_rug",
+          "context": "children room inspiration boards",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T05"
+          ]
+        },
+        "A_TRAM_COLOR": {
+          "entity_category": "Tram",
+          "dimension": "body_color",
+          "value": "blue",
+          "context": "heritage tram exterior color schemes",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T08"
+          ]
+        },
+        "A_CURTAIN_PATTERN": {
+          "entity_category": "Curtain",
+          "dimension": "pattern",
+          "value": "solid_unpatterned",
+          "context": "living-room curtains",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T10"
+          ]
+        },
+        "A_CURTAIN_COLOR": {
+          "entity_category": "Curtain",
+          "dimension": "color",
+          "value": "warm_ivory",
+          "context": "living-room curtains",
+          "stance": "settled_on",
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "global_preferences": {
+        "G_GROUP_CLEANUP": {
+          "dimension": "detail_cleanup_strength",
+          "value": "gentle",
+          "context": "indoor group snapshots",
+          "candidate_daily_context": "Choosing a clear group photo without a heavily processed look.",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "G_MANGA": {
+          "dimension": "rendering_style",
+          "value": "clean_black_and_white_manga_ink",
+          "context": "illustrated versions of people snapshots",
+          "candidate_daily_context": "Saving a black-and-white manga-style print for its line work, not requesting an editing algorithm.",
+          "supporting_tasks": [
+            "T07"
+          ]
+        }
+      },
+      "position_preferences": {
+        "S_SOAP_HANDWASH": {
+          "owner": {
+            "entity_category": "SoapDispenser"
+          },
+          "semantic_key": "where I keep pump soap within easy reach while washing hands",
+          "context": "sink with a free counter strip on its right",
+          "destination": {
+            "relation": "right_of",
+            "anchor": "sink basin",
+            "support": "free right-hand counter strip"
+          },
+          "groundings": {
+            "T01": {
+              "anchor_bbox": [
+                0.24,
+                0.83,
+                0.55,
+                0.98
+              ],
+              "destination_region": [
+                0.56,
+                0.81,
+                0.66,
+                0.94
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I keep the hand soap",
+            "our usual hand-washing spot"
+          ],
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "S_BRUSH_RINSE": {
+          "owner": {
+            "entity_id": "E_BRUSH_CUP"
+          },
+          "semantic_key": "where we keep our toothbrush glass so it is easy to rinse",
+          "context": "one sink with a pair of taps and a glass on their right",
+          "destination": {
+            "relation": "beside",
+            "anchor": "right-hand sink faucet",
+            "support": "counter immediately right of the faucet, left of the loose eyeglasses"
+          },
+          "groundings": {
+            "T02": {
+              "anchor_bbox": [
+                0.43,
+                0.4,
+                0.56,
+                0.67
+              ],
+              "destination_region": [
+                0.55,
+                0.43,
+                0.67,
+                0.65
+              ]
+            }
+          },
+          "reference_forms": [
+            "where we keep it for rinsing",
+            "back by the tap for a rinse"
+          ],
+          "supporting_tasks": [
+            "T02"
+          ]
+        }
+      },
+      "contextual_facts": {
+        "F_DINNER_TRIAL": {
+          "category": "FoodServing",
+          "fact": "The plated meat serving is the dinner idea Azusa decided to replace in this meal plan.",
+          "grounding": {
+            "task_id": "T03",
+            "bbox": [
+              0.12,
+              0.27,
+              0.89,
+              0.83
+            ],
+            "description": "plated meat serving"
+          },
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "F_RETURNED_BAG": {
+          "category": "GiftBag",
+          "fact": "The red dotted gift bag in the party photo was borrowed for that gathering and has since been returned.",
+          "grounding": {
+            "task_id": "T04",
+            "bbox": [
+              0.34,
+              0.62,
+              0.54,
+              0.91
+            ],
+            "description": "red gift bag held by the middle woman"
+          },
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "F_GROUP_PICK": {
+          "category": "Photo",
+          "fact": "This indoor group photo is the one Azusa picked for a community-event recap.",
+          "grounding": {
+            "task_id": "T06",
+            "bbox": [
+              0,
+              0,
+              1,
+              1
+            ],
+            "description": "whole group photo; no named face association"
+          },
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "F_TRAM_WALK": {
+          "category": "Tram",
+          "fact": "The heritage tram in this photo is the vehicle from Azusa's weekend tram outing.",
+          "grounding": {
+            "task_id": "T08",
+            "bbox": [
+              0.09,
+              0.13,
+              0.87,
+              0.99
+            ],
+            "description": "single heritage tram"
+          },
+          "supporting_tasks": [
+            "T08"
+          ]
+        },
+        "F_DONATED_CUSHIONS": {
+          "category": "Cushion",
+          "fact": "The loose floor cushions in front of the sofa are the ones Azusa has already donated.",
+          "grounding": {
+            "task_id": "T09",
+            "bbox": [
+              0.38,
+              0.81,
+              0.81,
+              1
+            ],
+            "description": "loose floor cushions only, not sofa cushions or woven basket"
+          },
+          "supporting_tasks": [
+            "T09"
+          ]
+        },
+        "F_CURTAIN_SHORTLIST": {
+          "category": "Curtain",
+          "fact": "Azusa ruled out the busy multicolored curtain fabric shown beside the balcony door.",
+          "grounding": {
+            "task_id": "T10",
+            "bbox": [
+              0.41,
+              0.16,
+              0.63,
+              0.85
+            ],
+            "description": "patterned balcony-side curtains"
+          },
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "aggregated_expression_review": null,
+      "coherence_review": {
+        "image_people_are_not_automatically_user": true,
+        "independent_source_tasks": true,
+        "owned_pets_added": 0,
+        "named_friends": [
+          "Zoe Baba"
+        ],
+        "notes": [
+          "群像与漫画照片不登记为本人或她的家庭。",
+          "两张浴室图片是物品摆放示意，不登记为两套住宅。",
+          "删礼袋是因为借用结束，删靠垫因为已捐出；均不推断讨厌它们。"
+        ]
+      },
+      "review_notes_zh": "核查T01台面落点是否足够放小号皂液器；T04包含一条删除和一条换色。T06群像不识别为她的家庭，轻度清理偏好仍待日常历史支撑。"
+    },
+    {
+      "persona_id": "persona_003",
+      "name": "Hayes Jorgensen",
+      "status": "draft_for_user_review",
+      "basic_profile_ref": "personas/basic_persona_profile.json#/personas/2",
+      "basic_source": {
+        "dataset": "bowen-upenn/PersonaMem-v3",
+        "revision": "7b00a090b35b7293e6efeeb19494207f32b5a9ee",
+        "source_persona_id": "17",
+        "path": "backend/17/profile.json",
+        "raw_sha256": "56a81cfee138ab94cb1eeb6e8612d7c55cadf4b82f3b6920afb1814a1e582c39"
+      },
+      "summary_zh": "Hayes Jorgensen从事信用社应付账款，爱钓鱼、烧烤、折扣工具和旧汽车旅馆明信片，已有银色Tacoma。这里用工具与修复、出行、餐食和明信片风格做轻量匹配；不把图片里的其他车辆都认作他的Tacoma。",
+      "construction_order": "match_source_tasks_then_construct_needed_edit_knowledge",
+      "knowledge_status": "constructed_draft; daily interaction histories not generated",
+      "personalized_entities": {
+        "E_WEEKENDER": {
+          "category": "Suitcase",
+          "name": "my old weekender",
+          "aliases": [
+            "my old weekender"
+          ],
+          "relationship": "owned vintage leather travel case",
+          "source_task": "T05",
+          "bbox": [
+            0.05,
+            0.13,
+            0.96,
+            0.94
+          ],
+          "visual_identity_facts": [
+            "worn rectangular brown leather suitcase",
+            "short leather closure straps",
+            "metal latches and a central handle"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T02",
+            "T05"
+          ],
+          "visual_reference": "references/persona_003/E_WEEKENDER.jpg",
+          "reference_sha256": "619466f9a23d8b55d38f39fcfa1d837612d4b407d8c10021d04a8f0c17e657c6"
+        },
+        "E_HEATH": {
+          "category": "Person",
+          "name": "Heath Jarrett",
+          "aliases": [
+            "Heath Jarrett"
+          ],
+          "relationship": "existing close fishing friend in V3",
+          "source_task": "T04",
+          "bbox": [
+            0.56,
+            0.18,
+            0.98,
+            0.99
+          ],
+          "visual_identity_facts": [
+            "man seated on the right at the campsite",
+            "short dark hair",
+            "gray-blue checked shirt"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "source_connection_ref": "basic_profile.additional.social_connections/1",
+          "supporting_tasks": [
+            "T04"
+          ],
+          "visual_reference": "references/persona_003/E_HEATH.jpg",
+          "reference_sha256": "4a4cd49c24b49d7f7aca8085f2eaaf11f5289b40d9b931b2491029d43a3af841"
+        },
+        "E_ARMCHAIR": {
+          "category": "Armchair",
+          "name": "my wood-arm chair",
+          "aliases": [
+            "my wood-arm chair"
+          ],
+          "relationship": "owned armchair; upholstery preview",
+          "source_task": "T09",
+          "bbox": [
+            0,
+            0.01,
+            1,
+            0.99
+          ],
+          "visual_identity_facts": [
+            "exposed brown wooden arms and legs",
+            "cream checked upholstery in source",
+            "wide rectangular seat"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T09"
+          ],
+          "visual_reference": "references/persona_003/E_ARMCHAIR.jpg",
+          "reference_sha256": "c2268622904fab0dd86861f4fbd4853910a4a45e2dd7f57d445011d55401a455"
+        }
+      },
+      "general_entity_preferences": {
+        "A_GARNISH_AVOID": {
+          "entity_category": "HerbGarnish",
+          "dimension": "herb_type",
+          "value": "parsley",
+          "context": "loose herb garnish touching grilled meat",
+          "stance": "avoid",
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "A_CAKE_AVOID": {
+          "entity_category": "Cake",
+          "dimension": "frosting_style",
+          "value": "white_frosting_with_blue_piping",
+          "context": "choosing dessert",
+          "stance": "avoid",
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "A_PIE": {
+          "entity_category": "Pie",
+          "dimension": "filling",
+          "value": "apple",
+          "context": "dessert pies",
+          "stance": "favorite",
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "A_CASE_FINISH": {
+          "entity_category": "Suitcase",
+          "dimension": "surface_finish",
+          "value": "smooth_glossy",
+          "context": "restoring vintage leather suitcases",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T05"
+          ]
+        },
+        "A_FOREST_SEASON": {
+          "entity_category": "ForestBackdrop",
+          "dimension": "season",
+          "value": "spring",
+          "context": "forest settings in vehicle photos",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T07"
+          ]
+        },
+        "A_CHAIR_WEAVE": {
+          "entity_category": "Armchair",
+          "dimension": "upholstery_texture",
+          "value": "ribbed_corduroy",
+          "context": "upholstery for wood-arm chairs",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T09"
+          ]
+        },
+        "A_TABLE_FINISH": {
+          "entity_category": "KitchenTable",
+          "dimension": "tabletop_finish",
+          "value": "natural_wood_grain",
+          "context": "tabletop-finish previews, including miniature mock-ups",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "global_preferences": {
+        "G_NIGHT_NOISE": {
+          "dimension": "shadow_noise_reduction",
+          "value": "mild",
+          "context": "nighttime snapshots",
+          "candidate_daily_context": "Comparing night photos: dislikes blotchy shadows, still wants the night mood and real detail.",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "G_POSTCARD": {
+          "dimension": "rendering_style",
+          "value": "vintage_sepia_postcard",
+          "context": "scenic postcard pictures",
+          "candidate_daily_context": "Collecting antique motel and travel postcards; the specific sepia preference is constructed after matching.",
+          "supporting_tasks": [
+            "T08"
+          ]
+        }
+      },
+      "position_preferences": {
+        "S_GARNISH_ASIDE": {
+          "owner": {
+            "entity_category": "HerbGarnish"
+          },
+          "semantic_key": "where I put herb garnish to keep it off my meat",
+          "context": "steak with broccoli on the same plate",
+          "destination": {
+            "relation": "on_rim_near",
+            "anchor": "broccoli",
+            "support": "plate rim clear of the steak"
+          },
+          "groundings": {
+            "T01": {
+              "anchor_bbox": [
+                0.72,
+                0.06,
+                1,
+                0.58
+              ],
+              "destination_region": [
+                0.53,
+                0.1,
+                0.72,
+                0.22
+              ]
+            }
+          },
+          "reference_forms": [
+            "out of my way when I eat steak",
+            "off my meat, in my usual garnish spot"
+          ],
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "S_TRUNK_PACK": {
+          "owner": {
+            "entity_id": "E_WEEKENDER"
+          },
+          "semantic_key": "where I put my weekender when packing an open car trunk",
+          "context": "open car trunk with a visible clear central floor",
+          "destination": {
+            "relation": "inside",
+            "anchor": "open car trunk",
+            "support": "central trunk floor"
+          },
+          "groundings": {
+            "T02": {
+              "anchor_bbox": [
+                0.13,
+                0.29,
+                0.86,
+                0.86
+              ],
+              "destination_region": [
+                0.3,
+                0.48,
+                0.7,
+                0.76
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I normally pack it in the trunk",
+            "my usual trunk packing spot"
+          ],
+          "supporting_tasks": [
+            "T02"
+          ]
+        }
+      },
+      "contextual_facts": {
+        "F_NIGHT_SNAPSHOT": {
+          "category": "Photo",
+          "fact": "This nighttime full-body snapshot is the one Hayes saved from an evening outing.",
+          "grounding": {
+            "task_id": "T06",
+            "bbox": [
+              0,
+              0,
+              1,
+              1
+            ],
+            "description": "whole nighttime photo; subject not identified as Hayes"
+          },
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "F_KITCHEN_MOCKUP": {
+          "category": "KitchenTable",
+          "fact": "Hayes is using the blue tabletop in this miniature kitchen as a table-finish sample.",
+          "grounding": {
+            "task_id": "T10",
+            "bbox": [
+              0,
+              0.53,
+              0.44,
+              0.76
+            ],
+            "description": "blue miniature tabletop in the foreground"
+          },
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "aggregated_expression_review": null,
+      "coherence_review": {
+        "image_people_are_not_automatically_user": true,
+        "independent_source_tasks": true,
+        "owned_pets_added": 0,
+        "named_friends": [
+          "Heath Jarrett"
+        ],
+        "notes": [
+          "同一只旧皮箱在添加和表面调整两条任务复用。",
+          "古董车后备箱与林间Ford卡车均不是基础简介中的银色Tacoma。",
+          "T10是玩具厨房模型，不登记为真实住宅。"
+        ]
+      },
+      "review_notes_zh": "T04用Heath作为保留者，确实要删除左侧另一人。T09将颜色任务改为常见的灯芯绒表面；T10明确是微缩厨房模型。"
+    },
+    {
+      "persona_id": "persona_004",
+      "name": "Folarin Ezeani",
+      "status": "draft_for_user_review",
+      "basic_profile_ref": "personas/basic_persona_profile.json#/personas/3",
+      "basic_source": {
+        "dataset": "bowen-upenn/PersonaMem-v3",
+        "revision": "7b00a090b35b7293e6efeeb19494207f32b5a9ee",
+        "source_persona_id": "2",
+        "path": "backend/2/profile.json",
+        "raw_sha256": "ee2723b07525165e6d7c921cea3b1dcbfeca5cb1304fa994c37378156daa0589"
+      },
+      "summary_zh": "Folarin Ezeani从事消费洞察与高端影音销售，已有未婚妻、婚礼筹备和阳台香草园。任务弱结合影音样机、婚礼配饰与香草盆栽，也保留普通服装与照片需求；不把陌生模特认作未婚妻。",
+      "construction_order": "match_source_tasks_then_construct_needed_edit_knowledge",
+      "knowledge_status": "constructed_draft; daily interaction histories not generated",
+      "personalized_entities": {
+        "E_JACKET": {
+          "category": "SuitJacket",
+          "name": "my fitting jacket",
+          "aliases": [
+            "my fitting jacket"
+          ],
+          "relationship": "jacket used for a fitting; no wearer identity assigned",
+          "source_task": "T05",
+          "bbox": [
+            0.08,
+            0.1,
+            0.94,
+            0.99
+          ],
+          "visual_identity_facts": [
+            "charcoal-gray herringbone suit jacket with visible lapels",
+            "yellow tie and teal pocket square in the source"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T05"
+          ],
+          "visual_reference": "references/persona_004/E_JACKET.jpg",
+          "reference_sha256": "e5fbec1ae627986a722ba5cc3d42a4dd2cf51fb83a62c1f06bbe764c5f9d8a95"
+        },
+        "E_DEMO_TV": {
+          "category": "Television",
+          "name": "the old demo TV",
+          "aliases": [
+            "the old demo TV"
+          ],
+          "relationship": "retired demonstration unit; constructed task context",
+          "source_task": "T09",
+          "bbox": [
+            0.03,
+            0.08,
+            0.95,
+            0.72
+          ],
+          "visual_identity_facts": [
+            "black widescreen television",
+            "sports broadcast on screen in source"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T09"
+          ],
+          "visual_reference": "references/persona_004/E_DEMO_TV.jpg",
+          "reference_sha256": "5a975cc150de03044f2ae429f7101b5f39681eb91d7202b361443a7def0fc228"
+        }
+      },
+      "general_entity_preferences": {
+        "A_BANGLE_MATERIAL": {
+          "entity_category": "Bangle",
+          "dimension": "material",
+          "value": "green_jade",
+          "context": "plain wedding-accessory bangles",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "A_HERB": {
+          "entity_category": "HerbPot",
+          "dimension": "herb_variety",
+          "value": "basil",
+          "context": "small kitchen or balcony herb pots",
+          "stance": "normally_buy",
+          "supporting_tasks": [
+            "T02"
+          ]
+        },
+        "A_COFFEE_TABLE": {
+          "entity_category": "CoffeeTable",
+          "dimension": "top_material",
+          "value": "clear_glass",
+          "context": "low tables for watching films",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "A_JACKET_FABRIC": {
+          "entity_category": "SuitJacket",
+          "dimension": "fabric",
+          "value": "velvet",
+          "context": "dress jackets for fittings",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T05"
+          ]
+        },
+        "A_FACE_SHINE": {
+          "entity_category": "PortraitFace",
+          "dimension": "forehead_shine",
+          "value": "gently_reduced",
+          "context": "close portraits shared after a work event",
+          "stance": "prefer",
+          "candidate_daily_context": "Comparing event photos and preferring less shiny foreheads.",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "A_FACE_TEXTURE": {
+          "entity_category": "PortraitFace",
+          "dimension": "skin_texture",
+          "value": "retain_natural_pores",
+          "context": "close portraits shared after a work event",
+          "stance": "prefer",
+          "candidate_daily_context": "Discussing why waxy-looking skin in profile photos looks unnatural.",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "A_BOOKSHELF": {
+          "entity_category": "Bookshelf",
+          "dimension": "wood_type",
+          "value": "walnut",
+          "context": "replacement shelving units for a retired display area",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T09"
+          ]
+        },
+        "A_FLOOR_MATERIAL": {
+          "entity_category": "LivingRoomFloor",
+          "dimension": "material",
+          "value": "oak_wood",
+          "context": "living-room flooring plans",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T10"
+          ]
+        },
+        "A_FLOOR_FINISH": {
+          "entity_category": "LivingRoomFloor",
+          "dimension": "surface_finish",
+          "value": "matte",
+          "context": "living-room flooring plans",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "global_preferences": {
+        "G_ROOM_LIGHT": {
+          "dimension": "light_color_temperature",
+          "value": "slightly_warmer_amber",
+          "context": "indoor living-room atmosphere",
+          "candidate_daily_context": "Talking about the warmer ambience of a comfortable evening room.",
+          "supporting_tasks": [
+            "T07"
+          ]
+        },
+        "G_ANIMATION": {
+          "dimension": "rendering_style",
+          "value": "three_dimensional_animated_film",
+          "context": "playful illustrated street scenes",
+          "candidate_daily_context": "Saving street illustrations with rounded 3D animated-film rendering.",
+          "supporting_tasks": [
+            "T08"
+          ]
+        }
+      },
+      "position_preferences": {
+        "S_HERB_DESK": {
+          "owner": {
+            "entity_category": "HerbPot"
+          },
+          "semantic_key": "where I keep a small herb pot clear of my mouse hand",
+          "context": "laptop desk with a clear strip at its front-left edge",
+          "destination": {
+            "relation": "front_left_of",
+            "anchor": "laptop",
+            "support": "free desk strip left of the project book, in front of the existing mug"
+          },
+          "groundings": {
+            "T02": {
+              "anchor_bbox": [
+                0.24,
+                0.08,
+                0.69,
+                0.55
+              ],
+              "destination_region": [
+                0.04,
+                0.55,
+                0.23,
+                0.76
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I keep plants clear of my mouse",
+            "where it stays clear of my mouse hand"
+          ],
+          "supporting_tasks": [
+            "T02"
+          ]
+        },
+        "S_MOVIE_REACH": {
+          "owner": {
+            "entity_category": "CoffeeTable"
+          },
+          "semantic_key": "where I put the coffee table within easy reach during a film",
+          "context": "low coffee table and black sofa in a living-room layout",
+          "destination": {
+            "relation": "closer_to",
+            "anchor": "black sofa seat",
+            "support": "floor directly in front of sofa, with a small reachable gap"
+          },
+          "groundings": {
+            "T03": {
+              "anchor_bbox": [
+                0.73,
+                0.57,
+                1,
+                0.99
+              ],
+              "destination_region": [
+                0.58,
+                0.67,
+                0.91,
+                0.98
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I can reach it from the sofa during a film",
+            "within reach for movie night"
+          ],
+          "supporting_tasks": [
+            "T03"
+          ]
+        }
+      },
+      "contextual_facts": {
+        "F_BRACELET_SHORTLIST": {
+          "category": "Bracelet",
+          "fact": "Folarin ruled out the chain bracelet on the foreground wrist in this wedding-accessory reference photo.",
+          "grounding": {
+            "task_id": "T01",
+            "bbox": [
+              0.25,
+              0.63,
+              0.42,
+              0.73
+            ],
+            "description": "gold chain bracelet on foreground wrist; model unnamed"
+          },
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "F_BORROWED_FIGURE": {
+          "category": "ToyFigure",
+          "fact": "The little figure sitting on top of this monitor was borrowed as a demo-day mascot and has been returned.",
+          "grounding": {
+            "task_id": "T04",
+            "bbox": [
+              0.61,
+              0.09,
+              0.75,
+              0.26
+            ],
+            "description": "small figure on top of monitor"
+          },
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "F_DEMO_PORTRAIT": {
+          "category": "PortraitFace",
+          "fact": "The close selfie was the portrait Folarin selected for the demo-day recap; its subject is not otherwise identified.",
+          "grounding": {
+            "task_id": "T06",
+            "bbox": [
+              0.12,
+              0.03,
+              0.92,
+              0.99
+            ],
+            "description": "single close portrait in demo-day selection"
+          },
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "F_FLOOR_PLAN": {
+          "category": "LivingRoomFloor",
+          "fact": "This dining-and-living-room image is the flooring reference Folarin shortlisted for comparing materials.",
+          "grounding": {
+            "task_id": "T10",
+            "bbox": [
+              0.01,
+              0.55,
+              0.99,
+              0.99
+            ],
+            "description": "exposed floor in shortlisted room image"
+          },
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "aggregated_expression_review": {
+        "task_id": "T06",
+        "expansion_refs": [
+          "A_FACE_SHINE",
+          "A_FACE_TEXTURE"
+        ],
+        "eligible_reason": "The selected close portrait and existing generic retouch intent support a concise face-only request.",
+        "scope": "Only forehead shine and natural pore texture; no reshaping, whitening or makeup.",
+        "fragment_support": "Two separate ordinary photo-comparison contexts planned; no history turns exist yet."
+      },
+      "coherence_review": {
+        "image_people_are_not_automatically_user": true,
+        "independent_source_tasks": true,
+        "owned_pets_added": 0,
+        "named_friends": [],
+        "notes": [
+          "猫是旧电视照片中保留的背景主体，不登记为他的宠物。",
+          "手镯照片只作为配饰参考，人物不绑定未婚妻或朋友。",
+          "客厅地板是方案参考，不登记第二套住宅。",
+          "聚合请求只限T06的两项人像属性，不调用全部偏好。"
+        ]
+      },
+      "review_notes_zh": "优先核查T01手腕配饰的评分清晰度，和T02小盆栽的尺寸。T06是本批唯一新增聚合表达，仍需未来的分散日常历史支持。"
+    },
+    {
+      "persona_id": "persona_005",
+      "name": "Xandro Panganiban",
+      "status": "draft_for_user_review",
+      "basic_profile_ref": "personas/basic_persona_profile.json#/personas/4",
+      "basic_source": {
+        "dataset": "bowen-upenn/PersonaMem-v3",
+        "revision": "7b00a090b35b7293e6efeeb19494207f32b5a9ee",
+        "source_persona_id": "108",
+        "path": "backend/108/profile.json",
+        "raw_sha256": "5b1abfdab4b231275ef1689b95226503d5be49020e13e3cbe478347bff7a6c42"
+      },
+      "summary_zh": "Xandro Panganiban从事市政道路桥梁协调，已有女友、幼儿、两只宠物和浴室更新计划。按需要将既有两只宠物落实为金毛Sunny与黑白猫Pip，不额外增加第三只；并轻量匹配浴室材质、家庭出行和日常餐照。",
+      "construction_order": "match_source_tasks_then_construct_needed_edit_knowledge",
+      "knowledge_status": "constructed_draft; daily interaction histories not generated",
+      "personalized_entities": {
+        "E_SUNNY": {
+          "category": "Dog",
+          "name": "Sunny",
+          "aliases": [
+            "Sunny"
+          ],
+          "relationship": "one of the two pets already present in the basic biography",
+          "source_task": "T02",
+          "bbox": [
+            0.04,
+            0.03,
+            0.98,
+            0.99
+          ],
+          "visual_identity_facts": [
+            "golden retriever",
+            "very light cream-gold coat",
+            "dark nose and floppy ears"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T01"
+          ],
+          "visual_reference": "references/persona_005/E_SUNNY.jpg",
+          "reference_sha256": "7fdaaa170d0cde67eb62c30f03b2dc373e91a8557f79668ff24d1a8910b89897"
+        },
+        "E_PIP": {
+          "category": "Cat",
+          "name": "Pip",
+          "aliases": [
+            "Pip"
+          ],
+          "relationship": "the other of the two existing pets",
+          "source_task": "T03",
+          "bbox": [
+            0.23,
+            0.27,
+            0.75,
+            0.6
+          ],
+          "visual_identity_facts": [
+            "black-and-white cat",
+            "dark back and head patches",
+            "white chest and front legs"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T03"
+          ],
+          "visual_reference": "references/persona_005/E_PIP.jpg",
+          "reference_sha256": "f2f9d3fe40008c3c8587566f59e93a65206137b2ac4b7e6bf83c9cf94dc671d1"
+        },
+        "E_FRIDGE": {
+          "category": "Refrigerator",
+          "name": "our fridge",
+          "aliases": [
+            "our fridge"
+          ],
+          "relationship": "shared family refrigerator; material preview",
+          "source_task": "T10",
+          "bbox": [
+            0.16,
+            0.04,
+            0.96,
+            0.99
+          ],
+          "visual_identity_facts": [
+            "white refrigerator with magnets and photographs on door",
+            "visible door handle"
+          ],
+          "note": "Visual association constructed after source matching; not evidence of actual ownership of the source photograph.",
+          "supporting_tasks": [
+            "T10"
+          ],
+          "visual_reference": "references/persona_005/E_FRIDGE.jpg",
+          "reference_sha256": "99ac3e86d534cefc1c7fb8a85ab824eeb8a1f597dda739cfb21960ed70296a37"
+        }
+      },
+      "general_entity_preferences": {
+        "A_DOG_FOREST": {
+          "entity_category": "ForestBackdrop",
+          "dimension": "season",
+          "value": "autumn_with_orange_and_yellow_foliage",
+          "context": "woodland backgrounds in pet photos",
+          "stance": "prefer",
+          "supporting_tasks": [
+            "T02"
+          ]
+        },
+        "A_VANITY_MATERIAL": {
+          "entity_category": "Countertop",
+          "dimension": "material",
+          "value": "white_marble",
+          "context": "bathroom vanity material samples",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "A_BACKPACK_COLOR": {
+          "entity_category": "Backpack",
+          "dimension": "color",
+          "value": "red",
+          "context": "small everyday backpacks",
+          "stance": "normally_buy",
+          "supporting_tasks": [
+            "T08"
+          ]
+        },
+        "A_BACKPACK_FABRIC": {
+          "entity_category": "Backpack",
+          "dimension": "fabric",
+          "value": "canvas",
+          "context": "small everyday backpacks",
+          "stance": "normally_buy",
+          "supporting_tasks": [
+            "T08"
+          ]
+        },
+        "A_PICNIC_SET": {
+          "entity_category": "PicnicFurnitureSet",
+          "dimension": "material",
+          "value": "wood",
+          "context": "a picnic table with two chairs for an ordinary outing",
+          "stance": "normally_choose",
+          "supporting_tasks": [
+            "T09"
+          ]
+        },
+        "A_FRIDGE_MATERIAL": {
+          "entity_category": "Refrigerator",
+          "dimension": "body_material",
+          "value": "brushed_stainless_steel",
+          "context": "refrigerator finish previews",
+          "stance": "picked",
+          "supporting_tasks": [
+            "T10"
+          ]
+        }
+      },
+      "global_preferences": {
+        "G_DINNER_DETAIL": {
+          "dimension": "detail_recovery_strength",
+          "value": "gentle",
+          "context": "restaurant snapshots",
+          "candidate_daily_context": "Choosing a clearer dinner photo while avoiding harsh edges or artificial food texture.",
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "G_CHARCOAL": {
+          "dimension": "rendering_style",
+          "value": "dramatic_charcoal_drawing",
+          "context": "animal pictures saved as wall-print ideas",
+          "candidate_daily_context": "Saving expressive charcoal animal drawings; does not imply owning the depicted animal.",
+          "supporting_tasks": [
+            "T07"
+          ]
+        }
+      },
+      "position_preferences": {
+        "S_DOG_WALK": {
+          "owner": {
+            "entity_id": "E_SUNNY"
+          },
+          "semantic_key": "which side Sunny walks on during our walks",
+          "context": "one person walking along a sufficiently wide path",
+          "destination": {
+            "relation": "left_of",
+            "anchor": "walking person",
+            "support": "path beside the person"
+          },
+          "groundings": {
+            "T01": {
+              "anchor_bbox": [
+                0.47,
+                0.43,
+                0.53,
+                0.57
+              ],
+              "destination_region": [
+                0.35,
+                0.48,
+                0.45,
+                0.6
+              ]
+            }
+          },
+          "reference_forms": [
+            "on our usual walking side",
+            "where Sunny walks beside us"
+          ],
+          "supporting_tasks": [
+            "T01"
+          ]
+        },
+        "S_CAT_DINNER_PERCH": {
+          "owner": {
+            "entity_id": "E_PIP"
+          },
+          "semantic_key": "where Pip perches while we sit at the dining table",
+          "context": "dining table with its existing empty right-hand wooden chair",
+          "destination": {
+            "relation": "on",
+            "anchor": "empty right-hand dining chair seat",
+            "support": "existing chair seat"
+          },
+          "groundings": {
+            "T03": {
+              "anchor_bbox": [
+                0.65,
+                0.24,
+                1,
+                0.77
+              ],
+              "destination_region": [
+                0.66,
+                0.43,
+                0.98,
+                0.65
+              ]
+            }
+          },
+          "reference_forms": [
+            "his usual dinner-time perch",
+            "where Pip sits at dinner"
+          ],
+          "supporting_tasks": [
+            "T03"
+          ]
+        },
+        "S_CAMP_CLEAR": {
+          "owner": {
+            "entity_category": "PicnicFurnitureSet"
+          },
+          "semantic_key": "where I set the picnic furniture so the tent entrance stays clear",
+          "context": "grassy campsite with a tent at the right edge",
+          "destination": {
+            "relation": "left_of",
+            "anchor": "tent",
+            "support": "flat grassy foreground clear of the tent entrance"
+          },
+          "groundings": {
+            "T09": {
+              "anchor_bbox": [
+                0.84,
+                0.58,
+                1,
+                0.98
+              ],
+              "destination_region": [
+                0.25,
+                0.56,
+                0.67,
+                0.86
+              ]
+            }
+          },
+          "reference_forms": [
+            "where I set up without blocking the tent",
+            "our tent-clear picnic spot"
+          ],
+          "supporting_tasks": [
+            "T09"
+          ]
+        }
+      },
+      "contextual_facts": {
+        "F_VANITY_SAMPLE": {
+          "category": "Countertop",
+          "fact": "The wide vanity photo is the countertop sample Xandro saved for the bathroom refresh.",
+          "grounding": {
+            "task_id": "T04",
+            "bbox": [
+              0.02,
+              0.35,
+              0.99,
+              0.79
+            ],
+            "description": "wide vanity countertop"
+          },
+          "supporting_tasks": [
+            "T04"
+          ]
+        },
+        "F_BISCUITS_SAVED": {
+          "category": "FoodServing",
+          "fact": "Xandro put aside the biscuits on the foreground plate for tomorrow's snack.",
+          "grounding": {
+            "task_id": "T05",
+            "bbox": [
+              0,
+              0.65,
+              0.56,
+              0.98
+            ],
+            "description": "foreground plate of biscuits; not flowers or teapot"
+          },
+          "supporting_tasks": [
+            "T05"
+          ]
+        },
+        "F_DINNER_PICK": {
+          "category": "Photo",
+          "fact": "This restaurant snapshot is the dinner photo Xandro saved to share.",
+          "grounding": {
+            "task_id": "T06",
+            "bbox": [
+              0,
+              0,
+              1,
+              1
+            ],
+            "description": "whole restaurant snapshot"
+          },
+          "supporting_tasks": [
+            "T06"
+          ]
+        },
+        "F_OUTGROWN_DRESS": {
+          "category": "Clothing",
+          "fact": "The little party dress in this flat-lay is the toddler garment Xandro has set aside because it is outgrown.",
+          "grounding": {
+            "task_id": "T08",
+            "bbox": [
+              0.12,
+              0.03,
+              0.89,
+              0.97
+            ],
+            "description": "single flat-lay party dress; child gender unspecified"
+          },
+          "supporting_tasks": [
+            "T08"
+          ]
+        }
+      },
+      "aggregated_expression_review": null,
+      "coherence_review": {
+        "image_people_are_not_automatically_user": true,
+        "independent_source_tasks": true,
+        "existing_basic_pet_count": 2,
+        "profile_pet_count": 2,
+        "pet_names": [
+          "Sunny",
+          "Pip"
+        ],
+        "named_friends": [],
+        "notes": [
+          "Sunny和Pip是简介中既有两宠的构建身份，不是新添两只。",
+          "两幅浴室素材是更新参考，不登记两套自有浴室。",
+          "马的画风任务不把马设成宠物。",
+          "幼儿衣物任务不推断孩子性别。",
+          "冰箱磁贴不等于基础简介中的交通代币收藏。"
+        ]
+      },
+      "review_notes_zh": "Sunny的视觉参考来自T02，T01添加的是同一只狗；T03移Pip时保留原行李箱，不执行来源的前序替换。审核露营桌椅的小尺度落点。"
+    }
+  ]
+}

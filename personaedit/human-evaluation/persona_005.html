@@ -1,0 +1,947 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PersonaEdit · persona_005 · 正式首稿</title><style>
+    :root{color-scheme:light;--ink:#24313e;--muted:#647480;--line:#dce3e7;--accent:#17665e}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;background:#f4f6f7;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:30px;margin:0 0 10px}h2{font-size:21px;margin:0}h3{margin:15px 0 6px}h4{margin:8px 0}a{color:var(--accent)}p{margin:8px 0}.intro,.task,.profile-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}.sub,.caption,.zh{color:var(--muted)}.sub{margin-top:0}.caption{font-size:13px}.pill{display:inline-block;background:#fdf0cb;border-radius:5px;padding:2px 8px;color:#715619}.nav{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffffff2;border-bottom:1px solid var(--line);padding:10px 25px;backdrop-filter:blur(8px)}.nav a{text-decoration:none;font-weight:600}button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:white;color:var(--ink);cursor:pointer}.nav label{margin-left:auto;font-size:13px}.task-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tag{display:inline-block;font:12px/1.5 ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:4px;margin:3px}.task-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:25px}.source-image{display:flex;justify-content:center;background:#edf1f2;border-radius:8px;padding:8px}.image-wrap{position:relative;line-height:0}.image-wrap img{display:block;max-width:100%;max-height:490px;width:auto;height:auto}.bbox{position:absolute;border:2px solid #1675b9;display:none;pointer-events:none;line-height:1.3}.show-boxes .bbox{display:block}.bbox span{position:absolute;top:0;left:0;color:white;background:#1675b9;font:11px/1.3 monospace}.bbox.remove{border-color:#c34149}.bbox.remove span{background:#c34149}.bbox.keep{border-color:#21804d}.bbox.keep span{background:#21804d}.bbox.destination{border:2px dashed #a76800}.bbox.destination span{background:#a76800}.personal,.base{border-radius:8px;padding:14px 17px;margin-bottom:13px}.personal{background:#e8f4ee;border-left:4px solid #33856f}.base{background:#f2f4f7}.commands label{font-size:12px;font-weight:700;letter-spacing:.04em}.commands p{font-size:17px}.commands .zh{font-size:15px}details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;font-weight:600}pre{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fa;border-radius:5px;padding:10px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px}td:first-child{min-width:155px}td:nth-child(2){min-width:190px}td:nth-child(3){width:52%}td pre{margin-top:0}.table-scroll{overflow:auto}.knowledge{border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0;scroll-margin-top:65px;overflow:auto}.reference{float:right;width:135px;max-height:160px;object-fit:contain;margin:0 0 10px 15px}.knowledge:target{border:2px solid #33856f;background:#f5fcf8}.feedback-label{display:block;margin:15px 0 6px;font-size:13px;color:var(--muted)}textarea{width:100%;min-height:75px;border:1px solid var(--line);border-radius:7px;padding:10px;font:14px/1.5 inherit;resize:vertical}#save-status{font-size:12px;color:var(--muted)}.small-links{display:flex;gap:15px;flex-wrap:wrap}.basic-list{padding-left:20px}.contact{width:100%;max-width:1000px;display:block;margin:15px auto}.notice{background:#fff9e8;border-radius:7px;padding:12px;font-size:13px}.profile-panel .profile-section>summary{font-size:16px}footer{font-size:12px;color:var(--muted);padding-bottom:30px}@media(max-width:850px){main{padding:14px}.intro,.task,.profile-panel{padding:16px}.task-grid{grid-template-columns:1fr}.nav{padding:8px 12px;gap:10px}.nav label{margin-left:0}.image-wrap img{max-height:430px}h1{font-size:25px}}
+    </style></head><body><nav class="nav"><a href="index.html">全部人物</a><a href="#overview">概览</a><a href="#profile">Profile</a><a href="#T01">T01</a><a href="#T02">T02</a><a href="#T03">T03</a><a href="#T04">T04</a><a href="#T05">T05</a><a href="#T06">T06</a><a href="#T07">T07</a><a href="#T08">T08</a><a href="#T09">T09</a><a href="#T10">T10</a><label><input id="show-boxes" type="checkbox"> 显示核查框</label><button id="export-feedback">导出意见 JSON</button><span id="save-status"></span></nav><main>
+    <section class="intro" id="overview"><span class="pill">正式数据构建稿 · 待审核</span><h1>Xandro Panganiban · persona_005</h1><p class="sub">100 位 V3 基础人物已固定顺序；目前 5 位完成图文构建稿，本页为其中一位的10个任务。英文为本轮评估语言，中文用于审核。</p><p>Xandro Panganiban从事市政道路桥梁协调，已有女友、幼儿、两只宠物和浴室更新计划。按需要将既有两只宠物落实为金毛Sunny与黑白猫Pip，不额外增加第三只；并轻量匹配浴室材质、家庭出行和日常餐照。</p><p>Utility coordination specialist for municipal bridge and roadway projects · Bachelor&#x27;s degree in Civil Engineering · 未提供数值年龄；按职业与教育背景推定为成年人</p><p class="caption">10 张不同原图 · 10 条命令 · 10 个原子操作 · 17 个个性化参数 · 8 类操作</p><p class="caption">Add 2 · Background 1 · Move 1 · Attribute Modification 2 · Remove 1 · Retouch 1 · Restyle 1 · Replace 1</p><div class="notice">Sunny的视觉参考来自T02，T01添加的是同一只狗；T03移Pip时保留原行李箱，不执行来源的前序替换。审核露营桌椅的小尺度落点。 所有实体和偏好仍为构建稿，尚无长期历史或编辑结果。</div><p class="caption">其他人物：<a href="persona_001.html">Khoa Bui</a> · <a href="persona_002.html">Azusa Bessho</a> · <a href="persona_003.html">Hayes Jorgensen</a> · <a href="persona_004.html">Folarin Ezeani</a></p><div class="small-links"><a href="../benchmark/data/personas/basic_persona_profile.json">100 人 Basic JSON</a><a href="../benchmark/data/personas/complete_persona_profile.json">Complete Profile JSON</a><a href="../benchmark/data/instructions/basic_instruction.json">Base JSON</a><a href="../benchmark/data/instructions/persona_instruction.json">Personalized JSON</a></div><div class="reviewer-panel" style="margin-top:16px;padding:14px;background:#f2f7f5;border-radius:8px">
+                <label for="reviewer-name">审核署名（可选）</label>
+                <input id="reviewer-name" type="text" maxlength="100" placeholder="姓名或昵称" style="display:block;max-width:100%;width:280px;padding:8px;margin:6px 0;border:1px solid #dce3e7;border-radius:6px;font:inherit">
+                <p class="caption">填写逐条或整体意见后，点击顶部“导出意见JSON”，把文件作为附件交回 <a href="mailto:jian_lang@std.uestc.edu.cn?subject=PersonaEdit%20review%20persona_005">jian_lang@std.uestc.edu.cn</a>。意见先保存在当前浏览器；导出或交回后才会进入本轮收集。</p></div><details><summary>整组图片与基础人物信息（已清理、统一字段）</summary><img class="contact" src="../benchmark/data/images/persona_005/contact-sheet.jpg" alt="10 source images"><pre>{
+  &quot;source&quot;: {
+    &quot;dataset&quot;: &quot;bowen-upenn/PersonaMem-v3&quot;,
+    &quot;revision&quot;: &quot;7b00a090b35b7293e6efeeb19494207f32b5a9ee&quot;,
+    &quot;source_persona_id&quot;: &quot;108&quot;,
+    &quot;path&quot;: &quot;backend/108/profile.json&quot;,
+    &quot;raw_sha256&quot;: &quot;5b1abfdab4b231275ef1689b95226503d5be49020e13e3cbe478347bff7a6c42&quot;
+  },
+  &quot;basic_profile&quot;: {
+    &quot;name&quot;: &quot;Xandro Panganiban&quot;,
+    &quot;age&quot;: null,
+    &quot;gender&quot;: &quot;transgender male, heterosexual&quot;,
+    &quot;nationality&quot;: null,
+    &quot;languages&quot;: [],
+    &quot;location&quot;: {
+      &quot;city&quot;: null,
+      &quot;region&quot;: null,
+      &quot;country&quot;: null,
+      &quot;description&quot;: null
+    },
+    &quot;education&quot;: {
+      &quot;degrees&quot;: [
+        &quot;Bachelor&#x27;s degree in Civil Engineering&quot;
+      ],
+      &quot;fields&quot;: [],
+      &quot;institutions&quot;: []
+    },
+    &quot;occupation&quot;: {
+      &quot;title&quot;: &quot;Utility coordination specialist for municipal bridge and roadway projects&quot;,
+      &quot;organization&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;status&quot;: null
+    },
+    &quot;relationship_status&quot;: null,
+    &quot;summary&quot;: null,
+    &quot;biography&quot;: &quot;Xandro spends most workdays tracking water-main conflicts and lane-closure schedules for bridge repair crews, then comes home to a girlfriend, a potty-training toddler, and two pets who dominate his camera roll. He decompresses with cat puns, Golden Retriever clips, piano covers, and occasional Phillies highlights, while quietly keeping tabs on Noah Wyle buzz and TV limited-series recommendations. On weekends he is slowly planning a practical bathroom refresh, mostly because the old grout annoys him more than he admits. A surprising obsession of his is collecting tiny vintage transit tokens from cities he has never visited.&quot;,
+    &quot;hobbies&quot;: [],
+    &quot;personality&quot;: {
+      &quot;traits&quot;: [],
+      &quot;values&quot;: [],
+      &quot;quirks&quot;: [],
+      &quot;big_five&quot;: {
+        &quot;openness&quot;: &quot;medium&quot;,
+        &quot;conscientiousness&quot;: &quot;medium&quot;,
+        &quot;extraversion&quot;: &quot;low&quot;,
+        &quot;agreeableness&quot;: &quot;high&quot;,
+        &quot;neuroticism&quot;: &quot;high&quot;
+      }
+    },
+    &quot;additional&quot;: {
+      &quot;social_connections&quot;: [
+        {
+          &quot;friend_id&quot;: &quot;friend_1&quot;,
+          &quot;display_name&quot;: &quot;Xavier Pascual&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Phillies highlights&quot;,
+            &quot;bridge repair projects&quot;,
+            &quot;Golden Retriever clips&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_2&quot;,
+          &quot;display_name&quot;: &quot;Maricel Poblete&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;parenting&quot;,
+            &quot;pet photos&quot;,
+            &quot;bathroom refresh ideas&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_3&quot;,
+          &quot;display_name&quot;: &quot;Paolo Punzalan&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;piano covers&quot;,
+            &quot;cat puns&quot;,
+            &quot;TV limited series&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_4&quot;,
+          &quot;display_name&quot;: &quot;Xiomara Palisoc&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;red-carpet creators&quot;,
+            &quot;Noah Wyle buzz&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_5&quot;,
+          &quot;display_name&quot;: &quot;Lito Penaflor&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;lane-closure schedules&quot;,
+            &quot;local community updates&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_6&quot;,
+          &quot;display_name&quot;: &quot;Xavier Peralta&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;urbanism&quot;,
+            &quot;transit posts&quot;,
+            &quot;sports highlights&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_7&quot;,
+          &quot;display_name&quot;: &quot;Trixie Policarpio&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;pet accounts&quot;,
+            &quot;cat puns&quot;,
+            &quot;family photos&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_8&quot;,
+          &quot;display_name&quot;: &quot;Noel Padilla&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;municipal projects&quot;,
+            &quot;roadway updates&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_9&quot;,
+          &quot;display_name&quot;: &quot;Bianca Pineda&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;animal conservation&quot;,
+            &quot;Golden Retriever clips&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_10&quot;,
+          &quot;display_name&quot;: &quot;Jun Paez&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Phillies highlights&quot;,
+            &quot;TV recommendations&quot;
+          ]
+        }
+      ]
+    }
+  },
+  &quot;adult_eligibility&quot;: {
+    &quot;status&quot;: &quot;adult&quot;,
+    &quot;basis&quot;: &quot;adult_career_and_education_context&quot;,
+    &quot;inferred&quot;: true,
+    &quot;numeric_age_provided&quot;: false
+  },
+  &quot;persona_id&quot;: &quot;persona_005&quot;
+}</pre></details></section>
+    <article class="task" id="T01">
+          <div class="task-heading"><h2>T01 · Sunny加到散步惯常一侧</h2><div><span class="tag">Add</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T01_imgedit_103.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T01_imgedit_103.jpg" alt="T01 source image"><div class="bbox destination" style="left:35.0%;top:48.0%;width:10.000000000000004%;height:12.0%"><span>destination</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 103 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Add Sunny on our usual walking side.</p><p class="zh">把Sunny加上，走我们平时散步的那一侧。</p></div><div class="base"><label>Base · 明确答案</label><p>Add the cream-coated golden retriever shown in the Sunny reference on the path to the left of the walking person.</p><p class="zh">按Sunny参考图添加同一只金毛，放在步行者左侧的小路上。</p></div><p class="caption">匹配：基础有两宠及金毛内容偏好；品种和视觉身份是匹配后落实，不声称来源直接给出宠物品种。</p><p class="caption">核查：Match the dog reference at a plausible size. Keep the walking person, snow and path unchanged.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P01<br>Add<br>Entity / reference_entity</td><td>Sunny<br><small>Personalized Entity</small></td><td><pre>&quot;E_SUNNY&quot;</pre><a class="tag" href="#K_E_SUNNY">E_SUNNY</a></td></tr><tr><td>P02<br>Add<br>Placement / destination</td><td>our usual walking side<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;left_of&quot;,
+  &quot;anchor&quot;: &quot;walking person&quot;,
+  &quot;support&quot;: &quot;path beside the person&quot;
+}</pre><a class="tag" href="#K_S_DOG_WALK">S_DOG_WALK</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Add a dog walking beside the person on the snow-covered path.</p><p>保留步行者旁加狗，具体为既有宠物Sunny及其散步侧位。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;103&quot;,
+    &quot;original_image_path&quot;: &quot;for_add/000295872.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Add a dog walking beside the person on the snow-covered path.&quot;,
+    &quot;native_label&quot;: &quot;add&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Match the dog reference at a plausible size. Keep the walking person, snow and path unchanged.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T01">这一条的意见</label><textarea id="feedback-T01" data-feedback="T01" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T02">
+          <div class="task-heading"><h2>T02 · Sunny照片换喜欢的林间季节</h2><div><span class="tag">Background</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T02_imgedit_236.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T02_imgedit_236.jpg" alt="T02 source image"></div></a><p class="caption">ImgEdit-Bench Basic · 236 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Use my preferred woodland season for the backdrop.</p><p class="zh">背景用我喜欢的那个林间季节。</p></div><div class="base"><label>Base · 明确答案</label><p>Replace the blurred background behind the golden retriever with an autumn forest with orange and yellow foliage.</p><p class="zh">把金毛身后的模糊背景换成橙黄叶片的秋林。</p></div><p class="caption">匹配：复用同一只Sunny身份，不新增另一只金毛。</p><p class="caption">核查：Preserve the retriever, face, coat and body outline; change background only.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P03<br>Background<br>Entity / reference_entity</td><td>my preferred woodland season for the backdrop<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;ForestBackdrop&quot;,
+  &quot;season&quot;: &quot;autumn_with_orange_and_yellow_foliage&quot;
+}</pre><a class="tag" href="#K_A_DOG_FOREST">A_DOG_FOREST</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the blurred environment in the background to an autumn forest with orange and yellow leaves on the trees.</p><p>保留原秋林背景；狗作为保留主体，不把它额外算成被编辑的参数。T01视觉参考从此图取得。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;236&quot;,
+    &quot;original_image_path&quot;: &quot;animal/000222070.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the blurred environment in the background to an autumn forest with orange and yellow leaves on the trees.&quot;,
+    &quot;native_label&quot;: &quot;background&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Preserve the retriever, face, coat and body outline; change background only.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T02">这一条的意见</label><textarea id="feedback-T02" data-feedback="T02" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T03">
+          <div class="task-heading"><h2>T03 · Pip回到吃饭时的固定座位</h2><div><span class="tag">Move</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T03_complex_521.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T03_complex_521.jpg" alt="T03 source image"><div class="bbox target" style="left:23.0%;top:27.0%;width:52.0%;height:32.99999999999999%"><span>P04</span></div><div class="bbox destination" style="left:66.0%;top:43.0%;width:31.999999999999996%;height:22.000000000000004%"><span>destination</span></div></div></a><p class="caption">Complex-Edit · 521 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Put Pip on his usual dinner-time perch.</p><p class="zh">把Pip挪到吃饭时它老待的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Move the black-and-white cat from the suitcase onto the existing empty wooden chair at the right of the dining table.</p><p class="zh">把行李箱上的黑白猫移到餐桌右侧现有空木椅上。</p></div><p class="caption">匹配：简介中的第二只宠物落实为Pip；已有两宠不被扩成多猫多狗。</p><p class="caption">核查：Keep original suitcase where it is; move the same cat onto the visible chair seat, not onto the table.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P04<br>Move<br>Entity / target_entity</td><td>Pip<br><small>Personalized Entity</small></td><td><pre>&quot;E_PIP&quot;</pre><a class="tag" href="#K_E_PIP">E_PIP</a></td></tr><tr><td>P05<br>Move<br>Placement / destination</td><td>his usual dinner-time perch<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;on&quot;,
+  &quot;anchor&quot;: &quot;empty right-hand dining chair seat&quot;,
+  &quot;support&quot;: &quot;existing chair seat&quot;
+}</pre><a class="tag" href="#K_S_CAT_DINNER_PERCH">S_CAT_DINNER_PERCH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Relocate the cat to sit on the chair at the dining table.</p><p>只选原序列移猫；猫和餐椅原图都有，不先将箱子换凳子，也不增加食盆。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;521&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Relocate the cat to sit on the chair at the dining table.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Move an Object&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      1
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Change the suitcase to a wooden stool.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Relocate the cat to sit on the chair at the dining table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a bowl of cat food on the wooden stool.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the color of the bowl to red.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Brighten the image slightly.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the orange ball from the floor.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Add a cozy warm-tone filter to the scene.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Change the view outside the open door to a snowy landscape.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Keep original suitcase where it is; move the same cat onto the visible chair seat, not onto the table.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T03">这一条的意见</label><textarea id="feedback-T03" data-feedback="T03" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T04">
+          <div class="task-heading"><h2>T04 · 浴室方案台面换白大理石</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T04_complex_77.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T04_complex_77.jpg" alt="T04 source image"><div class="bbox target" style="left:2.0%;top:35.0%;width:97.0%;height:44.00000000000001%"><span>P06</span></div></div></a><p class="caption">Complex-Edit · 77 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Try the vanity material I picked on the countertop sample I saved.</p><p class="zh">保存的那张台面参考，试试我选的盥洗台材质。</p></div><div class="base"><label>Base · 明确答案</label><p>Change only the vanity countertop to a white-marble material finish, keeping both sinks, faucets and ornaments.</p><p class="zh">仅把盥洗台面改成白大理石材质，保留双水槽、龙头和装饰。</p></div><p class="caption">匹配：基础明确有浴室更新计划；此图为样板参考，不等于自有双盆浴室。</p><p class="caption">核查：Countertop is broad and visible; do not replace sinks or reshape the vanity.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P06<br>Attribute Modification<br>Entity / target_entity</td><td>the countertop sample I saved<br><small>General Entity</small></td><td><pre>&quot;saved_bathroom_vanity_countertop&quot;</pre><a class="tag" href="#K_F_VANITY_SAMPLE">F_VANITY_SAMPLE</a></td></tr><tr><td>P07<br>Attribute Modification<br>Attribute / result_attribute</td><td>the vanity material I picked<br><small></small></td><td><pre>{
+  &quot;material&quot;: &quot;white_marble&quot;
+}</pre><a class="tag" href="#K_A_VANITY_MATERIAL">A_VANITY_MATERIAL</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the countertop texture to a white marble finish.</p><p>保留白大理石台面；按真实材质属性解析，不沿用来源可能混杂的颜色标签。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;77&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Change the countertop texture to a white marble finish.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Color&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      4
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the reflection in the mirrors to show a window overlooking a garden.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Increase ambient lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Eliminate the soapdish near the right sink.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the black faucet with a stainless-steel one.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the countertop texture to a white marble finish.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a small potted plant next to the left sink.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Resize an Object&quot;,
+        &quot;instruction&quot;: &quot;Make the ornamental vase slimmer.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm filter.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Countertop is broad and visible; do not replace sinks or reshape the vanity.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T04">这一条的意见</label><textarea id="feedback-T04" data-feedback="T04" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T05">
+          <div class="task-heading"><h2>T05 · 明天才吃的饼干先拿掉</h2><div><span class="tag">Remove</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T05_imgedit_1167.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T05_imgedit_1167.jpg" alt="T05 source image"><div class="bbox target" style="left:0%;top:65.0%;width:56.00000000000001%;height:32.99999999999999%"><span>P08</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 1167 · 1280 × 720</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Take out the biscuits I put aside for tomorrow.</p><p class="zh">把我留到明天吃的那盘饼干拿掉。</p></div><div class="base"><label>Base · 明确答案</label><p>Remove the plate of biscuits at the bottom left of the photo, keeping the teapot and flowers.</p><p class="zh">移除照片左下的整盘饼干，保留茶壶和花。</p></div><p class="caption">匹配：普通家庭点心；留到明天的事实是按任务补充，不涉及医疗或节食理由。</p><p class="caption">核查：Delete the complete foreground serving, naturally fill the exposed table, preserve teapot and bouquet.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P08<br>Remove<br>Entity / target_entity</td><td>the biscuits I put aside for tomorrow<br><small>General Entity</small></td><td><pre>&quot;foreground_plate_of_biscuits&quot;</pre><a class="tag" href="#K_F_BISCUITS_SAVED">F_BISCUITS_SAVED</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Remove the object in the foreground, and adjust the brightness of the background to make it lighter.</p><p>保留原删饼干目标，按图中盘装食物将整盘作为删除单位，不删桌上其他东西。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1167&quot;,
+    &quot;original_image_path&quot;: &quot;compose/objects/15.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Remove the object in the foreground, and adjust the brightness of the background to make it lighter.&quot;,
+    &quot;native_label&quot;: &quot;compose&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Delete the complete foreground serving, naturally fill the exposed table, preserve teapot and bouquet.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T05">这一条的意见</label><textarea id="feedback-T05" data-feedback="T05" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T06">
+          <div class="task-heading"><h2>T06 · 餐照轻度恢复细节</h2><div><span class="tag">Retouch</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T06_gedit_1202.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T06_gedit_1202.jpg" alt="T06 source image"><div class="bbox target" style="left:0%;top:0%;width:100%;height:100%"><span>P09</span></div></div></a><p class="caption">GEdit-Bench · 1202 · 480 × 576</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Bring the dinner photo I saved up to the detail level I like.</p><p class="zh">我存下的那张晚餐照，清楚到我喜欢的那个程度就好。</p></div><div class="base"><label>Base · 明确答案</label><p>Gently recover image detail in the restaurant snapshot, preserving natural skin and food textures without harsh edge sharpening.</p><p class="zh">轻度恢复餐厅随拍细节，保留自然肤质与食物纹理，不加生硬锐化边。</p></div><p class="caption">匹配：普通吃饭照片，不把图中女子认作女友。</p><p class="caption">核查：细节恢复的定性程度仍需后续评分口径与自然历史验证，不应要求从文字偏好恢复唯一算法。</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P09<br>Retouch<br>Entity / target_entity</td><td>the dinner photo I saved<br><small>General Entity</small></td><td><pre>&quot;saved_dinner_photo&quot;</pre><a class="tag" href="#K_F_DINNER_PICK">F_DINNER_PICK</a></td></tr><tr><td>P10<br>Retouch<br>Attribute / result_attribute</td><td>the detail level I like<br><small></small></td><td><pre>{
+  &quot;detail_recovery_strength&quot;: &quot;gentle&quot;
+}</pre><a class="tag" href="#K_G_DINNER_DETAIL">G_DINNER_DETAIL</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Enhance the clarity of this photo.</p><p>原通用增强明确为轻度细节恢复，不补精确锐化量或身份变化。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;1202&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;c09e9a0c550da145d9afe12c543b0048&quot;,
+    &quot;original_instruction&quot;: &quot;Enhance the clarity of this photo.&quot;,
+    &quot;native_label&quot;: &quot;tone_transfer&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Preserve all dishes, faces and layout; no hallucinated lettering or facial detail.&quot;,
+    &quot;follow_up&quot;: &quot;细节恢复的定性程度仍需后续评分口径与自然历史验证，不应要求从文字偏好恢复唯一算法。&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T06">这一条的意见</label><textarea id="feedback-T06" data-feedback="T06" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T07">
+          <div class="task-heading"><h2>T07 · 动物照片试收藏的炭笔风</h2><div><span class="tag">Restyle</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T07_imgedit_718.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T07_imgedit_718.jpg" alt="T07 source image"></div></a><p class="caption">ImgEdit-Bench Basic · 718 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Do this in the charcoal look I save for wall prints.</p><p class="zh">来我收藏作挂画参考的那种炭笔效果。</p></div><div class="base"><label>Base · 明确答案</label><p>Render the horse photo as a dramatic charcoal drawing.</p><p class="zh">把马的照片改成有表现力的炭笔画。</p></div><p class="caption">匹配：普通画作收藏参考，不另加养马经历。</p><p class="caption">核查：Preserve horse anatomy, pose and composition while changing rendering style.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P11<br>Restyle<br>Attribute / result_attribute</td><td>the charcoal look I save for wall prints<br><small></small></td><td><pre>{
+  &quot;rendering_style&quot;: &quot;dramatic_charcoal_drawing&quot;
+}</pre><a class="tag" href="#K_G_CHARCOAL">G_CHARCOAL</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Transfer the image into a dramatic charcoal-drawing style.</p><p>保留原戏剧性炭笔画意图；画中动物不自动成为个人宠物。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;718&quot;,
+    &quot;original_image_path&quot;: &quot;style/000308736.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Transfer the image into a dramatic charcoal-drawing style.&quot;,
+    &quot;native_label&quot;: &quot;style&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Preserve horse anatomy, pose and composition while changing rendering style.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T07">这一条的意见</label><textarea id="feedback-T07" data-feedback="T07" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T08">
+          <div class="task-heading"><h2>T08 · 长小的礼服换常买的背包</h2><div><span class="tag">Replace</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T08_imgedit_632.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T08_imgedit_632.jpg" alt="T08 source image"><div class="bbox target" style="left:12.0%;top:3.0%;width:77.0%;height:94.0%"><span>P12</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 632 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Swap the party dress we outgrew for a backpack in my usual color and fabric.</p><p class="zh">穿不下的那件小礼服，换成我常买的配色和面料的背包。</p></div><div class="base"><label>Base · 明确答案</label><p>Replace the outgrown little party dress in the flat-lay with a small red canvas backpack.</p><p class="zh">把平铺的小礼服换成小号红色帆布背包。</p></div><p class="caption">匹配：基础有幼儿；不推断性别，不为礼服增加另一个孩子。</p><p class="caption">核查：One clothing item is replaced by one backpack; preserve the flat-lay background.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P12<br>Replace<br>Entity / target_entity</td><td>the party dress we outgrew<br><small>General Entity</small></td><td><pre>&quot;outgrown_party_dress&quot;</pre><a class="tag" href="#K_F_OUTGROWN_DRESS">F_OUTGROWN_DRESS</a></td></tr><tr><td>P13<br>Replace<br>Entity / reference_entity</td><td>a backpack in my usual color and fabric<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Backpack&quot;,
+  &quot;color&quot;: &quot;red&quot;,
+  &quot;fabric&quot;: &quot;canvas&quot;
+}</pre><a class="tag" href="#K_A_BACKPACK_COLOR">A_BACKPACK_COLOR</a> <a class="tag" href="#K_A_BACKPACK_FABRIC">A_BACKPACK_FABRIC</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Replace the dress in the image with a red backpack.</p><p>保留小礼服换红背包，补常见帆布面料；颜色和面料共同定位General Entity引用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;632&quot;,
+    &quot;original_image_path&quot;: &quot;daily object/000340873.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the dress in the image with a red backpack.&quot;,
+    &quot;native_label&quot;: &quot;replace&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;One clothing item is replaced by one backpack; preserve the flat-lay background.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T08">这一条的意见</label><textarea id="feedback-T08" data-feedback="T08" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T09">
+          <div class="task-heading"><h2>T09 · 露营桌椅放在不挡帐篷处</h2><div><span class="tag">Add</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T09_imgedit_110.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T09_imgedit_110.jpg" alt="T09 source image"><div class="bbox destination" style="left:25.0%;top:56.00000000000001%;width:42.00000000000001%;height:29.999999999999993%"><span>destination</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 110 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Add a picnic set in the material I usually choose, where I set up without blocking the tent.</p><p class="zh">加一套我常选材质的野餐桌椅，放在我平时不挡帐篷的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Add one wooden picnic table with two matching chairs on the flat grassy foreground left of the tent, clear of its entrance.</p><p class="zh">在帐篷左侧前景平草地加一张木野餐桌与两把配套椅，不挡入口。</p></div><p class="caption">匹配：普通家庭出游情境，不把露营追加为必需职业或长期专长。</p><p class="caption">核查：Open grass left of the existing tent can fit a modest set; preserve tent, fence and landscape.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P14<br>Add<br>Entity / reference_entity</td><td>a picnic set in the material I usually choose<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;PicnicFurnitureSet&quot;,
+  &quot;material&quot;: &quot;wood&quot;,
+  &quot;members&quot;: &quot;one table and two chairs&quot;
+}</pre><a class="tag" href="#K_A_PICNIC_SET">A_PICNIC_SET</a></td></tr><tr><td>P15<br>Add<br>Placement / destination</td><td>where I set up without blocking the tent<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;left_of&quot;,
+  &quot;anchor&quot;: &quot;tent&quot;,
+  &quot;support&quot;: &quot;flat grassy foreground clear of the tent entrance&quot;
+}</pre><a class="tag" href="#K_S_CAMP_CLEAR">S_CAMP_CLEAR</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Add a picnic table with a couple of chairs in the grassy area near the tent, to create a cozy outdoor scene.</p><p>保留帐篷附近加野餐桌椅，明确木材及不挡入口的左侧空地；一组桌椅按集合实体解析，不拆成三个Add。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;110&quot;,
+    &quot;original_image_path&quot;: &quot;for_add/000313906.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Add a picnic table with a couple of chairs in the grassy area near the tent, to create a cozy outdoor scene.&quot;,
+    &quot;native_label&quot;: &quot;add&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Open grass left of the existing tent can fit a modest set; preserve tent, fence and landscape.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T09">这一条的意见</label><textarea id="feedback-T09" data-feedback="T09" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T10">
+          <div class="task-heading"><h2>T10 · 家用冰箱试拉丝不锈钢</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_005/T10_complex_22.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_005/T10_complex_22.jpg" alt="T10 source image"><div class="bbox target" style="left:16.0%;top:4.0%;width:80.0%;height:95.0%"><span>P16</span></div></div></a><p class="caption">Complex-Edit · 22 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Try the fridge finish I picked on our fridge.</p><p class="zh">家里冰箱，试试我选的那种表面。</p></div><div class="base"><label>Base · 明确答案</label><p>Change the refrigerator body to brushed stainless steel, preserving all magnets, photographs and the handle.</p><p class="zh">把冰箱主体改成拉丝不锈钢，保留全部磁贴、照片与把手。</p></div><p class="caption">匹配：普通居家材质预览；磁贴不等同基础简介的小交通代币收藏。</p><p class="caption">核查：Keep every original magnet and photo; tiny photo faces are not separate user entities.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P16<br>Attribute Modification<br>Entity / target_entity</td><td>our fridge<br><small>Personalized Entity</small></td><td><pre>&quot;E_FRIDGE&quot;</pre><a class="tag" href="#K_E_FRIDGE">E_FRIDGE</a></td></tr><tr><td>P17<br>Attribute Modification<br>Attribute / result_attribute</td><td>the fridge finish I picked<br><small></small></td><td><pre>{
+  &quot;body_material&quot;: &quot;brushed_stainless_steel&quot;
+}</pre><a class="tag" href="#K_A_FRIDGE_MATERIAL">A_FRIDGE_MATERIAL</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the main refrigerator body to a stainless steel metallic texture.</p><p>保留冰箱变不锈钢，并明确拉丝效果；不执行前序删除磁贴、加图案磁铁或改背景。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;22&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Change the main refrigerator body to a stainless steel metallic texture.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Color&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      4
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove all magnets and photos from the refrigerator.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a single large magnet with a geometric pattern centered on the refrigerator door.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the kitchen background with a minimalistic modern home environment.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Text&quot;,
+        &quot;instruction&quot;: &quot;Insert the text &#x27;Grocery List&#x27; at the top of the refrigerator door in a stylish font.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the main refrigerator body to a stainless steel metallic texture.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a handwritten note under the large magnet on the door.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Enhance the scene&#x27;s lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a soft bright filter to the image.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Keep every original magnet and photo; tiny photo faces are not separate user entities.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T10">这一条的意见</label><textarea id="feedback-T10" data-feedback="T10" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article>
+    <section class="profile-panel" id="profile"><h2>Profile · 由匹配任务反向构建</h2><p class="caption">属性修改均查询通用实体类别偏好。情境事实只用于本轮参数；位置条目记录特定实体或通用类别的生活语义、适用条件、目标位置和图中落点。</p><details class="profile-section"><summary>Personalized Entities · 3</summary><article class="knowledge" id="K_E_SUNNY"><h4>E_SUNNY</h4><a href="../benchmark/data/references/persona_005/E_SUNNY.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_005/E_SUNNY.jpg" alt="E_SUNNY reference"></a><pre>{
+  &quot;category&quot;: &quot;Dog&quot;,
+  &quot;name&quot;: &quot;Sunny&quot;,
+  &quot;aliases&quot;: [
+    &quot;Sunny&quot;
+  ],
+  &quot;relationship&quot;: &quot;one of the two pets already present in the basic biography&quot;,
+  &quot;source_task&quot;: &quot;T02&quot;,
+  &quot;bbox&quot;: [
+    0.04,
+    0.03,
+    0.98,
+    0.99
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;golden retriever&quot;,
+    &quot;very light cream-gold coat&quot;,
+    &quot;dark nose and floppy ears&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_005/E_SUNNY.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;7fdaaa170d0cde67eb62c30f03b2dc373e91a8557f79668ff24d1a8910b89897&quot;
+}</pre></article><article class="knowledge" id="K_E_PIP"><h4>E_PIP</h4><a href="../benchmark/data/references/persona_005/E_PIP.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_005/E_PIP.jpg" alt="E_PIP reference"></a><pre>{
+  &quot;category&quot;: &quot;Cat&quot;,
+  &quot;name&quot;: &quot;Pip&quot;,
+  &quot;aliases&quot;: [
+    &quot;Pip&quot;
+  ],
+  &quot;relationship&quot;: &quot;the other of the two existing pets&quot;,
+  &quot;source_task&quot;: &quot;T03&quot;,
+  &quot;bbox&quot;: [
+    0.23,
+    0.27,
+    0.75,
+    0.6
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;black-and-white cat&quot;,
+    &quot;dark back and head patches&quot;,
+    &quot;white chest and front legs&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_005/E_PIP.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;f2f9d3fe40008c3c8587566f59e93a65206137b2ac4b7e6bf83c9cf94dc671d1&quot;
+}</pre></article><article class="knowledge" id="K_E_FRIDGE"><h4>E_FRIDGE</h4><a href="../benchmark/data/references/persona_005/E_FRIDGE.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_005/E_FRIDGE.jpg" alt="E_FRIDGE reference"></a><pre>{
+  &quot;category&quot;: &quot;Refrigerator&quot;,
+  &quot;name&quot;: &quot;our fridge&quot;,
+  &quot;aliases&quot;: [
+    &quot;our fridge&quot;
+  ],
+  &quot;relationship&quot;: &quot;shared family refrigerator; material preview&quot;,
+  &quot;source_task&quot;: &quot;T10&quot;,
+  &quot;bbox&quot;: [
+    0.16,
+    0.04,
+    0.96,
+    0.99
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;white refrigerator with magnets and photographs on door&quot;,
+    &quot;visible door handle&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_005/E_FRIDGE.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;99ac3e86d534cefc1c7fb8a85ab824eeb8a1f597dda739cfb21960ed70296a37&quot;
+}</pre></article></details><details class="profile-section"><summary>General Entity Attribute Preferences · 6</summary><article class="knowledge" id="K_A_DOG_FOREST"><h4>A_DOG_FOREST</h4><pre>{
+  &quot;entity_category&quot;: &quot;ForestBackdrop&quot;,
+  &quot;dimension&quot;: &quot;season&quot;,
+  &quot;value&quot;: &quot;autumn_with_orange_and_yellow_foliage&quot;,
+  &quot;context&quot;: &quot;woodland backgrounds in pet photos&quot;,
+  &quot;stance&quot;: &quot;prefer&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T02&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_VANITY_MATERIAL"><h4>A_VANITY_MATERIAL</h4><pre>{
+  &quot;entity_category&quot;: &quot;Countertop&quot;,
+  &quot;dimension&quot;: &quot;material&quot;,
+  &quot;value&quot;: &quot;white_marble&quot;,
+  &quot;context&quot;: &quot;bathroom vanity material samples&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T04&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_BACKPACK_COLOR"><h4>A_BACKPACK_COLOR</h4><pre>{
+  &quot;entity_category&quot;: &quot;Backpack&quot;,
+  &quot;dimension&quot;: &quot;color&quot;,
+  &quot;value&quot;: &quot;red&quot;,
+  &quot;context&quot;: &quot;small everyday backpacks&quot;,
+  &quot;stance&quot;: &quot;normally_buy&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T08&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_BACKPACK_FABRIC"><h4>A_BACKPACK_FABRIC</h4><pre>{
+  &quot;entity_category&quot;: &quot;Backpack&quot;,
+  &quot;dimension&quot;: &quot;fabric&quot;,
+  &quot;value&quot;: &quot;canvas&quot;,
+  &quot;context&quot;: &quot;small everyday backpacks&quot;,
+  &quot;stance&quot;: &quot;normally_buy&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T08&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_PICNIC_SET"><h4>A_PICNIC_SET</h4><pre>{
+  &quot;entity_category&quot;: &quot;PicnicFurnitureSet&quot;,
+  &quot;dimension&quot;: &quot;material&quot;,
+  &quot;value&quot;: &quot;wood&quot;,
+  &quot;context&quot;: &quot;a picnic table with two chairs for an ordinary outing&quot;,
+  &quot;stance&quot;: &quot;normally_choose&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FRIDGE_MATERIAL"><h4>A_FRIDGE_MATERIAL</h4><pre>{
+  &quot;entity_category&quot;: &quot;Refrigerator&quot;,
+  &quot;dimension&quot;: &quot;body_material&quot;,
+  &quot;value&quot;: &quot;brushed_stainless_steel&quot;,
+  &quot;context&quot;: &quot;refrigerator finish previews&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Global Preferences · 2</summary><article class="knowledge" id="K_G_DINNER_DETAIL"><h4>G_DINNER_DETAIL</h4><pre>{
+  &quot;dimension&quot;: &quot;detail_recovery_strength&quot;,
+  &quot;value&quot;: &quot;gentle&quot;,
+  &quot;context&quot;: &quot;restaurant snapshots&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Choosing a clearer dinner photo while avoiding harsh edges or artificial food texture.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_G_CHARCOAL"><h4>G_CHARCOAL</h4><pre>{
+  &quot;dimension&quot;: &quot;rendering_style&quot;,
+  &quot;value&quot;: &quot;dramatic_charcoal_drawing&quot;,
+  &quot;context&quot;: &quot;animal pictures saved as wall-print ideas&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Saving expressive charcoal animal drawings; does not imply owning the depicted animal.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T07&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Position Preferences · 3</summary><article class="knowledge" id="K_S_DOG_WALK"><h4>S_DOG_WALK</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_id&quot;: &quot;E_SUNNY&quot;
+  },
+  &quot;semantic_key&quot;: &quot;which side Sunny walks on during our walks&quot;,
+  &quot;context&quot;: &quot;one person walking along a sufficiently wide path&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;left_of&quot;,
+    &quot;anchor&quot;: &quot;walking person&quot;,
+    &quot;support&quot;: &quot;path beside the person&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T01&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.47,
+        0.43,
+        0.53,
+        0.57
+      ],
+      &quot;destination_region&quot;: [
+        0.35,
+        0.48,
+        0.45,
+        0.6
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;on our usual walking side&quot;,
+    &quot;where Sunny walks beside us&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_S_CAT_DINNER_PERCH"><h4>S_CAT_DINNER_PERCH</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_id&quot;: &quot;E_PIP&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where Pip perches while we sit at the dining table&quot;,
+  &quot;context&quot;: &quot;dining table with its existing empty right-hand wooden chair&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;on&quot;,
+    &quot;anchor&quot;: &quot;empty right-hand dining chair seat&quot;,
+    &quot;support&quot;: &quot;existing chair seat&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T03&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.65,
+        0.24,
+        1,
+        0.77
+      ],
+      &quot;destination_region&quot;: [
+        0.66,
+        0.43,
+        0.98,
+        0.65
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;his usual dinner-time perch&quot;,
+    &quot;where Pip sits at dinner&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_S_CAMP_CLEAR"><h4>S_CAMP_CLEAR</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_category&quot;: &quot;PicnicFurnitureSet&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where I set the picnic furniture so the tent entrance stays clear&quot;,
+  &quot;context&quot;: &quot;grassy campsite with a tent at the right edge&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;left_of&quot;,
+    &quot;anchor&quot;: &quot;tent&quot;,
+    &quot;support&quot;: &quot;flat grassy foreground clear of the tent entrance&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T09&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.84,
+        0.58,
+        1,
+        0.98
+      ],
+      &quot;destination_region&quot;: [
+        0.25,
+        0.56,
+        0.67,
+        0.86
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;where I set up without blocking the tent&quot;,
+    &quot;our tent-clear picnic spot&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Contextual Facts · 4</summary><article class="knowledge" id="K_F_VANITY_SAMPLE"><h4>F_VANITY_SAMPLE</h4><pre>{
+  &quot;category&quot;: &quot;Countertop&quot;,
+  &quot;fact&quot;: &quot;The wide vanity photo is the countertop sample Xandro saved for the bathroom refresh.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T04&quot;,
+    &quot;bbox&quot;: [
+      0.02,
+      0.35,
+      0.99,
+      0.79
+    ],
+    &quot;description&quot;: &quot;wide vanity countertop&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T04&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_BISCUITS_SAVED"><h4>F_BISCUITS_SAVED</h4><pre>{
+  &quot;category&quot;: &quot;FoodServing&quot;,
+  &quot;fact&quot;: &quot;Xandro put aside the biscuits on the foreground plate for tomorrow&#x27;s snack.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T05&quot;,
+    &quot;bbox&quot;: [
+      0,
+      0.65,
+      0.56,
+      0.98
+    ],
+    &quot;description&quot;: &quot;foreground plate of biscuits; not flowers or teapot&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T05&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_DINNER_PICK"><h4>F_DINNER_PICK</h4><pre>{
+  &quot;category&quot;: &quot;Photo&quot;,
+  &quot;fact&quot;: &quot;This restaurant snapshot is the dinner photo Xandro saved to share.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T06&quot;,
+    &quot;bbox&quot;: [
+      0,
+      0,
+      1,
+      1
+    ],
+    &quot;description&quot;: &quot;whole restaurant snapshot&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_OUTGROWN_DRESS"><h4>F_OUTGROWN_DRESS</h4><pre>{
+  &quot;category&quot;: &quot;Clothing&quot;,
+  &quot;fact&quot;: &quot;The little party dress in this flat-lay is the toddler garment Xandro has set aside because it is outgrown.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T08&quot;,
+    &quot;bbox&quot;: [
+      0.12,
+      0.03,
+      0.89,
+      0.97
+    ],
+    &quot;description&quot;: &quot;single flat-lay party dress; child gender unspecified&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T08&quot;
+  ]
+}</pre></article></details><details><summary>聚合表达与整人一致性核查</summary><pre>{
+  &quot;aggregated_expression_review&quot;: null,
+  &quot;coherence_review&quot;: {
+    &quot;image_people_are_not_automatically_user&quot;: true,
+    &quot;independent_source_tasks&quot;: true,
+    &quot;existing_basic_pet_count&quot;: 2,
+    &quot;profile_pet_count&quot;: 2,
+    &quot;pet_names&quot;: [
+      &quot;Sunny&quot;,
+      &quot;Pip&quot;
+    ],
+    &quot;named_friends&quot;: [],
+    &quot;notes&quot;: [
+      &quot;Sunny和Pip是简介中既有两宠的构建身份，不是新添两只。&quot;,
+      &quot;两幅浴室素材是更新参考，不登记两套自有浴室。&quot;,
+      &quot;马的画风任务不把马设成宠物。&quot;,
+      &quot;幼儿衣物任务不推断孩子性别。&quot;,
+      &quot;冰箱磁贴不等于基础简介中的交通代币收藏。&quot;
+    ]
+  }
+}</pre></details><label class="feedback-label" for="feedback-profile">整个人物、Profile 或整体风格的意见</label><textarea id="feedback-profile" data-feedback="profile"></textarea></section><footer>当前为待审核构建稿。修改参数之后，来源 benchmark 的原始 target / 评分不直接沿用。</footer>
+    </main><script>
+    const pid="persona_005"; const storageKey='personaedit-formal-v1-'+pid;
+    const status=document.getElementById('save-status'); let feedback={};
+    try{feedback=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch(e){status.textContent='本地保存不可用；可导出意见'}
+    for(const el of document.querySelectorAll('[data-feedback]')){el.value=feedback[el.dataset.feedback]||'';el.addEventListener('input',()=>{feedback[el.dataset.feedback]=el.value;try{localStorage.setItem(storageKey,JSON.stringify(feedback));status.textContent='已在本机保存'}catch(e){status.textContent='请导出意见保存'}})}
+    document.getElementById('show-boxes').addEventListener('change',e=>document.body.classList.toggle('show-boxes',e.target.checked));
+    function revealHash(){const el=document.getElementById(location.hash.slice(1));if(!el)return;let node=el.parentElement;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement}el.scrollIntoView()}
+    window.addEventListener('hashchange',revealHash); if(location.hash)revealHash();
+    const reviewerKey='personaedit-volunteer-reviewer-v1';
+    let reviewer={id:'',name:''};
+    try{reviewer=JSON.parse(localStorage.getItem(reviewerKey)||'null')||reviewer}catch(e){}
+    if(!reviewer.id)reviewer.id=(globalThis.crypto?.randomUUID?.()||('r'+Date.now().toString(36)+Math.random().toString(36).slice(2))).slice(0,36);
+    const reviewerInput=document.getElementById('reviewer-name');reviewerInput.value=reviewer.name||'';
+    function saveReviewer(){reviewer.name=reviewerInput.value.trim();try{localStorage.setItem(reviewerKey,JSON.stringify(reviewer))}catch(e){}}
+    reviewerInput.addEventListener('input',saveReviewer);saveReviewer();
+    document.getElementById('export-feedback').addEventListener('click',()=>{
+      saveReviewer();
+      const exportedAt=new Date().toISOString();
+      const payload={schema_version:'1.1',persona_id:pid,draft:'formal-v1',dataset_revision:'59b4f06f3f61d703',reviewer_id:reviewer.id,reviewer_name:reviewer.name,exported_at:exportedAt,feedback};
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+      const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;
+      a.download=pid+'_'+exportedAt.replace(/[:.]/g,'-')+'_'+reviewer.id.slice(0,8)+'.json';a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='已导出；请将JSON附件交回审核组织者';
+    });
+    </script></body></html>

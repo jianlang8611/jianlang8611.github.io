@@ -1,0 +1,850 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PersonaEdit · persona_003 · 正式首稿</title><style>
+    :root{color-scheme:light;--ink:#24313e;--muted:#647480;--line:#dce3e7;--accent:#17665e}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;background:#f4f6f7;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:30px;margin:0 0 10px}h2{font-size:21px;margin:0}h3{margin:15px 0 6px}h4{margin:8px 0}a{color:var(--accent)}p{margin:8px 0}.intro,.task,.profile-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}.sub,.caption,.zh{color:var(--muted)}.sub{margin-top:0}.caption{font-size:13px}.pill{display:inline-block;background:#fdf0cb;border-radius:5px;padding:2px 8px;color:#715619}.nav{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffffff2;border-bottom:1px solid var(--line);padding:10px 25px;backdrop-filter:blur(8px)}.nav a{text-decoration:none;font-weight:600}button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:white;color:var(--ink);cursor:pointer}.nav label{margin-left:auto;font-size:13px}.task-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tag{display:inline-block;font:12px/1.5 ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:4px;margin:3px}.task-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:25px}.source-image{display:flex;justify-content:center;background:#edf1f2;border-radius:8px;padding:8px}.image-wrap{position:relative;line-height:0}.image-wrap img{display:block;max-width:100%;max-height:490px;width:auto;height:auto}.bbox{position:absolute;border:2px solid #1675b9;display:none;pointer-events:none;line-height:1.3}.show-boxes .bbox{display:block}.bbox span{position:absolute;top:0;left:0;color:white;background:#1675b9;font:11px/1.3 monospace}.bbox.remove{border-color:#c34149}.bbox.remove span{background:#c34149}.bbox.keep{border-color:#21804d}.bbox.keep span{background:#21804d}.bbox.destination{border:2px dashed #a76800}.bbox.destination span{background:#a76800}.personal,.base{border-radius:8px;padding:14px 17px;margin-bottom:13px}.personal{background:#e8f4ee;border-left:4px solid #33856f}.base{background:#f2f4f7}.commands label{font-size:12px;font-weight:700;letter-spacing:.04em}.commands p{font-size:17px}.commands .zh{font-size:15px}details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;font-weight:600}pre{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fa;border-radius:5px;padding:10px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px}td:first-child{min-width:155px}td:nth-child(2){min-width:190px}td:nth-child(3){width:52%}td pre{margin-top:0}.table-scroll{overflow:auto}.knowledge{border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0;scroll-margin-top:65px;overflow:auto}.reference{float:right;width:135px;max-height:160px;object-fit:contain;margin:0 0 10px 15px}.knowledge:target{border:2px solid #33856f;background:#f5fcf8}.feedback-label{display:block;margin:15px 0 6px;font-size:13px;color:var(--muted)}textarea{width:100%;min-height:75px;border:1px solid var(--line);border-radius:7px;padding:10px;font:14px/1.5 inherit;resize:vertical}#save-status{font-size:12px;color:var(--muted)}.small-links{display:flex;gap:15px;flex-wrap:wrap}.basic-list{padding-left:20px}.contact{width:100%;max-width:1000px;display:block;margin:15px auto}.notice{background:#fff9e8;border-radius:7px;padding:12px;font-size:13px}.profile-panel .profile-section>summary{font-size:16px}footer{font-size:12px;color:var(--muted);padding-bottom:30px}@media(max-width:850px){main{padding:14px}.intro,.task,.profile-panel{padding:16px}.task-grid{grid-template-columns:1fr}.nav{padding:8px 12px;gap:10px}.nav label{margin-left:0}.image-wrap img{max-height:430px}h1{font-size:25px}}
+    </style></head><body><nav class="nav"><a href="index.html">全部人物</a><a href="#overview">概览</a><a href="#profile">Profile</a><a href="#T01">T01</a><a href="#T02">T02</a><a href="#T03">T03</a><a href="#T04">T04</a><a href="#T05">T05</a><a href="#T06">T06</a><a href="#T07">T07</a><a href="#T08">T08</a><a href="#T09">T09</a><a href="#T10">T10</a><label><input id="show-boxes" type="checkbox"> 显示核查框</label><button id="export-feedback">导出意见 JSON</button><span id="save-status"></span></nav><main>
+    <section class="intro" id="overview"><span class="pill">正式数据构建稿 · 待审核</span><h1>Hayes Jorgensen · persona_003</h1><p class="sub">100 位 V3 基础人物已固定顺序；目前 5 位完成图文构建稿，本页为其中一位的10个任务。英文为本轮评估语言，中文用于审核。</p><p>Hayes Jorgensen从事信用社应付账款，爱钓鱼、烧烤、折扣工具和旧汽车旅馆明信片，已有银色Tacoma。这里用工具与修复、出行、餐食和明信片风格做轻量匹配；不把图片里的其他车辆都认作他的Tacoma。</p><p>Accounts payable coordinator at a regional credit union · Associate degree in Accounting · 未提供数值年龄；按职业与教育背景推定为成年人</p><p class="caption">10 张不同原图 · 10 条命令 · 10 个原子操作 · 17 个个性化参数 · 8 类操作</p><p class="caption">Move 1 · Add 1 · Replace 1 · Remove 1 · Attribute Modification 3 · Retouch 1 · Background 1 · Restyle 1</p><div class="notice">T04用Heath作为保留者，确实要删除左侧另一人。T09将颜色任务改为常见的灯芯绒表面；T10明确是微缩厨房模型。 所有实体和偏好仍为构建稿，尚无长期历史或编辑结果。</div><p class="caption">其他人物：<a href="persona_001.html">Khoa Bui</a> · <a href="persona_002.html">Azusa Bessho</a> · <a href="persona_004.html">Folarin Ezeani</a> · <a href="persona_005.html">Xandro Panganiban</a></p><div class="small-links"><a href="../benchmark/data/personas/basic_persona_profile.json">100 人 Basic JSON</a><a href="../benchmark/data/personas/complete_persona_profile.json">Complete Profile JSON</a><a href="../benchmark/data/instructions/basic_instruction.json">Base JSON</a><a href="../benchmark/data/instructions/persona_instruction.json">Personalized JSON</a></div><div class="reviewer-panel" style="margin-top:16px;padding:14px;background:#f2f7f5;border-radius:8px">
+                <label for="reviewer-name">审核署名（可选）</label>
+                <input id="reviewer-name" type="text" maxlength="100" placeholder="姓名或昵称" style="display:block;max-width:100%;width:280px;padding:8px;margin:6px 0;border:1px solid #dce3e7;border-radius:6px;font:inherit">
+                <p class="caption">填写逐条或整体意见后，点击顶部“导出意见JSON”，把文件作为附件交回 <a href="mailto:jian_lang@std.uestc.edu.cn?subject=PersonaEdit%20review%20persona_003">jian_lang@std.uestc.edu.cn</a>。意见先保存在当前浏览器；导出或交回后才会进入本轮收集。</p></div><details><summary>整组图片与基础人物信息（已清理、统一字段）</summary><img class="contact" src="../benchmark/data/images/persona_003/contact-sheet.jpg" alt="10 source images"><pre>{
+  &quot;source&quot;: {
+    &quot;dataset&quot;: &quot;bowen-upenn/PersonaMem-v3&quot;,
+    &quot;revision&quot;: &quot;7b00a090b35b7293e6efeeb19494207f32b5a9ee&quot;,
+    &quot;source_persona_id&quot;: &quot;17&quot;,
+    &quot;path&quot;: &quot;backend/17/profile.json&quot;,
+    &quot;raw_sha256&quot;: &quot;56a81cfee138ab94cb1eeb6e8612d7c55cadf4b82f3b6920afb1814a1e582c39&quot;
+  },
+  &quot;basic_profile&quot;: {
+    &quot;name&quot;: &quot;Hayes Jorgensen&quot;,
+    &quot;age&quot;: null,
+    &quot;gender&quot;: &quot;cisgender male, heterosexual&quot;,
+    &quot;nationality&quot;: null,
+    &quot;languages&quot;: [],
+    &quot;location&quot;: {
+      &quot;city&quot;: null,
+      &quot;region&quot;: null,
+      &quot;country&quot;: null,
+      &quot;description&quot;: null
+    },
+    &quot;education&quot;: {
+      &quot;degrees&quot;: [
+        &quot;Associate degree in Accounting&quot;
+      ],
+      &quot;fields&quot;: [],
+      &quot;institutions&quot;: []
+    },
+    &quot;occupation&quot;: {
+      &quot;title&quot;: &quot;Accounts payable coordinator at a regional credit union&quot;,
+      &quot;organization&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;status&quot;: null
+    },
+    &quot;relationship_status&quot;: null,
+    &quot;summary&quot;: null,
+    &quot;biography&quot;: &quot;Hayes spends weekdays chasing invoice approvals at a credit union, then unwinds by arguing about NFL preseason depth charts and Panthers-versus-Eagles takes in group chats. His phone feed is mostly touchdown clips, SEC rivalry trash talk, cat reels, DBZ edits, and the occasional husky chaos video as long as it is funny and not overly sentimental. On weekends he details his aging silver Tacoma, hunts for discounted tools, grills pork chops, and gets up early to fish for largemouth bass before the house is awake. He is blunt, loud, and easily wound up, but he is unexpectedly meticulous about pressing his shirts and keeps a small collection of antique motel postcards in a shoebox.&quot;,
+    &quot;hobbies&quot;: [],
+    &quot;personality&quot;: {
+      &quot;traits&quot;: [],
+      &quot;values&quot;: [],
+      &quot;quirks&quot;: [],
+      &quot;big_five&quot;: {
+        &quot;openness&quot;: &quot;low&quot;,
+        &quot;conscientiousness&quot;: &quot;medium&quot;,
+        &quot;extraversion&quot;: &quot;high&quot;,
+        &quot;agreeableness&quot;: &quot;low&quot;,
+        &quot;neuroticism&quot;: &quot;high&quot;
+      }
+    },
+    &quot;additional&quot;: {
+      &quot;social_connections&quot;: [
+        {
+          &quot;friend_id&quot;: &quot;friend_1&quot;,
+          &quot;display_name&quot;: &quot;Holden Jessup&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;NFL&quot;,
+            &quot;Panthers takes&quot;,
+            &quot;grilling&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_2&quot;,
+          &quot;display_name&quot;: &quot;Heath Jarrett&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;largemouth bass fishing&quot;,
+            &quot;discounted tools&quot;,
+            &quot;Tacoma detailing&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_3&quot;,
+          &quot;display_name&quot;: &quot;Hank Jamison&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;SEC rivalry talk&quot;,
+            &quot;NFL depth charts&quot;,
+            &quot;DBZ edits&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_4&quot;,
+          &quot;display_name&quot;: &quot;Holden Jeffers&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;local buy-sell groups&quot;,
+            &quot;tool deals&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_5&quot;,
+          &quot;display_name&quot;: &quot;Harrison Judd&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Eagles trash talk&quot;,
+            &quot;NFL&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_6&quot;,
+          &quot;display_name&quot;: &quot;Colby Janssen&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;credit union coworkers&quot;,
+            &quot;cat reels&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_7&quot;,
+          &quot;display_name&quot;: &quot;Wade Jernigan&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Tacoma detailing&quot;,
+            &quot;discounted tools&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_8&quot;,
+          &quot;display_name&quot;: &quot;Harvey Jolley&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;sports threads&quot;,
+            &quot;trash-talk mutuals&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_9&quot;,
+          &quot;display_name&quot;: &quot;Nolan Justice&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;husky chaos videos&quot;,
+            &quot;cat reels&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_10&quot;,
+          &quot;display_name&quot;: &quot;Seth Jowers&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;SEC football&quot;,
+            &quot;NFL commentary&quot;
+          ]
+        }
+      ]
+    }
+  },
+  &quot;adult_eligibility&quot;: {
+    &quot;status&quot;: &quot;adult&quot;,
+    &quot;basis&quot;: &quot;adult_career_and_education_context&quot;,
+    &quot;inferred&quot;: true,
+    &quot;numeric_age_provided&quot;: false
+  },
+  &quot;persona_id&quot;: &quot;persona_003&quot;
+}</pre></details></section>
+    <article class="task" id="T01">
+          <div class="task-heading"><h2>T01 · 不爱吃的香草挪到盘边</h2><div><span class="tag">Move</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T01_complex_67.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T01_complex_67.jpg" alt="T01 source image"><div class="bbox target" style="left:39.0%;top:34.0%;width:36.0%;height:31.0%"><span>P01</span></div><div class="bbox destination" style="left:53.0%;top:10.0%;width:18.999999999999993%;height:12.0%"><span>destination</span></div></div></a><p class="caption">Complex-Edit · 67 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Move the herb garnish I avoid out of my way when I eat steak.</p><p class="zh">把我不吃的那种香草配料挪到吃牛排时不碍事的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Move the parsley garnish off the steak onto the plate rim near the broccoli.</p><p class="zh">把牛排上的欧芹挪到西兰花旁边的盘沿。</p></div><p class="caption">匹配：烧烤爱好提供轻量匹配；不吃欧芹是按任务补充，不从职业或地区推断。</p><p class="caption">核查：Parsley, steak and broccoli are all visible in the unedited original.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P01<br>Move<br>Entity / target_entity</td><td>the herb garnish I avoid<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;HerbGarnish&quot;,
+  &quot;herb_type&quot;: &quot;parsley&quot;
+}</pre><a class="tag" href="#K_A_GARNISH_AVOID">A_GARNISH_AVOID</a></td></tr><tr><td>P02<br>Move<br>Placement / destination</td><td>out of my way when I eat steak<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;on_rim_near&quot;,
+  &quot;anchor&quot;: &quot;broccoli&quot;,
+  &quot;support&quot;: &quot;plate rim clear of the steak&quot;
+}</pre><a class="tag" href="#K_S_GARNISH_ASIDE">S_GARNISH_ASIDE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Reposition the parsley on the steak to the plate&#x27;s rim, near the broccoli.</p><p>保留欧芹从牛排移到西兰花旁盘边；不加酒、不改桌布或酱汁。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;67&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Reposition the parsley on the steak to the plate&#x27;s rim, near the broccoli.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Move an Object&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      4
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the orange cloth background with a white marble table surface.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add soft steam effects rising above the steak.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the steak&#x27;s sauce color slightly to a deeper red.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a glass of red wine to the upper left corner of the image.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Reposition the parsley on the steak to the plate&#x27;s rim, near the broccoli.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm filter to the image.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Zoom In/Out&quot;,
+        &quot;instruction&quot;: &quot;Zoom out slightly to show more of the full plate and surroundings.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Text&quot;,
+        &quot;instruction&quot;: &quot;Add the text &#x27;Bon Appétit&#x27; in elegant script to the bottom-left corner of the image.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Parsley, steak and broccoli are all visible in the unedited original.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T01">这一条的意见</label><textarea id="feedback-T01" data-feedback="T01" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T02">
+          <div class="task-heading"><h2>T02 · 旧皮箱放进后备箱惯常位置</h2><div><span class="tag">Add</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T02_imgedit_25.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T02_imgedit_25.jpg" alt="T02 source image"><div class="bbox destination" style="left:30.0%;top:48.0%;width:40.0%;height:28.000000000000004%"><span>destination</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 25 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Add my old weekender where I normally pack it in the trunk.</p><p class="zh">把我的旧旅行箱加上，放在我平时装后备箱的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Add a worn vintage brown leather suitcase with short leather closure straps, central handle and metal latches on the central floor of the open car trunk.</p><p class="zh">在敞开的后备箱中央放入一只磨旧的棕皮箱，带两道前搭带、中间提手和金属锁扣。</p></div><p class="caption">匹配：普通出行；图中的古董车不是简介中的Tacoma，不新增归属。</p><p class="caption">核查：Suitcase must fit inside the open trunk rather than covering the lid or floating.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P03<br>Add<br>Entity / reference_entity</td><td>my old weekender<br><small>Personalized Entity</small></td><td><pre>&quot;E_WEEKENDER&quot;</pre><a class="tag" href="#K_E_WEEKENDER">E_WEEKENDER</a></td></tr><tr><td>P04<br>Add<br>Placement / destination</td><td>where I normally pack it in the trunk<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;inside&quot;,
+  &quot;anchor&quot;: &quot;open car trunk&quot;,
+  &quot;support&quot;: &quot;central trunk floor&quot;
+}</pre><a class="tag" href="#K_S_TRUNK_PACK">S_TRUNK_PACK</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Add a vintage brown leather suitcase inside the car trunk.</p><p>保留后备箱加棕色古董皮箱，具体到T05同一只箱子和可见后备箱底部。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;25&quot;,
+    &quot;original_image_path&quot;: &quot;for_add/000001314.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Add a vintage brown leather suitcase inside the car trunk.&quot;,
+    &quot;native_label&quot;: &quot;add&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Suitcase must fit inside the open trunk rather than covering the lid or floating.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T02">这一条的意见</label><textarea id="feedback-T02" data-feedback="T02" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T03">
+          <div class="task-heading"><h2>T03 · 不喜欢的糖霜装饰蛋糕换苹果派</h2><div><span class="tag">Replace</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T03_gedit_889.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T03_gedit_889.jpg" alt="T03 source image"></div></a><p class="caption">GEdit-Bench · 889 · 608 × 448</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Swap the cake with the frosting I avoid for my favorite pie.</p><p class="zh">我不爱那种糖霜装饰的蛋糕，换成我最喜欢的派。</p></div><div class="base"><label>Base · 明确答案</label><p>Replace the white-frosted cake with blue piping with an apple pie, keeping the wooden serving board.</p><p class="zh">把带蓝色糖霜装饰的白色蛋糕换成苹果派，保留木托板。</p></div><p class="caption">匹配：普通甜点选择，苹果馅偏好在选图后补充。</p><p class="caption">核查：One cake on the board; replacement should not add a second dessert.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P05<br>Replace<br>Entity / target_entity</td><td>the cake with the frosting I avoid<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Cake&quot;,
+  &quot;frosting_style&quot;: &quot;white_frosting_with_blue_piping&quot;
+}</pre><a class="tag" href="#K_A_CAKE_AVOID">A_CAKE_AVOID</a></td></tr><tr><td>P06<br>Replace<br>Entity / reference_entity</td><td>my favorite pie<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Pie&quot;,
+  &quot;filling&quot;: &quot;apple&quot;
+}</pre><a class="tag" href="#K_A_PIE">A_PIE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Replace the cake with a pie.</p><p>原苹果派替换意图保留；明确保留托板。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;889&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;2d3bd0d5db244d8fc89c9348fcb07d19&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the cake with a pie.&quot;,
+    &quot;native_label&quot;: &quot;subject-replace&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;One cake on the board; replacement should not add a second dessert.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T03">这一条的意见</label><textarea id="feedback-T03" data-feedback="T03" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T04">
+          <div class="task-heading"><h2>T04 · 露营合照只留下Heath</h2><div><span class="tag">Remove</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T04_imgedit_1156.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T04_imgedit_1156.jpg" alt="T04 source image"><div class="bbox remove" style="left:30.0%;top:13.0%;width:31.0%;height:87.0%"><span>remove</span></div><div class="bbox keep" style="left:56.00000000000001%;top:18.0%;width:41.99999999999999%;height:81.0%"><span>keep</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 1156 · 1280 × 720</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Keep Heath; remove the other person.</p><p class="zh">只留Heath，把另一个人去掉。</p></div><div class="base"><label>Base · 明确答案</label><p>Remove the woman seated on the left; keep the man seated on the right.</p><p class="zh">移除坐在左侧的女子，保留右侧男子。</p></div><p class="caption">匹配：Heath Jarrett是基础名单已有钓友；视觉关联为本轮构建。</p><p class="caption">核查：Two visible people make the retained identity affect the deletion set. No personal dislike is inferred.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P07<br>Remove<br>Entity / target_entity</td><td>Keep Heath<br><small>General Entity</small></td><td><pre>{
+  &quot;selection&quot;: &quot;visible_people_except&quot;,
+  &quot;keep&quot;: &quot;E_HEATH&quot;,
+  &quot;remove&quot;: &quot;left_woman&quot;
+}</pre><a class="tag" href="#K_E_HEATH">E_HEATH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Remove the person on the left side of the image, and adjust the brightness of the sky to make it appear sunnier.</p><p>保留原复合指令的删左人部分；天空所占区域很小，舍弃原提亮天空部分，完整原指令仍保留。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1156&quot;,
+    &quot;original_image_path&quot;: &quot;compose/human/7.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Remove the person on the left side of the image, and adjust the brightness of the sky to make it appear sunnier.&quot;,
+    &quot;native_label&quot;: &quot;compose&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep Heath, campsite objects, ground and original lighting unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Two visible people make the retained identity affect the deletion set. No personal dislike is inferred.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T04">这一条的意见</label><textarea id="feedback-T04" data-feedback="T04" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T05">
+          <div class="task-heading"><h2>T05 · 旧皮箱试常选的皮面光泽</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T05_imgedit_1131.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T05_imgedit_1131.jpg" alt="T05 source image"><div class="bbox target" style="left:5.0%;top:13.0%;width:90.99999999999999%;height:81.0%"><span>P08</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 1131 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Give my old weekender the leather finish I usually choose.</p><p class="zh">我的旧旅行箱，试试我常选的那种皮面光泽。</p></div><div class="base"><label>Base · 明确答案</label><p>Give the worn brown leather suitcase a smooth, glossy surface finish, preserving its brown color, seams, closure straps and hardware.</p><p class="zh">给旧棕皮箱换光滑有光泽的表面，保留棕色、缝线、搭带和金属件。</p></div><p class="caption">匹配：工具与修复的弱匹配；偏好来自Suitcase类别，不是“喜欢的我的箱子的样子”。</p><p class="caption">核查：The weathered leather provides a visible finish change; preserve suitcase identity.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P08<br>Attribute Modification<br>Entity / target_entity</td><td>my old weekender<br><small>Personalized Entity</small></td><td><pre>&quot;E_WEEKENDER&quot;</pre><a class="tag" href="#K_E_WEEKENDER">E_WEEKENDER</a></td></tr><tr><td>P09<br>Attribute Modification<br>Attribute / result_attribute</td><td>the leather finish I usually choose<br><small></small></td><td><pre>{
+  &quot;surface_finish&quot;: &quot;smooth_glossy&quot;
+}</pre><a class="tag" href="#K_A_CASE_FINISH">A_CASE_FINISH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the surface texture of the object to a smooth, glossy finish.</p><p>保留光滑有光泽的表面任务，明确箱体皮面，避免把锁扣或搭带一起抹平。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1131&quot;,
+    &quot;original_image_path&quot;: &quot;daily object/000117413.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the surface texture of the object to a smooth, glossy finish.&quot;,
+    &quot;native_label&quot;: &quot;adjust&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The weathered leather provides a visible finish change; preserve suitcase identity.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T05">这一条的意见</label><textarea id="feedback-T05" data-feedback="T05" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T06">
+          <div class="task-heading"><h2>T06 · 夜间随拍轻度去掉暗部噪点</h2><div><span class="tag">Retouch</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T06_gedit_1208.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T06_gedit_1208.jpg" alt="T06 source image"><div class="bbox target" style="left:0%;top:0%;width:100%;height:100%"><span>P10</span></div></div></a><p class="caption">GEdit-Bench · 1208 · 416 × 608</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>For the night shot I saved, use the gentle noise cleanup I like.</p><p class="zh">我保存的那张夜景照，按我喜欢的轻度降噪处理。</p></div><div class="base"><label>Base · 明确答案</label><p>Mildly reduce shadow noise in the nighttime snapshot, preserving real detail and the existing night mood.</p><p class="zh">为夜间随拍轻度减少暗部噪点，保留真实细节和夜景气氛。</p></div><p class="caption">匹配：普通晚间出行照片；图中年轻男子不认作Hayes。</p><p class="caption">核查：未来历史需能支持“暗部干净一些但保留夜感”的观感；轻度效果仍需人工评分口径。</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P10<br>Retouch<br>Entity / target_entity</td><td>the night shot I saved<br><small>General Entity</small></td><td><pre>&quot;saved_evening_outing_photo&quot;</pre><a class="tag" href="#K_F_NIGHT_SNAPSHOT">F_NIGHT_SNAPSHOT</a></td></tr><tr><td>P11<br>Retouch<br>Attribute / result_attribute</td><td>the gentle noise cleanup I like<br><small></small></td><td><pre>{
+  &quot;shadow_noise_reduction&quot;: &quot;mild&quot;
+}</pre><a class="tag" href="#K_G_NIGHT_NOISE">G_NIGHT_NOISE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Improve the photo&#x27;s clarity and apply beautification.</p><p>原泛化修图具体为轻度暗部降噪，不补算法、数值或无依据的脸部细节。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;1208&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;220cbf1b8bf55b56873b0aec63a1e6bc&quot;,
+    &quot;original_instruction&quot;: &quot;Improve the photo&#x27;s clarity and apply beautification.&quot;,
+    &quot;native_label&quot;: &quot;tone_transfer&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Keep it a night photo; do not invent detail lost to the source resolution.&quot;,
+    &quot;follow_up&quot;: &quot;未来历史需能支持“暗部干净一些但保留夜感”的观感；轻度效果仍需人工评分口径。&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T06">这一条的意见</label><textarea id="feedback-T06" data-feedback="T06" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T07">
+          <div class="task-heading"><h2>T07 · 林间车辆照片换春季背景</h2><div><span class="tag">Background</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T07_imgedit_254.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T07_imgedit_254.jpg" alt="T07 source image"></div></a><p class="caption">ImgEdit-Bench Basic · 254 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Use the season I prefer for forest backdrops.</p><p class="zh">树林背景换成我喜欢的那个季节。</p></div><div class="base"><label>Base · 明确答案</label><p>Change the autumn forest behind the truck into a spring forest.</p><p class="zh">把卡车后方的秋季树林改成春季树林。</p></div><p class="caption">匹配：车辆与户外兴趣仅作轻量匹配；图中Ford不认作他的银色Tacoma。</p><p class="caption">核查：Truck identity and road remain unchanged; only surrounding forest season changes.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P12<br>Background<br>Entity / reference_entity</td><td>the season I prefer for forest backdrops<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;ForestBackdrop&quot;,
+  &quot;season&quot;: &quot;spring&quot;
+}</pre><a class="tag" href="#K_A_FOREST_SEASON">A_FOREST_SEASON</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the forest in the picture from autumn to spring.</p><p>保留秋林变春林，不改车辆。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;254&quot;,
+    &quot;original_image_path&quot;: &quot;transport/000265699.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the forest in the picture from autumn to spring.&quot;,
+    &quot;native_label&quot;: &quot;background&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Truck identity and road remain unchanged; only surrounding forest season changes.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T07">这一条的意见</label><textarea id="feedback-T07" data-feedback="T07" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T08">
+          <div class="task-heading"><h2>T08 · 风景做旧明信片风格</h2><div><span class="tag">Restyle</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T08_imgedit_687.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T08_imgedit_687.jpg" alt="T08 source image"></div></a><p class="caption">ImgEdit-Bench Basic · 687 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Give this the old-postcard look I collect.</p><p class="zh">做成我收藏的那种旧明信片风格。</p></div><div class="base"><label>Base · 明确答案</label><p>Render the coastal castle scene as a vintage sepia postcard.</p><p class="zh">把海岸城堡风景改成复古棕褐色明信片风格。</p></div><p class="caption">匹配：基础爱好有旧汽车旅馆明信片；不是把城堡认成汽车旅馆。</p><p class="caption">核查：Preserve castle, coastline, sea and viewpoint; no new text or stamp is required.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P13<br>Restyle<br>Attribute / result_attribute</td><td>the old-postcard look I collect<br><small></small></td><td><pre>{
+  &quot;rendering_style&quot;: &quot;vintage_sepia_postcard&quot;
+}</pre><a class="tag" href="#K_G_POSTCARD">G_POSTCARD</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Transfer the image into a sepia-toned vintage-photograph style.</p><p>保留原棕褐色复古照片意图，以明信片收藏语境承接。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;687&quot;,
+    &quot;original_image_path&quot;: &quot;style/000280642.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Transfer the image into a sepia-toned vintage-photograph style.&quot;,
+    &quot;native_label&quot;: &quot;style&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Preserve castle, coastline, sea and viewpoint; no new text or stamp is required.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T08">这一条的意见</label><textarea id="feedback-T08" data-feedback="T08" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T09">
+          <div class="task-heading"><h2>T09 · 木扶手椅换灯芯绒纹理</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T09_imgedit_1141.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T09_imgedit_1141.jpg" alt="T09 source image"><div class="bbox target" style="left:0%;top:1.0%;width:100%;height:98.0%"><span>P14</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 1141 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Try my usual upholstery texture on my wood-arm chair.</p><p class="zh">我的木扶手椅，试试我常选的软包纹理。</p></div><div class="base"><label>Base · 明确答案</label><p>Change only the armchair upholstery to a ribbed corduroy texture. Preserve its light cream base color and wooden frame.</p><p class="zh">仅把扶手椅软包改成灯芯绒条纹肌理，保留浅奶油底色与木架。</p></div><p class="caption">匹配：普通旧物翻新，不额外设定家具收藏爱好。</p><p class="caption">核查：The large seat, back and side upholstery make ribs assessable; retain wood grain and chair geometry.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P14<br>Attribute Modification<br>Entity / target_entity</td><td>my wood-arm chair<br><small>Personalized Entity</small></td><td><pre>&quot;E_ARMCHAIR&quot;</pre><a class="tag" href="#K_E_ARMCHAIR">E_ARMCHAIR</a></td></tr><tr><td>P15<br>Attribute Modification<br>Attribute / result_attribute</td><td>my usual upholstery texture<br><small></small></td><td><pre>{
+  &quot;upholstery_texture&quot;: &quot;ribbed_corduroy&quot;
+}</pre><a class="tag" href="#K_A_CHAIR_WEAVE">A_CHAIR_WEAVE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the armchair to red.</p><p>原任务仅椅子变红；为补常见非颜色属性，根据大面积可见软包改为灯芯绒纹理。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1141&quot;,
+    &quot;original_image_path&quot;: &quot;daily object/000363394.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the armchair to red.&quot;,
+    &quot;native_label&quot;: &quot;adjust&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The large seat, back and side upholstery make ribs assessable; retain wood grain and chair geometry.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T09">这一条的意见</label><textarea id="feedback-T09" data-feedback="T09" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T10">
+          <div class="task-heading"><h2>T10 · 微缩厨房桌面的木纹方案</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_003/T10_complex_16.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_003/T10_complex_16.jpg" alt="T10 source image"><div class="bbox target" style="left:0%;top:53.0%;width:44.0%;height:23.0%"><span>P16</span></div></div></a><p class="caption">Complex-Edit · 16 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Try my usual table finish on the one in my kitchen mock-up.</p><p class="zh">我厨房模型里的那张桌子，试试我常选的桌面效果。</p></div><div class="base"><label>Base · 明确答案</label><p>Change only the blue tabletop in the miniature kitchen to a natural wood-grain finish. Keep its legs and the blue cabinetry unchanged.</p><p class="zh">只把微缩厨房里蓝色桌面改成自然木纹，保留桌腿与蓝色橱柜。</p></div><p class="caption">匹配：工具兴趣只提供轻量关联；模型作为表面方案参考，不新增真实房间。</p><p class="caption">核查：Blue miniature table occupies foreground left; do not apply wood texture to adjacent blue cupboard panels.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P16<br>Attribute Modification<br>Entity / target_entity</td><td>the one in my kitchen mock-up<br><small>General Entity</small></td><td><pre>&quot;miniature_blue_tabletop&quot;</pre><a class="tag" href="#K_F_KITCHEN_MOCKUP">F_KITCHEN_MOCKUP</a></td></tr><tr><td>P17<br>Attribute Modification<br>Attribute / result_attribute</td><td>my usual table finish<br><small></small></td><td><pre>{
+  &quot;tabletop_finish&quot;: &quot;natural_wood_grain&quot;
+}</pre><a class="tag" href="#K_A_TABLE_FINISH">A_TABLE_FINISH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the table surface to a wood texture instead of the blue paint.</p><p>保留蓝桌面变木纹，但原图明显是玩具厨房，明确模型尺度，不误登记为真人厨房。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;16&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Change the table surface to a wood texture instead of the blue paint.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Texture&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      6
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a toy fruit basket on the kitchen table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the chair color to a deep red tone.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Reposition the refrigerator to the far left corner of the room.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add a warm evening light effect to the room.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the small fruit tiles on the wall.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a slight vintage filter to the entire image.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Change the table surface to a wood texture instead of the blue paint.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Dim the room lighting slightly.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Blue miniature table occupies foreground left; do not apply wood texture to adjacent blue cupboard panels.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T10">这一条的意见</label><textarea id="feedback-T10" data-feedback="T10" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article>
+    <section class="profile-panel" id="profile"><h2>Profile · 由匹配任务反向构建</h2><p class="caption">属性修改均查询通用实体类别偏好。情境事实只用于本轮参数；位置条目记录特定实体或通用类别的生活语义、适用条件、目标位置和图中落点。</p><details class="profile-section"><summary>Personalized Entities · 3</summary><article class="knowledge" id="K_E_WEEKENDER"><h4>E_WEEKENDER</h4><a href="../benchmark/data/references/persona_003/E_WEEKENDER.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_003/E_WEEKENDER.jpg" alt="E_WEEKENDER reference"></a><pre>{
+  &quot;category&quot;: &quot;Suitcase&quot;,
+  &quot;name&quot;: &quot;my old weekender&quot;,
+  &quot;aliases&quot;: [
+    &quot;my old weekender&quot;
+  ],
+  &quot;relationship&quot;: &quot;owned vintage leather travel case&quot;,
+  &quot;source_task&quot;: &quot;T05&quot;,
+  &quot;bbox&quot;: [
+    0.05,
+    0.13,
+    0.96,
+    0.94
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;worn rectangular brown leather suitcase&quot;,
+    &quot;short leather closure straps&quot;,
+    &quot;metal latches and a central handle&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T02&quot;,
+    &quot;T05&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_003/E_WEEKENDER.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;619466f9a23d8b55d38f39fcfa1d837612d4b407d8c10021d04a8f0c17e657c6&quot;
+}</pre></article><article class="knowledge" id="K_E_HEATH"><h4>E_HEATH</h4><a href="../benchmark/data/references/persona_003/E_HEATH.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_003/E_HEATH.jpg" alt="E_HEATH reference"></a><pre>{
+  &quot;category&quot;: &quot;Person&quot;,
+  &quot;name&quot;: &quot;Heath Jarrett&quot;,
+  &quot;aliases&quot;: [
+    &quot;Heath Jarrett&quot;
+  ],
+  &quot;relationship&quot;: &quot;existing close fishing friend in V3&quot;,
+  &quot;source_task&quot;: &quot;T04&quot;,
+  &quot;bbox&quot;: [
+    0.56,
+    0.18,
+    0.98,
+    0.99
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;man seated on the right at the campsite&quot;,
+    &quot;short dark hair&quot;,
+    &quot;gray-blue checked shirt&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;source_connection_ref&quot;: &quot;basic_profile.additional.social_connections/1&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T04&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_003/E_HEATH.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;4a4cd49c24b49d7f7aca8085f2eaaf11f5289b40d9b931b2491029d43a3af841&quot;
+}</pre></article><article class="knowledge" id="K_E_ARMCHAIR"><h4>E_ARMCHAIR</h4><a href="../benchmark/data/references/persona_003/E_ARMCHAIR.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_003/E_ARMCHAIR.jpg" alt="E_ARMCHAIR reference"></a><pre>{
+  &quot;category&quot;: &quot;Armchair&quot;,
+  &quot;name&quot;: &quot;my wood-arm chair&quot;,
+  &quot;aliases&quot;: [
+    &quot;my wood-arm chair&quot;
+  ],
+  &quot;relationship&quot;: &quot;owned armchair; upholstery preview&quot;,
+  &quot;source_task&quot;: &quot;T09&quot;,
+  &quot;bbox&quot;: [
+    0,
+    0.01,
+    1,
+    0.99
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;exposed brown wooden arms and legs&quot;,
+    &quot;cream checked upholstery in source&quot;,
+    &quot;wide rectangular seat&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_003/E_ARMCHAIR.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;c2268622904fab0dd86861f4fbd4853910a4a45e2dd7f57d445011d55401a455&quot;
+}</pre></article></details><details class="profile-section"><summary>General Entity Attribute Preferences · 7</summary><article class="knowledge" id="K_A_GARNISH_AVOID"><h4>A_GARNISH_AVOID</h4><pre>{
+  &quot;entity_category&quot;: &quot;HerbGarnish&quot;,
+  &quot;dimension&quot;: &quot;herb_type&quot;,
+  &quot;value&quot;: &quot;parsley&quot;,
+  &quot;context&quot;: &quot;loose herb garnish touching grilled meat&quot;,
+  &quot;stance&quot;: &quot;avoid&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_CAKE_AVOID"><h4>A_CAKE_AVOID</h4><pre>{
+  &quot;entity_category&quot;: &quot;Cake&quot;,
+  &quot;dimension&quot;: &quot;frosting_style&quot;,
+  &quot;value&quot;: &quot;white_frosting_with_blue_piping&quot;,
+  &quot;context&quot;: &quot;choosing dessert&quot;,
+  &quot;stance&quot;: &quot;avoid&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_PIE"><h4>A_PIE</h4><pre>{
+  &quot;entity_category&quot;: &quot;Pie&quot;,
+  &quot;dimension&quot;: &quot;filling&quot;,
+  &quot;value&quot;: &quot;apple&quot;,
+  &quot;context&quot;: &quot;dessert pies&quot;,
+  &quot;stance&quot;: &quot;favorite&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_CASE_FINISH"><h4>A_CASE_FINISH</h4><pre>{
+  &quot;entity_category&quot;: &quot;Suitcase&quot;,
+  &quot;dimension&quot;: &quot;surface_finish&quot;,
+  &quot;value&quot;: &quot;smooth_glossy&quot;,
+  &quot;context&quot;: &quot;restoring vintage leather suitcases&quot;,
+  &quot;stance&quot;: &quot;normally_choose&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T05&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FOREST_SEASON"><h4>A_FOREST_SEASON</h4><pre>{
+  &quot;entity_category&quot;: &quot;ForestBackdrop&quot;,
+  &quot;dimension&quot;: &quot;season&quot;,
+  &quot;value&quot;: &quot;spring&quot;,
+  &quot;context&quot;: &quot;forest settings in vehicle photos&quot;,
+  &quot;stance&quot;: &quot;prefer&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T07&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_CHAIR_WEAVE"><h4>A_CHAIR_WEAVE</h4><pre>{
+  &quot;entity_category&quot;: &quot;Armchair&quot;,
+  &quot;dimension&quot;: &quot;upholstery_texture&quot;,
+  &quot;value&quot;: &quot;ribbed_corduroy&quot;,
+  &quot;context&quot;: &quot;upholstery for wood-arm chairs&quot;,
+  &quot;stance&quot;: &quot;normally_choose&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_TABLE_FINISH"><h4>A_TABLE_FINISH</h4><pre>{
+  &quot;entity_category&quot;: &quot;KitchenTable&quot;,
+  &quot;dimension&quot;: &quot;tabletop_finish&quot;,
+  &quot;value&quot;: &quot;natural_wood_grain&quot;,
+  &quot;context&quot;: &quot;tabletop-finish previews, including miniature mock-ups&quot;,
+  &quot;stance&quot;: &quot;normally_choose&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Global Preferences · 2</summary><article class="knowledge" id="K_G_NIGHT_NOISE"><h4>G_NIGHT_NOISE</h4><pre>{
+  &quot;dimension&quot;: &quot;shadow_noise_reduction&quot;,
+  &quot;value&quot;: &quot;mild&quot;,
+  &quot;context&quot;: &quot;nighttime snapshots&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Comparing night photos: dislikes blotchy shadows, still wants the night mood and real detail.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_G_POSTCARD"><h4>G_POSTCARD</h4><pre>{
+  &quot;dimension&quot;: &quot;rendering_style&quot;,
+  &quot;value&quot;: &quot;vintage_sepia_postcard&quot;,
+  &quot;context&quot;: &quot;scenic postcard pictures&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Collecting antique motel and travel postcards; the specific sepia preference is constructed after matching.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T08&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Position Preferences · 2</summary><article class="knowledge" id="K_S_GARNISH_ASIDE"><h4>S_GARNISH_ASIDE</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_category&quot;: &quot;HerbGarnish&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where I put herb garnish to keep it off my meat&quot;,
+  &quot;context&quot;: &quot;steak with broccoli on the same plate&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;on_rim_near&quot;,
+    &quot;anchor&quot;: &quot;broccoli&quot;,
+    &quot;support&quot;: &quot;plate rim clear of the steak&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T01&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.72,
+        0.06,
+        1,
+        0.58
+      ],
+      &quot;destination_region&quot;: [
+        0.53,
+        0.1,
+        0.72,
+        0.22
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;out of my way when I eat steak&quot;,
+    &quot;off my meat, in my usual garnish spot&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_S_TRUNK_PACK"><h4>S_TRUNK_PACK</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_id&quot;: &quot;E_WEEKENDER&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where I put my weekender when packing an open car trunk&quot;,
+  &quot;context&quot;: &quot;open car trunk with a visible clear central floor&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;inside&quot;,
+    &quot;anchor&quot;: &quot;open car trunk&quot;,
+    &quot;support&quot;: &quot;central trunk floor&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T02&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.13,
+        0.29,
+        0.86,
+        0.86
+      ],
+      &quot;destination_region&quot;: [
+        0.3,
+        0.48,
+        0.7,
+        0.76
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;where I normally pack it in the trunk&quot;,
+    &quot;my usual trunk packing spot&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T02&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Contextual Facts · 2</summary><article class="knowledge" id="K_F_NIGHT_SNAPSHOT"><h4>F_NIGHT_SNAPSHOT</h4><pre>{
+  &quot;category&quot;: &quot;Photo&quot;,
+  &quot;fact&quot;: &quot;This nighttime full-body snapshot is the one Hayes saved from an evening outing.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T06&quot;,
+    &quot;bbox&quot;: [
+      0,
+      0,
+      1,
+      1
+    ],
+    &quot;description&quot;: &quot;whole nighttime photo; subject not identified as Hayes&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_KITCHEN_MOCKUP"><h4>F_KITCHEN_MOCKUP</h4><pre>{
+  &quot;category&quot;: &quot;KitchenTable&quot;,
+  &quot;fact&quot;: &quot;Hayes is using the blue tabletop in this miniature kitchen as a table-finish sample.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T10&quot;,
+    &quot;bbox&quot;: [
+      0,
+      0.53,
+      0.44,
+      0.76
+    ],
+    &quot;description&quot;: &quot;blue miniature tabletop in the foreground&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article></details><details><summary>聚合表达与整人一致性核查</summary><pre>{
+  &quot;aggregated_expression_review&quot;: null,
+  &quot;coherence_review&quot;: {
+    &quot;image_people_are_not_automatically_user&quot;: true,
+    &quot;independent_source_tasks&quot;: true,
+    &quot;owned_pets_added&quot;: 0,
+    &quot;named_friends&quot;: [
+      &quot;Heath Jarrett&quot;
+    ],
+    &quot;notes&quot;: [
+      &quot;同一只旧皮箱在添加和表面调整两条任务复用。&quot;,
+      &quot;古董车后备箱与林间Ford卡车均不是基础简介中的银色Tacoma。&quot;,
+      &quot;T10是玩具厨房模型，不登记为真实住宅。&quot;
+    ]
+  }
+}</pre></details><label class="feedback-label" for="feedback-profile">整个人物、Profile 或整体风格的意见</label><textarea id="feedback-profile" data-feedback="profile"></textarea></section><footer>当前为待审核构建稿。修改参数之后，来源 benchmark 的原始 target / 评分不直接沿用。</footer>
+    </main><script>
+    const pid="persona_003"; const storageKey='personaedit-formal-v1-'+pid;
+    const status=document.getElementById('save-status'); let feedback={};
+    try{feedback=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch(e){status.textContent='本地保存不可用；可导出意见'}
+    for(const el of document.querySelectorAll('[data-feedback]')){el.value=feedback[el.dataset.feedback]||'';el.addEventListener('input',()=>{feedback[el.dataset.feedback]=el.value;try{localStorage.setItem(storageKey,JSON.stringify(feedback));status.textContent='已在本机保存'}catch(e){status.textContent='请导出意见保存'}})}
+    document.getElementById('show-boxes').addEventListener('change',e=>document.body.classList.toggle('show-boxes',e.target.checked));
+    function revealHash(){const el=document.getElementById(location.hash.slice(1));if(!el)return;let node=el.parentElement;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement}el.scrollIntoView()}
+    window.addEventListener('hashchange',revealHash); if(location.hash)revealHash();
+    const reviewerKey='personaedit-volunteer-reviewer-v1';
+    let reviewer={id:'',name:''};
+    try{reviewer=JSON.parse(localStorage.getItem(reviewerKey)||'null')||reviewer}catch(e){}
+    if(!reviewer.id)reviewer.id=(globalThis.crypto?.randomUUID?.()||('r'+Date.now().toString(36)+Math.random().toString(36).slice(2))).slice(0,36);
+    const reviewerInput=document.getElementById('reviewer-name');reviewerInput.value=reviewer.name||'';
+    function saveReviewer(){reviewer.name=reviewerInput.value.trim();try{localStorage.setItem(reviewerKey,JSON.stringify(reviewer))}catch(e){}}
+    reviewerInput.addEventListener('input',saveReviewer);saveReviewer();
+    document.getElementById('export-feedback').addEventListener('click',()=>{
+      saveReviewer();
+      const exportedAt=new Date().toISOString();
+      const payload={schema_version:'1.1',persona_id:pid,draft:'formal-v1',dataset_revision:'59b4f06f3f61d703',reviewer_id:reviewer.id,reviewer_name:reviewer.name,exported_at:exportedAt,feedback};
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+      const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;
+      a.download=pid+'_'+exportedAt.replace(/[:.]/g,'-')+'_'+reviewer.id.slice(0,8)+'.json';a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='已导出；请将JSON附件交回审核组织者';
+    });
+    </script></body></html>

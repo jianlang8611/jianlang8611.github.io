@@ -1,0 +1,1012 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PersonaEdit · persona_004 · 正式首稿</title><style>
+    :root{color-scheme:light;--ink:#24313e;--muted:#647480;--line:#dce3e7;--accent:#17665e}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;background:#f4f6f7;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:30px;margin:0 0 10px}h2{font-size:21px;margin:0}h3{margin:15px 0 6px}h4{margin:8px 0}a{color:var(--accent)}p{margin:8px 0}.intro,.task,.profile-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}.sub,.caption,.zh{color:var(--muted)}.sub{margin-top:0}.caption{font-size:13px}.pill{display:inline-block;background:#fdf0cb;border-radius:5px;padding:2px 8px;color:#715619}.nav{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffffff2;border-bottom:1px solid var(--line);padding:10px 25px;backdrop-filter:blur(8px)}.nav a{text-decoration:none;font-weight:600}button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:white;color:var(--ink);cursor:pointer}.nav label{margin-left:auto;font-size:13px}.task-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tag{display:inline-block;font:12px/1.5 ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:4px;margin:3px}.task-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:25px}.source-image{display:flex;justify-content:center;background:#edf1f2;border-radius:8px;padding:8px}.image-wrap{position:relative;line-height:0}.image-wrap img{display:block;max-width:100%;max-height:490px;width:auto;height:auto}.bbox{position:absolute;border:2px solid #1675b9;display:none;pointer-events:none;line-height:1.3}.show-boxes .bbox{display:block}.bbox span{position:absolute;top:0;left:0;color:white;background:#1675b9;font:11px/1.3 monospace}.bbox.remove{border-color:#c34149}.bbox.remove span{background:#c34149}.bbox.keep{border-color:#21804d}.bbox.keep span{background:#21804d}.bbox.destination{border:2px dashed #a76800}.bbox.destination span{background:#a76800}.personal,.base{border-radius:8px;padding:14px 17px;margin-bottom:13px}.personal{background:#e8f4ee;border-left:4px solid #33856f}.base{background:#f2f4f7}.commands label{font-size:12px;font-weight:700;letter-spacing:.04em}.commands p{font-size:17px}.commands .zh{font-size:15px}details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;font-weight:600}pre{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fa;border-radius:5px;padding:10px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px}td:first-child{min-width:155px}td:nth-child(2){min-width:190px}td:nth-child(3){width:52%}td pre{margin-top:0}.table-scroll{overflow:auto}.knowledge{border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0;scroll-margin-top:65px;overflow:auto}.reference{float:right;width:135px;max-height:160px;object-fit:contain;margin:0 0 10px 15px}.knowledge:target{border:2px solid #33856f;background:#f5fcf8}.feedback-label{display:block;margin:15px 0 6px;font-size:13px;color:var(--muted)}textarea{width:100%;min-height:75px;border:1px solid var(--line);border-radius:7px;padding:10px;font:14px/1.5 inherit;resize:vertical}#save-status{font-size:12px;color:var(--muted)}.small-links{display:flex;gap:15px;flex-wrap:wrap}.basic-list{padding-left:20px}.contact{width:100%;max-width:1000px;display:block;margin:15px auto}.notice{background:#fff9e8;border-radius:7px;padding:12px;font-size:13px}.profile-panel .profile-section>summary{font-size:16px}footer{font-size:12px;color:var(--muted);padding-bottom:30px}@media(max-width:850px){main{padding:14px}.intro,.task,.profile-panel{padding:16px}.task-grid{grid-template-columns:1fr}.nav{padding:8px 12px;gap:10px}.nav label{margin-left:0}.image-wrap img{max-height:430px}h1{font-size:25px}}
+    </style></head><body><nav class="nav"><a href="index.html">全部人物</a><a href="#overview">概览</a><a href="#profile">Profile</a><a href="#T01">T01</a><a href="#T02">T02</a><a href="#T03">T03</a><a href="#T04">T04</a><a href="#T05">T05</a><a href="#T06">T06</a><a href="#T07">T07</a><a href="#T08">T08</a><a href="#T09">T09</a><a href="#T10">T10</a><label><input id="show-boxes" type="checkbox"> 显示核查框</label><button id="export-feedback">导出意见 JSON</button><span id="save-status"></span></nav><main>
+    <section class="intro" id="overview"><span class="pill">正式数据构建稿 · 待审核</span><h1>Folarin Ezeani · persona_004</h1><p class="sub">100 位 V3 基础人物已固定顺序；目前 5 位完成图文构建稿，本页为其中一位的10个任务。英文为本轮评估语言，中文用于审核。</p><p>Folarin Ezeani从事消费洞察与高端影音销售，已有未婚妻、婚礼筹备和阳台香草园。任务弱结合影音样机、婚礼配饰与香草盆栽，也保留普通服装与照片需求；不把陌生模特认作未婚妻。</p><p>Customer insights and premium home-theater sales manager for a regional electronics retailer · Master&#x27;s degree in Marketing Analytics · 未提供数值年龄；按职业与教育背景推定为成年人</p><p class="caption">10 张不同原图 · 10 条命令 · 10 个原子操作 · 19 个个性化参数 · 8 类操作</p><p class="caption">Replace 2 · Add 1 · Move 1 · Remove 1 · Attribute Modification 2 · Retouch 1 · Background 1 · Restyle 1</p><div class="notice">优先核查T01手腕配饰的评分清晰度，和T02小盆栽的尺寸。T06是本批唯一新增聚合表达，仍需未来的分散日常历史支持。 所有实体和偏好仍为构建稿，尚无长期历史或编辑结果。</div><p class="caption">其他人物：<a href="persona_001.html">Khoa Bui</a> · <a href="persona_002.html">Azusa Bessho</a> · <a href="persona_003.html">Hayes Jorgensen</a> · <a href="persona_005.html">Xandro Panganiban</a></p><div class="small-links"><a href="../benchmark/data/personas/basic_persona_profile.json">100 人 Basic JSON</a><a href="../benchmark/data/personas/complete_persona_profile.json">Complete Profile JSON</a><a href="../benchmark/data/instructions/basic_instruction.json">Base JSON</a><a href="../benchmark/data/instructions/persona_instruction.json">Personalized JSON</a></div><div class="reviewer-panel" style="margin-top:16px;padding:14px;background:#f2f7f5;border-radius:8px">
+                <label for="reviewer-name">审核署名（可选）</label>
+                <input id="reviewer-name" type="text" maxlength="100" placeholder="姓名或昵称" style="display:block;max-width:100%;width:280px;padding:8px;margin:6px 0;border:1px solid #dce3e7;border-radius:6px;font:inherit">
+                <p class="caption">填写逐条或整体意见后，点击顶部“导出意见JSON”，把文件作为附件交回 <a href="mailto:jian_lang@std.uestc.edu.cn?subject=PersonaEdit%20review%20persona_004">jian_lang@std.uestc.edu.cn</a>。意见先保存在当前浏览器；导出或交回后才会进入本轮收集。</p></div><details><summary>整组图片与基础人物信息（已清理、统一字段）</summary><img class="contact" src="../benchmark/data/images/persona_004/contact-sheet.jpg" alt="10 source images"><pre>{
+  &quot;source&quot;: {
+    &quot;dataset&quot;: &quot;bowen-upenn/PersonaMem-v3&quot;,
+    &quot;revision&quot;: &quot;7b00a090b35b7293e6efeeb19494207f32b5a9ee&quot;,
+    &quot;source_persona_id&quot;: &quot;2&quot;,
+    &quot;path&quot;: &quot;backend/2/profile.json&quot;,
+    &quot;raw_sha256&quot;: &quot;ee2723b07525165e6d7c921cea3b1dcbfeca5cb1304fa994c37378156daa0589&quot;
+  },
+  &quot;basic_profile&quot;: {
+    &quot;name&quot;: &quot;Folarin Ezeani&quot;,
+    &quot;age&quot;: null,
+    &quot;gender&quot;: &quot;cisgender male, heterosexual&quot;,
+    &quot;nationality&quot;: null,
+    &quot;languages&quot;: [],
+    &quot;location&quot;: {
+      &quot;city&quot;: null,
+      &quot;region&quot;: null,
+      &quot;country&quot;: null,
+      &quot;description&quot;: null
+    },
+    &quot;education&quot;: {
+      &quot;degrees&quot;: [
+        &quot;Master&#x27;s degree in Marketing Analytics&quot;
+      ],
+      &quot;fields&quot;: [],
+      &quot;institutions&quot;: []
+    },
+    &quot;occupation&quot;: {
+      &quot;title&quot;: &quot;Customer insights and premium home-theater sales manager for a regional electronics retailer&quot;,
+      &quot;organization&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;status&quot;: null
+    },
+    &quot;relationship_status&quot;: null,
+    &quot;summary&quot;: null,
+    &quot;biography&quot;: &quot;Folarin is a Nigerian immigrant who can turn a TV comparison into a full conversation about game-day setups, especially if the Buffalo Bills or NBA highlights are on in the background. After work he is usually at the gym, catching MMA clips, or sending his friends motivational posts about faith, self-confidence, and building real wealth instead of looking rich. He is also surprisingly fluent in beauty content, partly because he helps his fiancée save makeup and fashion ideas for their Indian-Nigerian wedding mood board. His apartment has a half-finished plumbing fix, a stack of sneaker-release screenshots, and a tiny balcony herb garden he forgets to water until Sunday night.&quot;,
+    &quot;hobbies&quot;: [],
+    &quot;personality&quot;: {
+      &quot;traits&quot;: [],
+      &quot;values&quot;: [],
+      &quot;quirks&quot;: [],
+      &quot;big_five&quot;: {
+        &quot;openness&quot;: &quot;medium&quot;,
+        &quot;conscientiousness&quot;: &quot;low&quot;,
+        &quot;extraversion&quot;: &quot;high&quot;,
+        &quot;agreeableness&quot;: &quot;high&quot;,
+        &quot;neuroticism&quot;: &quot;medium&quot;
+      }
+    },
+    &quot;additional&quot;: {
+      &quot;social_connections&quot;: [
+        {
+          &quot;friend_id&quot;: &quot;friend_1&quot;,
+          &quot;display_name&quot;: &quot;Femi Okonkwo&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Buffalo Bills&quot;,
+            &quot;gym&quot;,
+            &quot;faith posts&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_2&quot;,
+          &quot;display_name&quot;: &quot;Ifeoma Ehirim&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;church&quot;,
+            &quot;wedding inspiration&quot;,
+            &quot;family gatherings&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_3&quot;,
+          &quot;display_name&quot;: &quot;Nikhil Easwaran&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;NBA highlights&quot;,
+            &quot;home-theater setups&quot;,
+            &quot;relationship discourse&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_4&quot;,
+          &quot;display_name&quot;: &quot;Femi Ekwueme&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;sports talk&quot;,
+            &quot;MMA clips&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_5&quot;,
+          &quot;display_name&quot;: &quot;Farida Ekong&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;fitness creators&quot;,
+            &quot;self-confidence posts&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_6&quot;,
+          &quot;display_name&quot;: &quot;Chuka Egbuna&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;church&quot;,
+            &quot;wealth-building posts&quot;,
+            &quot;local networking&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_7&quot;,
+          &quot;display_name&quot;: &quot;Ananya Iyer&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;beauty content&quot;,
+            &quot;fashion ideas&quot;,
+            &quot;wedding inspiration&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_8&quot;,
+          &quot;display_name&quot;: &quot;Folake Enwere&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;faith community&quot;,
+            &quot;family elders&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_9&quot;,
+          &quot;display_name&quot;: &quot;Felix Erhabor&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;tech buyers&quot;,
+            &quot;premium TVs&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_10&quot;,
+          &quot;display_name&quot;: &quot;Faisal Eapen&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;mystery-curiosity accounts&quot;,
+            &quot;public sports talk&quot;
+          ]
+        }
+      ]
+    }
+  },
+  &quot;adult_eligibility&quot;: {
+    &quot;status&quot;: &quot;adult&quot;,
+    &quot;basis&quot;: &quot;adult_career_and_education_context&quot;,
+    &quot;inferred&quot;: true,
+    &quot;numeric_age_provided&quot;: false
+  },
+  &quot;persona_id&quot;: &quot;persona_004&quot;
+}</pre></details></section>
+    <article class="task" id="T01">
+          <div class="task-heading"><h2>T01 · 婚礼配饰参考换已选的玉镯</h2><div><span class="tag">Replace</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T01_gedit_897.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T01_gedit_897.jpg" alt="T01 source image"><div class="bbox target" style="left:25.0%;top:63.0%;width:17.0%;height:9.999999999999998%"><span>P01</span></div></div></a><p class="caption">GEdit-Bench · 897 · 384 × 640</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Swap the bracelet I ruled out for a bangle in the material I picked.</p><p class="zh">把我排除的那只手链换成我选定材质的镯子。</p></div><div class="base"><label>Base · 明确答案</label><p>Replace the gold chain bracelet on the foreground wrist with a plain green jade bangle. Keep other jewelry unchanged.</p><p class="zh">把前景手腕上的金色链式手镯换成素面绿玉镯，保留其他首饰。</p></div><p class="caption">匹配：基础婚礼筹备仅作轻量筛选；选玉是按图后补充，不由族裔或婚礼文化推断。</p><p class="caption">核查：手镯区域较小，需人工确认绿玉替换的可评分性；不宣称能沿用原来源评分。</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P01<br>Replace<br>Entity / target_entity</td><td>the bracelet I ruled out<br><small>General Entity</small></td><td><pre>&quot;foreground_gold_chain_bracelet&quot;</pre><a class="tag" href="#K_F_BRACELET_SHORTLIST">F_BRACELET_SHORTLIST</a></td></tr><tr><td>P02<br>Replace<br>Entity / reference_entity</td><td>a bangle in the material I picked<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Bangle&quot;,
+  &quot;material&quot;: &quot;green_jade&quot;
+}</pre><a class="tag" href="#K_A_BANGLE_MATERIAL">A_BANGLE_MATERIAL</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Replace the bracelet with a jade bangle.</p><p>保留手链换玉镯；明确前景手腕目标和素面绿玉材质，不识别模特身份。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;897&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;038b15558b1082c59f0a92e4853554aa&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the bracelet with a jade bangle.&quot;,
+    &quot;native_label&quot;: &quot;subject-replace&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The chain bracelet is visible on the foreground wrist. No face, body, swimsuit or other jewelry changes.&quot;,
+    &quot;follow_up&quot;: &quot;手镯区域较小，需人工确认绿玉替换的可评分性；不宣称能沿用原来源评分。&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T01">这一条的意见</label><textarea id="feedback-T01" data-feedback="T01" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T02">
+          <div class="task-heading"><h2>T02 · 香草盆栽放到不挡鼠标手的位置</h2><div><span class="tag">Add</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T02_complex_18.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T02_complex_18.jpg" alt="T02 source image"><div class="bbox destination" style="left:4.0%;top:55.00000000000001%;width:19.0%;height:20.999999999999996%"><span>destination</span></div></div></a><p class="caption">Complex-Edit · 18 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Add a pot of my usual herb where I keep plants clear of my mouse.</p><p class="zh">加一盆我常买的香草，放在平时不挡鼠标手的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Add a small pot of basil on the free front-left strip of the desk, left of the project book and in front of the existing mug.</p><p class="zh">在桌面左前方、项目本左边且现有杯子前方的空位，加一小盆罗勒。</p></div><p class="caption">匹配：基础已有香草园；具体罗勒品种、桌面摆位在匹配后补充，不把桌上笼子变成新宠物。</p><p class="caption">核查：可用台面较窄，盆栽须为小号；如人工确认遮挡不可接受，应换图而非强行挤入。</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P03<br>Add<br>Entity / reference_entity</td><td>a pot of my usual herb<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;HerbPot&quot;,
+  &quot;herb_variety&quot;: &quot;basil&quot;
+}</pre><a class="tag" href="#K_A_HERB">A_HERB</a></td></tr><tr><td>P04<br>Add<br>Placement / destination</td><td>where I keep plants clear of my mouse<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;front_left_of&quot;,
+  &quot;anchor&quot;: &quot;laptop&quot;,
+  &quot;support&quot;: &quot;free desk strip left of the project book, in front of the existing mug&quot;
+}</pre><a class="tag" href="#K_S_HERB_DESK">S_HERB_DESK</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Place a small pot with green indoor plants near the laptop.</p><p>保留电脑旁加小绿植，具体为罗勒与左前窄空位；不执行背景替换等其他步骤。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;18&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Place a small pot with green indoor plants near the laptop.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Add an Object&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      1
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the background with a nature scene visible through the window.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a small pot with green indoor plants near the laptop.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the smartphone from the desk.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the coffee mug with a cheerful blue ceramic cup.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Brighten the scene.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Text&quot;,
+        &quot;instruction&quot;: &quot;Insert a sticky note near the jumper area with the text &#x27;Today&#x27;s Plan&#x27;.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm-filter effect.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Resize an Object&quot;,
+        &quot;instruction&quot;: &quot;Slightly enlarge the project book on the desk.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Use a genuinely small pot. Keep the existing mug, project book, mouse, laptop and rear cage unobscured.&quot;,
+    &quot;follow_up&quot;: &quot;可用台面较窄，盆栽须为小号；如人工确认遮挡不可接受，应换图而非强行挤入。&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T02">这一条的意见</label><textarea id="feedback-T02" data-feedback="T02" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T03">
+          <div class="task-heading"><h2>T03 · 玻璃茶几移近观影座位</h2><div><span class="tag">Move</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T03_complex_93.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T03_complex_93.jpg" alt="T03 source image"><div class="bbox target" style="left:49.0%;top:64.0%;width:32.99999999999999%;height:34.0%"><span>P05</span></div><div class="bbox destination" style="left:57.99999999999999%;top:67.0%;width:33.00000000000001%;height:30.999999999999993%"><span>destination</span></div></div></a><p class="caption">Complex-Edit · 93 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Move the coffee table with the top I like where I can reach it from the sofa during a film.</p><p class="zh">那张我喜欢台面材质的茶几，挪到我看电影时坐沙发能顺手够到的位置。</p></div><div class="base"><label>Base · 明确答案</label><p>Move the low clear-glass coffee table closer to the black sofa, leaving a small reachable gap in front of the seat.</p><p class="zh">把透明玻璃矮茶几移近黑沙发，留出伸手可及的小间隙。</p></div><p class="caption">匹配：影音工作和观影场景轻量匹配；普通茶几结合类别材质偏好定位，不自动登记为个人实体。</p><p class="caption">核查：Move the existing table only; keep its glass top, metal frame, sofa, rug and walking route intact.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P05<br>Move<br>Entity / target_entity</td><td>the coffee table with the top I like<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;CoffeeTable&quot;,
+  &quot;top_material&quot;: &quot;clear_glass&quot;
+}</pre><a class="tag" href="#K_A_COFFEE_TABLE">A_COFFEE_TABLE</a></td></tr><tr><td>P06<br>Move<br>Placement / destination</td><td>where I can reach it from the sofa during a film<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;closer_to&quot;,
+  &quot;anchor&quot;: &quot;black sofa seat&quot;,
+  &quot;support&quot;: &quot;floor directly in front of sofa, with a small reachable gap&quot;
+}</pre><a class="tag" href="#K_S_MOVIE_REACH">S_MOVIE_REACH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Reposition the coffee table closer to the couch.</p><p>保留茶几靠近沙发，具体化可达距离；不加书架、不改地毯。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;93&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Reposition the coffee table closer to the couch.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Move an Object&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      6
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a decorative plant beside the white desk.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the couch leather color from black to dark blue.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the existing artwork with an abstract piece.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Dim the lighting emitted by the hanging lamp.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a small bookshelf near the seating arrangement.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Change the rug to a plush, deep-pile texture.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Reposition the coffee table closer to the couch.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm-tone filter to the entire image.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Move the existing table only; keep its glass top, metal frame, sofa, rug and walking route intact.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T03">这一条的意见</label><textarea id="feedback-T03" data-feedback="T03" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T04">
+          <div class="task-heading"><h2>T04 · 归还的样机吉祥物清掉</h2><div><span class="tag">Remove</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T04_complex_315.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T04_complex_315.jpg" alt="T04 source image"><div class="bbox target" style="left:61.0%;top:9.0%;width:14.000000000000002%;height:17.0%"><span>P07</span></div></div></a><p class="caption">Complex-Edit · 315 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Remove the demo mascot I returned.</p><p class="zh">把我归还的那只展示吉祥物去掉。</p></div><div class="base"><label>Base · 明确答案</label><p>Remove the small figurine sitting on top of the monitor.</p><p class="zh">移除显示器顶部的小人偶。</p></div><p class="caption">匹配：样机展示是弱职业关联；借来的小物不新增为收藏品。</p><p class="caption">核查：The figure is present in the original; laptop, screen contents and desk objects remain.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P07<br>Remove<br>Entity / target_entity</td><td>the demo mascot I returned<br><small>General Entity</small></td><td><pre>&quot;monitor_top_figure&quot;</pre><a class="tag" href="#K_F_BORROWED_FIGURE">F_BORROWED_FIGURE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Remove the figurine sitting on top of the monitor.</p><p>保留删显示器上人偶，借还事实用于指代，不附加厌恶。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;315&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Remove the figurine sitting on top of the monitor.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Remove an Object&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      2
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Reposition the laptop to sit aligned to the right side of the desk.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the monitor&#x27;s content with a presentation slide of financial charts.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the figurine sitting on top of the monitor.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a fancy ceramic mug next to the keyboard.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Dim the lamp&#x27;s light.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Add light motes floating around the desk area.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the visible wall and window with a modern office high-rise backdrop.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Reframe Composition&quot;,
+        &quot;instruction&quot;: &quot;Zoom out to include more desk and chair.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The figure is present in the original; laptop, screen contents and desk objects remain.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T04">这一条的意见</label><textarea id="feedback-T04" data-feedback="T04" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T05">
+          <div class="task-heading"><h2>T05 · 试衣西装外套换丝绒面料</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T05_imgedit_1138.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T05_imgedit_1138.jpg" alt="T05 source image"><div class="bbox target" style="left:8.0%;top:10.0%;width:86.0%;height:89.0%"><span>P08</span></div></div></a><p class="caption">ImgEdit-Bench Basic · 1138 · 1024 × 1024</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>My fitting jacket—try the fabric I picked for jackets.</p><p class="zh">试衣那件外套，试试我选的西装面料。</p></div><div class="base"><label>Base · 明确答案</label><p>Change the suit jacket fabric to velvet, preserving its charcoal-gray base color, cut and buttons.</p><p class="zh">把西装外套面料改为丝绒，保留深灰底色、版型和纽扣。</p></div><p class="caption">匹配：婚礼筹备仅作弱关联，不把未露面的穿着者认作Folarin。</p><p class="caption">核查：Large visible jacket fabric supports texture grading; keep yellow tie, teal pocket square, shirt and body geometry.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P08<br>Attribute Modification<br>Entity / target_entity</td><td>My fitting jacket<br><small>Personalized Entity</small></td><td><pre>&quot;E_JACKET&quot;</pre><a class="tag" href="#K_E_JACKET">E_JACKET</a></td></tr><tr><td>P09<br>Attribute Modification<br>Attribute / result_attribute</td><td>the fabric I picked for jackets<br><small></small></td><td><pre>{
+  &quot;fabric&quot;: &quot;velvet&quot;
+}</pre><a class="tag" href="#K_A_JACKET_FABRIC">A_JACKET_FABRIC</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Change the surface texture of the object to a smooth metallic finish.</p><p>原要求把穿着中的布料改金属表面，生活需求不自然；保留纹理修改操作，原图已是人字纹西装外套，改为常见丝绒面料以形成可见变化。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1138&quot;,
+    &quot;original_image_path&quot;: &quot;daily object/000299747.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the surface texture of the object to a smooth metallic finish.&quot;,
+    &quot;native_label&quot;: &quot;adjust&quot;,
+    &quot;metadata_url&quot;: &quot;https://github.com/PKU-YuanGroup/ImgEdit/blob/b79848168744c8db8389086d01fe3def1758aa45/Benchmark/Basic/basic_edit.json&quot;,
+    &quot;asset_archive_sha256&quot;: &quot;d59ed1d4f68bfd068667ae76c98619e59ade30a5434fe9237cf10bb79450786e&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Large visible jacket fabric supports texture grading; keep yellow tie, teal pocket square, shirt and body geometry.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T05">这一条的意见</label><textarea id="feedback-T05" data-feedback="T05" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T06">
+          <div class="task-heading"><h2>T06 · 展示活动人像简短聚合润饰</h2><div><span class="tag">Retouch</span><span class="tag">aggregated</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T06_gedit_384.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T06_gedit_384.jpg" alt="T06 source image"><div class="bbox target" style="left:12.0%;top:3.0%;width:80.0%;height:96.0%"><span>P10</span></div></div></a><p class="caption">GEdit-Bench · 384 · 512 × 512</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Polish up the demo-day portrait a little.</p><p class="zh">展示活动选的那张人像，稍微修好看点。</p></div><div class="base"><label>Base · 明确答案</label><p>Gently reduce forehead shine in the selected close portrait while retaining natural visible pores. Keep facial geometry, age, expression and hair unchanged.</p><p class="zh">轻度降低所选近景人像额头油光，保留自然可见毛孔；脸形、年龄、表情与头发不变。</p></div><p class="caption">匹配：活动回顾弱关联；人像主体保持普通实体，由选片事实定位，不新增一位朋友。</p><p class="caption">核查：聚合表达的唯一展开仍待未来分散的日常偏好证据验证；不把构建的profile当作已有交互历史。</p></div></div>
+          <details><summary>参数绑定 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P10<br>Retouch<br>Entity / target_entity</td><td>the demo-day portrait<br><small>General Entity</small></td><td><pre>&quot;selected_demo_day_portrait_face&quot;</pre><a class="tag" href="#K_F_DEMO_PORTRAIT">F_DEMO_PORTRAIT</a></td></tr><tr><td>P11<br>Retouch<br>Attribute / result_attribute</td><td>Polish up<br><small></small></td><td><pre>{
+  &quot;forehead_shine&quot;: &quot;gently_reduced&quot;
+}</pre><a class="tag" href="#K_A_FACE_SHINE">A_FACE_SHINE</a></td></tr><tr><td>P12<br>Retouch<br>Attribute / result_attribute</td><td>Polish up<br><small></small></td><td><pre>{
+  &quot;skin_texture&quot;: &quot;retain_natural_pores&quot;
+}</pre><a class="tag" href="#K_A_FACE_TEXTURE">A_FACE_TEXTURE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>把脸p好看点</p><p>原泛化人像修饰，明确为减额头油光、保留毛孔两项；聚合表达不要求历史里出现完整修图套餐。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;384&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;f81d8419a96bac5878844b85e21a938c&quot;,
+    &quot;original_instruction&quot;: &quot;把脸p好看点&quot;,
+    &quot;native_label&quot;: &quot;ps_human&quot;,
+    &quot;source_instruction_language&quot;: &quot;cn&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;One face: no identity-choice difficulty is claimed. Forehead shine is visible; two category preferences are the only expansion.&quot;,
+    &quot;follow_up&quot;: &quot;聚合表达的唯一展开仍待未来分散的日常偏好证据验证；不把构建的profile当作已有交互历史。&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T06">这一条的意见</label><textarea id="feedback-T06" data-feedback="T06" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T07">
+          <div class="task-heading"><h2>T07 · 客厅调成偏爱的微暖光</h2><div><span class="tag">Background</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T07_complex_8.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T07_complex_8.jpg" alt="T07 source image"></div></a><p class="caption">Complex-Edit · 8 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Warm this room up to the lighting I like.</p><p class="zh">这间屋的光调成我喜欢的那种微暖感觉。</p></div><div class="base"><label>Base · 明确答案</label><p>Make the indoor lighting slightly warmer with a soft amber cast, preserving brightness and exterior view.</p><p class="zh">室内灯光略微偏柔和琥珀暖色，保持亮度与窗外景色。</p></div><p class="caption">匹配：普通居家观感；房间不自动作为新住处登记。</p><p class="caption">核查：Indoor illumination only; keep furniture, window view and scene geometry.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P13<br>Background<br>Attribute / result_attribute</td><td>the lighting I like<br><small></small></td><td><pre>{
+  &quot;light_color_temperature&quot;: &quot;slightly_warmer_amber&quot;
+}</pre><a class="tag" href="#K_G_ROOM_LIGHT">G_ROOM_LIGHT</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Make the indoor lighting slightly warmer.</p><p>保留室内微暖光，不执行改窗景、加光粒子等步骤。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;8&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Make the indoor lighting slightly warmer.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Adjust Lighting&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      4
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the view from the window with one of a vibrant cityscape during the evening.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place an open book on the coffee table near the sofa.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Make the curtains a bright yellow with a bold geometric pattern.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add a subtle light sparkle effect.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Make the indoor lighting slightly warmer.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Add volumetric light particles through the window.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Apply a polished wood texture to the window sill.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Reframe Composition&quot;,
+        &quot;instruction&quot;: &quot;Tilt the view to focus on the interior and cityscape.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Indoor illumination only; keep furniture, window view and scene geometry.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T07">这一条的意见</label><textarea id="feedback-T07" data-feedback="T07" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T08">
+          <div class="task-heading"><h2>T08 · 街景换动画电影风</h2><div><span class="tag">Restyle</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T08_gedit_523.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T08_gedit_523.jpg" alt="T08 source image"></div></a><p class="caption">GEdit-Bench · 523 · 608 × 416</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Give this street shot the animation look I like.</p><p class="zh">这张街拍，来我喜欢的那种动画风。</p></div><div class="base"><label>Base · 明确答案</label><p>Render the street scene in a three-dimensional animated-film style.</p><p class="zh">把街景渲染成三维动画电影风。</p></div><p class="caption">匹配：不要求全部任务都与影音职业直接相关。</p><p class="caption">核查：Preserve all people, motorcycles, signs and street layout in the stylized result.</p></div></div>
+          <details><summary>参数绑定 · 1 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P14<br>Restyle<br>Attribute / result_attribute</td><td>the animation look I like<br><small></small></td><td><pre>{
+  &quot;rendering_style&quot;: &quot;three_dimensional_animated_film&quot;
+}</pre><a class="tag" href="#K_G_ANIMATION">G_ANIMATION</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Render with Pixar Animation Studios&#x27; 3D texture.</p><p>保留原三维动画化意图；不识别街上人物或车辆归属。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;523&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;c51e5e8de213d991bcab4513da06c885&quot;,
+    &quot;original_instruction&quot;: &quot;Render with Pixar Animation Studios&#x27; 3D texture.&quot;,
+    &quot;native_label&quot;: &quot;style_change&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Preserve all people, motorcycles, signs and street layout in the stylized result.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T08">这一条的意见</label><textarea id="feedback-T08" data-feedback="T08" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T09">
+          <div class="task-heading"><h2>T09 · 旧展示电视换胡桃木书架</h2><div><span class="tag">Replace</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T09_gedit_875.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T09_gedit_875.jpg" alt="T09 source image"><div class="bbox target" style="left:3.0%;top:8.0%;width:92.0%;height:64.0%"><span>P15</span></div></div></a><p class="caption">GEdit-Bench · 875 · 480 × 576</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>Swap the old demo TV for a bookshelf in the wood I picked.</p><p class="zh">把旧展示电视换成我选定木材的书架。</p></div><div class="base"><label>Base · 明确答案</label><p>Replace the black television with a walnut-wood bookshelf fitted into the same display area, keeping the foreground cat.</p><p class="zh">把黑色电视换成适合原区域的胡桃木书架，保留前景猫。</p></div><p class="caption">匹配：旧样机与工作轻量相符，不解释为影音从业者不喜欢电视；前景猫不登记为宠物。</p><p class="caption">核查：Replace the TV region without removing or deforming the foreground cat.</p></div></div>
+          <details><summary>参数绑定 · 2 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P15<br>Replace<br>Entity / target_entity</td><td>the old demo TV<br><small>Personalized Entity</small></td><td><pre>&quot;E_DEMO_TV&quot;</pre><a class="tag" href="#K_E_DEMO_TV">E_DEMO_TV</a></td></tr><tr><td>P16<br>Replace<br>Entity / reference_entity</td><td>a bookshelf in the wood I picked<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Bookshelf&quot;,
+  &quot;wood_type&quot;: &quot;walnut&quot;
+}</pre><a class="tag" href="#K_A_BOOKSHELF">A_BOOKSHELF</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Replace the TV with a bookshelf.</p><p>保留电视换书架，木材具体为胡桃木；猫及其他家具保留。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;875&quot;,
+    &quot;image_field&quot;: &quot;input_image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/stepfun-ai/GEdit-Bench/tree/50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;source_key&quot;: &quot;b3143e1ac75799da45f66d12b56cf911&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the TV with a bookshelf.&quot;,
+    &quot;native_label&quot;: &quot;subject-replace&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Replace the TV region without removing or deforming the foreground cat.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T09">这一条的意见</label><textarea id="feedback-T09" data-feedback="T09" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article><article class="task" id="T10">
+          <div class="task-heading"><h2>T10 · 地板方案试橡木与哑光</h2><div><span class="tag">Attribute Modification</span><span class="tag">componentwise</span></div></div>
+          <div class="task-grid"><div><a class="source-image" href="../benchmark/data/images/persona_004/T10_complex_375.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_004/T10_complex_375.jpg" alt="T10 source image"><div class="bbox target" style="left:1.0%;top:55.00000000000001%;width:98.0%;height:43.99999999999999%"><span>P17</span></div></div></a><p class="caption">Complex-Edit · 375 · 500 × 500</p></div>
+          <div class="commands"><div class="personal"><label>Personalized · 评估命令</label><p>For the floor in my shortlisted layout, use the wood and finish I picked.</p><p class="zh">入选方案里的地板，试试我选的木材和表面效果。</p></div><div class="base"><label>Base · 明确答案</label><p>Change the exposed flooring in the shortlisted room layout to matte oak wood, preserving furniture and walls.</p><p class="zh">把入选房间方案中露出的地板改成哑光橡木，家具墙面不变。</p></div><p class="caption">匹配：基础重实用价值仅是筛选背景，不能推导他必然选橡木或哑光；两项均按匹配补充。</p><p class="caption">核查：Floor is visible around furniture; preserve room geometry, objects, furniture legs and contact shadows.</p></div></div>
+          <details><summary>参数绑定 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr><td>P17<br>Attribute Modification<br>Entity / target_entity</td><td>the floor in my shortlisted layout<br><small>General Entity</small></td><td><pre>&quot;shortlisted_room_floor&quot;</pre><a class="tag" href="#K_F_FLOOR_PLAN">F_FLOOR_PLAN</a></td></tr><tr><td>P18<br>Attribute Modification<br>Attribute / result_attribute</td><td>the wood and finish I picked<br><small></small></td><td><pre>{
+  &quot;material&quot;: &quot;oak_wood&quot;
+}</pre><a class="tag" href="#K_A_FLOOR_MATERIAL">A_FLOOR_MATERIAL</a></td></tr><tr><td>P19<br>Attribute Modification<br>Attribute / result_attribute</td><td>the wood and finish I picked<br><small></small></td><td><pre>{
+  &quot;surface_finish&quot;: &quot;matte&quot;
+}</pre><a class="tag" href="#K_A_FLOOR_FINISH">A_FLOOR_FINISH</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>Modify the flooring to have a polished marble texture.</p><p>原抛光大理石改为橡木与哑光两个常见维度，仍是一次地面属性修改；避免本批多个大理石任务重复。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;375&quot;,
+    &quot;image_field&quot;: &quot;image&quot;,
+    &quot;asset_access&quot;: &quot;Hugging Face dataset viewer cached image; stored bytes retained without editing&quot;,
+    &quot;url&quot;: &quot;https://huggingface.co/datasets/UCSC-VLAA/Complex-Edit/tree/b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;original_instruction&quot;: &quot;Modify the flooring to have a polished marble texture.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Texture&quot;
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      3
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Change the color of the walls to a vibrant sky blue.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a vase with colorful flowers on the dining table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the hanging TV with a wooden shelf containing books.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Modify the flooring to have a polished marble texture.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Move the coffee table slightly closer to the couch.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm sepia tone to the entire image.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add softly glowing light trails near the ceiling corners.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Increase the brightness of the lamp on the dining table.&quot;
+      }
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects and spatial anchors are visible in the original source. No preceding sequence steps are applied or required; task-specific visual review records exclusions.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Floor is visible around furniture; preserve room geometry, objects, furniture legs and contact shadows.&quot;
+  }
+}</pre></details>
+          <label class="feedback-label" for="feedback-T10">这一条的意见</label><textarea id="feedback-T10" data-feedback="T10" placeholder="可以记录图像、表达、参数或人物设定中不合适的地方。"></textarea>
+        </article>
+    <section class="profile-panel" id="profile"><h2>Profile · 由匹配任务反向构建</h2><p class="caption">属性修改均查询通用实体类别偏好。情境事实只用于本轮参数；位置条目记录特定实体或通用类别的生活语义、适用条件、目标位置和图中落点。</p><details class="profile-section"><summary>Personalized Entities · 2</summary><article class="knowledge" id="K_E_JACKET"><h4>E_JACKET</h4><a href="../benchmark/data/references/persona_004/E_JACKET.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_004/E_JACKET.jpg" alt="E_JACKET reference"></a><pre>{
+  &quot;category&quot;: &quot;SuitJacket&quot;,
+  &quot;name&quot;: &quot;my fitting jacket&quot;,
+  &quot;aliases&quot;: [
+    &quot;my fitting jacket&quot;
+  ],
+  &quot;relationship&quot;: &quot;jacket used for a fitting; no wearer identity assigned&quot;,
+  &quot;source_task&quot;: &quot;T05&quot;,
+  &quot;bbox&quot;: [
+    0.08,
+    0.1,
+    0.94,
+    0.99
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;charcoal-gray herringbone suit jacket with visible lapels&quot;,
+    &quot;yellow tie and teal pocket square in the source&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T05&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_004/E_JACKET.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;e5fbec1ae627986a722ba5cc3d42a4dd2cf51fb83a62c1f06bbe764c5f9d8a95&quot;
+}</pre></article><article class="knowledge" id="K_E_DEMO_TV"><h4>E_DEMO_TV</h4><a href="../benchmark/data/references/persona_004/E_DEMO_TV.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_004/E_DEMO_TV.jpg" alt="E_DEMO_TV reference"></a><pre>{
+  &quot;category&quot;: &quot;Television&quot;,
+  &quot;name&quot;: &quot;the old demo TV&quot;,
+  &quot;aliases&quot;: [
+    &quot;the old demo TV&quot;
+  ],
+  &quot;relationship&quot;: &quot;retired demonstration unit; constructed task context&quot;,
+  &quot;source_task&quot;: &quot;T09&quot;,
+  &quot;bbox&quot;: [
+    0.03,
+    0.08,
+    0.95,
+    0.72
+  ],
+  &quot;visual_identity_facts&quot;: [
+    &quot;black widescreen television&quot;,
+    &quot;sports broadcast on screen in source&quot;
+  ],
+  &quot;note&quot;: &quot;Visual association constructed after source matching; not evidence of actual ownership of the source photograph.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ],
+  &quot;visual_reference&quot;: &quot;references/persona_004/E_DEMO_TV.jpg&quot;,
+  &quot;reference_sha256&quot;: &quot;5a975cc150de03044f2ae429f7101b5f39681eb91d7202b361443a7def0fc228&quot;
+}</pre></article></details><details class="profile-section"><summary>General Entity Attribute Preferences · 9</summary><article class="knowledge" id="K_A_BANGLE_MATERIAL"><h4>A_BANGLE_MATERIAL</h4><pre>{
+  &quot;entity_category&quot;: &quot;Bangle&quot;,
+  &quot;dimension&quot;: &quot;material&quot;,
+  &quot;value&quot;: &quot;green_jade&quot;,
+  &quot;context&quot;: &quot;plain wedding-accessory bangles&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_HERB"><h4>A_HERB</h4><pre>{
+  &quot;entity_category&quot;: &quot;HerbPot&quot;,
+  &quot;dimension&quot;: &quot;herb_variety&quot;,
+  &quot;value&quot;: &quot;basil&quot;,
+  &quot;context&quot;: &quot;small kitchen or balcony herb pots&quot;,
+  &quot;stance&quot;: &quot;normally_buy&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T02&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_COFFEE_TABLE"><h4>A_COFFEE_TABLE</h4><pre>{
+  &quot;entity_category&quot;: &quot;CoffeeTable&quot;,
+  &quot;dimension&quot;: &quot;top_material&quot;,
+  &quot;value&quot;: &quot;clear_glass&quot;,
+  &quot;context&quot;: &quot;low tables for watching films&quot;,
+  &quot;stance&quot;: &quot;prefer&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_JACKET_FABRIC"><h4>A_JACKET_FABRIC</h4><pre>{
+  &quot;entity_category&quot;: &quot;SuitJacket&quot;,
+  &quot;dimension&quot;: &quot;fabric&quot;,
+  &quot;value&quot;: &quot;velvet&quot;,
+  &quot;context&quot;: &quot;dress jackets for fittings&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T05&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FACE_SHINE"><h4>A_FACE_SHINE</h4><pre>{
+  &quot;entity_category&quot;: &quot;PortraitFace&quot;,
+  &quot;dimension&quot;: &quot;forehead_shine&quot;,
+  &quot;value&quot;: &quot;gently_reduced&quot;,
+  &quot;context&quot;: &quot;close portraits shared after a work event&quot;,
+  &quot;stance&quot;: &quot;prefer&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Comparing event photos and preferring less shiny foreheads.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FACE_TEXTURE"><h4>A_FACE_TEXTURE</h4><pre>{
+  &quot;entity_category&quot;: &quot;PortraitFace&quot;,
+  &quot;dimension&quot;: &quot;skin_texture&quot;,
+  &quot;value&quot;: &quot;retain_natural_pores&quot;,
+  &quot;context&quot;: &quot;close portraits shared after a work event&quot;,
+  &quot;stance&quot;: &quot;prefer&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Discussing why waxy-looking skin in profile photos looks unnatural.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_BOOKSHELF"><h4>A_BOOKSHELF</h4><pre>{
+  &quot;entity_category&quot;: &quot;Bookshelf&quot;,
+  &quot;dimension&quot;: &quot;wood_type&quot;,
+  &quot;value&quot;: &quot;walnut&quot;,
+  &quot;context&quot;: &quot;replacement shelving units for a retired display area&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T09&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FLOOR_MATERIAL"><h4>A_FLOOR_MATERIAL</h4><pre>{
+  &quot;entity_category&quot;: &quot;LivingRoomFloor&quot;,
+  &quot;dimension&quot;: &quot;material&quot;,
+  &quot;value&quot;: &quot;oak_wood&quot;,
+  &quot;context&quot;: &quot;living-room flooring plans&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_A_FLOOR_FINISH"><h4>A_FLOOR_FINISH</h4><pre>{
+  &quot;entity_category&quot;: &quot;LivingRoomFloor&quot;,
+  &quot;dimension&quot;: &quot;surface_finish&quot;,
+  &quot;value&quot;: &quot;matte&quot;,
+  &quot;context&quot;: &quot;living-room flooring plans&quot;,
+  &quot;stance&quot;: &quot;picked&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Global Preferences · 2</summary><article class="knowledge" id="K_G_ROOM_LIGHT"><h4>G_ROOM_LIGHT</h4><pre>{
+  &quot;dimension&quot;: &quot;light_color_temperature&quot;,
+  &quot;value&quot;: &quot;slightly_warmer_amber&quot;,
+  &quot;context&quot;: &quot;indoor living-room atmosphere&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Talking about the warmer ambience of a comfortable evening room.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T07&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_G_ANIMATION"><h4>G_ANIMATION</h4><pre>{
+  &quot;dimension&quot;: &quot;rendering_style&quot;,
+  &quot;value&quot;: &quot;three_dimensional_animated_film&quot;,
+  &quot;context&quot;: &quot;playful illustrated street scenes&quot;,
+  &quot;candidate_daily_context&quot;: &quot;Saving street illustrations with rounded 3D animated-film rendering.&quot;,
+  &quot;supporting_tasks&quot;: [
+    &quot;T08&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Position Preferences · 2</summary><article class="knowledge" id="K_S_HERB_DESK"><h4>S_HERB_DESK</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_category&quot;: &quot;HerbPot&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where I keep a small herb pot clear of my mouse hand&quot;,
+  &quot;context&quot;: &quot;laptop desk with a clear strip at its front-left edge&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;front_left_of&quot;,
+    &quot;anchor&quot;: &quot;laptop&quot;,
+    &quot;support&quot;: &quot;free desk strip left of the project book, in front of the existing mug&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T02&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.24,
+        0.08,
+        0.69,
+        0.55
+      ],
+      &quot;destination_region&quot;: [
+        0.04,
+        0.55,
+        0.23,
+        0.76
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;where I keep plants clear of my mouse&quot;,
+    &quot;where it stays clear of my mouse hand&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T02&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_S_MOVIE_REACH"><h4>S_MOVIE_REACH</h4><pre>{
+  &quot;owner&quot;: {
+    &quot;entity_category&quot;: &quot;CoffeeTable&quot;
+  },
+  &quot;semantic_key&quot;: &quot;where I put the coffee table within easy reach during a film&quot;,
+  &quot;context&quot;: &quot;low coffee table and black sofa in a living-room layout&quot;,
+  &quot;destination&quot;: {
+    &quot;relation&quot;: &quot;closer_to&quot;,
+    &quot;anchor&quot;: &quot;black sofa seat&quot;,
+    &quot;support&quot;: &quot;floor directly in front of sofa, with a small reachable gap&quot;
+  },
+  &quot;groundings&quot;: {
+    &quot;T03&quot;: {
+      &quot;anchor_bbox&quot;: [
+        0.73,
+        0.57,
+        1,
+        0.99
+      ],
+      &quot;destination_region&quot;: [
+        0.58,
+        0.67,
+        0.91,
+        0.98
+      ]
+    }
+  },
+  &quot;reference_forms&quot;: [
+    &quot;where I can reach it from the sofa during a film&quot;,
+    &quot;within reach for movie night&quot;
+  ],
+  &quot;supporting_tasks&quot;: [
+    &quot;T03&quot;
+  ]
+}</pre></article></details><details class="profile-section"><summary>Contextual Facts · 4</summary><article class="knowledge" id="K_F_BRACELET_SHORTLIST"><h4>F_BRACELET_SHORTLIST</h4><pre>{
+  &quot;category&quot;: &quot;Bracelet&quot;,
+  &quot;fact&quot;: &quot;Folarin ruled out the chain bracelet on the foreground wrist in this wedding-accessory reference photo.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T01&quot;,
+    &quot;bbox&quot;: [
+      0.25,
+      0.63,
+      0.42,
+      0.73
+    ],
+    &quot;description&quot;: &quot;gold chain bracelet on foreground wrist; model unnamed&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T01&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_BORROWED_FIGURE"><h4>F_BORROWED_FIGURE</h4><pre>{
+  &quot;category&quot;: &quot;ToyFigure&quot;,
+  &quot;fact&quot;: &quot;The little figure sitting on top of this monitor was borrowed as a demo-day mascot and has been returned.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T04&quot;,
+    &quot;bbox&quot;: [
+      0.61,
+      0.09,
+      0.75,
+      0.26
+    ],
+    &quot;description&quot;: &quot;small figure on top of monitor&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T04&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_DEMO_PORTRAIT"><h4>F_DEMO_PORTRAIT</h4><pre>{
+  &quot;category&quot;: &quot;PortraitFace&quot;,
+  &quot;fact&quot;: &quot;The close selfie was the portrait Folarin selected for the demo-day recap; its subject is not otherwise identified.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T06&quot;,
+    &quot;bbox&quot;: [
+      0.12,
+      0.03,
+      0.92,
+      0.99
+    ],
+    &quot;description&quot;: &quot;single close portrait in demo-day selection&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T06&quot;
+  ]
+}</pre></article><article class="knowledge" id="K_F_FLOOR_PLAN"><h4>F_FLOOR_PLAN</h4><pre>{
+  &quot;category&quot;: &quot;LivingRoomFloor&quot;,
+  &quot;fact&quot;: &quot;This dining-and-living-room image is the flooring reference Folarin shortlisted for comparing materials.&quot;,
+  &quot;grounding&quot;: {
+    &quot;task_id&quot;: &quot;T10&quot;,
+    &quot;bbox&quot;: [
+      0.01,
+      0.55,
+      0.99,
+      0.99
+    ],
+    &quot;description&quot;: &quot;exposed floor in shortlisted room image&quot;
+  },
+  &quot;supporting_tasks&quot;: [
+    &quot;T10&quot;
+  ]
+}</pre></article></details><details><summary>聚合表达与整人一致性核查</summary><pre>{
+  &quot;aggregated_expression_review&quot;: {
+    &quot;task_id&quot;: &quot;T06&quot;,
+    &quot;expansion_refs&quot;: [
+      &quot;A_FACE_SHINE&quot;,
+      &quot;A_FACE_TEXTURE&quot;
+    ],
+    &quot;eligible_reason&quot;: &quot;The selected close portrait and existing generic retouch intent support a concise face-only request.&quot;,
+    &quot;scope&quot;: &quot;Only forehead shine and natural pore texture; no reshaping, whitening or makeup.&quot;,
+    &quot;fragment_support&quot;: &quot;Two separate ordinary photo-comparison contexts planned; no history turns exist yet.&quot;
+  },
+  &quot;coherence_review&quot;: {
+    &quot;image_people_are_not_automatically_user&quot;: true,
+    &quot;independent_source_tasks&quot;: true,
+    &quot;owned_pets_added&quot;: 0,
+    &quot;named_friends&quot;: [],
+    &quot;notes&quot;: [
+      &quot;猫是旧电视照片中保留的背景主体，不登记为他的宠物。&quot;,
+      &quot;手镯照片只作为配饰参考，人物不绑定未婚妻或朋友。&quot;,
+      &quot;客厅地板是方案参考，不登记第二套住宅。&quot;,
+      &quot;聚合请求只限T06的两项人像属性，不调用全部偏好。&quot;
+    ]
+  }
+}</pre></details><label class="feedback-label" for="feedback-profile">整个人物、Profile 或整体风格的意见</label><textarea id="feedback-profile" data-feedback="profile"></textarea></section><footer>当前为待审核构建稿。修改参数之后，来源 benchmark 的原始 target / 评分不直接沿用。</footer>
+    </main><script>
+    const pid="persona_004"; const storageKey='personaedit-formal-v1-'+pid;
+    const status=document.getElementById('save-status'); let feedback={};
+    try{feedback=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch(e){status.textContent='本地保存不可用；可导出意见'}
+    for(const el of document.querySelectorAll('[data-feedback]')){el.value=feedback[el.dataset.feedback]||'';el.addEventListener('input',()=>{feedback[el.dataset.feedback]=el.value;try{localStorage.setItem(storageKey,JSON.stringify(feedback));status.textContent='已在本机保存'}catch(e){status.textContent='请导出意见保存'}})}
+    document.getElementById('show-boxes').addEventListener('change',e=>document.body.classList.toggle('show-boxes',e.target.checked));
+    function revealHash(){const el=document.getElementById(location.hash.slice(1));if(!el)return;let node=el.parentElement;while(node){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement}el.scrollIntoView()}
+    window.addEventListener('hashchange',revealHash); if(location.hash)revealHash();
+    const reviewerKey='personaedit-volunteer-reviewer-v1';
+    let reviewer={id:'',name:''};
+    try{reviewer=JSON.parse(localStorage.getItem(reviewerKey)||'null')||reviewer}catch(e){}
+    if(!reviewer.id)reviewer.id=(globalThis.crypto?.randomUUID?.()||('r'+Date.now().toString(36)+Math.random().toString(36).slice(2))).slice(0,36);
+    const reviewerInput=document.getElementById('reviewer-name');reviewerInput.value=reviewer.name||'';
+    function saveReviewer(){reviewer.name=reviewerInput.value.trim();try{localStorage.setItem(reviewerKey,JSON.stringify(reviewer))}catch(e){}}
+    reviewerInput.addEventListener('input',saveReviewer);saveReviewer();
+    document.getElementById('export-feedback').addEventListener('click',()=>{
+      saveReviewer();
+      const exportedAt=new Date().toISOString();
+      const payload={schema_version:'1.1',persona_id:pid,draft:'formal-v1',dataset_revision:'59b4f06f3f61d703',reviewer_id:reviewer.id,reviewer_name:reviewer.name,exported_at:exportedAt,feedback};
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
+      const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;
+      a.download=pid+'_'+exportedAt.replace(/[:.]/g,'-')+'_'+reviewer.id.slice(0,8)+'.json';a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='已导出；请将JSON附件交回审核组织者';
+    });
+    </script></body></html>

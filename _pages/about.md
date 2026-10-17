@@ -19,6 +19,8 @@ I am also interested in understanding, detecting, and moderating <strong>user-ge
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
+<p><strong>Volunteer review:</strong> Help review the first five personas in <a href="/personaedit/human-evaluation/">PersonaEdit</a>, our personalized image editing benchmark.</p>
+
 
 # 🔥 News
 - *2026.09*: &nbsp;🎉🎉 1 Paper is accepted by NeurIPS 2026! Congrats to my golden partner Rongpei.
