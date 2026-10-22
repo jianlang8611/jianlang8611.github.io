@@ -23,6 +23,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 
 # 🔥 News
+- *2026.10*: &nbsp;🎉🎉 Selected for the 2026 [Young Science and Technology Scientists Sponsorship Program by CAST - Doctoral Student Special Plan](https://rczx.cast.org.cn/sy/tzgg/art/2026/art_3c9cc64b5a914fa2b0e43e113ce66c39.html), with the China Computer Federation (CCF) as the sponsoring society!
 - *2026.09*: &nbsp;🎉🎉 1 Paper is accepted by NeurIPS 2026! Congrats to my golden partner Rongpei.
 - *2026.06*: &nbsp;🎉🎉 Get SIGKDD-supported KDD 2026 Student Travel Award!
 - *2026.05*: &nbsp;🎉🎉 1 Paper is accepted by ICML 2026! See you in Seoul!
@@ -307,6 +308,7 @@ Ting Zhong, **Jian Lang**, Yifan Zhang, Zhangtao Cheng†, Kunpeng Zhang, Fan Zh
 </div>
 
 # 🎖 Honors and Awards
+- *2026.10* **Young Science and Technology Scientists Sponsorship Program by CAST - Doctoral Student Special Plan**, [China Association for Science and Technology (CAST)](https://rczx.cast.org.cn/sy/tzgg/art/2026/art_3c9cc64b5a914fa2b0e43e113ce66c39.html)
 - *2026.06* **KDD 2026 Student Travel Award**, [ACM SIGKDD](https://www.kdd.org/)
 - *2026.06* **Outstanding Communist Party Member**, [UESTC](https://en.uestc.edu.cn/)
 - *2024–2025* **China National Scholarship ×2** (2024, 2025, combined master's–PhD), [Ministry of Education of the People's Republic of China](http://en.moe.gov.cn/)
