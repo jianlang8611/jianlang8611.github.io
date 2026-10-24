@@ -1,0 +1,959 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PersonaEdit · persona_042 · Instruction v3 审核</title><style>
+    :root{color-scheme:light;--ink:#24313e;--muted:#647480;--line:#dce3e7;--accent:#17665e}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;background:#f4f6f7;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:30px;margin:0 0 10px}h2{font-size:21px;margin:0}h3{margin:15px 0 6px}h4{margin:8px 0}a{color:var(--accent)}p{margin:8px 0}.intro,.task,.profile-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}.sub,.caption,.zh{color:var(--muted)}.sub{margin-top:0}.caption{font-size:13px}.pill{display:inline-block;background:#fdf0cb;border-radius:5px;padding:2px 8px;color:#715619}.nav{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffffff2;border-bottom:1px solid var(--line);padding:10px 25px;backdrop-filter:blur(8px)}.nav a{text-decoration:none;font-weight:600}button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:white;color:var(--ink);cursor:pointer}.nav label{margin-left:auto;font-size:13px}.task-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tag{display:inline-block;font:12px/1.5 ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:4px;margin:3px}.task-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:25px}.source-image{display:flex;justify-content:center;background:#edf1f2;border-radius:8px;padding:8px}.image-wrap{position:relative;line-height:0}.image-wrap img{display:block;max-width:100%;max-height:490px;width:auto;height:auto}.bbox{position:absolute;border:2px solid #1675b9;display:none;pointer-events:none;line-height:1.3}.show-boxes .bbox{display:block}.bbox span{position:absolute;top:0;left:0;color:white;background:#1675b9;font:11px/1.3 monospace}.bbox.remove{border-color:#c34149}.bbox.remove span{background:#c34149}.bbox.keep{border-color:#21804d}.bbox.keep span{background:#21804d}.bbox.destination{border:2px dashed #a76800}.bbox.destination span{background:#a76800}.personal,.base{border-radius:8px;padding:14px 17px;margin-bottom:13px}.personal{background:#e8f4ee;border-left:4px solid #33856f}.base{background:#f2f4f7}.commands label{font-size:12px;font-weight:700;letter-spacing:.04em}.commands p{font-size:17px}.commands .zh{font-size:15px}details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;font-weight:600}pre{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fa;border-radius:5px;padding:10px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px}td:first-child{min-width:155px}td:nth-child(2){min-width:190px}td:nth-child(3){width:52%}td pre{margin-top:0}.table-scroll{overflow:auto}.knowledge{border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0;scroll-margin-top:65px;overflow:auto}.reference{float:right;width:135px;max-height:160px;object-fit:contain;margin:0 0 10px 15px}.knowledge:target{border:2px solid #33856f;background:#f5fcf8}.feedback-label{display:block;margin:15px 0 6px;font-size:13px;color:var(--muted)}textarea{width:100%;min-height:75px;border:1px solid var(--line);border-radius:7px;padding:10px;font:14px/1.5 inherit;resize:vertical}#save-status{font-size:12px;color:var(--muted)}.small-links{display:flex;gap:15px;flex-wrap:wrap}.basic-list{padding-left:20px}.contact{width:100%;max-width:1000px;display:block;margin:15px auto}.notice{background:#fff9e8;border-radius:7px;padding:12px;font-size:13px}.profile-panel .profile-section>summary{font-size:16px}footer{font-size:12px;color:var(--muted);padding-bottom:30px}@media(max-width:850px){main{padding:14px}.intro,.task,.profile-panel{padding:16px}.task-grid{grid-template-columns:1fr}.nav{padding:8px 12px;gap:10px}.nav label{margin-left:0}.image-wrap img{max-height:430px}h1{font-size:25px}}
+    .image-comparison,.command-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.image-comparison>div,.command-comparison>div{min-width:0}.image-comparison .source-image{height:460px;align-items:center}.image-comparison .image-wrap img{max-height:440px}.comparison-label{font-weight:650;font-size:14px;margin:8px 0}.source-single{max-width:720px;margin:auto}.command-comparison{margin-top:18px}.command-comparison .previous-command{background:#f2f3f5;border-left-color:#87939e}.commands p{overflow-wrap:anywhere}.base-comparison .command-comparison{margin-top:12px}.bbox.distractor{border-color:#8759aa}.bbox.distractor span{background:#8759aa}@media(max-width:850px){.image-comparison,.command-comparison{grid-template-columns:1fr;gap:12px}.image-comparison .source-image{height:auto;min-height:240px}.image-comparison .image-wrap img{max-height:430px}}.source-plan-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.source-plan-layout>div,.source-plan-layout>aside{min-width:0}.source-plan-layout .pending-source-plan{margin-top:8px;padding:18px;line-height:1.8}.source-plan-layout .source-single{margin:0}@media(max-width:850px){.source-plan-layout{grid-template-columns:1fr;gap:8px}}.knowledge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.knowledge-grid .knowledge{margin:0;min-width:0;overflow-wrap:anywhere}.command-meta{overflow-wrap:anywhere}@media(max-width:850px){.knowledge-grid{grid-template-columns:1fr}}.instruction-layers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.instruction-layers>div{min-width:0}.upper-command{background:#e7f4ec;border:2px solid #28745a}.underlying-command{background:#edf2ff;border:2px solid #5269aa}.instruction-layers label{font-size:14px}.instruction-layers .instruction-en{font-size:19px;line-height:1.65}.instruction-layers .zh{font-size:15px}@media(max-width:850px){.instruction-layers{grid-template-columns:1fr}}</style><link rel="stylesheet" href="review.css"></head><body><nav class="nav review-nav"><a href="group-001-050.html">← A组 001–050</a><a href="group-001-050.html#requirements">审核要求</a><a href="#profile">个人知识</a><label>任务 <select id="task-jump" aria-label="跳转任务"><option value="">选择…</option><option value="T01">T01</option><option value="T02">T02</option><option value="T03">T03</option><option value="T04">T04</option><option value="T05">T05</option><option value="T06">T06</option><option value="T07">T07</option><option value="T08">T08</option><option value="T09">T09</option><option value="T10">T10</option></select></label><label><input id="show-boxes" type="checkbox">核查框</label><span id="review-progress" role="status">0 / 10</span><button type="button" id="export-feedback">导出完成审核</button><button type="button" id="export-draft">导出草稿</button><button type="button" id="import-draft">导入草稿</button><input id="import-file" type="file" accept="application/json,.json" hidden><span id="save-status" role="status"></span></nav><main><form id="review-form" novalidate><section class="review-identity"><p>A组 · 第 42 / 50 位 · 本页一个persona、10条命令</p><label for="reviewer-name">审核署名（可选）</label><input id="reviewer-name" type="text" maxlength="100" autocomplete="name"><p>先读<a href="group-001-050.html#requirements">审核与模糊化规则</a>，再核查个人知识、逐条判断并改写。底层解析用于核对原意，不要把答案抄进改写。</p><p id="review-message" role="alert" tabindex="-1"></p></section>
+    <section class="intro" id="overview"><span class="pill">正式数据构建稿 · 待审核</span><h1>Upton O&#x27;Rourke · persona_042</h1><p class="sub">100 位 V3 基础人物已固定顺序；目前 100 位完成图文构建稿，本页为其中一位的10个任务。英文为本轮评估语言，中文用于审核。</p><p>Upton以办公室整理、救助犬、普通用餐和旅行布置选项形成十张图。基础信息里的妻子、救助犬和出游计划作弱连接；不把任何相机误称为修复中的收音机。</p><p>Director of program evaluation for a nonprofit serving families experiencing homelessness · PhD in Social Policy · 未提供数值年龄；按职业与教育背景推定为成年人</p><p>Upton spends most workdays turning messy case-management data into reports for grant funders, usually from a cluttered office with a cold coffee and his rescue dog sleeping under the desk. After dinner, he checks fantasy football waiver advice, watches Lions-Ravens matchup clips, and decompresses with Modern Warfare 2 or a few blunt sports-comedy interviews. He is quiet at donor events but surprisingly serious about planning a Disney cruise for his wife, down to comparing deck layouts and shaded seating. On weekends he tinkers with restoring old shortwave radios, a habit he picked up from his grandfather.</p><p class="caption">10 张不同原图 · 10 条命令 · 21 个原子操作 · 47 个个性化参数 · 8 类操作</p><p class="caption">Remove 4 · Attribute Modification 7 · Replace 4 · Retouch 1 · Move 1 · Restyle 1 · Background 1 · Add 2</p><div class="notice">十条指令、参数和改图方案已逐项自查；未执行源图修改，等待整批审核。 所有实体和偏好仍为构建稿，尚无长期历史或编辑结果。</div><p class="notice">上层v3表达个性化编辑请求，底层列出操作、个性化参数及具体解析。125项global均不绑定题材或具体图片，由请求选择；人物基本信息、非global知识和图片保持不变。历史版本仅存internal；长期日常历史尚未构建。</p><p><a href="#T01">直接查看10条图像与命令 →</a></p><div class="small-links"><a href="../benchmark/data/personas/basic_persona_profile.json">100 人 Basic JSON</a><a href="../benchmark/data/personas/complete_persona_profile.json">Complete Profile JSON</a><a href="../benchmark/data/instructions/persona_instruction.json">上层 v3 JSON</a><a href="../benchmark/data/instructions/personalized_base_instruction.json">底层及参数解析 JSON</a></div><details><summary>整组图片与基础人物信息（已清理、统一字段）</summary><img class="contact" src="../benchmark/data/images/persona_042/contact-sheet.jpg" alt="10 source images"><pre>{
+  &quot;source&quot;: {
+    &quot;dataset&quot;: &quot;bowen-upenn/PersonaMem-v3&quot;,
+    &quot;revision&quot;: &quot;7b00a090b35b7293e6efeeb19494207f32b5a9ee&quot;,
+    &quot;source_persona_id&quot;: &quot;60&quot;,
+    &quot;path&quot;: &quot;backend/60/profile.json&quot;,
+    &quot;raw_sha256&quot;: &quot;5138e23025920d839735355f681ee60ed826b0d7f7079464da11a3c15bc22d06&quot;
+  },
+  &quot;basic_profile&quot;: {
+    &quot;name&quot;: &quot;Upton O&#x27;Rourke&quot;,
+    &quot;age&quot;: null,
+    &quot;gender&quot;: &quot;cisgender male, heterosexual&quot;,
+    &quot;nationality&quot;: null,
+    &quot;languages&quot;: [],
+    &quot;location&quot;: {
+      &quot;city&quot;: null,
+      &quot;region&quot;: null,
+      &quot;country&quot;: null,
+      &quot;description&quot;: null
+    },
+    &quot;education&quot;: {
+      &quot;degrees&quot;: [
+        &quot;PhD in Social Policy&quot;
+      ],
+      &quot;fields&quot;: [],
+      &quot;institutions&quot;: []
+    },
+    &quot;occupation&quot;: {
+      &quot;title&quot;: &quot;Director of program evaluation for a nonprofit serving families experiencing homelessness&quot;,
+      &quot;organization&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;status&quot;: null
+    },
+    &quot;relationship_status&quot;: null,
+    &quot;summary&quot;: null,
+    &quot;biography&quot;: &quot;Upton spends most workdays turning messy case-management data into reports for grant funders, usually from a cluttered office with a cold coffee and his rescue dog sleeping under the desk. After dinner, he checks fantasy football waiver advice, watches Lions-Ravens matchup clips, and decompresses with Modern Warfare 2 or a few blunt sports-comedy interviews. He is quiet at donor events but surprisingly serious about planning a Disney cruise for his wife, down to comparing deck layouts and shaded seating. On weekends he tinkers with restoring old shortwave radios, a habit he picked up from his grandfather.&quot;,
+    &quot;hobbies&quot;: [],
+    &quot;personality&quot;: {
+      &quot;traits&quot;: [],
+      &quot;values&quot;: [],
+      &quot;quirks&quot;: [],
+      &quot;big_five&quot;: {
+        &quot;openness&quot;: &quot;low&quot;,
+        &quot;conscientiousness&quot;: &quot;low&quot;,
+        &quot;extraversion&quot;: &quot;low&quot;,
+        &quot;agreeableness&quot;: &quot;medium&quot;,
+        &quot;neuroticism&quot;: &quot;medium&quot;
+      }
+    },
+    &quot;additional&quot;: {
+      &quot;social_connections&quot;: [
+        {
+          &quot;friend_id&quot;: &quot;friend_1&quot;,
+          &quot;display_name&quot;: &quot;Owen O&#x27;Malley&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;fantasy football&quot;,
+            &quot;Detroit Lions&quot;,
+            &quot;Modern Warfare 2&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_2&quot;,
+          &quot;display_name&quot;: &quot;Uriah O&#x27;Leary&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;NFL&quot;,
+            &quot;sports-comedy interviews&quot;,
+            &quot;Ravens clips&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_3&quot;,
+          &quot;display_name&quot;: &quot;Maeve O&#x27;Hara&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Disney cruises&quot;,
+            &quot;home projects&quot;,
+            &quot;family updates&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_4&quot;,
+          &quot;display_name&quot;: &quot;Owen Oakes&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;fantasy football&quot;,
+            &quot;sports media&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_5&quot;,
+          &quot;display_name&quot;: &quot;Ursula O&#x27;Donnell&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;nonprofit evaluation&quot;,
+            &quot;grant reporting&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_6&quot;,
+          &quot;display_name&quot;: &quot;Nolan Osgood&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;family homelessness services&quot;,
+            &quot;community nonprofits&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_7&quot;,
+          &quot;display_name&quot;: &quot;Una Ormsby&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Disney planning&quot;,
+            &quot;Instagram home-project creators&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_8&quot;,
+          &quot;display_name&quot;: &quot;Declan O&#x27;Neill&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;NFL&quot;,
+            &quot;old school friends&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_9&quot;,
+          &quot;display_name&quot;: &quot;Bridget Overton&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;donor events&quot;,
+            &quot;local nonprofit policy&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_10&quot;,
+          &quot;display_name&quot;: &quot;Seamus O&#x27;Connell&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Ravens football&quot;,
+            &quot;media-watchers&quot;
+          ]
+        }
+      ]
+    }
+  },
+  &quot;adult_eligibility&quot;: {
+    &quot;status&quot;: &quot;adult&quot;,
+    &quot;basis&quot;: &quot;adult_career_and_education_context&quot;,
+    &quot;inferred&quot;: true,
+    &quot;numeric_age_provided&quot;: false
+  },
+  &quot;persona_id&quot;: &quot;persona_042&quot;
+}</pre></details></section>
+    <section class="profile-panel persona-checks" id="profile-review"><h2>先检查这个persona</h2>
+<label class="check-line"><input type="checkbox" id="profile-read" data-persona-field="profile_read" required>我已阅读这个人的个人信息与相关知识，并会结合源图核查每条命令。</label>
+<label for="profile-leakage">个人信息是否夹带具体编辑意图／答案？<span class="required">必答</span></label>
+<select id="profile-leakage" data-persona-field="leakage" required><option value="">请选择</option><option value="ok">未发现；正常偏好值不算泄露</option><option value="issue">有编辑意图泄露</option><option value="unsure">不确定，需要复核</option></select>
+<label for="profile-notes">人物知识问题说明<span class="conditional">有问题或不确定时必填</span></label><textarea id="profile-notes" data-persona-field="notes" rows="3" placeholder="请引用具体知识条目；也可记录矛盾、缺失或身份依据问题。"></textarea></section><section class="profile-panel" id="profile"><h2>Profile · 既有知识重新分类</h2><details class="global-usage" open><summary>同一项 global 在本人的十条命令中出现多少次</summary><div class="table-scroll"><table><thead><tr><th>Global</th><th>调用任务</th><th>命令数</th></tr></thead><tbody><tr><td><a href="#K_G_IMAGE_STYLE">G_IMAGE_STYLE</a></td><td>T05</td><td>1 / 10</td></tr></tbody></table></div></details><p class="caption">以下按可读卡片展示个人 JSON。偏好分为实体、场景和全局三类；场景包括天空、背景环境、光照及环境表面，global 不会自动触发编辑；情境事实只用于对应参数的实体识别或筛选；位置条目独立记录空间习惯。</p><details class="profile-section" open><summary>Personalized Entities · 个人实体 · 3</summary><div class="knowledge-grid"><article class="knowledge" id="K_E_OFFICE_DOG"><h4>E_OFFICE_DOG · my office dog</h4><a href="../benchmark/data/references/persona_042/E_OFFICE_DOG.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_042/E_OFFICE_DOG.jpg" alt="E_OFFICE_DOG reference"></a>
+          <p><strong>Dog</strong> · my rescue dog who spends the workday at the office</p>
+          <div class="caption">视觉识别：</div><ul><li>medium-sized brown-and-white coat</li><li>broad white chest and muzzle</li><li>dark collar</li><li>larger dog sitting upright on sofa</li></ul>
+          <p class="caption">别名：my office dog · 来源任务：T01 · 支持任务：T01</p></article><article class="knowledge" id="K_E_WIFE"><h4>E_WIFE · my wife</h4><a href="../benchmark/data/references/persona_042/E_WIFE.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_042/E_WIFE.jpg" alt="E_WIFE reference"></a>
+          <p><strong>Person</strong> · my wife</p>
+          <div class="caption">视觉识别：</div><ul><li>long dark hair with lighter ends</li><li>black leather jacket</li><li>right person in the canal-and-blossom photo</li></ul>
+          <p class="caption">别名：my wife · 来源任务：T03 · 支持任务：T03</p></article><article class="knowledge" id="K_E_WHITE_BAG"><h4>E_WHITE_BAG · our small white bag</h4><a href="../benchmark/data/references/persona_042/E_WHITE_BAG.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_042/E_WHITE_BAG.jpg" alt="E_WHITE_BAG reference"></a>
+          <p><strong>Handbag</strong> · one shared small bag used while going out</p>
+          <div class="caption">视觉识别：</div><ul><li>small white flap body</li><li>curved short top handle</li><li>slim pale strap draped onto the stone step</li></ul>
+          <p class="caption">别名：our small white bag · 来源任务：T04 · 支持任务：T04</p></article></div></details><details class="profile-section" open><summary>Entity Preferences · 实体偏好 · 24</summary><div class="knowledge-grid"><article class="knowledge attribute-group" id="AG_A_FAMILY_FACE"><h4>A_FAMILY_FACE · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_FAMILY_FACE__SHADOW_MIDTONES">shadow_midtones</a>、<a href="#K_A_FAMILY_FACE__LIGHT_DIRECTION">light_direction</a>、<a href="#K_A_FAMILY_FACE__SKIN_TEXTURE">skin_texture</a></p><p class="caption">共同适用语境：adult family outing snapshots</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_CASUAL_JACKET"><h4>A_CASUAL_JACKET · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_CASUAL_JACKET__FABRIC">fabric</a>、<a href="#K_A_CASUAL_JACKET__COLOR">color</a>、<a href="#K_A_CASUAL_JACKET__SURFACE_SHEEN">surface_sheen</a></p><p class="caption">共同适用语境：lightweight adult jackets</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_SMALL_BAG"><h4>A_SMALL_BAG · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_SMALL_BAG__BODY_MATERIAL">body_material</a>、<a href="#K_A_SMALL_BAG__COLOR">color</a>、<a href="#K_A_SMALL_BAG__SURFACE_TEXTURE">surface_texture</a></p><p class="caption">共同适用语境：small flap handbags</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_CHICKEN_COATING"><h4>A_CHICKEN_COATING · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_CHICKEN_COATING__CRUMB_RECIPE">crumb_recipe</a>、<a href="#K_A_CHICKEN_COATING__COLOR">color</a>、<a href="#K_A_CHICKEN_COATING__CRUMB_TEXTURE">crumb_texture</a></p><p class="caption">共同适用语境：coatings on ordinary fried chicken pieces</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_TRIPOD"><h4>A_TRIPOD · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_TRIPOD__LEG_MATERIAL">leg_material</a>、<a href="#K_A_TRIPOD__SURFACE_SHEEN">surface_sheen</a>、<a href="#K_A_TRIPOD__SURFACE_TEXTURE">surface_texture</a></p><p class="caption">共同适用语境：folded camera tripod legs</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge" id="K_A_SOFA_COVER"><h4>A_SOFA_COVER · Sofa · upholstery_color</h4>
+          <p><strong>偏好：</strong>muted denim blue</p>
+          <p class="caption">适用语境：fabric sofas in a small sitting room · 支持任务：T01</p><p class="caption">可出现的日常话题：Comparing practical blue upholstery swatches while browsing furniture.</p></article><article class="knowledge" id="K_A_OFFICE_SEAT"><h4>A_OFFICE_SEAT · Sofa · design</h4>
+          <p><strong>偏好：</strong>a compact plain grey two-seat sofa on short wood legs</p>
+          <p class="caption">适用语境：compact sofas for a small shared workroom · 支持任务：T02</p><p class="caption">可出现的日常话题：Comparing modest two-seat sofas during homewares browsing.</p></article><article class="knowledge" id="K_A_FAMILY_FACE__SHADOW_MIDTONES"><h4>A_FAMILY_FACE__SHADOW_MIDTONES · Face · shadow_midtones</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>moderately lift visibly shaded cheek and lower-face midtones</p>
+          <p class="caption">适用语境：adult family outing snapshots · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing ordinary portrait prints and choosing a recognizable face with this specific skin-tonal finish, retaining original features and makeup.</p><p class="caption">同一偏好方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_FAMILY_FACE__LIGHT_DIRECTION"><h4>A_FAMILY_FACE__LIGHT_DIRECTION · Face · light_direction</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>retain original direction</p>
+          <p class="caption">适用语境：adult family outing snapshots · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing ordinary portrait prints and choosing a recognizable face with this specific skin-tonal finish, retaining original features and makeup.</p><p class="caption">同一偏好方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_FAMILY_FACE__SKIN_TEXTURE"><h4>A_FAMILY_FACE__SKIN_TEXTURE · Face · skin_texture</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>retain original skin detail</p>
+          <p class="caption">适用语境：adult family outing snapshots · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing ordinary portrait prints and choosing a recognizable face with this specific skin-tonal finish, retaining original features and makeup.</p><p class="caption">同一偏好方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_CASUAL_JACKET__FABRIC"><h4>A_CASUAL_JACKET__FABRIC · Jacket · fabric</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>suede</p>
+          <p class="caption">适用语境：lightweight adult jackets · 支持任务：T03</p><p class="caption">可出现的日常话题：Saving a chestnut-suede jacket during ordinary clothes browsing.</p><p class="caption">同一偏好方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_CASUAL_JACKET__COLOR"><h4>A_CASUAL_JACKET__COLOR · Jacket · color</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>chestnut</p>
+          <p class="caption">适用语境：lightweight adult jackets · 支持任务：T03</p><p class="caption">可出现的日常话题：Saving a chestnut-suede jacket during ordinary clothes browsing.</p><p class="caption">同一偏好方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_CASUAL_JACKET__SURFACE_SHEEN"><h4>A_CASUAL_JACKET__SURFACE_SHEEN · Jacket · surface_sheen</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>matte</p>
+          <p class="caption">适用语境：lightweight adult jackets · 支持任务：T03</p><p class="caption">可出现的日常话题：Saving a chestnut-suede jacket during ordinary clothes browsing.</p><p class="caption">同一偏好方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_SMALL_BAG__BODY_MATERIAL"><h4>A_SMALL_BAG__BODY_MATERIAL · Handbag · body_material</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>leather</p>
+          <p class="caption">适用语境：small flap handbags · 支持任务：T04</p><p class="caption">可出现的日常话题：Comparing practical pebbled-leather bags in a shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_SMALL_BAG__COLOR"><h4>A_SMALL_BAG__COLOR · Handbag · color</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>dark tan</p>
+          <p class="caption">适用语境：small flap handbags · 支持任务：T04</p><p class="caption">可出现的日常话题：Comparing practical pebbled-leather bags in a shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_SMALL_BAG__SURFACE_TEXTURE"><h4>A_SMALL_BAG__SURFACE_TEXTURE · Handbag · surface_texture</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>fine pebbled</p>
+          <p class="caption">适用语境：small flap handbags · 支持任务：T04</p><p class="caption">可出现的日常话题：Comparing practical pebbled-leather bags in a shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_HARBOUR_HULL"><h4>A_HARBOUR_HULL · Boat · hull_color</h4>
+          <p><strong>偏好：</strong>dark navy blue</p>
+          <p class="caption">适用语境：painted hulls of small leisure boats · 支持任务：T05</p><p class="caption">可出现的日常话题：Comparing painted boat hulls while planning an unhurried harbour visit.</p></article><article class="knowledge" id="K_A_GUEST_COVER"><h4>A_GUEST_COVER · Blanket · design</h4>
+          <p><strong>偏好：</strong>a cream waffle-weave cotton bed cover</p>
+          <p class="caption">适用语境：covers for a small guest bed · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing washable waffle-weave bed covers during household shopping.</p></article><article class="knowledge" id="K_A_READING_LAMP"><h4>A_READING_LAMP · FloorLamp · design</h4>
+          <p><strong>偏好：</strong>a slim black floor lamp with one downward-facing opal-glass shade</p>
+          <p class="caption">适用语境：reading lamps beside a small bed · 支持任务：T06</p><p class="caption">可出现的日常话题：Saving a simple opal reading lamp on a separate homewares visit.</p></article><article class="knowledge" id="K_A_LUNCH_DRINK"><h4>A_LUNCH_DRINK · Drink · design</h4>
+          <p><strong>偏好：</strong>cloudy lemonade in a tall clear ribbed glass with no garnish</p>
+          <p class="caption">适用语境：a modest drink with a casual lunch · 支持任务：T07</p><p class="caption">可出现的日常话题：Ordering cloudy lemonade during an ordinary lunch break.</p></article><article class="knowledge" id="K_A_CHICKEN_COATING__CRUMB_RECIPE"><h4>A_CHICKEN_COATING__CRUMB_RECIPE · ChickenDish · crumb_recipe</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>Cajun-spice crumbs</p>
+          <p class="caption">适用语境：coatings on ordinary fried chicken pieces · 支持任务：T07</p><p class="caption">可出现的日常话题：Comparing Cajun-spiced chicken on a lunch menu.</p><p class="caption">同一偏好方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_CHICKEN_COATING__COLOR"><h4>A_CHICKEN_COATING__COLOR · ChickenDish · color</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>reddish</p>
+          <p class="caption">适用语境：coatings on ordinary fried chicken pieces · 支持任务：T07</p><p class="caption">可出现的日常话题：Comparing Cajun-spiced chicken on a lunch menu.</p><p class="caption">同一偏好方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_CHICKEN_COATING__CRUMB_TEXTURE"><h4>A_CHICKEN_COATING__CRUMB_TEXTURE · ChickenDish · crumb_texture</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>crisp</p>
+          <p class="caption">适用语境：coatings on ordinary fried chicken pieces · 支持任务：T07</p><p class="caption">可出现的日常话题：Comparing Cajun-spiced chicken on a lunch menu.</p><p class="caption">同一偏好方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_EVENT_CAMERA"><h4>A_EVENT_CAMERA · Camera · design</h4>
+          <p><strong>偏好：</strong>a small black mirrorless camera with a short pancake lens</p>
+          <p class="caption">适用语境：cameras used for ordinary event snapshots · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing a simple compact mirrorless design for event photographs.</p></article><article class="knowledge" id="K_A_TRIPOD__LEG_MATERIAL"><h4>A_TRIPOD__LEG_MATERIAL · Tripod · leg_material</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>carbon fibre</p>
+          <p class="caption">适用语境：folded camera tripod legs · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing lighter tripod materials while discussing borrowed event equipment.</p><p class="caption">同一偏好方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_TRIPOD__SURFACE_SHEEN"><h4>A_TRIPOD__SURFACE_SHEEN · Tripod · surface_sheen</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>matte</p>
+          <p class="caption">适用语境：folded camera tripod legs · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing lighter tripod materials while discussing borrowed event equipment.</p><p class="caption">同一偏好方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_TRIPOD__SURFACE_TEXTURE"><h4>A_TRIPOD__SURFACE_TEXTURE · Tripod · surface_texture</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>fine woven</p>
+          <p class="caption">适用语境：folded camera tripod legs · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing lighter tripod materials while discussing borrowed event equipment.</p><p class="caption">同一偏好方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_GARDEN_SEAT"><h4>A_GARDEN_SEAT · Bench · paint_color</h4>
+          <p><strong>偏好：</strong>soft sage green</p>
+          <p class="caption">适用语境：painted metal garden benches · 支持任务：T09</p><p class="caption">可出现的日常话题：Comparing subtle garden-seat paint samples while browsing outdoor furniture.</p></article><article class="knowledge" id="K_A_TABLE_BUD"><h4>A_TABLE_BUD · FlowerArrangement · design</h4>
+          <p><strong>偏好：</strong>one short white cosmos stem in a very slim clear-glass bud vase, with total height about 15 cm</p>
+          <p class="caption">适用语境：small flower arrangements that do not block a dining table · 支持任务：T10</p><p class="caption">可出现的日常话题：Saving a single-stem table-flower idea during ordinary homewares browsing.</p></article></div></details><details class="profile-section" open><summary>Scene Preferences · 场景偏好 · 2</summary><div class="knowledge-grid"><article class="knowledge attribute-group" id="AG_G_GUEST_WALL"><h4>G_GUEST_WALL · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_G_GUEST_WALL__WALL_COLOR">wall_color</a>、<a href="#K_G_GUEST_WALL__SURFACE_SHEEN">surface_sheen</a></p><p class="caption">共同适用语境：walls in a small guest-room layout</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge" id="K_G_GUEST_WALL__WALL_COLOR"><h4>G_GUEST_WALL__WALL_COLOR · wall_color</h4>
+          <p><strong>场景偏好方案中的属性：</strong>pale grey green</p>
+          <p class="caption">适用语境：walls in a small guest-room layout · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing pale paint cards during a hardware-store visit.</p><p class="caption">同一偏好方案：<a href="#AG_G_GUEST_WALL">G_GUEST_WALL</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_G_GUEST_WALL__SURFACE_SHEEN"><h4>G_GUEST_WALL__SURFACE_SHEEN · surface_sheen</h4>
+          <p><strong>场景偏好方案中的属性：</strong>matte</p>
+          <p class="caption">适用语境：walls in a small guest-room layout · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing pale paint cards during a hardware-store visit.</p><p class="caption">同一偏好方案：<a href="#AG_G_GUEST_WALL">G_GUEST_WALL</a> · 属性分开记录，共同适用范围不变</p></article></div></details><details class="profile-section" open><summary>Global Preferences · 全局偏好 · 1</summary><div class="knowledge-grid"><article class="knowledge" id="K_G_IMAGE_STYLE"><h4>G_IMAGE_STYLE · rendering_style</h4>
+          <p><strong>全局偏好：</strong>full-colour soft-gouache illustration with fine visible details</p>
+          <p class="caption">适用语境：Across images, independent of depicted subject, scene or source image. · 支持任务：T05</p><p class="caption">可出现的日常话题：Comparing unrelated images and choosing the usual illustrated style: full-colour soft-gouache illustration with fine visible details</p><p class="caption">全局方案：usual illustrated style · 由本次请求选择，不按图片题材选择。</p></article></div></details><details class="profile-section" open><summary>Position Preferences · 位置习惯 · 3</summary><div class="knowledge-grid"><article class="knowledge" id="K_S_OUTING_BAG"><h4>S_OUTING_BAG · E_WHITE_BAG</h4>
+          <p><strong>空间习惯：</strong>where we put a bag while sitting on steps</p>
+          <p><strong>目标位置：</strong>relation：left_of；anchor：seated woman；support：same broad upper step, clear of her boots</p>
+          <p class="caption">适用条件：broad stone steps beside a seated adult · 说法：where we leave it when we sit down · 支持任务：T04</p></article><article class="knowledge" id="K_S_LUNCH_GLASS"><h4>S_LUNCH_GLASS · Drink</h4>
+          <p><strong>空间习惯：</strong>where I keep a cold drink separate from a food tray</p>
+          <p><strong>目标位置：</strong>relation：right_of；anchor：lunch plate；support：front-right tabletop, well away from the rear comparison cup</p>
+          <p class="caption">适用条件：a fried-chicken lunch on a table with clear space at right · 说法：where I keep it clear of the plate · 支持任务：T07</p></article><article class="knowledge" id="K_S_TABLE_BUD"><h4>S_TABLE_BUD · FlowerArrangement</h4>
+          <p><strong>空间习惯：</strong>where I keep a flower clear of plates and conversation</p>
+          <p><strong>目标位置：</strong>relation：beside；anchor：right side of the small foreground sauce bowl；support：narrow clear tabletop strip behind the foreground knife, away from plates and faces</p>
+          <p class="caption">适用条件：busy dining table with a napkin holder, sauce bowl and jars · 说法：where I keep it out of everyone’s way · 支持任务：T10</p></article></div></details><details class="profile-section" open><summary>Contextual Facts · 情境事实 · 10</summary><div class="knowledge-grid"><article class="knowledge" id="K_F_VISIT_SOFA"><h4>F_VISIT_SOFA · Sofa</h4>
+          <p><strong>情境事实：</strong>The pale sofa is the sofa in the visit photo with my office dog; the other small brown dog is not another pet of mine.</p>
+          <p class="caption">图像依据：pale beige sofa where the dogs are sitting · 支持任务：T01</p></article><article class="knowledge" id="K_F_FINISHED_OFFICE_PAPERS"><h4>F_FINISHED_OFFICE_PAPERS · Paper</h4>
+          <p><strong>情境事实：</strong>The loose checklist pages at the front-left beneath the black phone are the batch I already filed. The separate upright white paper packet to the right of the laptop is still pending; bound books and equipment are not part of the finished batch.</p>
+          <p class="caption">图像依据：loose checklist sheets at the front-left of the worktable beneath the black phone · 支持任务：T02</p></article><article class="knowledge" id="K_F_OFFICE_SEAT"><h4>F_OFFICE_SEAT · Sofa</h4>
+          <p><strong>情境事实：</strong>The patterned couch at the right is the seating option in the cluttered office-room photograph I sent while comparing a clearer workspace.</p>
+          <p class="caption">图像依据：patterned couch at the right of the room · 支持任务：T02</p></article><article class="knowledge" id="K_F_HARBOUR_BOAT"><h4>F_HARBOUR_BOAT · Boat</h4>
+          <p><strong>情境事实：</strong>The nearest cream-and-green boat at lower left is the boat I pointed out in the harbour planning photo; it belongs to its operator, not to me.</p>
+          <p class="caption">图像依据：nearest cream-and-green rowing boat at lower left · 支持任务：T05</p></article><article class="knowledge" id="K_F_GUEST_ROOM_OPTION"><h4>F_GUEST_ROOM_OPTION · Blanket</h4>
+          <p><strong>情境事实：</strong>The small room with a blue bed cover, low bookshelf and standing lamp is a guest-room layout option I shared, not an additional home I own.</p>
+          <p class="caption">图像依据：dark blue bed cover in the small room · 支持任务：T06</p></article><article class="knowledge" id="K_F_LUNCH_OPTION"><h4>F_LUNCH_OPTION · ChickenDish</h4>
+          <p><strong>情境事实：</strong>The fried chicken pieces on the front plate are the lunch option I sent before choosing a different crumb coating; the bread and slaw were separate parts.</p>
+          <p class="caption">图像依据：fried chicken pieces in the original front plate · 支持任务：T07</p></article><article class="knowledge" id="K_F_DONOR_CAMERA"><h4>F_DONOR_CAMERA · Camera</h4>
+          <p><strong>情境事实：</strong>The black camera and long lens at the upper right are the camera we borrowed for the donor-event equipment trial; the desk is an equipment layout, not my radio collection.</p>
+          <p class="caption">图像依据：black camera with long lens at the desk’s upper right · 支持任务：T08</p></article><article class="knowledge" id="K_F_RETURNED_HAT"><h4>F_RETURNED_HAT · Hat</h4>
+          <p><strong>情境事实：</strong>The straw fedora resting on the woman’s raised knee was borrowed for that garden snapshot and returned afterward.</p>
+          <p class="caption">图像依据：straw fedora resting on the reclining woman’s knee · 支持任务：T09</p></article><article class="knowledge" id="K_F_GARDEN_SEAT"><h4>F_GARDEN_SEAT · Bench</h4>
+          <p><strong>情境事实：</strong>The ornate black bench beneath the reclining woman is the public garden seat in the snapshot I shared, not furniture I own.</p>
+          <p class="caption">图像依据：ornate black metal garden bench beneath the woman · 支持任务：T09</p></article><article class="knowledge" id="K_F_EXTRA_JAR"><h4>F_EXTRA_JAR · DrinkingJar</h4>
+          <p><strong>情境事实：</strong>The large clear mason jar at the front centre was the extra jar I had borrowed from the next table and gave back; the smaller rear jar stayed with our meal.</p>
+          <p class="caption">图像依据：large clear mason jar at the table’s front centre · 支持任务：T10</p></article></div></details><details><summary>聚合表达与整人一致性核查</summary><pre>{
+  &quot;aggregated_expression_review&quot;: {
+    &quot;task_id&quot;: &quot;T06&quot;,
+    &quot;expansion_refs&quot;: [
+      &quot;A_GUEST_COVER&quot;,
+      &quot;A_READING_LAMP&quot;
+    ],
+    &quot;status&quot;: &quot;constructed_expansion_pending_fragmented_daily_history&quot;,
+    &quot;check_zh&quot;: &quot;两项类别物品设计和一个global墙面偏好来自分散日常信息，三项真实原子操作，不拆细属性凑数。&quot;
+  },
+  &quot;coherence_review&quot;: {
+    &quot;image_people_are_not_automatically_user&quot;: true,
+    &quot;independent_source_tasks&quot;: true,
+    &quot;owned_pets_added&quot;: 1,
+    &quot;named_friends&quot;: [],
+    &quot;notes&quot;: [
+      &quot;仅一只永久救助犬；同图小棕犬为普通其他动物，不构造第二只用户宠物。&quot;,
+      &quot;只登记妻子的必要视觉身份与一个共用小白包，来源房间均可为布置选项。&quot;
+    ]
+  }
+}</pre></details></section>
+    <article class="task" id="T01">
+          <div class="task-heading"><h2>T01 · 救助犬的到访照片</h2><div><span class="tag">Remove</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T01_anyedit_remove_26.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T01_anyedit_remove_26.jpg" alt="T01 current source image"><div class="bbox keep" style="left:47.0%;top:46.0%;width:15.000000000000002%;height:28.999999999999996%"><span>keep</span></div><div class="bbox remove" style="left:57.99999999999999%;top:49.0%;width:10.000000000000009%;height:28.000000000000004%"><span>remove</span></div><div class="bbox target" style="left:35.0%;top:35.0%;width:60.0%;height:58.00000000000001%"><span>P03</span></div></div></a></div><p class="caption">AnyEdit-Test · remove:26 · 当前图 500 × 375 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。放大核对确认大棕白犬与女子膝旁小棕犬两只；用户只拥有前者。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">I&#x27;d like just our office rescue dog in this one, with a sofa I&#x27;d choose for that office.</p><p class="zh">这张就留办公室的救助犬吧，沙发也要像我会给那间办公室选的。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear all the dogs except my office dog, and give the sofa from that visit the sofa color I picked.</p><p class="zh">狗就留办公室那位老伙伴，到访那张里的沙发也试试我选的颜色。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T01" data-review-task="T01">
+<h3 id="rewrite-heading-T01">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T01-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T01-leakage" data-task="T01" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T01-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T01-solvability" data-task="T01" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T01-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T01-naturalness" data-task="T01" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T01">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T01" data-task="T01" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T01">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T01" data-task="T01" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T01"><input id="faithful-T01" type="checkbox" data-task="T01" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T01" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → E_OFFICE_DOG；Entity/target_entity → F_VISIT_SOFA；Attribute/result_attribute → A_SOFA_COVER</p><p class="caption">匹配：严格只登记基础信息的一只救助犬；另一只小棕犬不叫第二只宠物。</p><p class="caption">核查：Zoom inspection confirms two real dogs: large brown-white dog and smaller dark-brown dog beside the woman’s lap. Remove complement includes the small dog, keeping human hands and lap coherent.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P02" data-argument-type="Entity"><td>P02<br>Remove<br>Entity / target_entity</td><td>all the dogs except my office dog<br><small>General Entity</small></td><td><pre>{
+  &quot;selection&quot;: &quot;all dogs except E_OFFICE_DOG&quot;
+}</pre><a class="tag" href="#K_E_OFFICE_DOG">E_OFFICE_DOG</a></td></tr><tr data-argument="P03" data-argument-type="Entity"><td>P03<br>Attribute Modification<br>Entity / target_entity</td><td>the sofa from that visit<br><small>General Entity</small></td><td><pre>&quot;pale beige sofa where the dogs are sitting&quot;</pre><a class="tag" href="#K_F_VISIT_SOFA">F_VISIT_SOFA</a></td></tr><tr data-argument="P04" data-argument-type="Attribute"><td>P04<br>Attribute Modification<br>Attribute / result_attribute</td><td>the sofa color I picked<br><small></small></td><td><pre>{
+  &quot;upholstery_color&quot;: &quot;muted denim blue&quot;
+}</pre><a class="tag" href="#K_A_SOFA_COVER">A_SOFA_COVER</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;remove&quot;,
+    &quot;sample_id&quot;: &quot;remove:26&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:remove:26&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;remove the two dogs from the couch&quot;,
+    &quot;native_label&quot;: &quot;remove&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/remove/input_img/COCO_train2014_000000318496_0.jpg&quot;,
+    &quot;original_caption&quot;: &quot;a woman is sitting on a couch with two dogs.&quot;,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Zoom inspection confirms two real dogs: large brown-white dog and smaller dark-brown dog beside the woman’s lap. Remove complement includes the small dog, keeping human hands and lap coherent.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T02">
+          <div class="task-heading"><h2>T02 · 办公室的旧文件</h2><div><span class="tag">Remove</span><span class="tag">Replace</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T02_complex_11.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T02_complex_11.jpg" alt="T02 current source image"><div class="bbox target" style="left:0%;top:80.60000000000001%;width:25.2%;height:16.199999999999992%"><span>P05</span></div><div class="bbox target" style="left:70.0%;top:43.0%;width:30.000000000000004%;height:38.00000000000001%"><span>P06</span></div></div></a></div><p class="caption">Complex-Edit · 11 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。前左手机下散页和电脑右侧竖白纸包是两个独立纸张组；事实只选已归档前左散页，右组仍待处理。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Those papers are finished with. Clear them and show the seating I&#x27;d choose instead of that office couch.</p><p class="zh">那些文件已经处理完，收起来，办公室沙发也换成我会选的座椅。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear the papers I already finished with, and swap the couch from that office option for the office-seat design I saved.</p><p class="zh">已经处理完的那批纸清掉，办公室那个方案的沙发换成我存的设计。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T02" data-review-task="T02">
+<h3 id="rewrite-heading-T02">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T02-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T02-leakage" data-task="T02" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T02-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T02-solvability" data-task="T02" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T02-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T02-naturalness" data-task="T02" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T02">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T02" data-task="T02" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T02">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T02" data-task="T02" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T02"><input id="faithful-T02" type="checkbox" data-task="T02" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T02" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_FINISHED_OFFICE_PAPERS；Entity/target_entity → F_OFFICE_SEAT；Entity/reference_entity → A_OFFICE_SEAT</p><p class="caption">匹配：杂乱办公室与基础职业弱关联，只清可识别纸张，不把全部杂物无差别删除。</p><p class="caption">核查：Actual completed paper subset is the front-left pages under the phone, with a distinct still-pending white packet right of the laptop. Preserve the phone and restore its tabletop support after removing pages. Sofa footprint stays in the original right-hand area.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P05" data-argument-type="Entity"><td>P05<br>Remove<br>Entity / target_entity</td><td>the papers I already finished with<br><small>General Entity</small></td><td><pre>&quot;loose checklist sheets at the front-left of the worktable beneath the black phone&quot;</pre><a class="tag" href="#K_F_FINISHED_OFFICE_PAPERS">F_FINISHED_OFFICE_PAPERS</a></td></tr><tr data-argument="P06" data-argument-type="Entity"><td>P06<br>Replace<br>Entity / target_entity</td><td>the couch from that office option<br><small>General Entity</small></td><td><pre>&quot;patterned couch at the right of the room&quot;</pre><a class="tag" href="#K_F_OFFICE_SEAT">F_OFFICE_SEAT</a></td></tr><tr data-argument="P07" data-argument-type="Entity"><td>P07<br>Replace<br>Entity / reference_entity</td><td>the office-seat design I saved<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Sofa&quot;,
+  &quot;design&quot;: &quot;a compact plain grey two-seat sofa on short wood legs&quot;
+}</pre><a class="tag" href="#K_A_OFFICE_SEAT">A_OFFICE_SEAT</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;11&quot;,
+    &quot;candidate_id&quot;: &quot;complex:11&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Remove all visible clutter (papers, random objects) from the tables. Replace the couch on the right with a sleek metallic futuristic capsule chair.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Remove an Object&quot;,
+      &quot;Replace an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove all visible clutter (papers, random objects) from the tables.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the couch on the right with a sleek metallic futuristic capsule chair.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Change the living room to look like a glass-walled futuristic studio.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a large wall-mounted holographic screen displaying dynamic data visuals.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Introduce neon-blue futuristic ambient lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a polished high-tech artificial environment texture to the scene.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Insert subtle ambient floating digital particles.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Reframe Composition&quot;,
+        &quot;instruction&quot;: &quot;Zoom out slightly and center on the futuristic workspace area.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0,
+      1
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Actual completed paper subset is the front-left pages under the phone, with a distinct still-pending white packet right of the laptop. Preserve the phone and restore its tabletop support after removing pages. Sofa footprint stays in the original right-hand area.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T03">
+          <div class="task-heading"><h2>T03 · 两人的运河出游照</h2><div><span class="tag">Retouch</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T03_gedit_261.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T03_gedit_261.jpg" alt="T03 current source image"><div class="bbox target" style="left:45.0%;top:53.0%;width:17.0%;height:18.999999999999993%"><span>P09</span></div><div class="bbox target" style="left:39.0%;top:69.0%;width:32.99999999999999%;height:31.000000000000007%"><span>P11</span></div></div></a></div><p class="caption">GEdit-Bench · 261 · 当前图 608 × 448 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。运河旁两名成人清楚可见，仅右侧女子建立太太的视觉身份。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Touch up my wife&#x27;s portrait and style her as I&#x27;d choose.</p><p class="zh">给妻子修修肖像，造型也搭成我会为她选的。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Give my wife&#x27;s face the touch-up I like, and try the jacket finish I saved on her jacket.</p><p class="zh">我太太的脸按我喜欢的程度修一下，外套也试试我存的质感。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T03" data-review-task="T03">
+<h3 id="rewrite-heading-T03">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T03-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T03-leakage" data-task="T03" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T03-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T03-solvability" data-task="T03" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T03-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T03-naturalness" data-task="T03" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T03">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T03" data-task="T03" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T03">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T03" data-task="T03" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T03"><input id="faithful-T03" type="checkbox" data-task="T03" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T03" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 8：Entity/target_entity → E_WIFE；Attribute/result_attribute → A_FAMILY_FACE__SHADOW_MIDTONES；Attribute/result_attribute → A_FAMILY_FACE__LIGHT_DIRECTION；Attribute/result_attribute → A_FAMILY_FACE__SKIN_TEXTURE；Entity/target_entity → E_WIFE；Attribute/result_attribute → A_CASUAL_JACKET__FABRIC；Attribute/result_attribute → A_CASUAL_JACKET__COLOR；Attribute/result_attribute → A_CASUAL_JACKET__SURFACE_SHEEN</p><p class="caption">匹配：妻子来自基础信息，不给另一位人物自动指定用户身份。</p><p class="caption">核查：Two adult faces provide real candidates. Face retouch and jacket material are independently assessable; no embracing pose change is required.</p>
+          <details><summary>底层参数解析 · 8 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P09" data-argument-type="Entity"><td>P09<br>Retouch<br>Entity / target_entity</td><td>my wife&#x27;s face<br><small>Personalized Entity</small></td><td><pre>{
+  &quot;entity_id&quot;: &quot;E_WIFE&quot;,
+  &quot;part&quot;: &quot;face&quot;
+}</pre><a class="tag" href="#K_E_WIFE">E_WIFE</a></td></tr><tr data-argument="P10.01" data-argument-type="Attribute"><td>P10.01<br>Retouch<br>Attribute / result_attribute</td><td>the touch-up I like<br><small></small></td><td><pre>{
+  &quot;shadow_midtones&quot;: &quot;moderately lift visibly shaded cheek and lower-face midtones&quot;
+}</pre><a class="tag" href="#K_A_FAMILY_FACE__SHADOW_MIDTONES">A_FAMILY_FACE__SHADOW_MIDTONES</a><p class="caption">同一方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a></p></td></tr><tr data-argument="P10.02" data-argument-type="Attribute"><td>P10.02<br>Retouch<br>Attribute / result_attribute</td><td>the touch-up I like<br><small></small></td><td><pre>{
+  &quot;light_direction&quot;: &quot;retain original direction&quot;
+}</pre><a class="tag" href="#K_A_FAMILY_FACE__LIGHT_DIRECTION">A_FAMILY_FACE__LIGHT_DIRECTION</a><p class="caption">同一方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a></p></td></tr><tr data-argument="P10.03" data-argument-type="Attribute"><td>P10.03<br>Retouch<br>Attribute / result_attribute</td><td>the touch-up I like<br><small></small></td><td><pre>{
+  &quot;skin_texture&quot;: &quot;retain original skin detail&quot;
+}</pre><a class="tag" href="#K_A_FAMILY_FACE__SKIN_TEXTURE">A_FAMILY_FACE__SKIN_TEXTURE</a><p class="caption">同一方案：<a href="#AG_A_FAMILY_FACE">A_FAMILY_FACE</a></p></td></tr><tr data-argument="P11" data-argument-type="Entity"><td>P11<br>Attribute Modification<br>Entity / target_entity</td><td>her jacket<br><small>Personalized Entity</small></td><td><pre>{
+  &quot;owner_entity_id&quot;: &quot;E_WIFE&quot;,
+  &quot;part&quot;: &quot;jacket&quot;
+}</pre><a class="tag" href="#K_E_WIFE">E_WIFE</a></td></tr><tr data-argument="P12.01" data-argument-type="Attribute"><td>P12.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the jacket finish I saved<br><small></small></td><td><pre>{
+  &quot;fabric&quot;: &quot;suede&quot;
+}</pre><a class="tag" href="#K_A_CASUAL_JACKET__FABRIC">A_CASUAL_JACKET__FABRIC</a><p class="caption">同一方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a></p></td></tr><tr data-argument="P12.02" data-argument-type="Attribute"><td>P12.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the jacket finish I saved<br><small></small></td><td><pre>{
+  &quot;color&quot;: &quot;chestnut&quot;
+}</pre><a class="tag" href="#K_A_CASUAL_JACKET__COLOR">A_CASUAL_JACKET__COLOR</a><p class="caption">同一方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a></p></td></tr><tr data-argument="P12.03" data-argument-type="Attribute"><td>P12.03<br>Attribute Modification<br>Attribute / result_attribute</td><td>the jacket finish I saved<br><small></small></td><td><pre>{
+  &quot;surface_sheen&quot;: &quot;matte&quot;
+}</pre><a class="tag" href="#K_A_CASUAL_JACKET__SURFACE_SHEEN">A_CASUAL_JACKET__SURFACE_SHEEN</a><p class="caption">同一方案：<a href="#AG_A_CASUAL_JACKET">A_CASUAL_JACKET</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;261&quot;,
+    &quot;candidate_id&quot;: &quot;gedit:261&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;请以这张图两位主人翁拥抱&quot;,
+    &quot;native_label&quot;: &quot;motion_change&quot;,
+    &quot;source_key&quot;: &quot;a6bd902e89f6b8576a02f2a0139a993b&quot;,
+    &quot;source_instruction_language&quot;: &quot;cn&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Two adult faces provide real candidates. Face retouch and jacket material are independently assessable; no embracing pose change is required.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T04">
+          <div class="task-heading"><h2>T04 · 坐下时的随身小包</h2><div><span class="tag">Move</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T04_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T04_improved_20261020.jpg" alt="T04 current source image"><div class="bbox target" style="left:44.5%;top:56.00000000000001%;width:17.5%;height:14.399999999999991%"><span>P13</span></div><div class="bbox destination" style="left:2.5%;top:35.0%;width:20.5%;height:20.000000000000007%"><span>destination</span></div><div class="bbox target" style="left:44.5%;top:56.00000000000001%;width:17.5%;height:14.399999999999991%"><span>P16</span></div><div class="bbox distractor" style="left:78.60000000000001%;top:67.4%;width:14.400000000000002%;height:14.09999999999999%"><span>added 1</span></div></div></a></div><p class="caption">AnyEdit-Test · relation:30 · 当前图 1254 × 1254 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Set our bag down as we do when sitting, and give it the sort of look I&#x27;d choose.</p><p class="zh">像我们坐下时那样放好包，包本身也换个合我心意的样子。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Put our bag where we leave it when we sit down, and try the bag finish I chose on it.</p><p class="zh">我们的包摆到坐下时常放的位置，包身也试试我选的质感。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T04" data-review-task="T04">
+<h3 id="rewrite-heading-T04">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T04-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T04-leakage" data-task="T04" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T04-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T04-solvability" data-task="T04" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T04-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T04-naturalness" data-task="T04" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T04">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T04" data-task="T04" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T04">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T04" data-task="T04" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T04"><input id="faithful-T04" type="checkbox" data-task="T04" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T04" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 6：Entity/target_entity → E_WHITE_BAG；Placement/destination → S_OUTING_BAG；Entity/target_entity → E_WHITE_BAG；Attribute/result_attribute → A_SMALL_BAG__BODY_MATERIAL；Attribute/result_attribute → A_SMALL_BAG__COLOR；Attribute/result_attribute → A_SMALL_BAG__SURFACE_TEXTURE</p><p class="caption">匹配：仅一件共用小包，不把来源中坐着的女子认成另一位妻子。</p><p class="caption">核查：Upper-left step is physically empty; do not move the bag onto a boot or unsupported riser.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P13" data-argument-type="Entity"><td>P13<br>Move<br>Entity / target_entity</td><td>our bag<br><small>Personalized Entity</small></td><td><pre>&quot;E_WHITE_BAG&quot;</pre><a class="tag" href="#K_E_WHITE_BAG">E_WHITE_BAG</a></td></tr><tr data-argument="P14" data-argument-type="Placement"><td>P14<br>Move<br>Placement / destination</td><td>where we leave it when we sit down<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;left_of&quot;,
+  &quot;anchor&quot;: &quot;seated woman&quot;,
+  &quot;support&quot;: &quot;same broad upper step, clear of her boots&quot;
+}</pre><a class="tag" href="#K_S_OUTING_BAG">S_OUTING_BAG</a></td></tr><tr data-argument="P16" data-argument-type="Entity"><td>P16<br>Attribute Modification<br>Entity / target_entity</td><td>our bag<br><small>Personalized Entity</small></td><td><pre>&quot;E_WHITE_BAG&quot;</pre><a class="tag" href="#K_E_WHITE_BAG">E_WHITE_BAG</a></td></tr><tr data-argument="P15.01" data-argument-type="Attribute"><td>P15.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the bag finish I chose<br><small></small></td><td><pre>{
+  &quot;body_material&quot;: &quot;leather&quot;
+}</pre><a class="tag" href="#K_A_SMALL_BAG__BODY_MATERIAL">A_SMALL_BAG__BODY_MATERIAL</a><p class="caption">同一方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a></p></td></tr><tr data-argument="P15.02" data-argument-type="Attribute"><td>P15.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the bag finish I chose<br><small></small></td><td><pre>{
+  &quot;color&quot;: &quot;dark tan&quot;
+}</pre><a class="tag" href="#K_A_SMALL_BAG__COLOR">A_SMALL_BAG__COLOR</a><p class="caption">同一方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a></p></td></tr><tr data-argument="P15.03" data-argument-type="Attribute"><td>P15.03<br>Attribute Modification<br>Attribute / result_attribute</td><td>the bag finish I chose<br><small></small></td><td><pre>{
+  &quot;surface_texture&quot;: &quot;fine pebbled&quot;
+}</pre><a class="tag" href="#K_A_SMALL_BAG__SURFACE_TEXTURE">A_SMALL_BAG__SURFACE_TEXTURE</a><p class="caption">同一方案：<a href="#AG_A_SMALL_BAG">A_SMALL_BAG</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;relation&quot;,
+    &quot;sample_id&quot;: &quot;relation:30&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:relation:30&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Move the white bag from the second step on the right to the left of the woman.&quot;,
+    &quot;native_label&quot;: &quot;relation&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/relation/input_img/122.jpg&quot;,
+    &quot;original_caption&quot;: null,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Upper-left step is physically empty; do not move the bag onto a boot or unsupported riser.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T05">
+          <div class="task-heading"><h2>T05 · 港口行程的照片</h2><div><span class="tag">Attribute Modification</span><span class="tag">Restyle</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T05_complex_245.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T05_complex_245.jpg" alt="T05 current source image"><div class="bbox target" style="left:0%;top:48.0%;width:57.99999999999999%;height:52.0%"><span>P17</span></div></div></a></div><p class="caption">Complex-Edit · 245 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。至少五条独立船在码头可见，只有近左船由情景事实定位。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Show the harbour boat I pointed out as one I&#x27;d pick, and give the whole picture the rendering I like.</p><p class="zh">把港口指出的那条船做成我会选的样子，整张也用我喜欢的绘制方式。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Try the hull color I picked on the boat from that harbour stop, and give the whole harbour photo my usual illustrated style.</p><p class="zh">港口停留那张，最近那艘船试试我选的船身颜色，整张用我一贯的画风。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T05" data-review-task="T05">
+<h3 id="rewrite-heading-T05">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T05-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T05-leakage" data-task="T05" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T05-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T05-solvability" data-task="T05" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T05-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T05-naturalness" data-task="T05" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T05">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T05" data-task="T05" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T05">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T05" data-task="T05" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T05"><input id="faithful-T05" type="checkbox" data-task="T05" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T05" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_HARBOUR_BOAT；Attribute/result_attribute → A_HARBOUR_HULL；Attribute/result_attribute → G_IMAGE_STYLE；评分边界：global_generalization_preserves_current_result：rendering_style：full-colour soft-gouache illustration with visible boat details</p><p class="caption">匹配：出游计划只弱引导港口景，不把小渔船说成Disney邮轮或私人船。</p><p class="caption">核查：Several boats already provide candidates. Full-colour gouache retains an independently visible dark hull without recolouring all boats.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P17" data-argument-type="Entity"><td>P17<br>Attribute Modification<br>Entity / target_entity</td><td>the boat from that harbour stop<br><small>General Entity</small></td><td><pre>&quot;nearest cream-and-green rowing boat at lower left&quot;</pre><a class="tag" href="#K_F_HARBOUR_BOAT">F_HARBOUR_BOAT</a></td></tr><tr data-argument="P18" data-argument-type="Attribute"><td>P18<br>Attribute Modification<br>Attribute / result_attribute</td><td>the hull color I picked<br><small></small></td><td><pre>{
+  &quot;hull_color&quot;: &quot;dark navy blue&quot;
+}</pre><a class="tag" href="#K_A_HARBOUR_HULL">A_HARBOUR_HULL</a></td></tr><tr data-argument="P19" data-argument-type="Attribute"><td>P19<br>Restyle<br>Attribute / result_attribute</td><td>usual illustrated style<br><small></small></td><td><pre>{
+  &quot;rendering_style&quot;: &quot;full-colour soft-gouache illustration with fine visible details&quot;
+}</pre><a class="tag" href="#K_G_IMAGE_STYLE">G_IMAGE_STYLE</a><p class="caption">操作作用范围：The complete image.</p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;245&quot;,
+    &quot;candidate_id&quot;: &quot;complex:245&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Give one of the boats a monochromatic color of navy blue. Apply a warm sunset filter to the image.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Color&quot;,
+      &quot;Apply Filter/Weather&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the cityscape in the background with a mountain range.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Overlay a light mist across the water.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Soften the sunlight reflection on the water.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Introduce a flock of flying seagulls in the sky above the boats.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Give one of the boats a monochromatic color of navy blue.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Duplicate an Object&quot;,
+        &quot;instruction&quot;: &quot;Copy one of the small boats and place it next to the original.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Introduce small water ripples around the docked boats.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm sunset filter to the image.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      4,
+      7
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Several boats already provide candidates. Full-colour gouache retains an independently visible dark hull without recolouring all boats.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T06">
+          <div class="task-heading"><h2>T06 · 客房布置的一套试选</h2><div><span class="tag">Replace</span><span class="tag">Replace</span><span class="tag">Background</span><span class="tag">聚合式</span><span class="tag">3 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T06_complex_164.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T06_complex_164.jpg" alt="T06 current source image"><div class="bbox target" style="left:3.0%;top:56.00000000000001%;width:83.0%;height:43.99999999999999%"><span>P20</span></div><div class="bbox target" style="left:56.00000000000001%;top:18.0%;width:19.999999999999996%;height:69.0%"><span>P22</span></div></div></a></div><p class="caption">Complex-Edit · 164 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">保留原图 · 未增补原因见说明。聚合命令展开为床罩、阅读灯与墙面三种结果，非按单一物品身份完成。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Rework the guest room&#x27;s bed and walls my way, and swap its floor lamp for the reading light I&#x27;d choose.</p><p class="zh">按我的眼光重搭客房的床和墙面，再把原来的落地灯换成我会选的阅读灯。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">For that guest-room option, use my usual room choices for the bed cover, reading light and walls.</p><p class="zh">客房那个方案，床罩、阅读灯和墙面都按我平常选的来。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T06" data-review-task="T06">
+<h3 id="rewrite-heading-T06">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T06-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T06-leakage" data-task="T06" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T06-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T06-solvability" data-task="T06" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T06-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T06-naturalness" data-task="T06" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T06">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T06" data-task="T06" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T06">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T06" data-task="T06" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T06"><input id="faithful-T06" type="checkbox" data-task="T06" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T06" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 3 · 底层聚合式 · 个性化参数 6：Entity/target_entity → F_GUEST_ROOM_OPTION；Entity/reference_entity → A_GUEST_COVER；Entity/target_entity → F_GUEST_ROOM_OPTION；Entity/reference_entity → A_READING_LAMP；Attribute/result_attribute → G_GUEST_WALL__WALL_COLOR；Attribute/result_attribute → G_GUEST_WALL__SURFACE_SHEEN</p><p class="caption">匹配：普通客房选项而非新增房产；三项偏好可来自分散的日常购物话题。</p><p class="caption">核查：Three distinct physical scopes; lamp replacement does not change bed or wall. Source standing lamp really exists beside the shelf.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P20" data-argument-type="Entity"><td>P20<br>Replace<br>Entity / target_entity</td><td>the bed cover<br><small>General Entity</small></td><td><pre>&quot;dark blue bed cover in the small room&quot;</pre><a class="tag" href="#K_F_GUEST_ROOM_OPTION">F_GUEST_ROOM_OPTION</a></td></tr><tr data-argument="P21" data-argument-type="Entity"><td>P21<br>Replace<br>Entity / reference_entity</td><td>my usual room choices<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Blanket&quot;,
+  &quot;design&quot;: &quot;a cream waffle-weave cotton bed cover&quot;
+}</pre><a class="tag" href="#K_A_GUEST_COVER">A_GUEST_COVER</a></td></tr><tr data-argument="P22" data-argument-type="Entity"><td>P22<br>Replace<br>Entity / target_entity</td><td>reading light<br><small>General Entity</small></td><td><pre>&quot;tall floor lamp beside the low bookshelf&quot;</pre><a class="tag" href="#K_F_GUEST_ROOM_OPTION">F_GUEST_ROOM_OPTION</a></td></tr><tr data-argument="P23" data-argument-type="Entity"><td>P23<br>Replace<br>Entity / reference_entity</td><td>my usual room choices<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;FloorLamp&quot;,
+  &quot;design&quot;: &quot;a slim black floor lamp with one downward-facing opal-glass shade&quot;
+}</pre><a class="tag" href="#K_A_READING_LAMP">A_READING_LAMP</a></td></tr><tr data-argument="P24.01" data-argument-type="Attribute"><td>P24.01<br>Background<br>Attribute / result_attribute</td><td>my usual room choices<br><small></small></td><td><pre>{
+  &quot;wall_color&quot;: &quot;pale grey green&quot;
+}</pre><a class="tag" href="#K_G_GUEST_WALL__WALL_COLOR">G_GUEST_WALL__WALL_COLOR</a><p class="caption">同一方案：<a href="#AG_G_GUEST_WALL">G_GUEST_WALL</a></p></td></tr><tr data-argument="P24.02" data-argument-type="Attribute"><td>P24.02<br>Background<br>Attribute / result_attribute</td><td>my usual room choices<br><small></small></td><td><pre>{
+  &quot;surface_sheen&quot;: &quot;matte&quot;
+}</pre><a class="tag" href="#K_G_GUEST_WALL__SURFACE_SHEEN">G_GUEST_WALL__SURFACE_SHEEN</a><p class="caption">同一方案：<a href="#AG_G_GUEST_WALL">G_GUEST_WALL</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;164&quot;,
+    &quot;candidate_id&quot;: &quot;complex:164&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the blanket on the bed with a red-and-white checkered blanket. Change the color of the walls to a pale blue tone. Remove the standing lamp to the side of the bed.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Replace an Object&quot;,
+      &quot;Change Color&quot;,
+      &quot;Remove an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the blanket on the bed with a red-and-white checkered blanket.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the color of the walls to a pale blue tone.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a large houseplant near the corner between the lamp and the bed.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Change the texture of the pillows to a velvety finish.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Increase the brightness and warmth of the lighting in the room.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Hang a round clock above the bookshelf on the wall.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the standing lamp to the side of the bed.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Move the smaller stack of books from the bookshelf onto the bedside near the pillow.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0,
+      1,
+      6
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Three distinct physical scopes; lamp replacement does not change bed or wall. Source standing lamp really exists beside the shelf.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T07">
+          <div class="task-heading"><h2>T07 · 工作日午餐的搭配</h2><div><span class="tag">Add</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T07_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T07_improved_20261020.jpg" alt="T07 current source image"><div class="bbox destination" style="left:71.0%;top:48.0%;width:24.0%;height:41.0%"><span>destination</span></div><div class="bbox target" style="left:9.7137%;top:44.522099999999995%;width:24.7713%;height:49.972899999999996%"><span>P27</span></div><div class="bbox distractor" style="left:85.0%;top:28.299999999999997%;width:9.899999999999999%;height:16.900000000000006%"><span>added 1</span></div></div></a></div><p class="caption">AnyEdit-Test · add:2 · 当前图 1611 × 976 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Set that chicken lunch up as my order, with a drink to hand.</p><p class="zh">把鸡肉午餐搭成我会点的一顿，喝的也配在顺手的位置。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Add the lunch drink I usually pick where I keep it clear of the plate, and give the chicken from that lunch option the chicken coating I picked.</p><p class="zh">放杯我午餐常点的饮料，搁到我不会碰到餐盘的位置，那个午餐方案的鸡块也试试我选的外衣。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T07" data-review-task="T07">
+<h3 id="rewrite-heading-T07">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T07-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T07-leakage" data-task="T07" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T07-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T07-solvability" data-task="T07" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T07-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T07-naturalness" data-task="T07" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T07">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T07" data-task="T07" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T07">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T07" data-task="T07" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T07"><input id="faithful-T07" type="checkbox" data-task="T07" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T07" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 6：Entity/reference_entity → A_LUNCH_DRINK；Placement/destination → S_LUNCH_GLASS；Entity/target_entity → F_LUNCH_OPTION；Attribute/result_attribute → A_CHICKEN_COATING__CRUMB_RECIPE；Attribute/result_attribute → A_CHICKEN_COATING__COLOR；Attribute/result_attribute → A_CHICKEN_COATING__CRUMB_TEXTURE</p><p class="caption">匹配：普通午餐选择即可，不从职业推断饮食限制。</p><p class="caption">核查：Current close-up lacks a safe full glass footprint at right. Planned table extension prevents glass floating on the food.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P25" data-argument-type="Entity"><td>P25<br>Add<br>Entity / reference_entity</td><td>the lunch drink I usually pick<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Drink&quot;,
+  &quot;design&quot;: &quot;cloudy lemonade in a tall clear ribbed glass with no garnish&quot;
+}</pre><a class="tag" href="#K_A_LUNCH_DRINK">A_LUNCH_DRINK</a></td></tr><tr data-argument="P26" data-argument-type="Placement"><td>P26<br>Add<br>Placement / destination</td><td>where I keep it clear of the plate<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;right_of&quot;,
+  &quot;anchor&quot;: &quot;lunch plate&quot;,
+  &quot;support&quot;: &quot;front-right tabletop, well away from the rear comparison cup&quot;
+}</pre><a class="tag" href="#K_S_LUNCH_GLASS">S_LUNCH_GLASS</a></td></tr><tr data-argument="P27" data-argument-type="Entity"><td>P27<br>Attribute Modification<br>Entity / target_entity</td><td>the chicken from that lunch option<br><small>General Entity</small></td><td><pre>&quot;fried chicken pieces in the original front plate&quot;</pre><a class="tag" href="#K_F_LUNCH_OPTION">F_LUNCH_OPTION</a></td></tr><tr data-argument="P28.01" data-argument-type="Attribute"><td>P28.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the chicken coating I picked<br><small></small></td><td><pre>{
+  &quot;crumb_recipe&quot;: &quot;Cajun-spice crumbs&quot;
+}</pre><a class="tag" href="#K_A_CHICKEN_COATING__CRUMB_RECIPE">A_CHICKEN_COATING__CRUMB_RECIPE</a><p class="caption">同一方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a></p></td></tr><tr data-argument="P28.02" data-argument-type="Attribute"><td>P28.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the chicken coating I picked<br><small></small></td><td><pre>{
+  &quot;color&quot;: &quot;reddish&quot;
+}</pre><a class="tag" href="#K_A_CHICKEN_COATING__COLOR">A_CHICKEN_COATING__COLOR</a><p class="caption">同一方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a></p></td></tr><tr data-argument="P28.03" data-argument-type="Attribute"><td>P28.03<br>Attribute Modification<br>Attribute / result_attribute</td><td>the chicken coating I picked<br><small></small></td><td><pre>{
+  &quot;crumb_texture&quot;: &quot;crisp&quot;
+}</pre><a class="tag" href="#K_A_CHICKEN_COATING__CRUMB_TEXTURE">A_CHICKEN_COATING__CRUMB_TEXTURE</a><p class="caption">同一方案：<a href="#AG_A_CHICKEN_COATING">A_CHICKEN_COATING</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;add&quot;,
+    &quot;sample_id&quot;: &quot;add:2&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:add:2&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;include a glass of lemonade on the table&quot;,
+    &quot;native_label&quot;: &quot;add&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/add/input_img/COCO_train2014_000000438429.jpg&quot;,
+    &quot;original_caption&quot;: null,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Current close-up lacks a safe full glass footprint at right. Planned table extension prevents glass floating on the food.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T08">
+          <div class="task-heading"><h2>T08 · 活动设备的试摆</h2><div><span class="tag">Replace</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T08_anyedit_appearance_alter_38.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T08_anyedit_appearance_alter_38.jpg" alt="T08 current source image"><div class="bbox target" style="left:70.0%;top:9.0%;width:24.0%;height:35.0%"><span>P29</span></div><div class="bbox target" style="left:17.0%;top:55.00000000000001%;width:75.0%;height:16.999999999999993%"><span>P31</span></div></div></a></div><p class="caption">AnyEdit-Test · appearance_alter:38 · 当前图 640 × 480 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。相机、摄像机、镜头及多根三脚架可区分，情景事实限定活动试摆中的两件。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Show the camera I&#x27;d choose instead of the event loaner, with a tripod that belongs with it.</p><p class="zh">把活动借用的相机换成我会选的，三脚架也搭配得合心意。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Swap the camera we borrowed for the event for the camera design I saved, and try the tripod material I picked on the tripod in that equipment option.</p><p class="zh">活动借的相机换成我存的设计，设备方案里的三脚架也试试我选的材质。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T08" data-review-task="T08">
+<h3 id="rewrite-heading-T08">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T08-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T08-leakage" data-task="T08" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T08-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T08-solvability" data-task="T08" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T08-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T08-naturalness" data-task="T08" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T08">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T08" data-task="T08" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T08">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T08" data-task="T08" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T08"><input id="faithful-T08" type="checkbox" data-task="T08" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T08" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 6：Entity/target_entity → F_DONOR_CAMERA；Entity/reference_entity → A_EVENT_CAMERA；Entity/target_entity → F_DONOR_CAMERA；Attribute/result_attribute → A_TRIPOD__LEG_MATERIAL；Attribute/result_attribute → A_TRIPOD__SURFACE_SHEEN；Attribute/result_attribute → A_TRIPOD__SURFACE_TEXTURE</p><p class="caption">匹配：筹款工作弱引导活动借用设备；不凭器材图虚构相机或收音机收藏。</p><p class="caption">核查：Several tripods and cameras are visible; only the main upper-right camera and silver middle tripod change. Memory cards and lenses remain.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P29" data-argument-type="Entity"><td>P29<br>Replace<br>Entity / target_entity</td><td>the camera we borrowed for the event<br><small>General Entity</small></td><td><pre>&quot;black camera with long lens at the desk’s upper right&quot;</pre><a class="tag" href="#K_F_DONOR_CAMERA">F_DONOR_CAMERA</a></td></tr><tr data-argument="P30" data-argument-type="Entity"><td>P30<br>Replace<br>Entity / reference_entity</td><td>the camera design I saved<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Camera&quot;,
+  &quot;design&quot;: &quot;a small black mirrorless camera with a short pancake lens&quot;
+}</pre><a class="tag" href="#K_A_EVENT_CAMERA">A_EVENT_CAMERA</a></td></tr><tr data-argument="P31" data-argument-type="Entity"><td>P31<br>Attribute Modification<br>Entity / target_entity</td><td>the tripod in that equipment option<br><small>General Entity</small></td><td><pre>&quot;silver-legged folded tripod across the middle of the desk&quot;</pre><a class="tag" href="#K_F_DONOR_CAMERA">F_DONOR_CAMERA</a></td></tr><tr data-argument="P32.01" data-argument-type="Attribute"><td>P32.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the tripod material I picked<br><small></small></td><td><pre>{
+  &quot;leg_material&quot;: &quot;carbon fibre&quot;
+}</pre><a class="tag" href="#K_A_TRIPOD__LEG_MATERIAL">A_TRIPOD__LEG_MATERIAL</a><p class="caption">同一方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a></p></td></tr><tr data-argument="P32.02" data-argument-type="Attribute"><td>P32.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the tripod material I picked<br><small></small></td><td><pre>{
+  &quot;surface_sheen&quot;: &quot;matte&quot;
+}</pre><a class="tag" href="#K_A_TRIPOD__SURFACE_SHEEN">A_TRIPOD__SURFACE_SHEEN</a><p class="caption">同一方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a></p></td></tr><tr data-argument="P32.03" data-argument-type="Attribute"><td>P32.03<br>Attribute Modification<br>Attribute / result_attribute</td><td>the tripod material I picked<br><small></small></td><td><pre>{
+  &quot;surface_texture&quot;: &quot;fine woven&quot;
+}</pre><a class="tag" href="#K_A_TRIPOD__SURFACE_TEXTURE">A_TRIPOD__SURFACE_TEXTURE</a><p class="caption">同一方案：<a href="#AG_A_TRIPOD">A_TRIPOD</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;appearance_alter&quot;,
+    &quot;sample_id&quot;: &quot;appearance_alter:38&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:appearance_alter:38&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;turn the equipment into vintage-style&quot;,
+    &quot;native_label&quot;: &quot;appearance_alter&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/appearance_alter/input_img/COCO_train2014_000000094359_0.jpg&quot;,
+    &quot;original_caption&quot;: &quot;assorted electronic computer equipment alongside camera equipmment on desk.&quot;,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Several tripods and cameras are visible; only the main upper-right camera and silver middle tripod change. Memory cards and lenses remain.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T09">
+          <div class="task-heading"><h2>T09 · 花园里借过的帽子</h2><div><span class="tag">Remove</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T09_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T09_improved_20261020.jpg" alt="T09 current source image"><div class="bbox target" style="left:43.0%;top:16.0%;width:13.000000000000005%;height:10.600000000000001%"><span>P33</span></div><div class="bbox target" style="left:7.3999999999999995%;top:19.0%;width:71.4%;height:45.5%"><span>P34</span></div><div class="bbox distractor" style="left:77.0%;top:77.0%;width:20.499999999999996%;height:14.000000000000002%"><span>added 1</span></div></div></a></div><p class="caption">AnyEdit-Test · remove:0 · 当前图 1254 × 1254 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">The hat went back. Let that garden bench look more like one I&#x27;d pick.</p><p class="zh">帽子已经归还，撤掉它，花园长椅也换个我会喜欢的面貌。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear the hat we returned, and give the bench from that garden photo the bench color I picked.</p><p class="zh">还回去的那顶帽子清掉，花园那张里的长椅也试试我挑的颜色。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T09" data-review-task="T09">
+<h3 id="rewrite-heading-T09">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T09-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T09-leakage" data-task="T09" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T09-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T09-solvability" data-task="T09" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T09-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T09-naturalness" data-task="T09" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T09">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T09" data-task="T09" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T09">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T09" data-task="T09" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T09"><input id="faithful-T09" type="checkbox" data-task="T09" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T09" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_RETURNED_HAT；Entity/target_entity → F_GARDEN_SEAT；Attribute/result_attribute → A_GARDEN_SEAT</p><p class="caption">匹配：休息日花园照片即可，不给躺着的女子另设亲属身份。</p><p class="caption">核查：Hat rests on a knee; removal must reconstruct that knee without changing leg pose. Generic second hat has no ownership claim.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P33" data-argument-type="Entity"><td>P33<br>Remove<br>Entity / target_entity</td><td>the hat we returned<br><small>General Entity</small></td><td><pre>&quot;straw fedora resting on the reclining woman’s knee&quot;</pre><a class="tag" href="#K_F_RETURNED_HAT">F_RETURNED_HAT</a></td></tr><tr data-argument="P34" data-argument-type="Entity"><td>P34<br>Attribute Modification<br>Entity / target_entity</td><td>the bench from that garden photo<br><small>General Entity</small></td><td><pre>&quot;ornate black metal garden bench beneath the woman&quot;</pre><a class="tag" href="#K_F_GARDEN_SEAT">F_GARDEN_SEAT</a></td></tr><tr data-argument="P35" data-argument-type="Attribute"><td>P35<br>Attribute Modification<br>Attribute / result_attribute</td><td>the bench color I picked<br><small></small></td><td><pre>{
+  &quot;paint_color&quot;: &quot;soft sage green&quot;
+}</pre><a class="tag" href="#K_A_GARDEN_SEAT">A_GARDEN_SEAT</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;remove&quot;,
+    &quot;sample_id&quot;: &quot;remove:0&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:remove:0&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;remove the fedora on the bench&quot;,
+    &quot;native_label&quot;: &quot;remove&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/remove/input_img/COCO_train2014_000000398858_0.jpg&quot;,
+    &quot;original_caption&quot;: &quot;a woman in white shirt with fedora laying on a bench.&quot;,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Hat rests on a knee; removal must reconstruct that knee without changing leg pose. Generic second hat has no ownership claim.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T10">
+          <div class="task-heading"><h2>T10 · 聚餐桌上的小整理</h2><div><span class="tag">Remove</span><span class="tag">Add</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_042/T10_complex_113.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_042/T10_complex_113.jpg" alt="T10 current source image"><div class="bbox target" style="left:65.0%;top:56.99999999999999%;width:16.000000000000004%;height:21.000000000000007%"><span>P36</span></div><div class="bbox destination" style="left:59.0%;top:86.0%;width:6.000000000000005%;height:7.9999999999999964%"><span>destination</span></div></div></a></div><p class="caption">Complex-Edit · 113 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。前中大罐和后方小罐两只可见，历史事实区分借还的额外大罐。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">The extra jar&#x27;s been returned. Make room for a little table flower I&#x27;d choose, set out my way.</p><p class="zh">多余的罐子已经归还，换上一小枝我会选的桌花，按我的习惯放妥。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear the extra jar I gave back, and add the little table flower I saved where I keep it out of everyone’s way.</p><p class="zh">还回去的多余罐子清掉，存的那枝小桌花放到我不碍事的位置。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T10" data-review-task="T10">
+<h3 id="rewrite-heading-T10">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T10-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T10-leakage" data-task="T10" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T10-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T10-solvability" data-task="T10" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T10-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T10-naturalness" data-task="T10" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T10">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T10" data-task="T10" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T10">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T10" data-task="T10" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T10"><input id="faithful-T10" type="checkbox" data-task="T10" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T10" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_EXTRA_JAR；Entity/reference_entity → A_TABLE_BUD；Placement/destination → S_TABLE_BUD</p><p class="caption">匹配：普通朋友聚餐，不将所有来源人物写入个人档案。</p><p class="caption">核查：Two jars are visible; only the front larger one is selected. Flower has a separate narrow supported footprint, so this is not remove-plus-add at one position disguised as two operations.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P36" data-argument-type="Entity"><td>P36<br>Remove<br>Entity / target_entity</td><td>the extra jar I gave back<br><small>General Entity</small></td><td><pre>&quot;large clear mason jar at the table’s front centre&quot;</pre><a class="tag" href="#K_F_EXTRA_JAR">F_EXTRA_JAR</a></td></tr><tr data-argument="P37" data-argument-type="Entity"><td>P37<br>Add<br>Entity / reference_entity</td><td>the little table flower I saved<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;FlowerArrangement&quot;,
+  &quot;design&quot;: &quot;one short white cosmos stem in a very slim clear-glass bud vase, with total height about 15 cm&quot;
+}</pre><a class="tag" href="#K_A_TABLE_BUD">A_TABLE_BUD</a></td></tr><tr data-argument="P38" data-argument-type="Placement"><td>P38<br>Add<br>Placement / destination</td><td>where I keep it out of everyone’s way<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;beside&quot;,
+  &quot;anchor&quot;: &quot;right side of the small foreground sauce bowl&quot;,
+  &quot;support&quot;: &quot;narrow clear tabletop strip behind the foreground knife, away from plates and faces&quot;
+}</pre><a class="tag" href="#K_S_TABLE_BUD">S_TABLE_BUD</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;113&quot;,
+    &quot;candidate_id&quot;: &quot;complex:113&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Remove the jar of soda on the table. Add a centerpiece with flowers on the table.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Remove an Object&quot;,
+      &quot;Add an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the jar of soda on the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a centerpiece with flowers on the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Introduce a warm ambient lighting filter to the scene.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Move an Object&quot;,
+        &quot;instruction&quot;: &quot;Move the food plate closer to the man in the white shirt.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Duplicate an Object&quot;,
+        &quot;instruction&quot;: &quot;Duplicate a glass of water and place it near the woman on the opposite side.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Dim the background window lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add candlelight visuals to the center of the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Apply a polished wooden texture to the table surface.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0,
+      1
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Two jars are visible; only the front larger one is selected. Flower has a separate narrow supported footprint, so this is not remove-plus-add at one position disguised as two operations.&quot;
+  }
+}</pre></details>
+          
+        </article>
+    <footer class="cohort-navigation"><a href="persona_041.html">← 上一个persona</a><a href="group-001-050.html">返回A组目录</a><a href="persona_043.html">下一个persona →</a><p>完成后导出JSON交回组织者：<a href="mailto:jian_lang@std.uestc.edu.cn">jian_lang@std.uestc.edu.cn</a>。草稿只保存在浏览器，未自动上传。</p></footer>
+    </form></main><script type="application/json" id="review-context">{"protocol_version": "personaedit-human-rewrite-v1", "dataset_revision": "e5a959d8a4c9b869", "review_ui_sha256": "d0f89e257d6efbfd268e29732597b7c6fe5d41cb4e71613e248d4d9d4a293736", "contact": "jian_lang@std.uestc.edu.cn", "page": "persona", "persona_id": "persona_042", "group_id": "A", "group_page": "group-001-050.html", "group_start": 1, "group_end": 50, "tasks": [{"task_id": "T01", "instruction": "I'd like just our office rescue dog in this one, with a sofa I'd choose for that office.", "instruction_sha256": "c5ab7b1a2f1f17586431afe4541af388d2832bc9edfd35a61c7094a79ceebc83", "underlying_sha256": "7052d58246286165b667db4dcecece33ebc48220a0cf89fcab66fc84f77dffa7"}, {"task_id": "T02", "instruction": "Those papers are finished with. Clear them and show the seating I'd choose instead of that office couch.", "instruction_sha256": "1ecb0bda36e0124742542a4f9c29c64fd4c480131ad581bc882f994b9e293846", "underlying_sha256": "eddb8d37bcbf9621c9b3bf1f7d863df2f1c8de0a5a08a69a1d739fbeabeac0f9"}, {"task_id": "T03", "instruction": "Touch up my wife's portrait and style her as I'd choose.", "instruction_sha256": "12cf0ffe539a12bd7d0d96baa995b2134073bbf28435b3dc60be985570f0570d", "underlying_sha256": "bdcc37133ebdd7546d83eea92979673814b77746f3e208ea6d5d4d3f431f585d"}, {"task_id": "T04", "instruction": "Set our bag down as we do when sitting, and give it the sort of look I'd choose.", "instruction_sha256": "1d6b3b304707491893eb8d8eb506313bd27bbeeee88c19d3bb61da6ba90ff0b5", "underlying_sha256": "62b1409d0ed46fb5dd4b2b2b6222dd5e409ab9325350cc2fcbf3a9b835d99fb6"}, {"task_id": "T05", "instruction": "Show the harbour boat I pointed out as one I'd pick, and give the whole picture the rendering I like.", "instruction_sha256": "3b97c078c9ba8dddbb2e92bb27f50a429fdf2ea7618793f958d1ae87fc9478a4", "underlying_sha256": "7a6c9797f3a56a723a0eb88fa954eef9e64f38fe98d48b45e9c77f9c9387007d"}, {"task_id": "T06", "instruction": "Rework the guest room's bed and walls my way, and swap its floor lamp for the reading light I'd choose.", "instruction_sha256": "dd3a3fd9e2e98caeaa045a9f16abe8b1b0fa7bf7f9fb176a26a35dd1a57a1479", "underlying_sha256": "8d65a5f2d8517cec97c88d7aae6dede90d749ec5fba1350b7cbbe6d129140911"}, {"task_id": "T07", "instruction": "Set that chicken lunch up as my order, with a drink to hand.", "instruction_sha256": "3ac23a14c82b3a83ae5d142b5118dc7e0b800524b33da50a143116083091e7a3", "underlying_sha256": "971f64dc17ecac5eb3a3e58d0d9e35761fbcf15c568e58c5647d988db549c228"}, {"task_id": "T08", "instruction": "Show the camera I'd choose instead of the event loaner, with a tripod that belongs with it.", "instruction_sha256": "69c684f32362de68727d6fc19420533ae4815a776f2000cf688688f84132d261", "underlying_sha256": "47c46afeeabd5a996b4d0aa17d6777a616b23f56efffcc9c95c3cf38a1a64a21"}, {"task_id": "T09", "instruction": "The hat went back. Let that garden bench look more like one I'd pick.", "instruction_sha256": "1432fa72a8eb8a51dfe4067965b32dc69ac0f29efe75c55dff4a3852beb76d81", "underlying_sha256": "b1941d21e8e978d78a70ffdc1153b5dcb693d3eec8f6ea3d76322dbba937587d"}, {"task_id": "T10", "instruction": "The extra jar's been returned. Make room for a little table flower I'd choose, set out my way.", "instruction_sha256": "779e3aa865dbf53fb68ceec42e2b605b8154265dfc234f38412c42ff46cdb795", "underlying_sha256": "046e453069c959f0d9e00aa9a80143180438b358823913227545936b6f6c7c9e"}]}</script><script src="review.js" defer></script></body></html>

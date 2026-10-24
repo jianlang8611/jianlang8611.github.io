@@ -1,0 +1,29 @@
+{
+  "updated_at": "2026-10-20",
+  "tasks_per_persona": 10,
+  "atomic_operations": {
+    "minimum": 2,
+    "maximum": 3,
+    "minimum_three_operation_commands_per_new_persona": 1,
+    "existing_two_operation_review_cohort": [
+      "persona_001",
+      "persona_002",
+      "persona_003",
+      "persona_004",
+      "persona_005"
+    ],
+    "rule_zh": "后续每位persona至少有一条自然的三操作命令，无固定数量或比例；不能硬凑，匹配时寻找适合的组合。现有五位本轮不为凑数修改已合适的命令。"
+  },
+  "source_images": {
+    "planning": "Complete personas, profiles, instructions and exact per-image modification plans before generation.",
+    "generation": "Generate source modifications only after the other construction steps; batch or concurrent generation may follow text-data publication.",
+    "internal": "Retain upstream originals, intermediate images, final images and provenance.",
+    "external": "Publish only the active source per task. Use the reviewed final modification when available; otherwise use the original and explicitly mark pending generation with the decided plan.",
+    "pending_status": "original_pending_modification",
+    "approval": "User authorized four concurrent imagegen source modification requests on2026-10-20. Assistant strict precondition/visual review precedes final human review.",
+    "uniqueness": "All1000 source images globally distinct, including compressed, resized and cropped variants; not just different file paths.",
+    "precondition_review": "For every atomic edit verify the actual source does not already satisfy its result. Add requires a genuinely absent additional target, Move requires a distinct supported destination, Remove a visible target, and Replace/Attribute/Retouch/Background/Restyle a visible unsatisfied state. Flag uncertain or invisible changes and repair before human review; a task having another valid edit does not excuse a no-op.",
+    "post_generation_review": "Recheck all targets, physical support, same-category competitors, preserved original identity and untouched future answers. Reground bounding boxes in the actual generated frame; include newly eligible distractors in removal complements."
+  },
+  "authoring_review": "Individually match, author and visually review eachpersona; inspect the completed cohort again before final handoff."
+}

@@ -1,5 +1,5 @@
 # Returned reviews
 
-Store received volunteer JSON exports in this directory, retaining the exported filename. No volunteer reviews have been received in the initial release.
+Store received volunteer JSON exports in this directory, retaining the exported filename.
 
-Each JSON contains the reviewed persona, dataset revision, optional reviewer name, reviewer ID, export time and task/profile comments. This folder contains returned reviews only; browser-local drafts are not yet collected results.
+Schema 2.0 completed reviews contain the reviewed persona, dataset and protocol versions, reviewer metadata, persona-level leakage review, ten human-authored English rewrites, per-task leakage/solvability/naturalness judgments and fidelity confirmations. Group batches contain only complete reviews. A completed review may report issues; complete does not mean the sample passed. Files marked draft are unfinished and must not be counted as completed reviews or final human instruction versions. This folder contains returned files only; browser-local drafts and synthetic UI test data are not volunteer submissions.

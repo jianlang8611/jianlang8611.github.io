@@ -1,0 +1,943 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PersonaEdit · persona_066 · Instruction v3 审核</title><style>
+    :root{color-scheme:light;--ink:#24313e;--muted:#647480;--line:#dce3e7;--accent:#17665e}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;background:#f4f6f7;color:var(--ink);font:15px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1440px;margin:auto;padding:28px}h1{font-size:30px;margin:0 0 10px}h2{font-size:21px;margin:0}h3{margin:15px 0 6px}h4{margin:8px 0}a{color:var(--accent)}p{margin:8px 0}.intro,.task,.profile-panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:22px}.sub,.caption,.zh{color:var(--muted)}.sub{margin-top:0}.caption{font-size:13px}.pill{display:inline-block;background:#fdf0cb;border-radius:5px;padding:2px 8px;color:#715619}.nav{position:sticky;top:0;z-index:5;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fffffff2;border-bottom:1px solid var(--line);padding:10px 25px;backdrop-filter:blur(8px)}.nav a{text-decoration:none;font-weight:600}button{border:1px solid var(--line);border-radius:6px;padding:7px 11px;background:white;color:var(--ink);cursor:pointer}.nav label{margin-left:auto;font-size:13px}.task-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tag{display:inline-block;font:12px/1.5 ui-monospace,monospace;padding:2px 6px;border:1px solid var(--line);border-radius:4px;margin:3px}.task-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:25px}.source-image{display:flex;justify-content:center;background:#edf1f2;border-radius:8px;padding:8px}.image-wrap{position:relative;line-height:0}.image-wrap img{display:block;max-width:100%;max-height:490px;width:auto;height:auto}.bbox{position:absolute;border:2px solid #1675b9;display:none;pointer-events:none;line-height:1.3}.show-boxes .bbox{display:block}.bbox span{position:absolute;top:0;left:0;color:white;background:#1675b9;font:11px/1.3 monospace}.bbox.remove{border-color:#c34149}.bbox.remove span{background:#c34149}.bbox.keep{border-color:#21804d}.bbox.keep span{background:#21804d}.bbox.destination{border:2px dashed #a76800}.bbox.destination span{background:#a76800}.personal,.base{border-radius:8px;padding:14px 17px;margin-bottom:13px}.personal{background:#e8f4ee;border-left:4px solid #33856f}.base{background:#f2f4f7}.commands label{font-size:12px;font-weight:700;letter-spacing:.04em}.commands p{font-size:17px}.commands .zh{font-size:15px}details{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}summary{cursor:pointer;font-weight:600}pre{font:12px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fa;border-radius:5px;padding:10px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px}td:first-child{min-width:155px}td:nth-child(2){min-width:190px}td:nth-child(3){width:52%}td pre{margin-top:0}.table-scroll{overflow:auto}.knowledge{border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0;scroll-margin-top:65px;overflow:auto}.reference{float:right;width:135px;max-height:160px;object-fit:contain;margin:0 0 10px 15px}.knowledge:target{border:2px solid #33856f;background:#f5fcf8}.feedback-label{display:block;margin:15px 0 6px;font-size:13px;color:var(--muted)}textarea{width:100%;min-height:75px;border:1px solid var(--line);border-radius:7px;padding:10px;font:14px/1.5 inherit;resize:vertical}#save-status{font-size:12px;color:var(--muted)}.small-links{display:flex;gap:15px;flex-wrap:wrap}.basic-list{padding-left:20px}.contact{width:100%;max-width:1000px;display:block;margin:15px auto}.notice{background:#fff9e8;border-radius:7px;padding:12px;font-size:13px}.profile-panel .profile-section>summary{font-size:16px}footer{font-size:12px;color:var(--muted);padding-bottom:30px}@media(max-width:850px){main{padding:14px}.intro,.task,.profile-panel{padding:16px}.task-grid{grid-template-columns:1fr}.nav{padding:8px 12px;gap:10px}.nav label{margin-left:0}.image-wrap img{max-height:430px}h1{font-size:25px}}
+    .image-comparison,.command-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.image-comparison>div,.command-comparison>div{min-width:0}.image-comparison .source-image{height:460px;align-items:center}.image-comparison .image-wrap img{max-height:440px}.comparison-label{font-weight:650;font-size:14px;margin:8px 0}.source-single{max-width:720px;margin:auto}.command-comparison{margin-top:18px}.command-comparison .previous-command{background:#f2f3f5;border-left-color:#87939e}.commands p{overflow-wrap:anywhere}.base-comparison .command-comparison{margin-top:12px}.bbox.distractor{border-color:#8759aa}.bbox.distractor span{background:#8759aa}@media(max-width:850px){.image-comparison,.command-comparison{grid-template-columns:1fr;gap:12px}.image-comparison .source-image{height:auto;min-height:240px}.image-comparison .image-wrap img{max-height:430px}}.source-plan-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}.source-plan-layout>div,.source-plan-layout>aside{min-width:0}.source-plan-layout .pending-source-plan{margin-top:8px;padding:18px;line-height:1.8}.source-plan-layout .source-single{margin:0}@media(max-width:850px){.source-plan-layout{grid-template-columns:1fr;gap:8px}}.knowledge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.knowledge-grid .knowledge{margin:0;min-width:0;overflow-wrap:anywhere}.command-meta{overflow-wrap:anywhere}@media(max-width:850px){.knowledge-grid{grid-template-columns:1fr}}.instruction-layers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.instruction-layers>div{min-width:0}.upper-command{background:#e7f4ec;border:2px solid #28745a}.underlying-command{background:#edf2ff;border:2px solid #5269aa}.instruction-layers label{font-size:14px}.instruction-layers .instruction-en{font-size:19px;line-height:1.65}.instruction-layers .zh{font-size:15px}@media(max-width:850px){.instruction-layers{grid-template-columns:1fr}}</style><link rel="stylesheet" href="review.css"></head><body><nav class="nav review-nav"><a href="group-051-100.html">← B组 051–100</a><a href="group-051-100.html#requirements">审核要求</a><a href="#profile">个人知识</a><label>任务 <select id="task-jump" aria-label="跳转任务"><option value="">选择…</option><option value="T01">T01</option><option value="T02">T02</option><option value="T03">T03</option><option value="T04">T04</option><option value="T05">T05</option><option value="T06">T06</option><option value="T07">T07</option><option value="T08">T08</option><option value="T09">T09</option><option value="T10">T10</option></select></label><label><input id="show-boxes" type="checkbox">核查框</label><span id="review-progress" role="status">0 / 10</span><button type="button" id="export-feedback">导出完成审核</button><button type="button" id="export-draft">导出草稿</button><button type="button" id="import-draft">导入草稿</button><input id="import-file" type="file" accept="application/json,.json" hidden><span id="save-status" role="status"></span></nav><main><form id="review-form" novalidate><section class="review-identity"><p>B组 · 第 16 / 50 位 · 本页一个persona、10条命令</p><label for="reviewer-name">审核署名（可选）</label><input id="reviewer-name" type="text" maxlength="100" autocomplete="name"><p>先读<a href="group-051-100.html#requirements">审核与模糊化规则</a>，再核查个人知识、逐条判断并改写。底层解析用于核对原意，不要把答案抄进改写。</p><p id="review-message" role="alert" tabindex="-1"></p></section>
+    <section class="intro" id="overview"><span class="pill">正式数据构建稿 · 待审核</span><h1>Minh-Anh Giang · persona_066</h1><p class="sub">100 位 V3 基础人物已固定顺序；目前 100 位完成图文构建稿，本页为其中一位的10个任务。英文为本轮评估语言，中文用于审核。</p><p>Minh-Anh的十图围绕餐点样板、蛋糕、花艺和接待区展开，另有朋友活动照与野餐摆台。工作只作弱选图依据；房间、儿童蛋糕和商业蛋糕均是讨论过的样板，不据此虚构住宅或孩子姓名。</p><p>Catering sales manager at a waterfront hotel · Bachelor&#x27;s degree in Hospitality Management · 未提供数值年龄；按职业与教育背景推定为成年人</p><p>Minh-Anh spends her workdays walking couples through banquet menus, calming nervous brides, and making sure the dessert table photographs well before anyone takes a bite. At home, she is a new mom who saves play-based toddler activity ideas, watches Mexican telenovelas after bedtime, and starts most mornings with a short devotional centered on Jesus. She loves polished outfit inspiration, volume-boosting hair tutorials, and cake decorating videos, even though she insists she is better at selling cakes than piping them. Her oddly specific talent is remembering the floor plans of every hotel ballroom she has ever worked in.</p><p class="caption">10 张不同原图 · 10 条命令 · 21 个原子操作 · 45 个个性化参数 · 8 类操作</p><p class="caption">Add 1 · Attribute Modification 7 · Replace 4 · Background 4 · Remove 2 · Retouch 1 · Restyle 1 · Move 1</p><div class="notice">十条指令、参数和改图方案已逐项自查；未执行源图修改，等待整批审核。 所有实体和偏好仍为构建稿，尚无长期历史或编辑结果。</div><p class="notice">上层v3表达个性化编辑请求，底层列出操作、个性化参数及具体解析。125项global均不绑定题材或具体图片，由请求选择；人物基本信息、非global知识和图片保持不变。历史版本仅存internal；长期日常历史尚未构建。</p><p><a href="#T01">直接查看10条图像与命令 →</a></p><div class="small-links"><a href="../benchmark/data/personas/basic_persona_profile.json">100 人 Basic JSON</a><a href="../benchmark/data/personas/complete_persona_profile.json">Complete Profile JSON</a><a href="../benchmark/data/instructions/persona_instruction.json">上层 v3 JSON</a><a href="../benchmark/data/instructions/personalized_base_instruction.json">底层及参数解析 JSON</a></div><details><summary>整组图片与基础人物信息（已清理、统一字段）</summary><img class="contact" src="../benchmark/data/images/persona_066/contact-sheet.jpg" alt="10 source images"><pre>{
+  &quot;source&quot;: {
+    &quot;dataset&quot;: &quot;bowen-upenn/PersonaMem-v3&quot;,
+    &quot;revision&quot;: &quot;7b00a090b35b7293e6efeeb19494207f32b5a9ee&quot;,
+    &quot;source_persona_id&quot;: &quot;113&quot;,
+    &quot;path&quot;: &quot;backend/113/profile.json&quot;,
+    &quot;raw_sha256&quot;: &quot;7b488842fb7ffdcd6e007324aceafde966dd171e5ff778adbf443b2e3f55d455&quot;
+  },
+  &quot;basic_profile&quot;: {
+    &quot;name&quot;: &quot;Minh-Anh Giang&quot;,
+    &quot;age&quot;: null,
+    &quot;gender&quot;: &quot;cisgender female, heterosexual&quot;,
+    &quot;nationality&quot;: null,
+    &quot;languages&quot;: [],
+    &quot;location&quot;: {
+      &quot;city&quot;: null,
+      &quot;region&quot;: null,
+      &quot;country&quot;: null,
+      &quot;description&quot;: null
+    },
+    &quot;education&quot;: {
+      &quot;degrees&quot;: [
+        &quot;Bachelor&#x27;s degree in Hospitality Management&quot;
+      ],
+      &quot;fields&quot;: [],
+      &quot;institutions&quot;: []
+    },
+    &quot;occupation&quot;: {
+      &quot;title&quot;: &quot;Catering sales manager at a waterfront hotel&quot;,
+      &quot;organization&quot;: null,
+      &quot;industry&quot;: null,
+      &quot;status&quot;: null
+    },
+    &quot;relationship_status&quot;: null,
+    &quot;summary&quot;: null,
+    &quot;biography&quot;: &quot;Minh-Anh spends her workdays walking couples through banquet menus, calming nervous brides, and making sure the dessert table photographs well before anyone takes a bite. At home, she is a new mom who saves play-based toddler activity ideas, watches Mexican telenovelas after bedtime, and starts most mornings with a short devotional centered on Jesus. She loves polished outfit inspiration, volume-boosting hair tutorials, and cake decorating videos, even though she insists she is better at selling cakes than piping them. Her oddly specific talent is remembering the floor plans of every hotel ballroom she has ever worked in.&quot;,
+    &quot;hobbies&quot;: [],
+    &quot;personality&quot;: {
+      &quot;traits&quot;: [],
+      &quot;values&quot;: [],
+      &quot;quirks&quot;: [],
+      &quot;big_five&quot;: {
+        &quot;openness&quot;: &quot;low&quot;,
+        &quot;conscientiousness&quot;: &quot;medium&quot;,
+        &quot;extraversion&quot;: &quot;high&quot;,
+        &quot;agreeableness&quot;: &quot;high&quot;,
+        &quot;neuroticism&quot;: &quot;medium&quot;
+      }
+    },
+    &quot;additional&quot;: {
+      &quot;social_connections&quot;: [
+        {
+          &quot;friend_id&quot;: &quot;friend_1&quot;,
+          &quot;display_name&quot;: &quot;Mai Tran&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;local moms&quot;,
+            &quot;toddler activities&quot;,
+            &quot;church&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_2&quot;,
+          &quot;display_name&quot;: &quot;Marisol Juarez&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Mexican telenovelas&quot;,
+            &quot;hospitality events&quot;,
+            &quot;outfit inspiration&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_3&quot;,
+          &quot;display_name&quot;: &quot;My-Linh Pham&quot;,
+          &quot;relationship_depth&quot;: &quot;close&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;cake decorating&quot;,
+            &quot;beauty tutorials&quot;,
+            &quot;family gatherings&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_4&quot;,
+          &quot;display_name&quot;: &quot;Mai Jimenez&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Latino pop culture&quot;,
+            &quot;creator-comment threads&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_5&quot;,
+          &quot;display_name&quot;: &quot;Mateo Jasso&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;waterfront hotel events&quot;,
+            &quot;banquet menus&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_6&quot;,
+          &quot;display_name&quot;: &quot;Michelle Jeong&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;hair tutorials&quot;,
+            &quot;polished outfits&quot;,
+            &quot;Instagram creators&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_7&quot;,
+          &quot;display_name&quot;: &quot;Micaela Jaramillo&quot;,
+          &quot;relationship_depth&quot;: &quot;acquaintance&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Mexican telenovelas&quot;,
+            &quot;tired moms&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_8&quot;,
+          &quot;display_name&quot;: &quot;Mireya Jauregui&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;Latino drama fans&quot;,
+            &quot;public Threads&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_9&quot;,
+          &quot;display_name&quot;: &quot;Madeline Le&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;church community&quot;,
+            &quot;devotionals&quot;
+          ]
+        },
+        {
+          &quot;friend_id&quot;: &quot;friend_10&quot;,
+          &quot;display_name&quot;: &quot;Monica Jefferson&quot;,
+          &quot;relationship_depth&quot;: &quot;distant&quot;,
+          &quot;shared_interests&quot;: [
+            &quot;local moms&quot;,
+            &quot;play-based activities&quot;
+          ]
+        }
+      ]
+    }
+  },
+  &quot;adult_eligibility&quot;: {
+    &quot;status&quot;: &quot;adult&quot;,
+    &quot;basis&quot;: &quot;adult_career_and_education_context&quot;,
+    &quot;inferred&quot;: true,
+    &quot;numeric_age_provided&quot;: false
+  },
+  &quot;persona_id&quot;: &quot;persona_066&quot;
+}</pre></details></section>
+    <section class="profile-panel persona-checks" id="profile-review"><h2>先检查这个persona</h2>
+<label class="check-line"><input type="checkbox" id="profile-read" data-persona-field="profile_read" required>我已阅读这个人的个人信息与相关知识，并会结合源图核查每条命令。</label>
+<label for="profile-leakage">个人信息是否夹带具体编辑意图／答案？<span class="required">必答</span></label>
+<select id="profile-leakage" data-persona-field="leakage" required><option value="">请选择</option><option value="ok">未发现；正常偏好值不算泄露</option><option value="issue">有编辑意图泄露</option><option value="unsure">不确定，需要复核</option></select>
+<label for="profile-notes">人物知识问题说明<span class="conditional">有问题或不确定时必填</span></label><textarea id="profile-notes" data-persona-field="notes" rows="3" placeholder="请引用具体知识条目；也可记录矛盾、缺失或身份依据问题。"></textarea></section><section class="profile-panel" id="profile"><h2>Profile · 既有知识重新分类</h2><details class="global-usage" open><summary>同一项 global 在本人的十条命令中出现多少次</summary><div class="table-scroll"><table><thead><tr><th>Global</th><th>调用任务</th><th>命令数</th></tr></thead><tbody><tr><td><a href="#K_G_IMAGE_STYLE">G_IMAGE_STYLE</a></td><td>T06</td><td>1 / 10</td></tr></tbody></table></div></details><p class="caption">以下按可读卡片展示个人 JSON。偏好分为实体、场景和全局三类；场景包括天空、背景环境、光照及环境表面，global 不会自动触发编辑；情境事实只用于对应参数的实体识别或筛选；位置条目独立记录空间习惯。</p><details class="profile-section" open><summary>Personalized Entities · 个人实体 · 1</summary><div class="knowledge-grid"><article class="knowledge" id="K_E_MAI"><h4>E_MAI · Mai Tran</h4><a href="../benchmark/data/references/persona_066/E_MAI.jpg" target="_blank"><img class="reference" src="../benchmark/data/references/persona_066/E_MAI.jpg" alt="E_MAI reference"></a>
+          <p><strong>Person</strong> · close friend</p>
+          <div class="caption">视觉识别：</div><ul><li>dark hair tied up</li><li>dark blazer over a white collared shirt in this source</li><li>standing on the right of the rose bouquet</li></ul>
+          <p class="caption">别名：Mai Tran · 来源任务：T05 · 支持任务：T05</p><p class="caption">基础社交信息：Mai Tran · close · 共同兴趣：local moms、toddler activities、church</p></article></div></details><details class="profile-section" open><summary>Entity Preferences · 实体偏好 · 21</summary><div class="knowledge-grid"><article class="knowledge attribute-group" id="AG_A_PREP_BOARD"><h4>A_PREP_BOARD · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_PREP_BOARD__MATERIAL">material</a>、<a href="#K_A_PREP_BOARD__COLOR">color</a></p><p class="caption">共同适用语境：serving and prep boards used for a fruit display</p><p class="caption">范围及保留条件：food-safe material</p></article><article class="knowledge attribute-group" id="AG_A_LOUNGE_TABLE"><h4>A_LOUNGE_TABLE · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_LOUNGE_TABLE__FRAME_MATERIAL">frame_material</a>、<a href="#K_A_LOUNGE_TABLE__SURFACE_FINISH">surface_finish</a></p><p class="caption">共同适用语境：frames supporting round glass coffee tables</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_EVENT_FACE"><h4>A_EVENT_FACE · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_EVENT_FACE__HIGHLIGHTS">highlights</a>、<a href="#K_A_EVENT_FACE__SKIN_TEXTURE">skin_texture</a>、<a href="#K_A_EVENT_FACE__EXPRESSION">expression</a>、<a href="#K_A_EVENT_FACE__FACE_GEOMETRY">face_geometry</a></p><p class="caption">共同适用语境：adult event portraits</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_PICNIC_CLOTH"><h4>A_PICNIC_CLOTH · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_PICNIC_CLOTH__PATTERN">pattern</a>、<a href="#K_A_PICNIC_CLOTH__PATTERN_COLORS">pattern_colors</a></p><p class="caption">共同适用语境：washable outdoor picnic cloths</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_A_GREETING_VASE"><h4>A_GREETING_VASE · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_A_GREETING_VASE__MATERIAL">material</a>、<a href="#K_A_GREETING_VASE__SURFACE_FINISH">surface_finish</a>、<a href="#K_A_GREETING_VASE__GLASS_TINT">glass_tint</a></p><p class="caption">共同适用语境：glass vases for greeting-table arrangements</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge" id="K_A_CAKE_FIGURINE"><h4>A_CAKE_FIGURINE · CakeDecoration · design</h4>
+          <p><strong>偏好：</strong>a small fondant Dalmatian puppy figurine</p>
+          <p class="caption">适用语境：small animal figurines for celebration cakes · 支持任务：T01</p><p class="caption">可出现的日常话题：Looking through ordinary birthday-cake decoration samples.</p></article><article class="knowledge" id="K_A_VEHICLE_CAKE"><h4>A_VEHICLE_CAKE · CakeDecoration · icing_color</h4>
+          <p><strong>偏好：</strong>pastel blue</p>
+          <p class="caption">适用语境：body icing on vehicle-shaped celebration cakes · 支持任务：T01</p><p class="caption">可出现的日常话题：Comparing birthday-cake icing palettes in a sample catalogue.</p></article><article class="knowledge" id="K_A_LUNCH_SANDWICH"><h4>A_LUNCH_SANDWICH · Sandwich · recipe</h4>
+          <p><strong>偏好：</strong>a seeded baguette filled with roasted peppers and hummus</p>
+          <p class="caption">适用语境：baguette sandwiches for a casual lunch display · 支持任务：T02</p><p class="caption">可出现的日常话题：Ordering a roasted-pepper and hummus sandwich during an ordinary lunch break.</p></article><article class="knowledge" id="K_A_FRUIT_CONTAINER"><h4>A_FRUIT_CONTAINER · Bowl · design</h4>
+          <p><strong>偏好：</strong>a small round natural woven-willow fruit basket</p>
+          <p class="caption">适用语境：small fruit-serving containers · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing small woven fruit baskets while browsing homeware.</p></article><article class="knowledge" id="K_A_PREP_BOARD__MATERIAL"><h4>A_PREP_BOARD__MATERIAL · CuttingBoard · material</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>slate</p>
+          <p class="caption">适用语境：serving and prep boards used for a fruit display · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing dark slate serving boards for a fruit table.</p><p class="caption">同一偏好方案：<a href="#AG_A_PREP_BOARD">A_PREP_BOARD</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_PREP_BOARD__COLOR"><h4>A_PREP_BOARD__COLOR · CuttingBoard · color</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>dark</p>
+          <p class="caption">适用语境：serving and prep boards used for a fruit display · 支持任务：T03</p><p class="caption">可出现的日常话题：Comparing dark slate serving boards for a fruit table.</p><p class="caption">同一偏好方案：<a href="#AG_A_PREP_BOARD">A_PREP_BOARD</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_LOUNGE_CUSHION"><h4>A_LOUNGE_CUSHION · SeatCushion · cover_color</h4>
+          <p><strong>偏好：</strong>pale sage green</p>
+          <p class="caption">适用语境：cushion covers in a reception waiting area · 支持任务：T04</p><p class="caption">可出现的日常话题：Comparing pale sage upholstery swatches during an ordinary room-sample conversation.</p></article><article class="knowledge" id="K_A_LOUNGE_TABLE__FRAME_MATERIAL"><h4>A_LOUNGE_TABLE__FRAME_MATERIAL · CoffeeTable · frame_material</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>brass</p>
+          <p class="caption">适用语境：frames supporting round glass coffee tables · 支持任务：T04</p><p class="caption">可出现的日常话题：Saving a brushed-brass table frame seen in a furniture shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_LOUNGE_TABLE">A_LOUNGE_TABLE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_LOUNGE_TABLE__SURFACE_FINISH"><h4>A_LOUNGE_TABLE__SURFACE_FINISH · CoffeeTable · surface_finish</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>brushed</p>
+          <p class="caption">适用语境：frames supporting round glass coffee tables · 支持任务：T04</p><p class="caption">可出现的日常话题：Saving a brushed-brass table frame seen in a furniture shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_LOUNGE_TABLE">A_LOUNGE_TABLE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_LOUNGE_FLOWERS"><h4>A_LOUNGE_FLOWERS · FlowerArrangement · species</h4>
+          <p><strong>偏好：</strong>white anemones with dark centres and green leaves</p>
+          <p class="caption">适用语境：small reception-table flower arrangements · 支持任务：T04</p><p class="caption">可出现的日常话题：Choosing white anemones during an ordinary florist visit.</p></article><article class="knowledge" id="K_A_EVENT_FACE__HIGHLIGHTS"><h4>A_EVENT_FACE__HIGHLIGHTS · Face · highlights</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>balance uneven forehead highlights gently</p>
+          <p class="caption">适用语境：adult event portraits · 支持任务：T05</p><p class="caption">可出现的日常话题：Choosing familiar-looking printed event snapshots over heavily smoothed faces.</p><p class="caption">同一偏好方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_EVENT_FACE__SKIN_TEXTURE"><h4>A_EVENT_FACE__SKIN_TEXTURE · Face · skin_texture</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>retain original texture</p>
+          <p class="caption">适用语境：adult event portraits · 支持任务：T05</p><p class="caption">可出现的日常话题：Choosing familiar-looking printed event snapshots over heavily smoothed faces.</p><p class="caption">同一偏好方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_EVENT_FACE__EXPRESSION"><h4>A_EVENT_FACE__EXPRESSION · Face · expression</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>retain original expression</p>
+          <p class="caption">适用语境：adult event portraits · 支持任务：T05</p><p class="caption">可出现的日常话题：Choosing familiar-looking printed event snapshots over heavily smoothed faces.</p><p class="caption">同一偏好方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_EVENT_FACE__FACE_GEOMETRY"><h4>A_EVENT_FACE__FACE_GEOMETRY · Face · face_geometry</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>unchanged</p>
+          <p class="caption">适用语境：adult event portraits · 支持任务：T05</p><p class="caption">可出现的日常话题：Choosing familiar-looking printed event snapshots over heavily smoothed faces.</p><p class="caption">同一偏好方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_PICNIC_CLOTH__PATTERN"><h4>A_PICNIC_CLOTH__PATTERN · Tablecloth · pattern</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>wide stripes</p>
+          <p class="caption">适用语境：washable outdoor picnic cloths · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing striped picnic blankets and cloths in a shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_PICNIC_CLOTH">A_PICNIC_CLOTH</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_PICNIC_CLOTH__PATTERN_COLORS"><h4>A_PICNIC_CLOTH__PATTERN_COLORS · Tablecloth · pattern_colors</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>pale yellow and white</p>
+          <p class="caption">适用语境：washable outdoor picnic cloths · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing striped picnic blankets and cloths in a shop.</p><p class="caption">同一偏好方案：<a href="#AG_A_PICNIC_CLOTH">A_PICNIC_CLOTH</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_TASTING_ICING"><h4>A_TASTING_ICING · CakeSlice · icing_color</h4>
+          <p><strong>偏好：</strong>pale lavender</p>
+          <p class="caption">适用语境：icing on small cake-tasting portions · 支持任务：T07</p><p class="caption">可出现的日常话题：Comparing pastel cake-icing sample cards.</p></article><article class="knowledge" id="K_A_GREETING_VASE__MATERIAL"><h4>A_GREETING_VASE__MATERIAL · Vase · material</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>glass</p>
+          <p class="caption">适用语境：glass vases for greeting-table arrangements · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing frosted clear-glass vases during flower shopping.</p><p class="caption">同一偏好方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_GREETING_VASE__SURFACE_FINISH"><h4>A_GREETING_VASE__SURFACE_FINISH · Vase · surface_finish</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>frosted</p>
+          <p class="caption">适用语境：glass vases for greeting-table arrangements · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing frosted clear-glass vases during flower shopping.</p><p class="caption">同一偏好方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_GREETING_VASE__GLASS_TINT"><h4>A_GREETING_VASE__GLASS_TINT · Vase · glass_tint</h4>
+          <p><strong>原方案中的属性（与组内条件一起理解）：</strong>clear</p>
+          <p class="caption">适用语境：glass vases for greeting-table arrangements · 支持任务：T08</p><p class="caption">可出现的日常话题：Comparing frosted clear-glass vases during flower shopping.</p><p class="caption">同一偏好方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_A_EVENT_DESSERT"><h4>A_EVENT_DESSERT · Dessert · recipe</h4>
+          <p><strong>偏好：</strong>one large cherry lattice-top pie</p>
+          <p class="caption">适用语境：desserts for a small informal buffet · 支持任务：T09</p><p class="caption">可出现的日常话题：Choosing a cherry lattice pie while discussing ordinary buffet dessert options.</p></article></div></details><details class="profile-section" open><summary>Scene Preferences · 场景偏好 · 6</summary><div class="knowledge-grid"><article class="knowledge attribute-group" id="AG_G_TASTING_CLOTH"><h4>G_TASTING_CLOTH · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_G_TASTING_CLOTH__TABLECLOTH_COLOR">tablecloth_color</a>、<a href="#K_G_TASTING_CLOTH__PATTERN">pattern</a></p><p class="caption">共同适用语境：cloth visible beyond a round cake platter</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge attribute-group" id="AG_G_WINE_TASTING_TOP"><h4>G_WINE_TASTING_TOP · 同一偏好方案</h4><p>偏好该组合；拆出的属性不分别泛化为独立偏好。</p><p>属性：<a href="#K_G_WINE_TASTING_TOP__TABLE_MATERIAL">table_material</a>、<a href="#K_G_WINE_TASTING_TOP__SURFACE_FINISH">surface_finish</a></p><p class="caption">共同适用语境：tabletops supporting a wine-tasting lineup</p><p class="caption">范围及保留条件：沿用原有目标与语境</p></article><article class="knowledge" id="K_G_BUFFET_SUPPORT"><h4>G_BUFFET_SUPPORT · display_support_material</h4>
+          <p><strong>场景偏好：</strong>rustic oak serving boards</p>
+          <p class="caption">适用语境：exposed shelf surfaces beneath a sandwich display · 支持任务：T02</p><p class="caption">可出现的日常话题：Comparing wood serving boards for an informal buffet.</p></article><article class="knowledge" id="K_G_TASTING_CLOTH__TABLECLOTH_COLOR"><h4>G_TASTING_CLOTH__TABLECLOTH_COLOR · tablecloth_color</h4>
+          <p><strong>场景偏好方案中的属性：</strong>muted teal</p>
+          <p class="caption">适用语境：cloth visible beyond a round cake platter · 支持任务：T07</p><p class="caption">可出现的日常话题：Choosing a plain teal cloth for a small tasting table.</p><p class="caption">同一偏好方案：<a href="#AG_G_TASTING_CLOTH">G_TASTING_CLOTH</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_G_TASTING_CLOTH__PATTERN"><h4>G_TASTING_CLOTH__PATTERN · pattern</h4>
+          <p><strong>场景偏好方案中的属性：</strong>plain</p>
+          <p class="caption">适用语境：cloth visible beyond a round cake platter · 支持任务：T07</p><p class="caption">可出现的日常话题：Choosing a plain teal cloth for a small tasting table.</p><p class="caption">同一偏好方案：<a href="#AG_G_TASTING_CLOTH">G_TASTING_CLOTH</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_G_DESSERT_COUNTER"><h4>G_DESSERT_COUNTER · countertop_material</h4>
+          <p><strong>场景偏好：</strong>light oak laminate</p>
+          <p class="caption">适用语境：countertops around a dessert board · 支持任务：T09</p><p class="caption">可出现的日常话题：Comparing light-oak laminate counter samples.</p></article><article class="knowledge" id="K_G_WINE_TASTING_TOP__TABLE_MATERIAL"><h4>G_WINE_TASTING_TOP__TABLE_MATERIAL · table_material</h4>
+          <p><strong>场景偏好方案中的属性：</strong>pale limestone</p>
+          <p class="caption">适用语境：tabletops supporting a wine-tasting lineup · 支持任务：T10</p><p class="caption">可出现的日常话题：Saving a pale limestone tasting-table example during venue browsing.</p><p class="caption">同一偏好方案：<a href="#AG_G_WINE_TASTING_TOP">G_WINE_TASTING_TOP</a> · 属性分开记录，共同适用范围不变</p></article><article class="knowledge" id="K_G_WINE_TASTING_TOP__SURFACE_FINISH"><h4>G_WINE_TASTING_TOP__SURFACE_FINISH · surface_finish</h4>
+          <p><strong>场景偏好方案中的属性：</strong>honed</p>
+          <p class="caption">适用语境：tabletops supporting a wine-tasting lineup · 支持任务：T10</p><p class="caption">可出现的日常话题：Saving a pale limestone tasting-table example during venue browsing.</p><p class="caption">同一偏好方案：<a href="#AG_G_WINE_TASTING_TOP">G_WINE_TASTING_TOP</a> · 属性分开记录，共同适用范围不变</p></article></div></details><details class="profile-section" open><summary>Global Preferences · 全局偏好 · 1</summary><div class="knowledge-grid"><article class="knowledge" id="K_G_IMAGE_STYLE"><h4>G_IMAGE_STYLE · rendering_style</h4>
+          <p><strong>全局偏好：</strong>a full-colour coloured-pencil illustration with visible paper grain</p>
+          <p class="caption">适用语境：Across images, independent of depicted subject, scene or source image. · 支持任务：T06</p><p class="caption">可出现的日常话题：Comparing unrelated images and choosing the usual illustrated style: a full-colour coloured-pencil illustration with visible paper grain</p><p class="caption">全局方案：usual illustrated style · 由本次请求选择，不按图片题材选择。</p></article></div></details><details class="profile-section" open><summary>Position Preferences · 位置习惯 · 2</summary><div class="knowledge-grid"><article class="knowledge" id="K_S_CAKE_FIGURE"><h4>S_CAKE_FIGURE · CakeDecoration</h4>
+          <p><strong>空间习惯：</strong>where I leave a little figure without covering the cake lettering</p>
+          <p><strong>目标位置：</strong>relation：on；anchor：clear left edge of the white cake board beside the lettering；clearance：away from the ELIJAH letters and existing firefighter</p>
+          <p class="caption">适用条件：fire-engine cake on a white square board · 说法：where I leave space for a little figure · 支持任务：T01</p></article><article class="knowledge" id="K_S_GREETING_CENTREPIECE"><h4>S_GREETING_CENTREPIECE · FlowerArrangement</h4>
+          <p><strong>空间习惯：</strong>where I leave the centrepiece to keep the greeting table useful</p>
+          <p><strong>目标位置：</strong>relation：on；anchor：left end of greeting table；clearance：leave centre and right-front clear for name cards</p>
+          <p class="caption">适用条件：greeting table with a tall peony arrangement · 说法：where I leave room for the name cards · 支持任务：T08</p></article></div></details><details class="profile-section" open><summary>Contextual Facts · 情境事实 · 13</summary><div class="knowledge-grid"><article class="knowledge" id="K_F_ENGINE_CAKE"><h4>F_ENGINE_CAKE · CakeDecoration</h4>
+          <p><strong>情境事实：</strong>The red fire-engine cake is a decoration sample I shared for a client discussion; the name and age on its board are the source example’s lettering, not my child’s details.</p>
+          <p class="caption">图像依据：red body panels of the large edible fire-engine cake · 支持任务：T01</p></article><article class="knowledge" id="K_F_TASTING_SANDWICH"><h4>F_TASTING_SANDWICH · Sandwich</h4>
+          <p><strong>情境事实：</strong>The frontmost long sandwich at lower left is the one we passed around while discussing a lunch-display sample; the stacked sandwiches behind it were other samples.</p>
+          <p class="caption">图像依据：frontmost long sandwich at the lower-left of the case · 支持任务：T02</p></article><article class="knowledge" id="K_F_FRUIT_BOWL"><h4>F_FRUIT_BOWL · Bowl</h4>
+          <p><strong>情境事实：</strong>The empty transparent bowl at the upper right is the bowl in the fruit-station example I sent; the red area beneath it is a mat, not a red bowl.</p>
+          <p class="caption">图像依据：empty clear mixing bowl on the red mat at the upper right · 支持任务：T03</p></article><article class="knowledge" id="K_F_FRUIT_BOARD"><h4>F_FRUIT_BOARD · CuttingBoard</h4>
+          <p><strong>情境事实：</strong>The long board with the knife and digital thermometer is the prep board in that same fruit-station example.</p>
+          <p class="caption">图像依据：long wooden cutting board under the knife and thermometer · 支持任务：T03</p></article><article class="knowledge" id="K_F_LOUNGE_CUSHIONS"><h4>F_LOUNGE_CUSHIONS · SeatCushion</h4>
+          <p><strong>情境事实：</strong>The white seating group is the conservatory-lounge example I shared for a small reception waiting area; it is a sample space, not another home.</p>
+          <p class="caption">图像依据：all white seat and back cushions in the conservatory seating group · 支持任务：T04</p></article><article class="knowledge" id="K_F_LOUNGE_TABLE"><h4>F_LOUNGE_TABLE · CoffeeTable</h4>
+          <p><strong>情境事实：</strong>The round glass coffee table is the central table in that same conservatory-lounge example.</p>
+          <p class="caption">图像依据：curved pale frame of the round glass coffee table · 支持任务：T04</p></article><article class="knowledge" id="K_F_LOUNGE_FLOWERS"><h4>F_LOUNGE_FLOWERS · FlowerArrangement</h4>
+          <p><strong>情境事实：</strong>The yellow-and-red bouquet on the glass table is the centrepiece in that conservatory-lounge sample.</p>
+          <p class="caption">图像依据：yellow-and-red bouquet on the round glass table · 支持任务：T04</p></article><article class="knowledge" id="K_F_HANDED_OVER_BOUQUET"><h4>F_HANDED_OVER_BOUQUET · FlowerArrangement</h4>
+          <p><strong>情境事实：</strong>The large wrapped rose bouquet is the one we handed over after this event snapshot.</p>
+          <p class="caption">图像依据：large wrapped red-rose bouquet in the foreground · 支持任务：T05</p></article><article class="knowledge" id="K_F_PICNIC_CLOTH"><h4>F_PICNIC_CLOTH · Tablecloth</h4>
+          <p><strong>情境事实：</strong>The checked cloth is the one under the food in the picnic-table example I shared, not a tablecloth from a second home.</p>
+          <p class="caption">图像依据：blue-and-white checked cloth under the food spread · 支持任务：T06</p></article><article class="knowledge" id="K_F_TASTING_SLICES"><h4>F_TASTING_SLICES · CakeSlice</h4>
+          <p><strong>情境事实：</strong>The frosted rectangular pieces are the slices in the cake-tasting photo I shared; the scattered topping pieces are part of the same sample.</p>
+          <p class="caption">图像依据：iced rectangular cake slices on a round wooden platter · 支持任务：T07</p></article><article class="knowledge" id="K_F_CENTREPIECE"><h4>F_CENTREPIECE · FlowerArrangement</h4>
+          <p><strong>情境事实：</strong>The pale-pink peony arrangement in a green-glass vase is the centrepiece sample I sent while discussing an uncluttered greeting table.</p>
+          <p class="caption">图像依据：whole pale-pink peony arrangement with its green-glass vase · 支持任务：T08</p></article><article class="knowledge" id="K_F_CORPORATE_CAKE"><h4>F_CORPORATE_CAKE · Cake</h4>
+          <p><strong>情境事实：</strong>The two-tier cake with the KIC sign is a corporate-dessert sample I shared; the company text belongs to that sample and is not personal biography.</p>
+          <p class="caption">图像依据：two-tier white corporate cake with blue lettering and flowers · 支持任务：T09</p></article><article class="knowledge" id="K_F_TASTING_KEEP"><h4>F_TASTING_KEEP · WineBottle</h4>
+          <p><strong>情境事实：</strong>In the tasting photograph, the clear central bottle with the white STREWN Sauvignon Blanc label is the sample we still need for the next menu discussion; the three other bottles have finished their tasting role.</p>
+          <p class="caption">图像依据：{&#x27;selection&#x27;: &#x27;all wine bottles except the clear central bottle with the white STREWN Sauvignon Blanc label&#x27;, &#x27;keep_description&#x27;: &#x27;central clear bottle, distinct from the green Sauvignon Blanc bottle to its left&#x27;} · 支持任务：T10</p></article></div></details><details><summary>聚合表达与整人一致性核查</summary><pre>{
+  &quot;aggregated_expression_review&quot;: {
+    &quot;task_id&quot;: &quot;T04&quot;,
+    &quot;expansion_refs&quot;: [
+      &quot;A_LOUNGE_CUSHION&quot;,
+      &quot;A_LOUNGE_TABLE&quot;,
+      &quot;A_LOUNGE_FLOWERS&quot;
+    ],
+    &quot;status&quot;: &quot;constructed_expansion_pending_fragmented_daily_history&quot;,
+    &quot;check_zh&quot;: &quot;布样、家具框架和花店选择三个日常片段聚合；三项分别修改坐垫、框架和花束。&quot;
+  },
+  &quot;coherence_review&quot;: {
+    &quot;image_people_are_not_automatically_user&quot;: true,
+    &quot;independent_source_tasks&quot;: true,
+    &quot;owned_pets_added&quot;: 0,
+    &quot;named_friends&quot;: [
+      &quot;Mai Tran&quot;
+    ],
+    &quot;notes&quot;: [
+      &quot;没有把蛋糕上的ELIJAH或企业标牌当作用户家庭信息。&quot;,
+      &quot;花艺、器皿、桌布和食谱均按General Entity类别偏好保存。&quot;,
+      &quot;一条接待区聚合命令整合三项独立且可见的变化，不等于把同一属性拆成多操作。&quot;
+    ]
+  }
+}</pre></details></section>
+    <article class="task" id="T01">
+          <div class="task-heading"><h2>T01 · 儿童蛋糕装饰样板</h2><div><span class="tag">Add</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T01_complex_318.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T01_complex_318.jpg" alt="T01 current source image"><div class="bbox destination" style="left:0.6%;top:57.8%;width:10.0%;height:13.0%"><span>destination</span></div><div class="bbox target" style="left:19.0%;top:6.0%;width:74.2%;height:54.800000000000004%"><span>P03</span></div></div></a></div><p class="caption">Complex-Edit · 318 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。车体、消防员、水管与底板装饰可区分，新增摆件以类别偏好和摆放习惯恢复。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Make that vehicle-cake sample feel like my choice, with a little figure I&#x27;d choose set out my way.</p><p class="zh">把车辆蛋糕样品收拾得合我的心意，配上会选的小摆件，位置也按我的习惯来。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Add the little cake figure I picked where I leave space for a little figure, and try the vehicle-cake color I chose on the engine cake from that sample.</p><p class="zh">样板里的消防车蛋糕试试我选的配色，那个小摆件也加在我会留的位置。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T01" data-review-task="T01">
+<h3 id="rewrite-heading-T01">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T01-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T01-leakage" data-task="T01" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T01-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T01-solvability" data-task="T01" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T01-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T01-naturalness" data-task="T01" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T01">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T01" data-task="T01" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T01">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T01" data-task="T01" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T01"><input id="faithful-T01" type="checkbox" data-task="T01" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T01" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 4：Entity/reference_entity → A_CAKE_FIGURINE；Placement/destination → S_CAKE_FIGURE；Entity/target_entity → F_ENGINE_CAKE；Attribute/result_attribute → A_VEHICLE_CAKE</p><p class="caption">匹配：蛋糕装饰兴趣和酒店餐饮工作只弱引导选图。</p><p class="caption">核查：The white left-board strip below the cab and beside the name has room for a small figurine; do not place it over the silver dashboard. Preserve the letters and original firefighter; an edible puppy does not create an owned pet.</p>
+          <details><summary>底层参数解析 · 4 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P01" data-argument-type="Entity"><td>P01<br>Add<br>Entity / reference_entity</td><td>the little cake figure I picked<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;CakeDecoration&quot;,
+  &quot;design&quot;: &quot;a small fondant Dalmatian puppy figurine&quot;
+}</pre><a class="tag" href="#K_A_CAKE_FIGURINE">A_CAKE_FIGURINE</a></td></tr><tr data-argument="P02" data-argument-type="Placement"><td>P02<br>Add<br>Placement / destination</td><td>where I leave space for a little figure<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;on&quot;,
+  &quot;anchor&quot;: &quot;clear left edge of the white cake board beside the lettering&quot;,
+  &quot;clearance&quot;: &quot;away from the ELIJAH letters and existing firefighter&quot;
+}</pre><a class="tag" href="#K_S_CAKE_FIGURE">S_CAKE_FIGURE</a></td></tr><tr data-argument="P03" data-argument-type="Entity"><td>P03<br>Attribute Modification<br>Entity / target_entity</td><td>the engine cake from that sample<br><small>General Entity</small></td><td><pre>&quot;red body panels of the large edible fire-engine cake&quot;</pre><a class="tag" href="#K_F_ENGINE_CAKE">F_ENGINE_CAKE</a></td></tr><tr data-argument="P04" data-argument-type="Attribute"><td>P04<br>Attribute Modification<br>Attribute / result_attribute</td><td>the vehicle-cake color I chose<br><small></small></td><td><pre>{
+  &quot;icing_color&quot;: &quot;pastel blue&quot;
+}</pre><a class="tag" href="#K_A_VEHICLE_CAKE">A_VEHICLE_CAKE</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;318&quot;,
+    &quot;candidate_id&quot;: &quot;complex:318&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Add a figurine of a Dalmatian next to the fire truck.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Add an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Modify the text color of &#x27;ELIJAH&#x27; to blue.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a figurine of a Dalmatian next to the fire truck.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the star shape with a flame shape.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Alter the texture of the fire flames to look more realistic.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Resize an Object&quot;,
+        &quot;instruction&quot;: &quot;Increase the size of the ladder on the fire truck.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Text&quot;,
+        &quot;instruction&quot;: &quot;Add text reading &#x27;Happy Birthday&#x27; on the side of the cake.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the birthday candle wax to yellow.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Add a glowing effect around the candles.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      1
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The white left-board strip below the cab and beside the name has room for a small figurine; do not place it over the silver dashboard. Preserve the letters and original firefighter; an edible puppy does not create an owned pet.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T02">
+          <div class="task-heading"><h2>T02 · 午餐三明治样板</h2><div><span class="tag">Replace</span><span class="tag">Background</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T02_complex_352.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T02_complex_352.jpg" alt="T02 current source image"><div class="bbox target" style="left:0%;top:54.400000000000006%;width:56.99999999999999%;height:30.999999999999993%"><span>P05</span></div></div></a></div><p class="caption">Complex-Edit · 352 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。有多份独立三明治，事实定位前排最靠近镜头的那一份。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Make the sandwich we shared my kind of lunch, with the serving surface I&#x27;d choose beneath it.</p><p class="zh">把一起分着吃的三明治做成我会选的午餐，下面也换成我中意的承托台面。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Make the sandwich we passed around the lunch filling I usually choose, and use the serving surface I picked underneath the display.</p><p class="zh">传着试吃的那个换成我午餐常选的搭配，下面展示用的面也换成我挑的。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T02" data-review-task="T02">
+<h3 id="rewrite-heading-T02">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T02-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T02-leakage" data-task="T02" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T02-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T02-solvability" data-task="T02" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T02-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T02-naturalness" data-task="T02" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T02">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T02" data-task="T02" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T02">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T02" data-task="T02" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T02"><input id="faithful-T02" type="checkbox" data-task="T02" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T02" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_TASTING_SANDWICH；Entity/reference_entity → A_LUNCH_SANDWICH；Attribute/result_attribute → G_BUFFET_SUPPORT</p><p class="caption">匹配：工作中的餐饮样板与普通午餐选择相容。</p><p class="caption">核查：The front sandwich has a separate footprint. Only the metal support under the food changes, not the transparent vertical glass or every case surface.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P05" data-argument-type="Entity"><td>P05<br>Replace<br>Entity / target_entity</td><td>the sandwich we passed around<br><small>General Entity</small></td><td><pre>&quot;frontmost long sandwich at the lower-left of the case&quot;</pre><a class="tag" href="#K_F_TASTING_SANDWICH">F_TASTING_SANDWICH</a></td></tr><tr data-argument="P06" data-argument-type="Entity"><td>P06<br>Replace<br>Entity / reference_entity</td><td>the lunch filling I usually choose<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Sandwich&quot;,
+  &quot;recipe&quot;: &quot;a seeded baguette filled with roasted peppers and hummus&quot;
+}</pre><a class="tag" href="#K_A_LUNCH_SANDWICH">A_LUNCH_SANDWICH</a></td></tr><tr data-argument="P07" data-argument-type="Attribute"><td>P07<br>Background<br>Attribute / result_attribute</td><td>the serving surface I picked<br><small></small></td><td><pre>{
+  &quot;display_support_material&quot;: &quot;rustic oak serving boards&quot;
+}</pre><a class="tag" href="#K_G_BUFFET_SUPPORT">G_BUFFET_SUPPORT</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;352&quot;,
+    &quot;candidate_id&quot;: &quot;complex:352&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the display case interior with a rustic wooden table setting.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Change Background&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the display case interior with a rustic wooden table setting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Place a wine bottle and glasses.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Apply a warm vintage filter.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Enhance shadows to emulate sunlight on the sandwiches.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Texture&quot;,
+        &quot;instruction&quot;: &quot;Give the bread a crispier texture.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Add a light sprinkle of breadcrumbs near the sandwiches.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Substitute one of the sandwiches with a baguette.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add a glowing effect above the food items.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The front sandwich has a separate footprint. Only the metal support under the food changes, not the transparent vertical glass or every case surface.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T03">
+          <div class="task-heading"><h2>T03 · 水果台器具样板</h2><div><span class="tag">Replace</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T03_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T03_improved_20261020.jpg" alt="T03 current source image"><div class="bbox target" style="left:72.9454%;top:8.8857%;width:27.054599999999994%;height:21.427999999999997%"><span>P08</span></div><div class="bbox target" style="left:62.395%;top:42.5538%;width:36.51989999999999%;height:42.024899999999995%"><span>P10</span></div><div class="bbox distractor" style="left:3.9%;top:4.6%;width:26.3%;height:25.4%"><span>added 1</span></div></div></a></div><p class="caption">Complex-Edit · 355 · 当前图 1254 × 1254 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">I&#x27;d rather have my chosen fruit bowl at that station, with a prep board that fits my taste.</p><p class="zh">水果站的碗换成我会选的，备餐板也搭配得合心意。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Swap the bowl from that fruit-station example for the fruit bowl I keep saving, and try the board material I chose on the prep board in that example.</p><p class="zh">水果台例图的碗换成我常存的那种果篮，备料板也试试我选的材质。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T03" data-review-task="T03">
+<h3 id="rewrite-heading-T03">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T03-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T03-leakage" data-task="T03" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T03-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T03-solvability" data-task="T03" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T03-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T03-naturalness" data-task="T03" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T03">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T03" data-task="T03" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T03">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T03" data-task="T03" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T03"><input id="faithful-T03" type="checkbox" data-task="T03" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T03" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 5：Entity/target_entity → F_FRUIT_BOWL；Entity/reference_entity → A_FRUIT_CONTAINER；Entity/target_entity → F_FRUIT_BOARD；Attribute/result_attribute → A_PREP_BOARD__MATERIAL；Attribute/result_attribute → A_PREP_BOARD__COLOR</p><p class="caption">匹配：餐饮与日常备料的自然交集，不增加家中厨房身份。</p><p class="caption">核查：The bowl is transparent over a red mat. Native descriptions can mislead: preserve that separate mat and every original fruit rather than filling the new basket automatically.</p>
+          <details><summary>底层参数解析 · 5 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P08" data-argument-type="Entity"><td>P08<br>Replace<br>Entity / target_entity</td><td>the bowl from that fruit-station example<br><small>General Entity</small></td><td><pre>&quot;empty clear mixing bowl on the red mat at the upper right&quot;</pre><a class="tag" href="#K_F_FRUIT_BOWL">F_FRUIT_BOWL</a></td></tr><tr data-argument="P09" data-argument-type="Entity"><td>P09<br>Replace<br>Entity / reference_entity</td><td>the fruit bowl I keep saving<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Bowl&quot;,
+  &quot;design&quot;: &quot;a small round natural woven-willow fruit basket&quot;
+}</pre><a class="tag" href="#K_A_FRUIT_CONTAINER">A_FRUIT_CONTAINER</a></td></tr><tr data-argument="P10" data-argument-type="Entity"><td>P10<br>Attribute Modification<br>Entity / target_entity</td><td>the prep board in that example<br><small>General Entity</small></td><td><pre>&quot;long wooden cutting board under the knife and thermometer&quot;</pre><a class="tag" href="#K_F_FRUIT_BOARD">F_FRUIT_BOARD</a></td></tr><tr data-argument="P11.01" data-argument-type="Attribute"><td>P11.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the board material I chose<br><small></small></td><td><pre>{
+  &quot;material&quot;: &quot;slate&quot;
+}</pre><a class="tag" href="#K_A_PREP_BOARD__MATERIAL">A_PREP_BOARD__MATERIAL</a><p class="caption">同一方案：<a href="#AG_A_PREP_BOARD">A_PREP_BOARD</a></p><p class="caption">范围及保留：food-safe material</p></td></tr><tr data-argument="P11.02" data-argument-type="Attribute"><td>P11.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the board material I chose<br><small></small></td><td><pre>{
+  &quot;color&quot;: &quot;dark&quot;
+}</pre><a class="tag" href="#K_A_PREP_BOARD__COLOR">A_PREP_BOARD__COLOR</a><p class="caption">同一方案：<a href="#AG_A_PREP_BOARD">A_PREP_BOARD</a></p><p class="caption">范围及保留：food-safe material</p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;355&quot;,
+    &quot;candidate_id&quot;: &quot;complex:355&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Replace the bowl with one full of assorted fruits.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Replace an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Replace the bowl with one full of assorted fruits.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a bouquet of flowers beside the fruits on the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Increase the warm lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Background&quot;,
+        &quot;instruction&quot;: &quot;Replace the background with a rustic wooden countertop.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Remove an Object&quot;,
+        &quot;instruction&quot;: &quot;Remove the ginger piece from the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Change the banana to a vibrant green.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Add a faint sunlight beam coming across the table onto the fruit.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Crop Image&quot;,
+        &quot;instruction&quot;: &quot;Crop the image to focus on the array of fruits.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;The bowl is transparent over a red mat. Native descriptions can mislead: preserve that separate mat and every original fruit rather than filling the new basket automatically.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T04">
+          <div class="task-heading"><h2>T04 · 接待休息区的组合方案</h2><div><span class="tag">Attribute Modification</span><span class="tag">Attribute Modification</span><span class="tag">Replace</span><span class="tag">聚合式</span><span class="tag">3 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T04_complex_356.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T04_complex_356.jpg" alt="T04 current source image"><div class="bbox target" style="left:0%;top:44.4%;width:100%;height:55.60000000000001%"><span>P12</span></div><div class="bbox target" style="left:40.2%;top:74.2%;width:44.199999999999996%;height:22.4%"><span>P14</span></div><div class="bbox target" style="left:38.0%;top:61.199999999999996%;width:21.799999999999997%;height:17.600000000000005%"><span>P16</span></div></div></a></div><p class="caption">Complex-Edit · 356 · 当前图 500 × 500 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。多个坐垫靠垫、数把椅子和长凳均可见；聚合只展开到三项指定对象。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Make that lounge somewhere I&#x27;d want to settle, seating, coffee table and flowers together.</p><p class="zh">把休息室搭成我愿意坐下来放松的地方，座椅、茶几和花要协调。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Give the seating cushions, coffee-table frame and flowers the lounge combination I keep saving.</p><p class="zh">坐垫、茶几框架和花，都用我常存的那个休息区组合。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T04" data-review-task="T04">
+<h3 id="rewrite-heading-T04">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T04-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T04-leakage" data-task="T04" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T04-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T04-solvability" data-task="T04" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T04-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T04-naturalness" data-task="T04" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T04">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T04" data-task="T04" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T04">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T04" data-task="T04" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T04"><input id="faithful-T04" type="checkbox" data-task="T04" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T04" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 3 · 底层聚合式 · 个性化参数 7：Entity/target_entity → F_LOUNGE_CUSHIONS；Attribute/result_attribute → A_LOUNGE_CUSHION；Entity/target_entity → F_LOUNGE_TABLE；Attribute/result_attribute → A_LOUNGE_TABLE__FRAME_MATERIAL；Attribute/result_attribute → A_LOUNGE_TABLE__SURFACE_FINISH；Entity/target_entity → F_LOUNGE_FLOWERS；Entity/reference_entity → A_LOUNGE_FLOWERS</p><p class="caption">匹配：酒店宴会工作的弱线索，引出接待等候区样板，不无端推导完整设计喜好。</p><p class="caption">核查：Three original-visible objects change independently. Preserve the glass top and seating structure; all cushion covers form one coherent upholstery operation.</p>
+          <details><summary>底层参数解析 · 7 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P12" data-argument-type="Entity"><td>P12<br>Attribute Modification<br>Entity / target_entity</td><td>the seating cushions<br><small>General Entity</small></td><td><pre>&quot;all white seat and back cushions in the conservatory seating group&quot;</pre><a class="tag" href="#K_F_LOUNGE_CUSHIONS">F_LOUNGE_CUSHIONS</a></td></tr><tr data-argument="P13" data-argument-type="Attribute"><td>P13<br>Attribute Modification<br>Attribute / result_attribute</td><td>the lounge combination I keep saving<br><small></small></td><td><pre>{
+  &quot;cover_color&quot;: &quot;pale sage green&quot;
+}</pre><a class="tag" href="#K_A_LOUNGE_CUSHION">A_LOUNGE_CUSHION</a></td></tr><tr data-argument="P14" data-argument-type="Entity"><td>P14<br>Attribute Modification<br>Entity / target_entity</td><td>coffee-table frame<br><small>General Entity</small></td><td><pre>&quot;curved pale frame of the round glass coffee table&quot;</pre><a class="tag" href="#K_F_LOUNGE_TABLE">F_LOUNGE_TABLE</a></td></tr><tr data-argument="P15.01" data-argument-type="Attribute"><td>P15.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the lounge combination I keep saving<br><small></small></td><td><pre>{
+  &quot;frame_material&quot;: &quot;brass&quot;
+}</pre><a class="tag" href="#K_A_LOUNGE_TABLE__FRAME_MATERIAL">A_LOUNGE_TABLE__FRAME_MATERIAL</a><p class="caption">同一方案：<a href="#AG_A_LOUNGE_TABLE">A_LOUNGE_TABLE</a></p></td></tr><tr data-argument="P15.02" data-argument-type="Attribute"><td>P15.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the lounge combination I keep saving<br><small></small></td><td><pre>{
+  &quot;surface_finish&quot;: &quot;brushed&quot;
+}</pre><a class="tag" href="#K_A_LOUNGE_TABLE__SURFACE_FINISH">A_LOUNGE_TABLE__SURFACE_FINISH</a><p class="caption">同一方案：<a href="#AG_A_LOUNGE_TABLE">A_LOUNGE_TABLE</a></p></td></tr><tr data-argument="P16" data-argument-type="Entity"><td>P16<br>Replace<br>Entity / target_entity</td><td>flowers<br><small>General Entity</small></td><td><pre>&quot;yellow-and-red bouquet on the round glass table&quot;</pre><a class="tag" href="#K_F_LOUNGE_FLOWERS">F_LOUNGE_FLOWERS</a></td></tr><tr data-argument="P17" data-argument-type="Entity"><td>P17<br>Replace<br>Entity / reference_entity</td><td>the lounge combination I keep saving<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;FlowerArrangement&quot;,
+  &quot;species&quot;: &quot;white anemones with dark centres and green leaves&quot;
+}</pre><a class="tag" href="#K_A_LOUNGE_FLOWERS">A_LOUNGE_FLOWERS</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;Complex-Edit&quot;,
+    &quot;dataset&quot;: &quot;UCSC-VLAA/Complex-Edit&quot;,
+    &quot;revision&quot;: &quot;b0b8a81d740ae413d52572281a23dc975c4b4b91&quot;,
+    &quot;split&quot;: &quot;test_real&quot;,
+    &quot;sample_id&quot;: &quot;356&quot;,
+    &quot;candidate_id&quot;: &quot;complex:356&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Dim the overall lighting. Add flickering candles on the table.&quot;,
+    &quot;native_label&quot;: [
+      &quot;Adjust Lighting&quot;,
+      &quot;Add an Object&quot;
+    ],
+    &quot;original_sequence&quot;: [
+      {
+        &quot;name&quot;: &quot;Adjust Lighting&quot;,
+        &quot;instruction&quot;: &quot;Dim the overall lighting.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add flickering candles on the table.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apply Filter/Weather&quot;,
+        &quot;instruction&quot;: &quot;Introduce a warm sepia-toned filter.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add an Object&quot;,
+        &quot;instruction&quot;: &quot;Add a cozy throw blanket on the couch.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Change Color&quot;,
+        &quot;instruction&quot;: &quot;Adjust the couch color to a deep and warm brown.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Replace an Object&quot;,
+        &quot;instruction&quot;: &quot;Change the flower fabric-type upholstery to velvet.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Particles&quot;,
+        &quot;instruction&quot;: &quot;Introduce slight firefly-like light particles visible through the window.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Add Special Effects&quot;,
+        &quot;instruction&quot;: &quot;Create a glow effect around the candles.&quot;
+      }
+    ],
+    &quot;selected_sequence_indices_zero_based&quot;: [
+      0,
+      1
+    ],
+    &quot;preceding_steps_applied&quot;: false,
+    &quot;dependency_review&quot;: &quot;Selected objects exist in the unedited source. No earlier addition or replacement is required.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Three original-visible objects change independently. Preserve the glass top and seating structure; all cushion covers form one coherent upholstery operation.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T05">
+          <div class="task-heading"><h2>T05 · 活动后的朋友合照</h2><div><span class="tag">Remove</span><span class="tag">Retouch</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T05_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T05_improved_20261020.jpg" alt="T05 current source image"><div class="bbox target" style="left:0.012%;top:34.6487%;width:52.6421%;height:39.2085%"><span>P18</span></div><div class="bbox target" style="left:37.8317%;top:22.2332%;width:13.9239%;height:12.5582%"><span>P20</span></div><div class="bbox distractor" style="left:74.2%;top:32.7%;width:25.7%;height:18.9%"><span>added 1</span></div></div></a></div><p class="caption">GEdit-Bench · 800 · 当前图 971 × 1620 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">That bouquet&#x27;s been handed over. A little event-photo care for Mai Tran, without the flowers lingering.</p><p class="zh">花束已经送出去了，给 Mai Tran 收拾一下活动照，花就别再留着了。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear the bouquet we handed over, and give Mai&#x27;s face the event-photo touch-up I like.</p><p class="zh">送出去的那束花清掉，Mai的脸按我喜欢的活动照效果修一下。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T05" data-review-task="T05">
+<h3 id="rewrite-heading-T05">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T05-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T05-leakage" data-task="T05" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T05-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T05-solvability" data-task="T05" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T05-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T05-naturalness" data-task="T05" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T05">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T05" data-task="T05" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T05">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T05" data-task="T05" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T05"><input id="faithful-T05" type="checkbox" data-task="T05" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T05" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 6：Entity/target_entity → F_HANDED_OVER_BOUQUET；Entity/target_entity → E_MAI；Attribute/result_attribute → A_EVENT_FACE__HIGHLIGHTS；Attribute/result_attribute → A_EVENT_FACE__SKIN_TEXTURE；Attribute/result_attribute → A_EVENT_FACE__EXPRESSION；Attribute/result_attribute → A_EVENT_FACE__FACE_GEOMETRY</p><p class="caption">匹配：Mai来自基础名单；另一位不自动认定为家人。</p><p class="caption">核查：Two adult faces provide identity candidates. Bouquet removal requires careful clothing/hand reconstruction; do not delete either person or the balloon décor.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P18" data-argument-type="Entity"><td>P18<br>Remove<br>Entity / target_entity</td><td>the bouquet we handed over<br><small>General Entity</small></td><td><pre>&quot;large wrapped red-rose bouquet in the foreground&quot;</pre><a class="tag" href="#K_F_HANDED_OVER_BOUQUET">F_HANDED_OVER_BOUQUET</a></td></tr><tr data-argument="P20" data-argument-type="Entity"><td>P20<br>Retouch<br>Entity / target_entity</td><td>Mai&#x27;s face<br><small>Personalized Entity</small></td><td><pre>{
+  &quot;entity_id&quot;: &quot;E_MAI&quot;,
+  &quot;part&quot;: &quot;face&quot;
+}</pre><a class="tag" href="#K_E_MAI">E_MAI</a></td></tr><tr data-argument="P21.01" data-argument-type="Attribute"><td>P21.01<br>Retouch<br>Attribute / result_attribute</td><td>the event-photo touch-up I like<br><small></small></td><td><pre>{
+  &quot;highlights&quot;: &quot;balance uneven forehead highlights gently&quot;
+}</pre><a class="tag" href="#K_A_EVENT_FACE__HIGHLIGHTS">A_EVENT_FACE__HIGHLIGHTS</a><p class="caption">同一方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a></p></td></tr><tr data-argument="P21.02" data-argument-type="Attribute"><td>P21.02<br>Retouch<br>Attribute / result_attribute</td><td>the event-photo touch-up I like<br><small></small></td><td><pre>{
+  &quot;skin_texture&quot;: &quot;retain original texture&quot;
+}</pre><a class="tag" href="#K_A_EVENT_FACE__SKIN_TEXTURE">A_EVENT_FACE__SKIN_TEXTURE</a><p class="caption">同一方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a></p></td></tr><tr data-argument="P21.03" data-argument-type="Attribute"><td>P21.03<br>Retouch<br>Attribute / result_attribute</td><td>the event-photo touch-up I like<br><small></small></td><td><pre>{
+  &quot;expression&quot;: &quot;retain original expression&quot;
+}</pre><a class="tag" href="#K_A_EVENT_FACE__EXPRESSION">A_EVENT_FACE__EXPRESSION</a><p class="caption">同一方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a></p></td></tr><tr data-argument="P21.04" data-argument-type="Attribute"><td>P21.04<br>Retouch<br>Attribute / result_attribute</td><td>the event-photo touch-up I like<br><small></small></td><td><pre>{
+  &quot;face_geometry&quot;: &quot;unchanged&quot;
+}</pre><a class="tag" href="#K_A_EVENT_FACE__FACE_GEOMETRY">A_EVENT_FACE__FACE_GEOMETRY</a><p class="caption">同一方案：<a href="#AG_A_EVENT_FACE">A_EVENT_FACE</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;800&quot;,
+    &quot;candidate_id&quot;: &quot;gedit:800&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Remove the bouquet from the left foreground.&quot;,
+    &quot;native_label&quot;: &quot;subject-remove&quot;,
+    &quot;source_key&quot;: &quot;600884cc7c2be67d2ecf5517fea512c2&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Two adult faces provide identity candidates. Bouquet removal requires careful clothing/hand reconstruction; do not delete either person or the balloon décor.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T06">
+          <div class="task-heading"><h2>T06 · 家庭野餐的印画例图</h2><div><span class="tag">Restyle</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T06_gedit_530.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T06_gedit_530.jpg" alt="T06 current source image"><div class="bbox target" style="left:8.1%;top:1.4000000000000001%;width:91.9%;height:98.6%"><span>P23</span></div></div></a></div><p class="caption">GEdit-Bench · 530 · 当前图 608 × 448 · 点击图片可查看大图</p><p class="notice discrimination">保留原图 · 未增补原因见说明。整图风格和桌布花纹是两项独立结果；一张实际承载全部餐点的桌布不强行拆成多块。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Give the picnic a cloth I&#x27;d choose for a meal, and give the whole picture my kind of illustrated look.</p><p class="zh">给野餐配上我会选来用餐的布，整张也换成我喜欢的绘画面貌。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Use my usual illustrated style on the whole photo, and try the picnic cloth pattern I chose on the cloth from that picnic example.</p><p class="zh">整张野餐照用我一贯的画风，桌布试试我挑的野餐花纹。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T06" data-review-task="T06">
+<h3 id="rewrite-heading-T06">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T06-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T06-leakage" data-task="T06" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T06-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T06-solvability" data-task="T06" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T06-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T06-naturalness" data-task="T06" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T06">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T06" data-task="T06" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T06">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T06" data-task="T06" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T06"><input id="faithful-T06" type="checkbox" data-task="T06" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T06" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 4：Attribute/result_attribute → G_IMAGE_STYLE；Entity/target_entity → F_PICNIC_CLOTH；Attribute/result_attribute → A_PICNIC_CLOTH__PATTERN；Attribute/result_attribute → A_PICNIC_CLOTH__PATTERN_COLORS</p><p class="caption">匹配：家庭与餐点摆台是弱关联，不要求所有餐饮图属于同一真实场地。</p><p class="caption">核查：Full-colour rendering leaves the independently edited cloth pattern assessable. The dishes and flowers are preserved, not counted as extra operations.</p>
+          <details><summary>底层参数解析 · 4 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P22" data-argument-type="Attribute"><td>P22<br>Restyle<br>Attribute / result_attribute</td><td>usual illustrated style<br><small></small></td><td><pre>{
+  &quot;rendering_style&quot;: &quot;a full-colour coloured-pencil illustration with visible paper grain&quot;
+}</pre><a class="tag" href="#K_G_IMAGE_STYLE">G_IMAGE_STYLE</a><p class="caption">操作作用范围：The complete image.</p></td></tr><tr data-argument="P23" data-argument-type="Entity"><td>P23<br>Attribute Modification<br>Entity / target_entity</td><td>the cloth from that picnic example<br><small>General Entity</small></td><td><pre>&quot;blue-and-white checked cloth under the food spread&quot;</pre><a class="tag" href="#K_F_PICNIC_CLOTH">F_PICNIC_CLOTH</a></td></tr><tr data-argument="P24.01" data-argument-type="Attribute"><td>P24.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the picnic cloth pattern I chose<br><small></small></td><td><pre>{
+  &quot;pattern&quot;: &quot;wide stripes&quot;
+}</pre><a class="tag" href="#K_A_PICNIC_CLOTH__PATTERN">A_PICNIC_CLOTH__PATTERN</a><p class="caption">同一方案：<a href="#AG_A_PICNIC_CLOTH">A_PICNIC_CLOTH</a></p></td></tr><tr data-argument="P24.02" data-argument-type="Attribute"><td>P24.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the picnic cloth pattern I chose<br><small></small></td><td><pre>{
+  &quot;pattern_colors&quot;: &quot;pale yellow and white&quot;
+}</pre><a class="tag" href="#K_A_PICNIC_CLOTH__PATTERN_COLORS">A_PICNIC_CLOTH__PATTERN_COLORS</a><p class="caption">同一方案：<a href="#AG_A_PICNIC_CLOTH">A_PICNIC_CLOTH</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;GEdit-Bench&quot;,
+    &quot;dataset&quot;: &quot;stepfun-ai/GEdit-Bench&quot;,
+    &quot;revision&quot;: &quot;50766778e2a737474c7e9bdf84cdce82c3ea3f4f&quot;,
+    &quot;split&quot;: &quot;train&quot;,
+    &quot;sample_id&quot;: &quot;530&quot;,
+    &quot;candidate_id&quot;: &quot;gedit:530&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Present the brushstroke characteristics of digital painting.&quot;,
+    &quot;native_label&quot;: &quot;style_change&quot;,
+    &quot;source_key&quot;: &quot;1484ee9ef9a7f142aff7856a0edb276b&quot;,
+    &quot;source_instruction_language&quot;: &quot;en&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Full-colour rendering leaves the independently edited cloth pattern assessable. The dishes and flowers are preserved, not counted as extra operations.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T07">
+          <div class="task-heading"><h2>T07 · 试吃蛋糕切块</h2><div><span class="tag">Attribute Modification</span><span class="tag">Background</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T07_imgedit_52.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T07_imgedit_52.jpg" alt="T07 current source image"><div class="bbox target" style="left:9.1%;top:13.0%;width:90.0%;height:72.7%"><span>P25</span></div></div></a></div><p class="caption">ImgEdit-Bench Basic · 1135 · 当前图 1024 × 1024 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。多块蛋糕可见，命令以本次试吃组为范围，不凭单一切块位置猜答案。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Show that tasting cake the way I&#x27;d choose it, with a tasting table that belongs with it.</p><p class="zh">把试吃蛋糕收拾成我会喜欢的样子，周围试吃桌也一起搭配。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Try the tasting-cake icing color I picked on the slices from that tasting photo, and use the tasting-table cloth I chose around the platter.</p><p class="zh">试吃照那组切块用我选的糖霜颜色，盘子外面也换成我挑的试吃桌布。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T07" data-review-task="T07">
+<h3 id="rewrite-heading-T07">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T07-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T07-leakage" data-task="T07" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T07-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T07-solvability" data-task="T07" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T07-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T07-naturalness" data-task="T07" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T07">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T07" data-task="T07" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T07">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T07" data-task="T07" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T07"><input id="faithful-T07" type="checkbox" data-task="T07" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T07" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 4：Entity/target_entity → F_TASTING_SLICES；Attribute/result_attribute → A_TASTING_ICING；Attribute/result_attribute → G_TASTING_CLOTH__TABLECLOTH_COLOR；Attribute/result_attribute → G_TASTING_CLOTH__PATTERN</p><p class="caption">匹配：蛋糕兴趣与工作样板自然相容。</p><p class="caption">核查：Only icing changes colour; preserve the tan cake crumb and topping pieces. The platter is wood and is not mistaken for the background cloth.</p>
+          <details><summary>底层参数解析 · 4 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P25" data-argument-type="Entity"><td>P25<br>Attribute Modification<br>Entity / target_entity</td><td>the slices from that tasting photo<br><small>General Entity</small></td><td><pre>&quot;iced rectangular cake slices on a round wooden platter&quot;</pre><a class="tag" href="#K_F_TASTING_SLICES">F_TASTING_SLICES</a></td></tr><tr data-argument="P26" data-argument-type="Attribute"><td>P26<br>Attribute Modification<br>Attribute / result_attribute</td><td>the tasting-cake icing color I picked<br><small></small></td><td><pre>{
+  &quot;icing_color&quot;: &quot;pale lavender&quot;
+}</pre><a class="tag" href="#K_A_TASTING_ICING">A_TASTING_ICING</a></td></tr><tr data-argument="P27.01" data-argument-type="Attribute"><td>P27.01<br>Background<br>Attribute / result_attribute</td><td>the tasting-table cloth I chose<br><small></small></td><td><pre>{
+  &quot;tablecloth_color&quot;: &quot;muted teal&quot;
+}</pre><a class="tag" href="#K_G_TASTING_CLOTH__TABLECLOTH_COLOR">G_TASTING_CLOTH__TABLECLOTH_COLOR</a><p class="caption">同一方案：<a href="#AG_G_TASTING_CLOTH">G_TASTING_CLOTH</a></p></td></tr><tr data-argument="P27.02" data-argument-type="Attribute"><td>P27.02<br>Background<br>Attribute / result_attribute</td><td>the tasting-table cloth I chose<br><small></small></td><td><pre>{
+  &quot;pattern&quot;: &quot;plain&quot;
+}</pre><a class="tag" href="#K_G_TASTING_CLOTH__PATTERN">G_TASTING_CLOTH__PATTERN</a><p class="caption">同一方案：<a href="#AG_G_TASTING_CLOTH">G_TASTING_CLOTH</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;ImgEdit-Bench Basic&quot;,
+    &quot;dataset&quot;: &quot;PKU-YuanGroup/ImgEdit&quot;,
+    &quot;revision&quot;: &quot;b79848168744c8db8389086d01fe3def1758aa45&quot;,
+    &quot;split&quot;: &quot;Basic/singleturn&quot;,
+    &quot;sample_id&quot;: &quot;1135&quot;,
+    &quot;candidate_id&quot;: &quot;imgedit:52&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_image_path&quot;: &quot;daily object/000273675.jpg&quot;,
+    &quot;original_instruction&quot;: &quot;Change the frosting color to a light blue.&quot;,
+    &quot;native_label&quot;: &quot;adjust&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Only icing changes colour; preserve the tan cake crumb and topping pieces. The platter is wood and is not mistaken for the background cloth.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T08">
+          <div class="task-heading"><h2>T08 · 迎宾花艺的留白位置</h2><div><span class="tag">Move</span><span class="tag">Attribute Modification</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T08_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T08_improved_20261020.jpg" alt="T08 current source image"><div class="bbox target" style="left:47.2935%;top:7.1812000000000005%;width:49.011%;height:68.55210000000001%"><span>P28</span></div><div class="bbox destination" style="left:0.8%;top:1.0%;width:51.5%;height:92.2%"><span>destination</span></div><div class="bbox target" style="left:67.4029%;top:59.3433%;width:13.514899999999997%;height:16.259800000000002%"><span>P30</span></div><div class="bbox distractor" style="left:89.60000000000001%;top:57.49999999999999%;width:9.999999999999998%;height:27.3%"><span>added 1</span></div></div></a></div><p class="caption">AnyEdit-Test · relation:12 · 当前图 1536 × 1024 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Set that centerpiece sample where I&#x27;d use it, and make its vase feel like my choice.</p><p class="zh">按我的习惯放好桌花样品，花瓶也收拾得合我的心意。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Put the centrepiece sample I sent where I leave room for the name cards, and give its vase the vase finish I keep choosing.</p><p class="zh">我发的迎宾花艺放到我会给名牌留空的位置，花瓶也用我常选的表面效果。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T08" data-review-task="T08">
+<h3 id="rewrite-heading-T08">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T08-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T08-leakage" data-task="T08" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T08-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T08-solvability" data-task="T08" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T08-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T08-naturalness" data-task="T08" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T08">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T08" data-task="T08" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T08">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T08" data-task="T08" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T08"><input id="faithful-T08" type="checkbox" data-task="T08" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T08" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 6：Entity/target_entity → F_CENTREPIECE；Placement/destination → S_GREETING_CENTREPIECE；Entity/target_entity → F_CENTREPIECE；Attribute/result_attribute → A_GREETING_VASE__MATERIAL；Attribute/result_attribute → A_GREETING_VASE__SURFACE_FINISH；Attribute/result_attribute → A_GREETING_VASE__GLASS_TINT</p><p class="caption">匹配：摆台位置是工作和待客都常见的习惯，不写成抽象scope偏好。</p><p class="caption">核查：Original vase base and table are cropped. The usable destination exists only after explicitly planned extension; its reserved width is about 1.1 original-photo widths and its height about 1.45 original-photo heights, enough for the completed arrangement without squeezing it. Do not move flowers independently from their vase.</p>
+          <details><summary>底层参数解析 · 6 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P28" data-argument-type="Entity"><td>P28<br>Move<br>Entity / target_entity</td><td>the centrepiece sample I sent<br><small>General Entity</small></td><td><pre>&quot;whole pale-pink peony arrangement with its green-glass vase&quot;</pre><a class="tag" href="#K_F_CENTREPIECE">F_CENTREPIECE</a></td></tr><tr data-argument="P29" data-argument-type="Placement"><td>P29<br>Move<br>Placement / destination</td><td>where I leave room for the name cards<br><small></small></td><td><pre>{
+  &quot;relation&quot;: &quot;on&quot;,
+  &quot;anchor&quot;: &quot;left end of greeting table&quot;,
+  &quot;clearance&quot;: &quot;leave centre and right-front clear for name cards&quot;
+}</pre><a class="tag" href="#K_S_GREETING_CENTREPIECE">S_GREETING_CENTREPIECE</a></td></tr><tr data-argument="P30" data-argument-type="Entity"><td>P30<br>Attribute Modification<br>Entity / target_entity</td><td>its vase<br><small>General Entity</small></td><td><pre>&quot;green-glass vase holding the peonies&quot;</pre><a class="tag" href="#K_F_CENTREPIECE">F_CENTREPIECE</a></td></tr><tr data-argument="P31.01" data-argument-type="Attribute"><td>P31.01<br>Attribute Modification<br>Attribute / result_attribute</td><td>the vase finish I keep choosing<br><small></small></td><td><pre>{
+  &quot;material&quot;: &quot;glass&quot;
+}</pre><a class="tag" href="#K_A_GREETING_VASE__MATERIAL">A_GREETING_VASE__MATERIAL</a><p class="caption">同一方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a></p></td></tr><tr data-argument="P31.02" data-argument-type="Attribute"><td>P31.02<br>Attribute Modification<br>Attribute / result_attribute</td><td>the vase finish I keep choosing<br><small></small></td><td><pre>{
+  &quot;surface_finish&quot;: &quot;frosted&quot;
+}</pre><a class="tag" href="#K_A_GREETING_VASE__SURFACE_FINISH">A_GREETING_VASE__SURFACE_FINISH</a><p class="caption">同一方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a></p></td></tr><tr data-argument="P31.03" data-argument-type="Attribute"><td>P31.03<br>Attribute Modification<br>Attribute / result_attribute</td><td>the vase finish I keep choosing<br><small></small></td><td><pre>{
+  &quot;glass_tint&quot;: &quot;clear&quot;
+}</pre><a class="tag" href="#K_A_GREETING_VASE__GLASS_TINT">A_GREETING_VASE__GLASS_TINT</a><p class="caption">同一方案：<a href="#AG_A_GREETING_VASE">A_GREETING_VASE</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;relation&quot;,
+    &quot;sample_id&quot;: &quot;relation:12&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:relation:12&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;Move the flowers to the left.&quot;,
+    &quot;native_label&quot;: &quot;relation&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/relation/input_img/248.jpg&quot;,
+    &quot;original_caption&quot;: null,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Original vase base and table are cropped. The usable destination exists only after explicitly planned extension; its reserved width is about 1.1 original-photo widths and its height about 1.45 original-photo heights, enough for the completed arrangement without squeezing it. Do not move flowers independently from their vase.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T09">
+          <div class="task-heading"><h2>T09 · 活动甜点替换样板</h2><div><span class="tag">Replace</span><span class="tag">Background</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">当前有效 source image · 历史图保留于internal</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T09_improved_20261020.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T09_improved_20261020.jpg" alt="T09 current source image"><div class="bbox target" style="left:43.8083%;top:10.1099%;width:55.876000000000005%;height:83.5193%"><span>P32</span></div><div class="bbox distractor" style="left:6.6000000000000005%;top:36.0%;width:29.9%;height:43.10000000000001%"><span>added 1</span></div></div></a></div><p class="caption">AnyEdit-Test · replace:38 · 当前图 1580 × 995 · 点击图片可查看大图</p><p class="notice discrimination">已增补并初步核查，待本轮审核。已生成并逐图初检：核对同类候选、身份、实际落点及未提前执行目标编辑；等待人类审核。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">I&#x27;d rather see my dessert choice than that company cake sample, on a counter that suits me.</p><p class="zh">把公司蛋糕样品换成我会选的甜点，台面也搭配得合心意。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Swap the cake from that company sample for the dessert I usually choose, and use the dessert-counter surface I picked around the board.</p><p class="zh">企业样板里那只蛋糕换成我平常选的甜点，底板外的台面也用我挑的材质。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T09" data-review-task="T09">
+<h3 id="rewrite-heading-T09">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T09-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T09-leakage" data-task="T09" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T09-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T09-solvability" data-task="T09" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T09-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T09-naturalness" data-task="T09" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T09">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T09" data-task="T09" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T09">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T09" data-task="T09" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T09"><input id="faithful-T09" type="checkbox" data-task="T09" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T09" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_CORPORATE_CAKE；Entity/reference_entity → A_EVENT_DESSERT；Attribute/result_attribute → G_DESSERT_COUNTER</p><p class="caption">匹配：工作甜点样板，不保留不属于新参考实体的原蛋糕字样。</p><p class="caption">核查：Whole-cake replacement includes its edible decorations; the separate white presentation board remains. Do not turn the red bench into a countertop.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P32" data-argument-type="Entity"><td>P32<br>Replace<br>Entity / target_entity</td><td>the cake from that company sample<br><small>General Entity</small></td><td><pre>&quot;two-tier white corporate cake with blue lettering and flowers&quot;</pre><a class="tag" href="#K_F_CORPORATE_CAKE">F_CORPORATE_CAKE</a></td></tr><tr data-argument="P33" data-argument-type="Entity"><td>P33<br>Replace<br>Entity / reference_entity</td><td>the dessert I usually choose<br><small>General Entity</small></td><td><pre>{
+  &quot;category&quot;: &quot;Dessert&quot;,
+  &quot;recipe&quot;: &quot;one large cherry lattice-top pie&quot;
+}</pre><a class="tag" href="#K_A_EVENT_DESSERT">A_EVENT_DESSERT</a></td></tr><tr data-argument="P34" data-argument-type="Attribute"><td>P34<br>Background<br>Attribute / result_attribute</td><td>the dessert-counter surface I picked<br><small></small></td><td><pre>{
+  &quot;countertop_material&quot;: &quot;light oak laminate&quot;
+}</pre><a class="tag" href="#K_G_DESSERT_COUNTER">G_DESSERT_COUNTER</a></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;replace&quot;,
+    &quot;sample_id&quot;: &quot;replace:38&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:replace:38&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;change the cake to a pie&quot;,
+    &quot;native_label&quot;: &quot;replace&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/replace/input_img/COCO_train2014_000000101692.jpg&quot;,
+    &quot;original_caption&quot;: &quot;a two tier cake with writing on it sits on a table&quot;,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;Whole-cake replacement includes its edible decorations; the separate white presentation board remains. Do not turn the red bench into a countertop.&quot;
+  }
+}</pre></details>
+          
+        </article><article class="task" id="T10">
+          <div class="task-heading"><h2>T10 · 品鉴桌的保留与清理</h2><div><span class="tag">Remove</span><span class="tag">Background</span><span class="tag">逐项式</span><span class="tag">2 原子</span></div></div>
+          <div class="source-single"><p class="comparison-label">源图 · 保留原始版本</p><a class="source-image current-source" href="../benchmark/data/images/persona_066/T10_anyedit_background_change_46.jpg" target="_blank"><div class="image-wrap"><img src="../benchmark/data/images/persona_066/T10_anyedit_background_change_46.jpg" alt="T10 current source image"><div class="bbox keep" style="left:44.7%;top:0%;width:17.4%;height:60.199999999999996%"><span>keep</span></div><div class="bbox remove" style="left:3.5000000000000004%;top:0%;width:25.5%;height:85.5%"><span>remove</span></div><div class="bbox remove" style="left:27.500000000000004%;top:0%;width:19.999999999999996%;height:80.0%"><span>remove</span></div><div class="bbox remove" style="left:60.0%;top:0%;width:19.000000000000007%;height:66.0%"><span>remove</span></div></div></a></div><p class="caption">AnyEdit-Test · background_change:46 · 当前图 640 × 480 · 点击图片可查看大图</p><p class="notice discrimination">已有同类候选。四瓶并列，采用除指定品鉴样本之外全部清理的补集形式；不移除任何杯子。</p>
+          <div class="review-request-layout"><div class="current-request"><div class="commands instruction-layers" data-instruction-version="v3">
+          <div class="personal upper-command"><label>上层 · v3 用户指令</label><p class="instruction-en">Leave just the tasting bottle we still need, with the surface I&#x27;d choose for a tasting beneath the glasses.</p><p class="zh">试饮瓶就留还需要的那只，杯子下面配上我品鉴时会选的台面。</p></div>
+          <div class="personal underlying-command"><label>底层 · 操作与个性化参数</label><p class="instruction-en">Clear the tasting bottles except the one we still need, and use the tasting-table surface I saved underneath the glasses.</p><p class="zh">品鉴酒瓶只留我们还要用的那只，其他清掉，杯子下面的桌面也用我存的材质。</p></div></div>
+          </div><section class="human-rewrite" aria-labelledby="rewrite-heading-T10" data-review-task="T10">
+<h3 id="rewrite-heading-T10">你的审核与英文改写</h3><p class="caption">评价当前版本，再亲自改写；具体值与位置答案继续隐去。</p>
+<div class="issue-checks"><label for="T10-leakage">当前样本是否存在泄露／评估捷径？<span class="required">必答</span></label>
+<select id="T10-leakage" data-task="T10" data-field="leakage" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T10-solvability">当前命令是否有不可解的模糊性／证据缺口？<span class="required">必答</span></label>
+<select id="T10-solvability" data-task="T10" data-field="solvability" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select><label for="T10-naturalness">当前命令是否不像真实用户表达？<span class="required">必答</span></label>
+<select id="T10-naturalness" data-task="T10" data-field="naturalness" required><option value="">请选择</option><option value="ok">未发现问题</option><option value="issue">有问题</option><option value="unsure">不确定，需要复核</option></select></div>
+<label for="rewrite-T10">人类改写版本（英文）<span class="required">每条必填</span></label>
+<textarea id="rewrite-T10" data-task="T10" data-field="rewrite" required rows="4" spellcheck="true" placeholder="用你自己会说的英文重写，保留个性化和原有推断难度。"></textarea>
+<label for="notes-T10">问题说明／无法确定的依据<span class="conditional">有问题或不确定时必填</span></label>
+<textarea id="notes-T10" data-task="T10" data-field="notes" rows="3" placeholder="指出具体对象、措辞、个人知识或源图的问题；没有问题可留空。"></textarea>
+<label class="check-line" for="faithful-T10"><input id="faithful-T10" type="checkbox" data-task="T10" data-field="faithful" required>我已核对：改写保持原意与编辑范围，未泄露个人偏好值／位置答案，未新增个人事实。</label>
+<p class="task-completion" id="completion-T10" aria-live="polite">尚未完成</p></section></div><p class="caption command-meta">底层原子操作 2 · 底层逐项式 · 个性化参数 3：Entity/target_entity → F_TASTING_KEEP；Attribute/result_attribute → G_WINE_TASTING_TOP__TABLE_MATERIAL；Attribute/result_attribute → G_WINE_TASTING_TOP__SURFACE_FINISH</p><p class="caption">匹配：品鉴工作是普通餐饮场景，保留原因是具体进度事实而非对瓶子颜色的偏好。</p><p class="caption">核查：There are four bottles and four glasses. Keep the clear centre bottle, not the green Sauvignon Blanc bottle next to it; preserve every glass even when its matching bottle is removed.</p>
+          <details><summary>底层参数解析 · 3 个参数</summary><div class="table-scroll"><table><thead><tr><th>操作 / 参数</th><th>个性化表达</th><th>明确值 / Profile 依据</th></tr></thead><tbody><tr data-argument="P35" data-argument-type="Entity"><td>P35<br>Remove<br>Entity / target_entity</td><td>the tasting bottles except the one we still need<br><small>General Entity</small></td><td><pre>{
+  &quot;selection&quot;: &quot;all wine bottles except the clear central bottle with the white STREWN Sauvignon Blanc label&quot;,
+  &quot;keep_description&quot;: &quot;central clear bottle, distinct from the green Sauvignon Blanc bottle to its left&quot;
+}</pre><a class="tag" href="#K_F_TASTING_KEEP">F_TASTING_KEEP</a></td></tr><tr data-argument="P36.01" data-argument-type="Attribute"><td>P36.01<br>Background<br>Attribute / result_attribute</td><td>the tasting-table surface I saved<br><small></small></td><td><pre>{
+  &quot;table_material&quot;: &quot;pale limestone&quot;
+}</pre><a class="tag" href="#K_G_WINE_TASTING_TOP__TABLE_MATERIAL">G_WINE_TASTING_TOP__TABLE_MATERIAL</a><p class="caption">同一方案：<a href="#AG_G_WINE_TASTING_TOP">G_WINE_TASTING_TOP</a></p></td></tr><tr data-argument="P36.02" data-argument-type="Attribute"><td>P36.02<br>Background<br>Attribute / result_attribute</td><td>the tasting-table surface I saved<br><small></small></td><td><pre>{
+  &quot;surface_finish&quot;: &quot;honed&quot;
+}</pre><a class="tag" href="#K_G_WINE_TASTING_TOP__SURFACE_FINISH">G_WINE_TASTING_TOP__SURFACE_FINISH</a><p class="caption">同一方案：<a href="#AG_G_WINE_TASTING_TOP">G_WINE_TASTING_TOP</a></p></td></tr></tbody></table></div></details>
+          <details><summary>来源、改写和保留要求</summary><p>以来源原图和命令为起点，按本任务保留、改写或补充编辑意图；仅编辑原图实际可见或明确待新增的对象，具体操作以本任务为准。原target不沿用。</p><pre>{
+  &quot;source&quot;: {
+    &quot;benchmark&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;dataset&quot;: &quot;AnyEdit-Test&quot;,
+    &quot;revision&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;split&quot;: &quot;background_change&quot;,
+    &quot;sample_id&quot;: &quot;background_change:46&quot;,
+    &quot;candidate_id&quot;: &quot;anyedit:background_change:46&quot;,
+    &quot;asset_access&quot;: &quot;Unmodified upstream source bytes; independently reviewed before persona assignment.&quot;,
+    &quot;original_instruction&quot;: &quot;turn the background to a rustic wooden table&quot;,
+    &quot;native_label&quot;: &quot;background_change&quot;,
+    &quot;original_image_path&quot;: &quot;anybench/background_change/input_img/COCO_train2014_000000204529_0.jpg&quot;,
+    &quot;original_caption&quot;: &quot;a group of wine bottles and wine glasses&quot;,
+    &quot;archive_url&quot;: &quot;https://drive.google.com/file/d/1V-Z4agWoTMzAYkRJQ1BNz0-i79eAVWt4/view&quot;,
+    &quot;archive_sha256&quot;: &quot;a8b4d04258c624319ed0e63155f7320acdca831b5547c154a344a5bb75a78c27&quot;,
+    &quot;archive_scope&quot;: &quot;Official AnyEdit-Test only; training data are not used.&quot;
+  },
+  &quot;preservation_constraints&quot;: [
+    &quot;Keep unrelated scene content and identity unchanged.&quot;
+  ],
+  &quot;visual_review&quot;: {
+    &quot;status&quot;: &quot;source_visually_checked_draft&quot;,
+    &quot;check&quot;: &quot;There are four bottles and four glasses. Keep the clear centre bottle, not the green Sauvignon Blanc bottle next to it; preserve every glass even when its matching bottle is removed.&quot;
+  }
+}</pre></details>
+          
+        </article>
+    <footer class="cohort-navigation"><a href="persona_065.html">← 上一个persona</a><a href="group-051-100.html">返回B组目录</a><a href="persona_067.html">下一个persona →</a><p>完成后导出JSON交回组织者：<a href="mailto:jian_lang@std.uestc.edu.cn">jian_lang@std.uestc.edu.cn</a>。草稿只保存在浏览器，未自动上传。</p></footer>
+    </form></main><script type="application/json" id="review-context">{"protocol_version": "personaedit-human-rewrite-v1", "dataset_revision": "e5a959d8a4c9b869", "review_ui_sha256": "d0f89e257d6efbfd268e29732597b7c6fe5d41cb4e71613e248d4d9d4a293736", "contact": "jian_lang@std.uestc.edu.cn", "page": "persona", "persona_id": "persona_066", "group_id": "B", "group_page": "group-051-100.html", "group_start": 51, "group_end": 100, "tasks": [{"task_id": "T01", "instruction": "Make that vehicle-cake sample feel like my choice, with a little figure I'd choose set out my way.", "instruction_sha256": "37f792026d21e72a32de98276dc1d15440741b41ec01a860ed7605ec470f467d", "underlying_sha256": "b209684ef4c62555618c8d773806eec197db307edc926ed9f143b57cc29bc197"}, {"task_id": "T02", "instruction": "Make the sandwich we shared my kind of lunch, with the serving surface I'd choose beneath it.", "instruction_sha256": "9e7b08d1b92bac366f1a6bcfc245076d23261ad2e2c336c136bcec9caac92b37", "underlying_sha256": "c307152a39bf0db710d060901df5124e3dd51f51819ef34230b34d58cf3f062a"}, {"task_id": "T03", "instruction": "I'd rather have my chosen fruit bowl at that station, with a prep board that fits my taste.", "instruction_sha256": "29da3304a6332fd30c704e00306ddb67060d565e03d4c097c6c9e783a4bcc600", "underlying_sha256": "7193714eb88840effad047a6843e3259368fe0f1d4f9ce5f78e89a43f3b3787e"}, {"task_id": "T04", "instruction": "Make that lounge somewhere I'd want to settle, seating, coffee table and flowers together.", "instruction_sha256": "25a63b244e6e2052041304c52246767a5fc70099f26f70dc82194efd530a42f4", "underlying_sha256": "09bdd238740ddcbc7a77faae6e210e23c054c9c6ae0cddff840bb28b108428c7"}, {"task_id": "T05", "instruction": "That bouquet's been handed over. A little event-photo care for Mai Tran, without the flowers lingering.", "instruction_sha256": "93d4cb657e93eabe93d83cea5809220f4b8cf2e561ecb6dbfbd68b77036f52e0", "underlying_sha256": "01510eb348e45aba43badfc788e91b76cbb22e13de997742e81c15c03a9b168d"}, {"task_id": "T06", "instruction": "Give the picnic a cloth I'd choose for a meal, and give the whole picture my kind of illustrated look.", "instruction_sha256": "bcbb54aa74444fff2e24fd852a78e621cd907ad901c7434efd5efa8d1e4d7c80", "underlying_sha256": "28629eb1ae7724d0e650ae6098f14f337953ee6472001a5072bf613af562a088"}, {"task_id": "T07", "instruction": "Show that tasting cake the way I'd choose it, with a tasting table that belongs with it.", "instruction_sha256": "456b5bdfa095bdae778622704958fd60a92b04a541dac88953e372e5db67e512", "underlying_sha256": "e8700ff81f4ebd32938028bf88c0b5c5f2abb90b266a9492b8e5446b4c49f5c1"}, {"task_id": "T08", "instruction": "Set that centerpiece sample where I'd use it, and make its vase feel like my choice.", "instruction_sha256": "cba61af970235ec6bfc7c03a297cfe90d0be813ecb416c61b954da9e3315319c", "underlying_sha256": "8137afa7c9665750dba67ab02e6a34712408d8c4590e61d886435d651defaf31"}, {"task_id": "T09", "instruction": "I'd rather see my dessert choice than that company cake sample, on a counter that suits me.", "instruction_sha256": "4dd858827f3eaa448d55324c3cf9f90398d6e0e7186240e5038ba43703f2b255", "underlying_sha256": "cd15277a3d611549bf1efb303a61796dc080ae5786ee94b31e2f24f2cd256c7e"}, {"task_id": "T10", "instruction": "Leave just the tasting bottle we still need, with the surface I'd choose for a tasting beneath the glasses.", "instruction_sha256": "52ca4cb412aa70cec0651e5c31aa444b266bc51cae62ae328a45ad557781eb2c", "underlying_sha256": "5078db1b572af426a72872ed774c36718c8f2d58f11b0daf9c3a0ca62e94fc88"}]}</script><script src="review.js" defer></script></body></html>

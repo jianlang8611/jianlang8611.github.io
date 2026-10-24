@@ -1,28 +1,18 @@
 # PersonaEdit
 
-PersonaEdit is a personalized image editing benchmark. It studies whether an image editing model can recover Entity, Attribute and Placement arguments from a user's long-term everyday interactions.
+PersonaEdit evaluates image editing that recovers personal entities, attribute preferences and placement habits from everyday interactions.
 
-**Current release: a draft for human review.** There are 100 sparse basic persona profiles and 5 complete task groups. Each complete persona has 10 source images, 10 explicit instructions, 10 corresponding personalized instructions and an editing-related profile. All five currently cover eight operation classes. Daily interaction histories and edited outputs are pending.
+The current instruction version is **v3**: 100 personas, 1,000 distinct source images and 1,000 paired user requests and personalized underlying commands, containing 2116 operations. Each request has two or three operations. English is the task language; Chinese supports review.
 
-- [Volunteer review website](https://jianlang.org/personaedit/human-evaluation/)
-- [Local review index](human-evaluation/index.html)
-- [Benchmark data and schema](benchmark/README.md)
-- [Data sources and attribution](benchmark/SOURCES.md)
-- [Review instructions and results](human-evaluation/README.md)
+Requests express personal goals using the existing person and scene context. The underlying layer records standard operations, personalized parameters, resolved values and evidence. Only the user request is evaluation wording; profiles and resolved annotations contain answers. Everyday histories and edited outputs have not yet been constructed.
 
-```text
-benchmark/
-  data/personas/          # 100 basic profiles; 5 complete profiles
-  data/instructions/      # explicit and personalized versions, grouped by persona
-  data/images/           # 50 source images and 5 contact sheets
-  data/references/       # visual references for personalized entities
-  data/manifests/         # public asset hashes and revision
-human-evaluation/
-  index.html             # five-persona review index
-  persona_001.html ... persona_005.html
-  results/               # returned review JSON files
-```
+- [Review the personas](human-evaluation/index.html)
+- [Data and schema](benchmark/README.md)
+- [Sources](benchmark/SOURCES.md)
+- [Review instructions](human-evaluation/README.md)
 
-The canonical task language is English; Chinese text supports human review. Explicit instructions and complete profiles contain answers and annotations, and are not evaluation-time interaction histories. Source images and original instructions retain upstream provenance. Source benchmark target images and scoring prompts are not assumed to remain applicable after changes.
+Only the latest profiles, instructions and active images are published. Earlier versions remain in the internal archive. Basic biographies, non-global knowledge and source/reference images are preserved. All 125 global finishing options apply independently of image subject or scene; an explicit request selects the applicable option. Existing global reuse adds at most two tasks per persona.
 
-Dataset revision: `59b4f06f3f61d703`. Feedback is saved in the reviewer's browser and exported as JSON; reviewers return the exported file to the organizer. This static website does not receive files automatically.
+Assistant semantic and structural checks are complete; independent human review remains pending. Dataset revision: `e5a959d8a4c9b869`. [Website entry](https://jianlang.org/personaedit/human-evaluation/).
+
+Volunteer review has two cohort entries: [001–050](human-evaluation/group-001-050.html) and [051–100](human-evaluation/group-051-100.html). Each persona has one page with ten tasks. Reviewers check persona intent leakage and, for each request, leakage, irresolvable ambiguity and naturalness. Every task requires a human-authored English rewrite that preserves the intended edits, personalization and hidden preference values/locations. Completed review exports require all ten rewrites and judgments; incomplete drafts can be saved and resumed. Browser storage does not automatically submit feedback.
