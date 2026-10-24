@@ -8,12 +8,39 @@
   const taskIds = Array.from({length: 10}, (_, i) => 'T' + String(i + 1).padStart(2, '0'));
   const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
   const keyFor = pid => `${context.protocol_version}:${context.dataset_revision}:${pid}`;
+  const reviewerKey = 'personaedit-volunteer-reviewer-v2';
+  const sessionPrefix = 'personaedit-review-session-v1:';
+  let tabValues = {};
+  try { if (window.name.startsWith(sessionPrefix)) tabValues = JSON.parse(window.name.slice(sessionPrefix.length)); } catch (_) {}
   const message = text => {
     const element = document.getElementById('review-message');
     if (element) { element.textContent = text; if (text) element.focus(); }
   };
   function readStorage(key) {
-    try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) { return null; }
+    let disk = null;
+    try { disk = JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) {}
+    const tab = tabValues[key] || null;
+    const time = value => Date.parse(value?.exported_at || value?.updated_at || '') || 0;
+    return disk && (!tab || time(disk) > time(tab)) ? disk : tab || disk;
+  }
+  function writeStorage(key, value) {
+    let persisted = true;
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { persisted = false; }
+    if (!persisted || key === reviewerKey) tabValues[key] = value; else delete tabValues[key];
+    try { window.name = sessionPrefix + JSON.stringify(tabValues); } catch (_) {}
+    return persisted;
+  }
+  function reviewerRecord() {
+    const reviewer = readStorage(reviewerKey) || {};
+    if (!reviewer.id) reviewer.id = (globalThis.crypto?.randomUUID?.() || 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2)).slice(0, 36);
+    return reviewer;
+  }
+  const validName = name => /[\p{L}\p{N}]/u.test(String(name || '').trim());
+  const filenameName = name => Array.from(String(name).normalize('NFKC').trim()
+    .replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').replace(/\s+/g, '_').replace(/^[. ]+|[. ]+$/g, '')).slice(0, 80).join('');
+  function currentReview(pid) {
+    const payload = readStorage(keyFor(pid));
+    return payload?.protocol_version === context.protocol_version && payload?.dataset_revision === context.dataset_revision && payload?.persona_id === pid ? payload : null;
   }
   function taskErrors(row) {
     const errors = [];
@@ -32,6 +59,7 @@
   }
   function payloadErrors(payload) {
     const errors = [];
+    if (!validName(payload.reviewer_name)) errors.push({id: 'reviewer-name', text: '请先返回审核人须知页填写姓名，用于导出JSON文件名'});
     if (payload.profile_review?.profile_read !== true) errors.push({id: 'profile-read', text: '请先阅读并确认persona知识'});
     if (!verdicts.includes(payload.profile_review?.leakage)) errors.push({id: 'profile-leakage', text: '请判断persona中是否有编辑意图泄露'});
     if (['issue', 'unsure'].includes(payload.profile_review?.leakage) && !String(payload.profile_review?.notes || '').trim()) {
@@ -59,11 +87,39 @@
   }
   const timestamp = () => new Date().toISOString().replace(/[:.]/g, '-');
 
+  function completedReviews(ids) {
+    return ids.map(currentReview)
+      .filter(payload => payload && payload.review_status === 'complete' && payloadErrors(payload).length === 0)
+      .map(payload => ({...payload, tasks: payload.tasks.map(row => ({...row,
+        checks: Object.fromEntries(checkFields.map(name => [name, row.checks[name]]))}))}));
+  }
+  function exportBatch(ids, reviewer, requireAll = false) {
+    if (!validName(reviewer.name)) { message('请先在审核人须知页填写姓名，用于导出JSON文件名。'); document.getElementById('reviewer-name')?.focus(); return false; }
+    const reviews = completedReviews(ids);
+    if (requireAll && reviews.length !== ids.length) {
+      const firstMissing = ids.find(pid => !reviews.some(review => review.persona_id === pid));
+      message(`本组还有 ${ids.length - reviews.length} 位persona未填齐，请先补齐 ${firstMissing}。已有改写已保存。`);
+      const link = document.getElementById('resume-incomplete');
+      if (link) { link.href = firstMissing + '.html'; link.textContent = '返回未完成的 ' + firstMissing + ' →'; link.hidden = false; }
+      return false;
+    }
+    if (!reviews.length) { message('还没有填齐的persona审核。请从下一页开始，依次完成每人的10条改写与两项判断。'); return false; }
+    const payload = {schema_version: '2.0', protocol_version: context.protocol_version,
+      dataset_revision: context.dataset_revision, review_ui_sha256: context.review_ui_sha256,
+      group_id: context.group_id, group_start: context.group_start, group_end: context.group_end,
+      reviewer_id: reviewer.id, reviewer_name: reviewer.name.trim(),
+      review_status: 'complete_batch', group_complete: reviews.length === ids.length,
+      exported_at: new Date().toISOString(), completed_personas: reviews.length,
+      human_rewrites: reviews.length * 10, reviews};
+    download(payload, `${filenameName(reviewer.name)}_group_${context.group_id}_complete_${timestamp()}`);
+    message(`已导出 ${reviews.length} 位persona、${reviews.length * 10} 条人类改写，文件名已包含你的姓名。请将JSON交回组织者。`);
+    return true;
+  }
+
   if (context.page === 'persona') {
     const pid = context.persona_id;
     const specifications = new Map(context.tasks.map(task => [task.task_id, task]));
-    let reviewer = readStorage('personaedit-volunteer-reviewer-v2') || {};
-    if (!reviewer.id) reviewer.id = (globalThis.crypto?.randomUUID?.() || 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2)).slice(0, 36);
+    let reviewer = reviewerRecord();
     let state = {profile: {profile_read: false, leakage: '', notes: ''}, tasks: {}};
     for (const id of taskIds) state.tasks[id] = {leakage: '', solvability: '', rewrite: '', notes: '', faithful: false};
     const reviewerInput = document.getElementById('reviewer-name');
@@ -114,7 +170,7 @@
         faithful: row.rewrite_faithfulness_confirmed === true,
       };
       state = next;
-      if (payload.reviewer_name) reviewerInput.value = String(payload.reviewer_name).slice(0, 100);
+      if (!reviewerInput.value.trim() && payload.reviewer_name) reviewerInput.value = String(payload.reviewer_name).slice(0, 100);
     }
     const saved = readStorage(keyFor(pid));
     if (saved) {
@@ -148,12 +204,11 @@
     function save() {
       const complete = updateProgress();
       reviewer.name = reviewerInput.value.trim();
-      try {
-        localStorage.setItem(keyFor(pid), JSON.stringify(buildPayload(complete ? 'complete' : 'draft')));
-        localStorage.setItem('personaedit-volunteer-reviewer-v2', JSON.stringify(reviewer));
-        storageFailed = false;
-      } catch (_) { storageFailed = true; }
-      status.textContent = storageFailed ? '浏览器保存不可用；请立即导出草稿保存。' : '已在此浏览器保存；导出并交回后才会收集。';
+      reviewer.updated_at = new Date().toISOString();
+      const reviewSaved = writeStorage(keyFor(pid), buildPayload(complete ? 'complete' : 'draft'));
+      const nameSaved = writeStorage(reviewerKey, reviewer);
+      storageFailed = !reviewSaved || !nameSaved;
+      status.textContent = storageFailed ? '浏览器长期保存不可用；当前标签页暂存，请导出草稿备份。' : '已自动保存；填齐本页后点击下一页。导出并交回后才会收集。';
     }
     for (const element of document.querySelectorAll('[data-persona-field], [data-task][data-field]')) {
       element.addEventListener('input', () => {
@@ -166,23 +221,29 @@
     }
     reviewerInput.addEventListener('input', save);
     document.getElementById('review-form').addEventListener('submit', event => event.preventDefault());
-    document.getElementById('export-feedback').addEventListener('click', () => {
+    function validateCurrent() {
       const payload = buildPayload('complete');
       const errors = payloadErrors(payload);
       document.querySelectorAll('.review-invalid').forEach(element => element.classList.remove('review-invalid'));
       if (errors.length) {
         for (const error of errors) document.getElementById(error.id)?.classList.add('review-invalid');
-        message(`还有 ${errors.length} 项未完成，暂不能导出完成审核。\n` + errors.slice(0, 10).map(error => error.text).join('\n') + '\n可以先导出草稿，下次继续。');
+        message(`还有 ${errors.length} 项未完成，暂不能进入下一页或导出完成审核。\n` + errors.slice(0, 10).map(error => error.text).join('\n') + '\n可以先导出草稿，下次继续。');
         document.getElementById(errors[0].id)?.focus();
-        return;
+        return false;
       }
+      return true;
+    }
+    document.getElementById('export-feedback').addEventListener('click', () => {
+      if (!validateCurrent()) return;
       save();
-      download(payload, `${pid}_complete_${timestamp()}_${reviewer.id.slice(0, 8)}`);
+      const payload = buildPayload('complete');
+      download(payload, `${filenameName(payload.reviewer_name)}_${pid}_complete_${timestamp()}_${reviewer.id.slice(0, 8)}`);
       message('已导出完成审核JSON；请交回组织者。浏览器不会自动上传。');
     });
     document.getElementById('export-draft').addEventListener('click', () => {
+      if (!validName(reviewerInput.value)) { message('请先返回审核人须知页填写姓名，用于草稿JSON文件名。已有内容会保留。'); return; }
       save();
-      download(buildPayload('draft'), `${pid}_draft_${timestamp()}_${reviewer.id.slice(0, 8)}`);
+      download(buildPayload('draft'), `${filenameName(reviewerInput.value)}_${pid}_draft_${timestamp()}_${reviewer.id.slice(0, 8)}`);
       message('已导出未完成草稿，可通过“导入草稿”恢复；此文件不作为完成审核。');
     });
     document.getElementById('import-draft').addEventListener('click', () => document.getElementById('import-file').click());
@@ -192,6 +253,16 @@
       try { importPayload(JSON.parse(await file.text())); applyStateToForm(); save(); message('已恢复当前persona的审核草稿。'); }
       catch (error) { message(error.message || '文件无法读取，未导入。'); }
       event.target.value = '';
+    });
+    document.getElementById('next-persona')?.addEventListener('click', () => {
+      if (!validateCurrent()) return;
+      save();
+      location.href = context.next_persona + '.html';
+    });
+    document.getElementById('finish-group')?.addEventListener('click', () => {
+      if (!validateCurrent()) return;
+      save();
+      exportBatch(context.persona_ids, reviewer, true);
     });
     document.getElementById('show-boxes').addEventListener('change', event => document.body.classList.toggle('show-boxes', event.target.checked));
     function revealHash() {
@@ -211,47 +282,44 @@
     if (location.hash) requestAnimationFrame(revealHash);
   }
 
-  if (context.page === 'group') {
-    const rows = [...document.querySelectorAll('[data-persona]')];
-    function current(pid) {
-      const payload = readStorage(keyFor(pid));
-      return payload?.protocol_version === context.protocol_version && payload?.dataset_revision === context.dataset_revision && payload?.persona_id === pid ? payload : null;
+  if (context.page === 'group' || context.page === 'index') {
+    let reviewer = reviewerRecord();
+    const input = document.getElementById('reviewer-name');
+    input.value = reviewer.name || '';
+    function saveName() {
+      reviewer.name = input.value.trim();
+      reviewer.updated_at = new Date().toISOString();
+      writeStorage(reviewerKey, reviewer);
     }
-    function completed() {
-      return context.persona_ids.map(current)
-        .filter(payload => payload && payload.review_status === 'complete' && payloadErrors(payload).length === 0)
-        .map(payload => ({...payload, tasks: payload.tasks.map(row => ({...row,
-          checks: Object.fromEntries(checkFields.map(name => [name, row.checks[name]]))}))}));
+    input.addEventListener('input', saveName);
+    for (const link of document.querySelectorAll('[data-start-persona]')) {
+      link.addEventListener('click', event => {
+        saveName();
+        if (!validName(reviewer.name)) {
+          event.preventDefault();
+          message('请先填写审核人姓名或审核昵称；导出JSON时会使用这个名字。');
+          input.focus();
+        }
+      });
     }
-    function refresh() {
-      for (const row of rows) {
-        const payload = current(row.dataset.persona);
-        const done = payload && payloadErrors(payload).length === 0;
-        const n = payload ? payload.tasks.filter(task => taskErrors(task).length === 0).length : 0;
-        row.dataset.complete = String(Boolean(done));
-        row.querySelector('[data-persona-progress]').textContent = done ? '已填齐，记得交回' : n ? `${n} / 10 条填齐` : payload ? '已开始' : '未开始';
+    if (context.page === 'group') {
+      const requested = new URLSearchParams(location.search).get('return');
+      function refresh() {
+        const done = completedReviews(context.persona_ids);
+        document.getElementById('group-progress').textContent = `${done.length} / 50 位完成填写（当前浏览器）`;
+        const validReturn = context.persona_ids.includes(requested) ? requested : null;
+        const firstMissing = context.persona_ids.find(pid => !done.some(review => review.persona_id === pid));
+        const target = validReturn || firstMissing || context.persona_ids[0];
+        const link = document.getElementById('start-review');
+        link.href = target + '.html';
+        link.dataset.startPersona = target;
+        const pageNumber = Number(target.slice(-3)) - context.group_start + 2;
+        link.textContent = validReturn || done.length ? `继续审核 → ${target}（第${pageNumber}页）` : `我已阅读，开始审核 → 第2页：${target}`;
       }
-      document.getElementById('group-progress').textContent = `${completed().length} / 50 位完成填写（当前浏览器）`;
+      document.getElementById('export-group').addEventListener('click', () => { saveName(); exportBatch(context.persona_ids, reviewer); });
+      window.addEventListener('storage', refresh);
+      window.addEventListener('pageshow', refresh);
+      refresh();
     }
-    document.getElementById('filter').addEventListener('input', event => {
-      const query = event.target.value.trim().toLowerCase();
-      let visible = 0;
-      for (const row of rows) { row.hidden = !row.dataset.search.includes(query); if (!row.hidden) visible++; }
-      document.getElementById('visible-count').textContent = `${visible} 位`;
-    });
-    document.getElementById('export-group').addEventListener('click', () => {
-      const reviews = completed();
-      if (!reviews.length) { message('当前浏览器还没有填齐的persona审核。请先进入人物页，完成10条改写与问题判断。'); return; }
-      const payload = {schema_version: '2.0', protocol_version: context.protocol_version,
-        dataset_revision: context.dataset_revision, review_ui_sha256: context.review_ui_sha256,
-        group_id: context.group_id, group_start: context.group_start, group_end: context.group_end,
-        review_status: 'complete_batch', exported_at: new Date().toISOString(),
-        completed_personas: reviews.length, human_rewrites: reviews.length * 10, reviews};
-      download(payload, `group_${context.group_id}_complete_${timestamp()}`);
-      message(`已导出 ${reviews.length} 位persona、${reviews.length * 10} 条人类改写。未完成的草稿未计入，请将JSON交回组织者。`);
-    });
-    window.addEventListener('storage', refresh);
-    window.addEventListener('pageshow', refresh);
-    refresh();
   }
 })();
