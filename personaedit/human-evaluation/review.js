@@ -4,6 +4,7 @@
   if (!contextElement) return;
   const context = JSON.parse(contextElement.textContent);
   const verdicts = ['ok', 'issue', 'unsure'];
+  const checkFields = ['leakage', 'solvability'];
   const taskIds = Array.from({length: 10}, (_, i) => 'T' + String(i + 1).padStart(2, '0'));
   const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
   const keyFor = pid => `${context.protocol_version}:${context.dataset_revision}:${pid}`;
@@ -16,14 +17,14 @@
   }
   function taskErrors(row) {
     const errors = [];
-    for (const name of ['leakage', 'solvability', 'naturalness']) {
-      if (!verdicts.includes(row.checks?.[name])) errors.push({field: name, text: '请完成三项问题判断'});
+    for (const name of checkFields) {
+      if (!verdicts.includes(row.checks?.[name])) errors.push({field: name, text: '请完成泄露和不可解模糊性两项判断'});
     }
     const rewrite = String(row.human_instruction || '').trim();
     if (!rewrite) errors.push({field: 'rewrite', text: '请填写英文人类改写'});
     else if (normalize(rewrite) === normalize(row.original_instruction)) errors.push({field: 'rewrite', text: '请自行重写，不能原样复制当前命令'});
     else if ((rewrite.match(/[A-Za-z]+/g) || []).length < 2) errors.push({field: 'rewrite', text: '请提供英文编辑请求；问题解释请写在说明栏'});
-    if (Object.values(row.checks || {}).some(value => value === 'issue' || value === 'unsure') && !String(row.issue_notes || '').trim()) {
+    if (checkFields.some(name => ['issue', 'unsure'].includes(row.checks?.[name])) && !String(row.issue_notes || '').trim()) {
       errors.push({field: 'notes', text: '有问题或不确定时，请说明具体原因'});
     }
     if (row.rewrite_faithfulness_confirmed !== true) errors.push({field: 'faithful', text: '请核对并确认改写的忠实性与模糊程度'});
@@ -64,7 +65,7 @@
     let reviewer = readStorage('personaedit-volunteer-reviewer-v2') || {};
     if (!reviewer.id) reviewer.id = (globalThis.crypto?.randomUUID?.() || 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2)).slice(0, 36);
     let state = {profile: {profile_read: false, leakage: '', notes: ''}, tasks: {}};
-    for (const id of taskIds) state.tasks[id] = {leakage: '', solvability: '', naturalness: '', rewrite: '', notes: '', faithful: false};
+    for (const id of taskIds) state.tasks[id] = {leakage: '', solvability: '', rewrite: '', notes: '', faithful: false};
     const reviewerInput = document.getElementById('reviewer-name');
     reviewerInput.value = reviewer.name || '';
     const status = document.getElementById('save-status');
@@ -84,7 +85,7 @@
             original_instruction_sha256: task.instruction_sha256,
             underlying_operations_sha256: task.underlying_sha256,
             human_instruction: row.rewrite.trim(),
-            checks: {leakage: row.leakage, solvability: row.solvability, naturalness: row.naturalness},
+            checks: {leakage: row.leakage, solvability: row.solvability},
             issue_notes: row.notes.trim(), rewrite_faithfulness_confirmed: row.faithful};
         }),
       };
@@ -109,7 +110,6 @@
       for (const row of payload.tasks) next.tasks[row.task_id] = {
         leakage: verdicts.includes(row.checks?.leakage) ? row.checks.leakage : '',
         solvability: verdicts.includes(row.checks?.solvability) ? row.checks.solvability : '',
-        naturalness: verdicts.includes(row.checks?.naturalness) ? row.checks.naturalness : '',
         rewrite: String(row.human_instruction || ''), notes: String(row.issue_notes || ''),
         faithful: row.rewrite_faithfulness_confirmed === true,
       };
@@ -139,7 +139,7 @@
         const panel = document.querySelector(`[data-review-task="${row.task_id}"]`);
         panel.dataset.complete = String(done);
         document.getElementById(`completion-${row.task_id}`).textContent = done ? '本条已填齐；仍请确认语义与模糊程度' : '尚未完成';
-        document.getElementById(`notes-${row.task_id}`).required = Object.values(row.checks).some(value => value === 'issue' || value === 'unsure');
+        document.getElementById(`notes-${row.task_id}`).required = checkFields.some(name => ['issue', 'unsure'].includes(row.checks[name]));
       }
       document.getElementById('profile-notes').required = ['issue', 'unsure'].includes(state.profile.leakage);
       document.getElementById('review-progress').textContent = `${complete} / 10 条填齐`;
@@ -218,7 +218,10 @@
       return payload?.protocol_version === context.protocol_version && payload?.dataset_revision === context.dataset_revision && payload?.persona_id === pid ? payload : null;
     }
     function completed() {
-      return context.persona_ids.map(current).filter(payload => payload && payload.review_status === 'complete' && payloadErrors(payload).length === 0);
+      return context.persona_ids.map(current)
+        .filter(payload => payload && payload.review_status === 'complete' && payloadErrors(payload).length === 0)
+        .map(payload => ({...payload, tasks: payload.tasks.map(row => ({...row,
+          checks: Object.fromEntries(checkFields.map(name => [name, row.checks[name]]))}))}));
     }
     function refresh() {
       for (const row of rows) {
