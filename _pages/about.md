@@ -114,7 +114,7 @@ Feel free to contact me if you have any questions about my research or potential
 
 [Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation](https://www.arxiv.org/abs/2602.00132)
 
-Jiao Li, **Jian Lang**, Xikai Tang, Wenzheng Shu, Ting Zhong†, Qiang Gao, Yong Wang, Leiting Chen, Fan Zhou
+Jiao Li, **Jian Lang** (Project Leader), Xikai Tang, Wenzheng Shu, Ting Zhong†, Qiang Gao, Yong Wang, Leiting Chen, Fan Zhou
 
 **AAAI 2026** \| **CCF A** \| [**PDF**](https://www.arxiv.org/abs/2602.00132) \| [**Github**](https://github.com/Jolieresearch/SCANNER) \| <span style="color:red;"><strong>Oral</strong></span>
 
