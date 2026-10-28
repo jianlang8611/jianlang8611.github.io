@@ -19,8 +19,6 @@ I am also interested in understanding, detecting, and moderating <strong>user-ge
   
 Feel free to contact me if you have any questions about my research or potential collaboration opportunities.
 
-<p><strong>Volunteer review:</strong> Help review the first five personas in <a href="/personaedit/human-evaluation/">PersonaEdit</a>, our personalized image editing benchmark.</p>
-
 
 # 🔥 News
 - *2026.10*: &nbsp;🎉🎉 Selected for the 2026 [Young Science and Technology Scientists Sponsorship Program by CAST - Doctoral Student Special Plan](https://rczx.cast.org.cn/sy/tzgg/art/2026/art_3c9cc64b5a914fa2b0e43e113ce66c39.html), with the China Computer Federation (CCF) as the sponsoring society!
