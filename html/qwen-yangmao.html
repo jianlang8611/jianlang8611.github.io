@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Qwen3.8-27B API 实测记录：模型查询、最小请求、真实响应，以及 Python / cURL 复现代码。">
+  <meta name="color-scheme" content="light">
+  <title>Qwen3.8-27B · API 调用实录</title>
+  <style>
+    :root{--bg:#f5f5ef;--paper:#fffef9;--ink:#182521;--muted:#64726b;--line:#d9dfd6;--green:#18774d;--soft:#e6efdf;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:var(--sans);line-height:1.65}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible{outline:3px solid #369064;outline-offset:4px}button:disabled{cursor:wait}::selection{background:#c7e5bb}button[hidden],[hidden]{display:none!important}
+    .wrap{width:min(1120px,calc(100% - 64px));margin:auto}.mast{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:80px;border-bottom:1px solid var(--line)}.brand{font:12px var(--mono);letter-spacing:.13em;display:flex;align-items:center;gap:10px}.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%}.mast a{font-size:13px;text-decoration:none;color:var(--muted)}
+    .hero{padding:64px 0 44px;display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:center}.eyebrow{font:11px var(--mono);letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.hero h1{font-size:clamp(35px,4.7vw,61px);line-height:1.16;letter-spacing:-.055em;font-weight:650;margin:20px 0}.hero h1 span{display:block;margin-top:10px;font-weight:450;letter-spacing:-.06em}.intro{font-size:15px;max-width:490px;color:var(--muted);margin:22px 0 0}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #bed5b5;color:#285d3b;border-radius:100px;padding:5px 11px;font-size:11px;letter-spacing:.025em}.result{padding:30px;background:var(--soft);border-radius:5px;position:relative}.result-label{font:11px var(--mono);color:#446c4a;display:flex;justify-content:space-between;gap:10px}.reply{font-size:37px;letter-spacing:-.04em;margin:25px 0 21px;font-weight:550}.reply::before{content:'“';color:#6c976a}.reply::after{content:'”';color:#6c976a}.result-bottom{font:11px var(--mono);color:#446c4a;display:flex;gap:12px;justify-content:space-between;border-top:1px solid #c3d4b9;padding-top:14px;flex-wrap:wrap}
+    .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:58px}.fact{padding:22px 25px;border-right:1px solid var(--line)}.fact:first-child{padding-left:0}.fact:last-child{border:0}.fact-label{font-size:12px;color:var(--muted);margin-bottom:6px}.fact-value{font:25px var(--mono);letter-spacing:-.05em}.fact-value small{font-size:12px;letter-spacing:0;color:var(--muted)}
+    .section-head{display:flex;gap:16px;justify-content:space-between;align-items:baseline;margin-bottom:21px}.section-title{display:flex;gap:14px;align-items:baseline}.number{font:11px var(--mono);color:var(--green)}h2{font-size:20px;font-weight:550;letter-spacing:-.03em;margin:0}.section-note{color:var(--muted);font-size:12px;margin:0}.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.step{background:transparent;text-align:left;border:1px solid var(--line);border-radius:5px;padding:19px 21px;position:relative;transition:background .15s,border-color .15s}.step:hover{background:#edf1e7}.step[aria-selected=true]{background:var(--paper);border-color:var(--green);box-shadow:inset 0 3px 0 var(--green)}.step-top{display:flex;justify-content:space-between;font:11px var(--mono);color:var(--muted)}.step-top .ok{color:var(--green)}.step-title{font-weight:550;font-size:15px;margin:10px 0 4px}.step-desc{font:11px var(--mono);color:var(--muted);overflow-wrap:anywhere}.flow-detail{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:27px 29px;margin-bottom:54px;display:grid;grid-template-columns:1fr 1.15fr;gap:32px;align-items:start;min-height:253px}.detail-kicker{font:11px var(--mono);color:var(--green);margin-bottom:10px}.flow-detail h3{font-size:20px;font-weight:550;margin:0 0 11px;letter-spacing:-.03em}.detail-copy{font-size:13px;color:var(--muted);margin:0 0 20px;max-width:440px}.detail-meta{display:flex;gap:8px;flex-wrap:wrap}.tag{background:#eef1e8;font:11px var(--mono);padding:4px 9px;border-radius:3px;color:#465b4b}.mini-code{margin:0;padding:19px 20px;background:#edf0e7;border-radius:4px;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.8 var(--mono);min-width:0}.endpoint{margin-bottom:32px;padding:17px 20px;background:#e9ede3;border-radius:4px;display:flex;align-items:start;gap:22px}.endpoint-label{font:11px/1.8 var(--mono);color:var(--muted);white-space:nowrap}.endpoint code{font:12px/1.8 var(--mono);overflow-wrap:anywhere}
+    .code-box{background:#192722;border-radius:6px;overflow:hidden;color:#e5ece5}.code-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid #33433a;padding:0 20px;min-height:64px;flex-wrap:wrap}.tabs{display:flex;gap:22px;align-self:stretch;flex-wrap:wrap}.tab{background:none;color:#aebdb1;border:0;border-bottom:2px solid transparent;padding:19px 0;font:12px var(--mono)}.tab:hover{color:#fff}.tab[aria-selected=true]{color:#d7efb8;border-bottom-color:#b4d98f}.code-actions{display:flex;gap:8px;padding:11px 0}.small-btn{background:transparent;color:#d8e2d7;border:1px solid #56675a;border-radius:4px;padding:6px 12px;font-size:11px;white-space:nowrap}.small-btn:hover{background:#2d4034}.code-info{padding:15px 24px 0;color:#b9c9bd;font:11px var(--mono)}.source{margin:0;padding:22px 24px 30px;white-space:pre;overflow:auto;tab-size:4;font:12px/1.85 var(--mono);max-height:560px}.source code{font:inherit}.run{display:flex;gap:30px;justify-content:space-between;align-items:center;padding:20px 24px;background:#22372a;border-top:1px solid #33493a}.run-text{font-size:12px;color:#c2d3c3}.run-text strong{color:#eef5ea;font-weight:500;display:block;margin-bottom:4px}.run code{font:12px var(--mono);color:#dbefc6;white-space:nowrap}.code-caption{font-size:12px;color:var(--muted);margin:14px 0 42px}.note-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin:0 0 45px}.note{border-top:1px solid var(--line);padding-top:18px}.note h3{font-size:13px;font-weight:550;margin:0 0 7px}.note p{font-size:12px;color:var(--muted);margin:0}.footer{border-top:1px solid var(--line);display:flex;gap:15px;justify-content:space-between;padding:23px 0 34px;font:10px var(--mono);color:var(--muted);flex-wrap:wrap}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:760px){.wrap{width:calc(100% - 36px)}.mast{min-height:67px}.brand{font-size:10px;letter-spacing:.08em}.mast a{font-size:12px}.hero{grid-template-columns:1fr;gap:30px;padding:39px 0 30px}.hero h1{font-size:42px}.result{padding:23px}.reply{font-size:32px;margin:17px 0}.facts{grid-template-columns:1fr 1fr;margin-bottom:40px}.fact{padding:17px 15px!important}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid var(--line)}.fact-value{font-size:23px}.section-head{display:block}.section-note{margin-top:8px}.flow{gap:7px}.step{padding:14px 11px}.step-top{font-size:10px}.step-title{font-size:13px}.step-desc{font-size:10px}.flow-detail{grid-template-columns:1fr;gap:17px;padding:21px;margin-bottom:38px}.endpoint{display:block;padding:15px}.endpoint-label{margin-bottom:5px}.code-toolbar{gap:0;padding:0 15px}.tabs{gap:15px}.tab{font-size:11px;padding:17px 0}.code-actions{gap:7px}.small-btn{padding:6px 10px}.source{padding:19px 16px 25px;font-size:11px;max-height:480px}.code-info{padding-left:16px;font-size:10px}.run{display:block;padding:17px}.run code{display:block;margin-top:13px;white-space:normal;overflow-wrap:anywhere}.note-grid{grid-template-columns:1fr;gap:22px}.footer{font-size:10px}.code-caption{margin-bottom:30px}}
+    @media(max-width:380px){.hero h1{font-size:35px}.flow{grid-template-columns:1fr}.step{display:grid;grid-template-columns:65px 1fr;gap:0 10px;padding:12px 14px}.step-top{grid-row:1 / 3;display:block;align-self:center}.step-top .ok{display:block;margin-top:3px}.step-title{margin:0}.step-desc{margin-top:3px}.tabs{gap:13px}.mast a{font-size:11px}.brand{max-width:190px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.step{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast"><div class="brand"><span class="dot" aria-hidden="true"></span>QWEN / API FIELD NOTES</div><a href="#code">查看调用代码 ↗</a></header>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div><div class="eyebrow">实测记录 · 2026.11.05</div><h1 id="page-title">Qwen3.8-27B<span>一次真实调用。</span></h1><span class="pill"><span class="dot" aria-hidden="true"></span>已验证 · HTTP 200</span><p class="intro">使用工作空间的 OpenAI 兼容接口，查询可用模型，再发送一个最小对话请求。下方展示这次测试的过程与原始结果。</p></div>
+        <div class="result"><div class="result-label"><span>ASSISTANT RESPONSE</span><span>200 OK</span></div><div class="reply">连接成功</div><div class="result-bottom"><span>model: qwen3.8-27b</span><span>finish_reason: stop</span></div></div>
+      </section>
+      <div class="facts" aria-label="本次实测数据"><div class="fact"><div class="fact-label">对话请求耗时</div><div class="fact-value">0.46 <small>秒</small></div></div><div class="fact"><div class="fact-label">输入 / 输出 Token</div><div class="fact-value">17 <small>/</small> 3</div></div><div class="fact"><div class="fact-label">合计 Token</div><div class="fact-value">20</div></div><div class="fact"><div class="fact-label">思考模式</div><div class="fact-value" style="font-size:20px">false <small>已关闭</small></div></div></div>
+      <section aria-labelledby="flow-title">
+        <div class="section-head"><div class="section-title"><span class="number">01 /</span><h2 id="flow-title">调用过程</h2></div><p class="section-note">点击步骤，查看已记录的请求与结果</p></div>
+        <div class="flow" role="tablist" aria-label="实测步骤">
+          <button class="step" id="step-0" type="button" role="tab" aria-controls="flow-panel" aria-selected="true" data-step="0"><div class="step-top"><span>STEP 01</span><span class="ok">200 OK</span></div><div class="step-title">查询可用模型</div><div class="step-desc">GET /models</div></button>
+          <button class="step" id="step-1" type="button" role="tab" aria-controls="flow-panel" aria-selected="false" data-step="1" tabindex="-1"><div class="step-top"><span>STEP 02</span><span class="ok">200 OK</span></div><div class="step-title">发送最小请求</div><div class="step-desc">POST /chat/completions</div></button>
+          <button class="step" id="step-2" type="button" role="tab" aria-controls="flow-panel" aria-selected="false" data-step="2" tabindex="-1"><div class="step-top"><span>STEP 03</span><span class="ok">PASS</span></div><div class="step-title">核对模型与响应</div><div class="step-desc">model · content · usage</div></button>
+        </div>
+        <div class="flow-detail" id="flow-panel" role="tabpanel" aria-labelledby="step-0"><div><div class="detail-kicker" id="detail-kicker">GET /models</div><h3 id="detail-title">先确认模型名确实可用</h3><p class="detail-copy" id="detail-copy">携带 Bearer 鉴权查询模型列表。接口返回 200，列表中包含目标模型 qwen3.8-27b，随后用这个精确的模型名发起调用。</p><div class="detail-meta" id="detail-meta"><span class="tag">HTTP 200</span><span class="tag">0.24 秒</span><span class="tag">模型列表摘录</span></div></div><pre class="mini-code" id="detail-json">{
+  "status": 200,
+  "seconds": 0.24,
+  "matching_models": ["qwen3.8-27b"]
+}</pre></div>
+      </section>
+      <section id="code" aria-labelledby="code-title">
+        <div class="section-head"><div class="section-title"><span class="number">02 /</span><h2 id="code-title">对应代码，直接复现</h2></div><p class="section-note">Python 标准库 · 无需安装依赖</p></div>
+        <div class="endpoint"><div class="endpoint-label">BASE URL</div><code>https://ws-rp9lenauh953vhh5.cn-beijing.maas.aliyuncs.com/compatible-mode/v1</code></div>
+        <div class="code-box">
+          <div class="code-toolbar"><div class="tabs" role="tablist" aria-label="调用代码与响应"><button class="tab" id="tab-python" role="tab" type="button" aria-controls="source-panel" aria-selected="true" data-code="python">Python</button><button class="tab" id="tab-curl" role="tab" type="button" aria-controls="source-panel" aria-selected="false" data-code="curl" tabindex="-1">cURL</button><button class="tab" id="tab-request" role="tab" type="button" aria-controls="source-panel" aria-selected="false" data-code="request" tabindex="-1">请求 JSON</button><button class="tab" id="tab-response" role="tab" type="button" aria-controls="source-panel" aria-selected="false" data-code="response" tabindex="-1">响应 JSON</button></div><div class="code-actions"><button class="small-btn" type="button" id="copy">复制</button><button class="small-btn" type="button" id="download">下载</button></div></div>
+          <div id="source-panel" role="tabpanel" aria-labelledby="tab-python"><div class="code-info" id="code-filename">call_qwen.py</div><pre class="source"><code id="source">#!/usr/bin/env python3
+&quot;&quot;&quot;复现 Qwen3.8-27B 连通性测试；仅使用 Python 标准库。&quot;&quot;&quot;
+
+import getpass
+import json
+import os
+import sys
+import time
+import urllib.error
+import urllib.request
+
+
+BASE_URL = os.environ.get(
+    &quot;DASHSCOPE_BASE_URL&quot;,
+    &quot;https://ws-rp9lenauh953vhh5.cn-beijing.maas.aliyuncs.com/compatible-mode/v1&quot;,
+).rstrip(&quot;/&quot;)
+MODEL = os.environ.get(&quot;QWEN_MODEL&quot;, &quot;qwen3.8-27b&quot;)
+
+
+def request(path, api_key, body=None):
+    &quot;&quot;&quot;返回 HTTP 状态、端到端耗时及 JSON 响应，不输出鉴权头。&quot;&quot;&quot;
+    data = None if body is None else json.dumps(body).encode(&quot;utf-8&quot;)
+    req = urllib.request.Request(
+        BASE_URL + path,
+        data=data,
+        headers={
+            &quot;Authorization&quot;: &quot;Bearer &quot; + api_key,
+            &quot;Content-Type&quot;: &quot;application/json&quot;,
+        },
+    )
+    start = time.monotonic()
+    try:
+        with urllib.request.urlopen(req, timeout=45) as response:
+            status = response.status
+            raw = response.read().decode(&quot;utf-8&quot;)
+    except urllib.error.HTTPError as error:
+        status = error.code
+        raw = error.read().decode(&quot;utf-8&quot;, errors=&quot;replace&quot;)
+    except (urllib.error.URLError, TimeoutError, OSError) as error:
+        return {
+            &quot;status&quot;: None,
+            &quot;seconds&quot;: round(time.monotonic() - start, 2),
+            &quot;error&quot;: str(error).replace(api_key, &quot;[REDACTED]&quot;),
+        }
+
+    raw = raw.replace(api_key, &quot;[REDACTED]&quot;)
+    try:
+        payload = json.loads(raw)
+    except ValueError:
+        payload = raw[:4000]
+    return {
+        &quot;status&quot;: status,
+        &quot;seconds&quot;: round(time.monotonic() - start, 2),
+        &quot;body&quot;: payload,
+    }
+
+
+def show(label, value):
+    print(label, flush=True)
+    print(json.dumps(value, ensure_ascii=False, indent=2), flush=True)
+
+
+def main():
+    api_key = os.environ.get(&quot;DASHSCOPE_API_KEY&quot;, &quot;&quot;).strip()
+    if not api_key:
+        if not sys.stdin.isatty():
+            print(&quot;请设置环境变量 DASHSCOPE_API_KEY。&quot;, file=sys.stderr)
+            return 2
+        api_key = getpass.getpass(&quot;请输入 API Key（输入不回显）: &quot;).strip()
+    if not api_key:
+        print(&quot;API Key 不能为空。&quot;, file=sys.stderr)
+        return 2
+
+    models = request(&quot;/models&quot;, api_key)
+    model_body = models.get(&quot;body&quot;)
+    ids = []
+    if models.get(&quot;status&quot;) == 200 and isinstance(model_body, dict):
+        ids = [item.get(&quot;id&quot;, &quot;&quot;) for item in model_body.get(&quot;data&quot;, [])]
+    candidates = [name for name in ids if &quot;qwen3.8&quot; in name.lower() and &quot;27b&quot; in name.lower()]
+    selected_model = MODEL
+    if MODEL not in ids and MODEL == &quot;qwen3.8-27b&quot; and candidates:
+        selected_model = candidates[0]
+
+    summary = {key: value for key, value in models.items() if key != &quot;body&quot;}
+    summary.update({&quot;matching_models&quot;: candidates, &quot;selected_model&quot;: selected_model})
+    if models.get(&quot;status&quot;) != 200:
+        summary[&quot;body&quot;] = model_body
+    show(&quot;1. GET /models&quot;, summary)
+
+    # /models 可能不受支持，仍直接尝试目标模型。
+    payload = {
+        &quot;model&quot;: selected_model,
+        &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;只回复：连接成功&quot;}],
+        &quot;max_tokens&quot;: 128,
+        &quot;temperature&quot;: 0,
+        &quot;enable_thinking&quot;: False,
+    }
+    result = request(&quot;/chat/completions&quot;, api_key, payload)
+    show(&quot;2. POST /chat/completions&quot;, result)
+
+    body = result.get(&quot;body&quot;)
+    if result.get(&quot;status&quot;) != 200 or not isinstance(body, dict):
+        return 1
+    try:
+        reply = body[&quot;choices&quot;][0][&quot;message&quot;][&quot;content&quot;]
+        returned_model = body[&quot;model&quot;]
+    except (KeyError, IndexError, TypeError):
+        print(&quot;响应缺少 model 或 choices[0].message.content。&quot;, file=sys.stderr)
+        return 1
+    if not isinstance(reply, str) or not reply.strip():
+        print(&quot;响应正文为空。&quot;, file=sys.stderr)
+        return 1
+    show(&quot;3. 调用成功&quot;, {&quot;model&quot;: returned_model, &quot;reply&quot;: reply, &quot;usage&quot;: body.get(&quot;usage&quot;)})
+    return 0
+
+
+if __name__ == &quot;__main__&quot;:
+    raise SystemExit(main())
+</code></pre></div>
+          <div class="run" id="run"><div class="run-text"><strong>在本地运行，终端会提示输入 Key</strong><span>也可通过环境变量 DASHSCOPE_API_KEY 提供。</span></div><code id="run-command">python3 call_qwen.py</code></div>
+        </div>
+        <p class="code-caption">Python 代码复现本次实测逻辑；cURL 展示相同的两个 HTTP 请求。代码、请求体和历史响应都可单独下载。</p>
+      </section>
+      <div class="note-grid"><section class="note"><h3>这是一次测试的快照</h3><p>0.24 秒与 0.46 秒分别为此前模型查询和完整对话请求的耗时，包含网络往返。页面切换不会发送新请求；重新运行代码会产生新的耗时与用量。</p></section><section class="note"><h3>Key 只在本地提供</h3><p>页面与下载文件均不包含 API Key。脚本从本地环境变量或终端隐藏输入读取 Key，通过 Authorization: Bearer 请求头鉴权。</p></section></div>
+    </main>
+    <footer class="footer"><span>QWEN3.8-27B / CONNECTIVITY CHECK</span><span>实际请求 · enable_thinking: false · max_tokens: 128</span></footer>
+    <div class="visually-hidden" role="status" aria-live="polite" id="announcement"></div>
+    <noscript><p>完整 Python 代码已显示；启用 JavaScript 可切换步骤、代码及下载文件。</p></noscript>
+  </div>
+  <script type="application/json" id="page-data">{"python": "#!/usr/bin/env python3\n\"\"\"复现 Qwen3.8-27B 连通性测试；仅使用 Python 标准库。\"\"\"\n\nimport getpass\nimport json\nimport os\nimport sys\nimport time\nimport urllib.error\nimport urllib.request\n\n\nBASE_URL = os.environ.get(\n    \"DASHSCOPE_BASE_URL\",\n    \"https://ws-rp9lenauh953vhh5.cn-beijing.maas.aliyuncs.com/compatible-mode/v1\",\n).rstrip(\"/\")\nMODEL = os.environ.get(\"QWEN_MODEL\", \"qwen3.8-27b\")\n\n\ndef request(path, api_key, body=None):\n    \"\"\"返回 HTTP 状态、端到端耗时及 JSON 响应，不输出鉴权头。\"\"\"\n    data = None if body is None else json.dumps(body).encode(\"utf-8\")\n    req = urllib.request.Request(\n        BASE_URL + path,\n        data=data,\n        headers={\n            \"Authorization\": \"Bearer \" + api_key,\n            \"Content-Type\": \"application/json\",\n        },\n    )\n    start = time.monotonic()\n    try:\n        with urllib.request.urlopen(req, timeout=45) as response:\n            status = response.status\n            raw = response.read().decode(\"utf-8\")\n    except urllib.error.HTTPError as error:\n        status = error.code\n        raw = error.read().decode(\"utf-8\", errors=\"replace\")\n    except (urllib.error.URLError, TimeoutError, OSError) as error:\n        return {\n            \"status\": None,\n            \"seconds\": round(time.monotonic() - start, 2),\n            \"error\": str(error).replace(api_key, \"[REDACTED]\"),\n        }\n\n    raw = raw.replace(api_key, \"[REDACTED]\")\n    try:\n        payload = json.loads(raw)\n    except ValueError:\n        payload = raw[:4000]\n    return {\n        \"status\": status,\n        \"seconds\": round(time.monotonic() - start, 2),\n        \"body\": payload,\n    }\n\n\ndef show(label, value):\n    print(label, flush=True)\n    print(json.dumps(value, ensure_ascii=False, indent=2), flush=True)\n\n\ndef main():\n    api_key = os.environ.get(\"DASHSCOPE_API_KEY\", \"\").strip()\n    if not api_key:\n        if not sys.stdin.isatty():\n            print(\"请设置环境变量 DASHSCOPE_API_KEY。\", file=sys.stderr)\n            return 2\n        api_key = getpass.getpass(\"请输入 API Key（输入不回显）: \").strip()\n    if not api_key:\n        print(\"API Key 不能为空。\", file=sys.stderr)\n        return 2\n\n    models = request(\"/models\", api_key)\n    model_body = models.get(\"body\")\n    ids = []\n    if models.get(\"status\") == 200 and isinstance(model_body, dict):\n        ids = [item.get(\"id\", \"\") for item in model_body.get(\"data\", [])]\n    candidates = [name for name in ids if \"qwen3.8\" in name.lower() and \"27b\" in name.lower()]\n    selected_model = MODEL\n    if MODEL not in ids and MODEL == \"qwen3.8-27b\" and candidates:\n        selected_model = candidates[0]\n\n    summary = {key: value for key, value in models.items() if key != \"body\"}\n    summary.update({\"matching_models\": candidates, \"selected_model\": selected_model})\n    if models.get(\"status\") != 200:\n        summary[\"body\"] = model_body\n    show(\"1. GET /models\", summary)\n\n    # /models 可能不受支持，仍直接尝试目标模型。\n    payload = {\n        \"model\": selected_model,\n        \"messages\": [{\"role\": \"user\", \"content\": \"只回复：连接成功\"}],\n        \"max_tokens\": 128,\n        \"temperature\": 0,\n        \"enable_thinking\": False,\n    }\n    result = request(\"/chat/completions\", api_key, payload)\n    show(\"2. POST /chat/completions\", result)\n\n    body = result.get(\"body\")\n    if result.get(\"status\") != 200 or not isinstance(body, dict):\n        return 1\n    try:\n        reply = body[\"choices\"][0][\"message\"][\"content\"]\n        returned_model = body[\"model\"]\n    except (KeyError, IndexError, TypeError):\n        print(\"响应缺少 model 或 choices[0].message.content。\", file=sys.stderr)\n        return 1\n    if not isinstance(reply, str) or not reply.strip():\n        print(\"响应正文为空。\", file=sys.stderr)\n        return 1\n    show(\"3. 调用成功\", {\"model\": returned_model, \"reply\": reply, \"usage\": body.get(\"usage\")})\n    return 0\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n", "curl": "#!/usr/bin/env bash\nset -euo pipefail\n\nBASE_URL=\"${DASHSCOPE_BASE_URL:-https://ws-rp9lenauh953vhh5.cn-beijing.maas.aliyuncs.com/compatible-mode/v1}\"\nBASE_URL=\"${BASE_URL%/}\"\nif [[ -z \"${DASHSCOPE_API_KEY:-}\" ]]; then\n  read -r -s -p '请输入 API Key（输入不回显）: ' DASHSCOPE_API_KEY\n  printf '\\n'\nfi\nif [[ -z \"$DASHSCOPE_API_KEY\" ]]; then\n  printf 'API Key 不能为空。\\n' >&2\n  exit 2\nfi\n\n# 第一步：查询可用模型。鉴权信息经 stdin 传给 curl，不出现在命令行参数中。\nprintf '1. GET /models\\n'\ncurl --silent --show-error --fail-with-body --max-time 45 \\\n  --header @- \\\n  \"$BASE_URL/models\" <<HEADERS\nAuthorization: Bearer $DASHSCOPE_API_KEY\nHEADERS\nprintf '\\n\\n'\n\n# 第二步：发送与实测相同的最小请求。\nprintf '2. POST /chat/completions\\n'\ncurl --silent --show-error --fail-with-body --max-time 45 \\\n  --header @- \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"model\": \"qwen3.8-27b\",\n    \"messages\": [{\"role\": \"user\", \"content\": \"只回复：连接成功\"}],\n    \"max_tokens\": 128,\n    \"temperature\": 0,\n    \"enable_thinking\": false\n  }' \\\n  --write-out '\\nHTTP %{http_code} · 耗时 %{time_total} 秒\\n' \\\n  \"$BASE_URL/chat/completions\" <<HEADERS\nAuthorization: Bearer $DASHSCOPE_API_KEY\nHEADERS\n", "record": {"description": "此前实际调用的结果快照；不是实时监控。", "base_url": "https://ws-rp9lenauh953vhh5.cn-beijing.maas.aliyuncs.com/compatible-mode/v1", "models": {"method": "GET", "path": "/models", "status": 200, "seconds": 0.24, "matching_models": ["qwen3.8-27b"], "note": "模型列表仅摘录本次相关的模型名。"}, "completion": {"method": "POST", "path": "/chat/completions", "status": 200, "seconds": 0.46, "request": {"model": "qwen3.8-27b", "messages": [{"role": "user", "content": "只回复：连接成功"}], "max_tokens": 128, "temperature": 0, "enable_thinking": false}, "response": {"id": "chatcmpl-beadfa88-7af8-9f4f-8007-94110a327664", "object": "chat.completion", "created": 1793879179, "model": "qwen3.8-27b", "choices": [{"index": 0, "message": {"role": "assistant", "reasoning_content": "", "content": "连接成功"}, "finish_reason": "stop", "logprobs": null}], "usage": {"prompt_tokens": 17, "total_tokens": 20, "completion_tokens": 3, "prompt_tokens_details": {"cached_tokens": 0, "text_tokens": 17}, "completion_tokens_details": {}}}}}}</script>
+  <script>
+    (() => {
+      'use strict';
+      const data = JSON.parse(document.getElementById('page-data').textContent);
+      const $ = id => document.getElementById(id);
+      const steps = [
+        {kicker:'GET /models',title:'先确认模型名确实可用',copy:'携带 Bearer 鉴权查询模型列表。接口返回 200，列表中包含目标模型 qwen3.8-27b，随后用这个精确的模型名发起调用。',tags:['HTTP 200','0.24 秒','模型列表摘录'],json:{status:200,seconds:0.24,matching_models:data.record.models.matching_models}},
+        {kicker:'POST /chat/completions',title:'发送一个最小对话请求',copy:'要求模型只回复“连接成功”。temperature 设为 0，最多输出 128 个 Token，并通过 enable_thinking: false 关闭思考模式。鉴权信息放在请求头中。',tags:['HTTP 200','0.46 秒','非流式响应'],json:data.record.completion.request},
+        {kicker:'VERIFY RESPONSE',title:'模型名和回复均已返回',copy:'接口返回的 model 为 qwen3.8-27b，回复正文为“连接成功”，finish_reason 为 stop。输入 17 个 Token，输出 3 个，合计 20 个。',tags:['model 已核对','content 非空','finish_reason: stop'],json:{model:data.record.completion.response.model,message:data.record.completion.response.choices[0].message,finish_reason:'stop',usage:data.record.completion.response.usage}}
+      ];
+      const snippets = {
+        python:{filename:'call_qwen.py',content:data.python,command:'python3 call_qwen.py'},
+        curl:{filename:'call_qwen.sh',content:data.curl,command:'bash call_qwen.sh'},
+        request:{filename:'request.json',content:JSON.stringify(data.record.completion.request,null,2)+'\n'},
+        response:{filename:'response.json',content:JSON.stringify(data.record.completion.response,null,2)+'\n'}
+      };
+      let currentCode = 'python';
+      function selectStep(index) {
+        document.querySelectorAll('[data-step]').forEach(button => {const active=Number(button.dataset.step)===index;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+        const step=steps[index];
+        $('flow-panel').setAttribute('aria-labelledby','step-'+index);
+        $('detail-kicker').textContent=step.kicker;
+        $('detail-title').textContent=step.title;
+        $('detail-copy').textContent=step.copy;
+        $('detail-json').textContent=JSON.stringify(step.json,null,2);
+        $('detail-meta').replaceChildren(...step.tags.map(text=>{const span=document.createElement('span');span.className='tag';span.textContent=text;return span;}));
+      }
+      function selectCode(name) {
+        currentCode=name;
+        document.querySelectorAll('[data-code]').forEach(button=>{const active=button.dataset.code===name;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+        const snippet=snippets[name];
+        $('source-panel').setAttribute('aria-labelledby','tab-'+name);
+        $('source').textContent=snippet.content;
+        $('source').parentElement.scrollTop=0;
+        $('source').parentElement.scrollLeft=0;
+        $('code-filename').textContent=snippet.filename;
+        $('run').hidden=!snippet.command;
+        $('run-command').textContent=snippet.command||'';
+        $('copy').textContent='复制';
+      }
+      function wireTabs(selector,activate) {
+        const buttons=Array.from(document.querySelectorAll(selector));
+        buttons.forEach((button,index)=>{
+          button.addEventListener('click',()=>activate(button));
+          button.addEventListener('keydown',event=>{
+            let next;
+            if(event.key==='ArrowRight') next=(index+1)%buttons.length;
+            else if(event.key==='ArrowLeft') next=(index+buttons.length-1)%buttons.length;
+            else if(event.key==='Home') next=0;
+            else if(event.key==='End') next=buttons.length-1;
+            else return;
+            event.preventDefault();buttons[next].focus();activate(buttons[next]);
+          });
+        });
+      }
+      wireTabs('[data-step]',button=>selectStep(Number(button.dataset.step)));
+      wireTabs('[data-code]',button=>selectCode(button.dataset.code));
+      $('copy').addEventListener('click',async()=>{
+        const content=snippets[currentCode].content;
+        try {
+          if(navigator.clipboard&&window.isSecureContext) await navigator.clipboard.writeText(content);
+          else {
+            const field=document.createElement('textarea');field.value=content;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();const ok=document.execCommand('copy');field.remove();$('copy').focus();if(!ok)throw new Error('copy failed');
+          }
+          $('copy').textContent='已复制';$('announcement').textContent='已复制 '+snippets[currentCode].filename;
+        }catch(error){$('copy').textContent='请手动选择复制';$('announcement').textContent='复制不可用，请选择代码后手动复制。';}
+      });
+      $('download').addEventListener('click',()=>{
+        const snippet=snippets[currentCode];const type=currentCode==='request'||currentCode==='response'?'application/json;charset=utf-8':'text/plain;charset=utf-8';const url=URL.createObjectURL(new Blob([snippet.content],{type}));const anchor=document.createElement('a');anchor.href=url;anchor.download=snippet.filename;document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('announcement').textContent='已下载 '+snippet.filename;
+      });
+      selectCode('python');
+    })();
+  </script>
+</body>
+</html>
