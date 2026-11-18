@@ -1,6 +1,6 @@
 'use strict';
 const STORAGE = 'personaedit-human-20261118-response-v1';
-const VISUAL_OPTIONS = [[1, 'yes', '✓ 满足'], [0, 'no', '× 未满足'], [2, 'unsure', '? 无法确认']];
+const VISUAL_OPTIONS = [[1, 'yes', '✓ 满足'], [0, 'no', '× 未满足'], [2, 'unsure', '? 无法确认（慎选）']];
 const isJudgment = value => value === 0 || value === 1 || value === 2;
 const CONSENT_VERSION = '2026-11-18-v1';
 const $ = s => document.querySelector(s);
